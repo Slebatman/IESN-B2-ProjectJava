@@ -9,6 +9,8 @@
 * public getCollectivesByCategorie(categorie)
 * public getRentalsByTypeOfProblemExitLocation(typeOfProblemLocation)
 * public getProblemsBetweenDates(firstDate, secondDate)
+* public deleteObject(object)
+* public changeObject(object)
 
 ### Couche DataAccess
 * public addObject(object)
@@ -19,3 +21,5 @@
 * public getCollectivesByCategorie(categorie)
 * public getRentalsByTypeOfProblemExitLocation(typeOfProblemLocation)
 * public getProblemsBetweenDates(firstDate, secondDate)
+* public deleteObject(object)
+* public changeObject(object)
