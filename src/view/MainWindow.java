@@ -36,12 +36,24 @@ public class MainWindow extends JFrame {
         application.add(leave);
 
         createObject = new JMenuItem("Create");
+        createObject.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AddObjectWindow addObjectWindow = new AddObjectWindow();
+            }
+        });
         objects.add(createObject);
 
         updateObject = new JMenuItem("Update");
         objects.add(updateObject);
 
         deleteObject = new JMenuItem("Delete");
+        deleteObject.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DeleteObjectWindow deleteWindow = new DeleteObjectWindow();
+            }
+        });
         objects.add(deleteObject);
 
         showObjects = new JMenuItem("Show all");
