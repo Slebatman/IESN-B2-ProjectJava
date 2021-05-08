@@ -13,7 +13,7 @@ public class SingletonConnexion {
     {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection =
+            connection =
                     DriverManager.getConnection(url, user, password);
             System.out.println("Succefuly connected to the db !");
         }
@@ -24,6 +24,7 @@ public class SingletonConnexion {
     }
 
     public static Connection getConnection() {
+        System.out.println("c = " + connection);
         return connection;
     }
 }
