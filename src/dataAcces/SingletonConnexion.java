@@ -4,6 +4,9 @@ package dataAcces;
 import java.sql.*;
 
 public class SingletonConnexion {
+    private static String url = "jdbc:mysql://localhost:3306/inventory";
+    private static String user = "admin";
+    private static String password = "projetJava";
     private static Connection connection;
 
     static
@@ -11,9 +14,7 @@ public class SingletonConnexion {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection =
-                    DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory",
-                            "admin",
-                            "projetJava");
+                    DriverManager.getConnection(url, user, password);
             System.out.println("Succefuly connected to the db !");
         }
         catch(ClassNotFoundException | SQLException e) {
