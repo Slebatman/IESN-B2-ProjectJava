@@ -25,3 +25,4 @@ hs_err_pid*
 #Folder
 script/
 out/production/projectJava/META-INF/projectJava.kotlin_module
+.idea/misc.xml
