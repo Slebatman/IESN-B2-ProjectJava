@@ -13,9 +13,9 @@ public class CollectiveDB implements ICollectiveDAO {
 
     @Override
     public void insert(Collective collective) throws DAOException, SQLException {
-        System.out.println("Connexion : " + this.connexion.getConnection().createStatement());
+        String sql = "INSERT INTO collective (idCollective, name, category, physicalAdress, emailAdress) VALUES (2, 'Baetsle Antoine', 'KàPs', 'Rue sous la pelière', 'antoine@lesmarostin')";
         Statement statement = this.connexion.getConnection().createStatement();
-        statement.executeUpdate("INSERT INTO collective (idCollective, name, category, physicalAdress, emailAdress) VALUES (1, 'Baetsle Antoine', 'KàPs', 'Rue sous la pelière', 'antoine@lesmarostin')");
+        statement.executeUpdate(sql);
     }
 
     @Override
