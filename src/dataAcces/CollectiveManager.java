@@ -11,7 +11,7 @@ public class CollectiveManager {
         this.dao = new CollectiveDB();
     }
 
-    public void addCollective(Collective collective) throws SQLException {
+    public void addCollective(Collective collective) throws DAOConfigurationException {
         dao.insert(collective);
     }
 

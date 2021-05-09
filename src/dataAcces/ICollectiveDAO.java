@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public interface ICollectiveDAO {
     // Methods
-    void insert(Collective collective) throws DAOException, SQLException;
+    void insert(Collective collective) throws DAOConfigurationException;
     Collective find(String name) throws DAOException;
 
 

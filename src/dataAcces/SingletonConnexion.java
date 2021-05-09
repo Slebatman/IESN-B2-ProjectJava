@@ -17,8 +17,7 @@ public class SingletonConnexion {
                     DriverManager.getConnection(url, user, password);
         }
         catch(ClassNotFoundException | SQLException e) {
-            // ToDo : spread the error
-            System.out.println(e.getMessage());
+            throw new DAOConfigurationException("Erreur lors de la connection à la base de données.");
         }
     }
 
