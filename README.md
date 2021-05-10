@@ -1,4 +1,9 @@
 # Project Java - Baetslé Antoine & Antoine Valentin
+
+## Requêtes pour Val
+* Select tout les collectifs
+* Select tout les objets d'un collectif
+
 ## Design Patterns 
 ### Couche Controler
 * public addObject(object)
