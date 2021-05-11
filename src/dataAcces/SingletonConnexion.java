@@ -1,6 +1,8 @@
 // Class implement Singleton Pattern
 package dataAcces;
 
+import dataAcces.exception.DAOConfigurationException;
+
 import java.sql.*;
 
 public class SingletonConnexion {

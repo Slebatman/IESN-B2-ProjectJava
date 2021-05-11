@@ -1,7 +1,6 @@
 package view;
 import controler.*;
 import type.*;
-import type.Object;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +23,6 @@ public class AddObjectWindow extends JFrame {
     private JButton buttonValid, buttonCancel;
     private JFormattedTextField dateArea;
     private AddObjectControler addObjectControler;
-    private Object object;
 
     public AddObjectWindow(){
         super("Create an object");
@@ -110,13 +108,7 @@ public class AddObjectWindow extends JFrame {
     private class CreateObject implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
-            addObjectControler = new AddObjectControler();
-            DateFormat formatDate = new SimpleDateFormat("yyyy/mm/dd");
-            //Date dateTest = formatDate.parse(dateArea.getText());
-            GregorianCalendar date = new GregorianCalendar();
-            //date.setTime();
-            object = new Object(textName.getText(),1, false,date, 15, 12, 5);
-            addObjectControler.addObject(object);
+
         }
     }
 

@@ -1,11 +1,8 @@
 package dataAcces.dao;
 
-import dataAcces.DAOConfigurationException;
-import dataAcces.DAOException;
+import dataAcces.exception.DAOConfigurationException;
 import type.Collective;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface ICollectiveDAO {

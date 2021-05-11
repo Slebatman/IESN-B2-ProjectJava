@@ -1,7 +1,6 @@
 package view;
 
 import controler.AddObjectControler;
-import type.Object;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +19,6 @@ public class UpdateObjectWindow extends JFrame{
     private JButton buttonUpdate, buttonCancel;
     private JFormattedTextField dateArea;
     private AddObjectControler addObjectControler;
-    private Object object;
 
     UpdateObjectWindow(){
         super("Create an object");

@@ -1,6 +1,7 @@
 package dataAcces;
 
 import dataAcces.dao.ICollectiveDAO;
+import dataAcces.exception.DAOConfigurationException;
 import type.Collective;
 
 import java.sql.*;
@@ -8,14 +9,14 @@ import java.util.ArrayList;
 
 public class CollectiveDB implements ICollectiveDAO {
     // DB Access
-    private final Connection connexion = SingletonConnexion.getConnection();
+    private final Connection connection = SingletonConnexion.getConnection();
 
     // Insert
     @Override
     public void insert(Collective c) throws DAOConfigurationException {
         try {
             String sql = "INSERT INTO collective (name, category, physicalAdress, emailAdress) VALUES (?, ?, ?, ?)";
-            PreparedStatement statement = connexion.prepareStatement(sql);
+            PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, c.getName());
             statement.setString(2,c.getCategory());
             statement.setString(3,c.getPhysicalAdress());
@@ -31,7 +32,7 @@ public class CollectiveDB implements ICollectiveDAO {
     public void update(Collective c) throws DAOConfigurationException {
         try {
             String sql = "UPDATE collective SET name = ?, category = ?, physicalAdress = ?, emailAdress = ? where idCollective = ?";
-            PreparedStatement statement = connexion.prepareStatement(sql);
+            PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, c.getName());
             statement.setString(2,c.getCategory());
             statement.setString(3,c.getPhysicalAdress());
@@ -54,7 +55,7 @@ public class CollectiveDB implements ICollectiveDAO {
         try {
             // SQL statement
             String sql = "SELECT * FROM inventory.collective";
-            PreparedStatement statement = connexion.prepareStatement(sql);
+            PreparedStatement statement = connection.prepareStatement(sql);
             data = statement.executeQuery();
 
             // Convert
