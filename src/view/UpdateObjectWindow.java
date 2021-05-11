@@ -1,30 +1,26 @@
 package view;
-import controler.*;
-import type.*;
+
+import controler.AddObjectControler;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
-public class AddObjectWindow extends JFrame {
+public class UpdateObjectWindow extends JFrame{
     private JLabel labelCollective, labelName, labelCommandable, labelDate, labelPrice, labelDeposit, labelPeriod;
     private JTextField textName, textPrice, textDeposit, textPeriod;
     private JRadioButton commandable, notCommandable;
     private ButtonGroup radioGroup;
     private JComboBox listCollective;
-    private JPanel panel, panelRadio, panelButton, panelWindow;
-    private JButton buttonValid, buttonCancel;
+    private JPanel panel, panelRadio, panelButton, panelWindow, panelCollectives;
+    private JButton buttonUpdate, buttonCancel;
     private JFormattedTextField dateArea;
     private AddObjectControler addObjectControler;
 
-    public AddObjectWindow(){
+    UpdateObjectWindow(){
         super("Create an object");
         setBounds(250, 200, 600, 400);
         String[] collectives = {"info", "math", "philo", "éco" ,"chygé"};
@@ -57,14 +53,16 @@ public class AddObjectWindow extends JFrame {
         panelRadio = new JPanel();
         panelRadio.add(commandable);
         panelRadio.add(notCommandable);
-        buttonValid = new JButton("Create");
+        buttonUpdate = new JButton("Update");
         buttonCancel= new JButton("Cancel");
         panel = new JPanel();
         panelButton = new JPanel();
         panelWindow = new JPanel();
-        panel.setLayout(new GridLayout(7,2, 10, 5));
-        panel.add(labelCollective);
-        panel.add(listCollective);
+        panelCollectives = new JPanel();
+        panelCollectives.setLayout(new GridLayout(1,2, 5, 5));
+        panelCollectives.add(labelCollective);
+        panelCollectives.add(listCollective);
+        panel.setLayout(new GridLayout(6,2, 10, 5));
         panel.add(labelName);
         panel.add(textName);
         panel.add(labelCommandable);
@@ -80,10 +78,11 @@ public class AddObjectWindow extends JFrame {
 
         buttonCancel.addActionListener(new CancelButtonListener());
         panelButton.add(buttonCancel);
-        buttonValid.addActionListener(new CreateObject());
-        panelButton.add(buttonValid);
+        buttonUpdate.addActionListener(new UpdateObject());
+        panelButton.add(buttonUpdate);
 
-        panelWindow.setLayout(new GridLayout(2,1, 10, 30));;
+        panelWindow.setLayout(new GridLayout(3,1, 10, 30));;
+        panelWindow.add(panelCollectives);
         panelWindow.add(panel);
         panelWindow.add(panelButton);
         panelWindow.setVisible(true);
@@ -91,25 +90,17 @@ public class AddObjectWindow extends JFrame {
         setVisible(true);
     }
 
-    private class ExitButtonListener extends WindowAdapter{
-        @Override
-        public void windowClosing(WindowEvent evt){
-            AddObjectWindow.this.dispose();
-        }
-    }
-
-    private class CancelButtonListener implements ActionListener{
+    private class CancelButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent evt){
-            AddObjectWindow.this.dispose();
+            UpdateObjectWindow.this.dispose();
         }
     }
 
-    private class CreateObject implements ActionListener{
+    private class UpdateObject implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
 
         }
     }
-
 }
