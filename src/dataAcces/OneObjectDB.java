@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class OneObjectDB implements IOneObjectDAO {
-    // Data Acces
+    // Data Access
     private final Connection connection = SingletonConnexion.getConnection();
 
     @Override
