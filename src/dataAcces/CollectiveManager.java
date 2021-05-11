@@ -1,8 +1,7 @@
 package dataAcces;
 
+import dataAcces.dao.ICollectiveDAO;
 import type.Collective;
-
-import java.sql.SQLException;
 
 public class CollectiveManager {
     ICollectiveDAO dao;

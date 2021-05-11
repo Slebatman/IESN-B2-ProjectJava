@@ -1,5 +1,6 @@
 package dataAcces;
 
+import dataAcces.dao.ICollectiveDAO;
 import type.Collective;
 
 import java.sql.*;
@@ -9,9 +10,13 @@ public class CollectiveDB implements ICollectiveDAO {
     private SingletonConnexion connexion = new SingletonConnexion();
 
     @Override
-    public void insert(Collective collective) throws DAOConfigurationException {
+    public void insert(Collective c) throws DAOConfigurationException {
         try {
-            String sql = "INSERT INTO collective (name, category, physicalAdress, emailAdress) VALUES ('Baetsle Antoine', 'KàPs', 'Rue sous la pelière', 'antoine@lesmarostin.be')";
+            String sql = "INSERT INTO collective (name, category, physicalAdress, emailAdress) VALUES (" +
+                    c.getName() +", " +
+                    c.getCategory() + ", " +
+                    c.getPhysicalAdress() + ", " +
+                    c.getEmailAdress() +")";
             Statement statement = this.connexion.getConnection().createStatement();
             statement.executeUpdate(sql);
         } catch (SQLException e) {
@@ -20,7 +25,7 @@ public class CollectiveDB implements ICollectiveDAO {
     }
 
     @Override
-    public Collective find(String name) throws DAOException {
+    public Collective find(String name) throws DAOConfigurationException {
         return null;
     }
 }
