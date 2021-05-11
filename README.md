@@ -1,7 +1,10 @@
 # Project Java - Baetslé Antoine & Antoine Valentin
 
+## Questions 
+
 ## Requêtes pour Val
-* Select tout les collectifs
+
+* Select tout les collectifs ==> Done 
 * Select tout les objets d'un collectif
 
 ## Design Patterns 
