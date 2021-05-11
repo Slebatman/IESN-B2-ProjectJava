@@ -36,24 +36,15 @@ public class MainWindow extends JFrame {
         application.add(leave);
 
         createObject = new JMenuItem("Create");
-        createObject.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AddObjectWindow addObjectWindow = new AddObjectWindow();
-            }
-        });
+        createObject.addActionListener(new AddObject());
         objects.add(createObject);
 
         updateObject = new JMenuItem("Update");
+        updateObject.addActionListener(new UpdateObject());
         objects.add(updateObject);
 
         deleteObject = new JMenuItem("Delete");
-        deleteObject.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                DeleteObjectWindow deleteWindow = new DeleteObjectWindow();
-            }
-        });
+        deleteObject.addActionListener(new DeleteObject());
         objects.add(deleteObject);
 
         showObjects = new JMenuItem("Show all");
@@ -69,4 +60,26 @@ public class MainWindow extends JFrame {
             System.exit(0);
         }
     }
+
+    private class AddObject implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent evt){
+            AddObjectWindow addObjectWindow = new AddObjectWindow();
+        }
+    }
+
+    private class DeleteObject implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent evt){
+            DeleteObjectWindow deleteWindow = new DeleteObjectWindow();
+        }
+    }
+
+    private class UpdateObject implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent evt){
+            UpdateObjectWindow updateWindow = new UpdateObjectWindow();
+        }
+    }
+
 }
