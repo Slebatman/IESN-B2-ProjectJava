@@ -1,6 +1,8 @@
 package dataAcces;
 
+import dataAcces.exception.DAOConfigurationException;
 import type.Collective;
+import type.OneObject;
 
 import java.util.ArrayList;
 
@@ -8,33 +10,19 @@ public class main {
     public static void main(String[] args)  {
         // Init
         CollectiveManager collectiveManager = new CollectiveManager();
-        Collective collective1 = new Collective(3,"Alice", "AGE", "Rue Bruno N°7", "alice@age-namur.be");
+        OneObjectManager oneObjectManager = new OneObjectManager();
 
-        // Insert
-       /* try {
-            collectiveManager.addCollective(collective1);
-        } catch (DAOConfigurationException e) {
-            System.out.println(e.getMessage());
-        }*/
-
-        // Update
-        /*try {
-            collectiveManager.updateCollective(collective1);
-        } catch (DAOConfigurationException e) {
-            System.out.println(e.getMessage());
-        }*/
-        ArrayList<Collective> allCollectives = new ArrayList<>();
+        ArrayList<OneObject> allObjectsForOneCollective;
 
         try {
-            allCollectives = collectiveManager.getAllCollectives();
+            allObjectsForOneCollective = oneObjectManager.getAllOneCollective(1);
+
+            for (OneObject o : allObjectsForOneCollective) {
+                //System.out.println(o.getIdObject());
+            }
         }
         catch (DAOConfigurationException e) {
             System.out.println(e.getMessage());
         }
-
-        for (Collective c : allCollectives) {
-            System.out.println(c.getName());
-        }
-
     }
 }

@@ -1,4 +1,4 @@
-package dataAcces;
+package dataAcces.exception;
 
 public class DAOConfigurationException extends RuntimeException {
     // Constructor 1
