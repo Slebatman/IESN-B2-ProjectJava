@@ -5,7 +5,7 @@
 ## Requêtes pour Val
 
 * Select tout les collectifs ==> Done 
-* Select tout les objets d'un collectif
+* Select tout les objets d'un collectif 
 
 ## Design Patterns 
 ### Couche Controler
