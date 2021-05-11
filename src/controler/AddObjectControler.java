@@ -1,7 +1,5 @@
 package controler;
-import business.*;
 import type.*;
-import type.Object;
 
 public class AddObjectControler {
     private AddObjectBusiness business;
