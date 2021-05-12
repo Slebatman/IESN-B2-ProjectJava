@@ -18,7 +18,7 @@ public class main {
             allObjectsForOneCollective = oneObjectManager.getAllOneCollective(1);
 
             for (OneObject o : allObjectsForOneCollective) {
-                System.out.println(o.getName());
+                System.out.println(o);
             }
         }
         catch (DAOConfigurationException e) {

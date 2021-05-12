@@ -2,10 +2,11 @@
 
 ## Questions 
 - Fermeture de la db. Where ? 
+- Peut-on faire appel au Manager/Buiness depuis le DAO
 ## Requêtes pour Val
 
 * Select tout les collectifs ==> Done 
-* Select tout les objets d'un collectif 
+* Select tout les objets d'un collectif ==> Almost Done
 * Select tout les objets
 
 ## Design Patterns 

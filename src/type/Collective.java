@@ -39,4 +39,15 @@ public class Collective {
     public String getEmailAddress() {
         return emailAddress;
     }
+
+    @Override
+    public String toString() {
+        return "Collective{" +
+                "idCollective=" + idCollective +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", physicalAddress='" + physicalAddress + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                '}';
+    }
 }

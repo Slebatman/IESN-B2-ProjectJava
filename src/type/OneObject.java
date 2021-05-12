@@ -11,13 +11,13 @@ public class OneObject {
     private boolean isCommandable;
     private GregorianCalendar purchaseDate;
     private double purchasePrice;
-    private boolean deposit;
+    private int deposit;
     private int maxRentalPeriod;
 
     // Constructor
     public OneObject() {};
 
-    public OneObject(String name, Collective collectiveOwner, boolean isCommandable, GregorianCalendar purchaseDate, double purchasePrice, boolean deposit, int maxRentalPeriod) {
+    public OneObject(String name, Collective collectiveOwner, boolean isCommandable, GregorianCalendar purchaseDate, double purchasePrice, int deposit, int maxRentalPeriod) {
         this.name = name;
         this.collectiveOwner = collectiveOwner;
         this.isCommandable = isCommandable;
@@ -27,12 +27,12 @@ public class OneObject {
         this.maxRentalPeriod = maxRentalPeriod;
     }
 
-    public OneObject(int idObject, String name, Collective collectiveOwner, boolean isCommandable, GregorianCalendar purchaseDate, double purchasePrice, boolean deposit, int maxRentalPeriod) {
+    public OneObject(int idObject, String name, Collective collectiveOwner, boolean isCommandable, GregorianCalendar purchaseDate, double purchasePrice, int deposit, int maxRentalPeriod) {
         this(name, collectiveOwner, isCommandable, purchaseDate, purchasePrice, deposit, maxRentalPeriod);
         this.idObject = idObject;
     }
 
-    public OneObject(String name, int idCollectiveOwner, boolean isCommandable, GregorianCalendar purchaseDate, double purchasePrice, boolean deposit, int maxRentalPeriod) {
+    public OneObject(String name, int idCollectiveOwner, boolean isCommandable, GregorianCalendar purchaseDate, double purchasePrice, int deposit, int maxRentalPeriod) {
         this.name = name;
         this.idCollectiveOwner = idCollectiveOwner;
         this.isCommandable = isCommandable;
@@ -42,7 +42,7 @@ public class OneObject {
         this.maxRentalPeriod = maxRentalPeriod;
     }
 
-    public OneObject(int idObject, String name, int idCollectiveOwner, boolean isCommandable, GregorianCalendar purchaseDate, double purchasePrice, boolean deposit, int maxRentalPeriod) {
+    public OneObject(int idObject, String name, int idCollectiveOwner, boolean isCommandable, GregorianCalendar purchaseDate, double purchasePrice, int deposit, int maxRentalPeriod) {
         this(name, idCollectiveOwner, isCommandable, purchaseDate, purchasePrice, deposit, maxRentalPeriod);
         this.idObject = idObject;
     }
@@ -76,7 +76,7 @@ public class OneObject {
         return purchasePrice;
     }
 
-    public boolean isDeposit() {
+    public int getDeposit() {
         return deposit;
     }
 
@@ -113,11 +113,26 @@ public class OneObject {
         this.purchasePrice = purchasePrice;
     }
 
-    public void setDeposit(boolean deposit) {
+    public void setDeposit(int deposit) {
         this.deposit = deposit;
     }
 
     public void setMaxRentalPeriod(int maxRentalPeriod) {
         this.maxRentalPeriod = maxRentalPeriod;
+    }
+
+    @Override
+    public String toString() {
+        return "OneObject{" +
+                "idObject=" + idObject +
+                ", name='" + name + '\'' +
+                ", collectiveOwner=" + collectiveOwner +
+                ", idCollectiveOwner=" + idCollectiveOwner +
+                ", isCommandable=" + isCommandable +
+                ", purchaseDate=" + purchaseDate +
+                ", purchasePrice=" + purchasePrice +
+                ", deposit=" + deposit +
+                ", maxRentalPeriod=" + maxRentalPeriod +
+                '}';
     }
 }
