@@ -1,13 +1,10 @@
 package view;
 import controler.*;
-import type.*;
+import type.OneObject;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,8 +18,11 @@ public class AddObjectWindow extends JFrame {
     private JComboBox listCollective;
     private JPanel panel, panelRadio, panelButton, panelWindow;
     private JButton buttonValid, buttonCancel;
-    private JFormattedTextField dateArea;
-    private AddObjectControler addObjectControler;
+    private JTextField dateArea;
+    private ObjectControler addObjectControler;
+    private OneObject object;
+    private Boolean commandableValue;
+    private GregorianCalendar date;
 
     public AddObjectWindow(){
         super("Create an object");
@@ -34,18 +34,20 @@ public class AddObjectWindow extends JFrame {
         this.setLayout(new FlowLayout());
 
 
-        DateFormat formatDate = new SimpleDateFormat("yyyy/mm/dd");
+        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+        date = new GregorianCalendar();
+        formatDate.setCalendar(date);
 
 
         labelCollective = new JLabel("Collectif : ");
         labelName = new JLabel("Nom de l'objet : ");
         labelCommandable = new JLabel("Commandable : ");
-        labelDate = new JLabel("Date de l'achat (dd/mm/yyyy) : ");
+        labelDate = new JLabel("Date de l'achat (yyyy-MM-dd) : ");
         labelPrice = new JLabel("Prix d'achat : ");
         labelDeposit = new JLabel("Montant de la caution : ");
         labelPeriod = new JLabel("Combien de jours maximum peut-il être loué :");
         textName = new JTextField();
-        dateArea = new JFormattedTextField(formatDate);
+        dateArea = new JTextField();
         textDeposit = new JTextField();
         textPrice = new JTextField();
         textPeriod = new JTextField();
@@ -78,6 +80,13 @@ public class AddObjectWindow extends JFrame {
         panel.add(labelPeriod);
         panel.add(textPeriod);
 
+        RadioButtonListener listener = new RadioButtonListener();
+
+        String dateString = formatDate.format(dateArea.getText());
+
+        Date dateChange = formatDate.parse(dateArea.getText());
+
+
         buttonCancel.addActionListener(new CancelButtonListener());
         panelButton.add(buttonCancel);
         buttonValid.addActionListener(new CreateObject());
@@ -108,7 +117,14 @@ public class AddObjectWindow extends JFrame {
     private class CreateObject implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
+            object = new OneObject(textName.getText(), 1, commandableValue, date, double purchasePrice, boolean deposit, int maxRentalPeriod);
+        }
+    }
 
+    private class RadioButtonListener implements ItemListener{
+        public void itemStateChanged(ItemEvent event){
+            if(event.getSource() == commandable && event.getStateChange() == ItemEvent.SELECTED) commandableValue = true;
+            else if(event.getSource() = notCommandable && event.getStateChange() == ItemEvent.SELECTED) commandableValue = false;
         }
     }
 

@@ -1,6 +1,6 @@
 package view;
 
-import controler.AddObjectControler;
+import controler.ObjectControler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +18,7 @@ public class UpdateObjectWindow extends JFrame{
     private JPanel panel, panelRadio, panelButton, panelWindow, panelCollectives;
     private JButton buttonUpdate, buttonCancel;
     private JFormattedTextField dateArea;
-    private AddObjectControler addObjectControler;
+    private ObjectControler addObjectControler;
 
     UpdateObjectWindow(){
         super("Create an object");
