@@ -36,7 +36,6 @@ public class AddObjectWindow extends JFrame {
 
         SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
         date = new GregorianCalendar();
-        formatDate.setCalendar(date);
 
 
         labelCollective = new JLabel("Collectif : ");
@@ -82,9 +81,6 @@ public class AddObjectWindow extends JFrame {
 
         RadioButtonListener listener = new RadioButtonListener();
 
-        String dateString = formatDate.format(dateArea.getText());
-
-        Date dateChange = formatDate.parse(dateArea.getText());
 
 
         buttonCancel.addActionListener(new CancelButtonListener());
@@ -117,14 +113,14 @@ public class AddObjectWindow extends JFrame {
     private class CreateObject implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
-            object = new OneObject(textName.getText(), 1, commandableValue, date, double purchasePrice, boolean deposit, int maxRentalPeriod);
+            //object = new OneObject(textName.getText(), 1, commandableValue, date, double purchasePrice, boolean deposit, int maxRentalPeriod);
         }
     }
 
     private class RadioButtonListener implements ItemListener{
         public void itemStateChanged(ItemEvent event){
             if(event.getSource() == commandable && event.getStateChange() == ItemEvent.SELECTED) commandableValue = true;
-            else if(event.getSource() = notCommandable && event.getStateChange() == ItemEvent.SELECTED) commandableValue = false;
+            //else if(event.getSource() = notCommandable && event.getStateChange() == ItemEvent.SELECTED) commandableValue = false;
         }
     }
 
