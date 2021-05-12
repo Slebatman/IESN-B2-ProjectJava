@@ -18,7 +18,6 @@ public class OneObjectDB implements IOneObjectDAO {
         // Variables
         ResultSet data;
         ArrayList<OneObject> allObjectsCollective = new ArrayList<>();
-        OneObject object = new OneObject();
         GregorianCalendar calendar = new GregorianCalendar();
 
         try {
@@ -30,40 +29,25 @@ public class OneObjectDB implements IOneObjectDAO {
 
             // Convert
             while(data.next()) {
-                object.setIdObject(data.getInt("idObject"));
-                object.setName( data.getString("name"));
-                object.setIdCollectiveOwner(data.getInt("idCollectiveOwner"));
-                object.setCommandable(data.getInt("isCommandable") == 1);
+                OneObject oneObject = new OneObject();
+                oneObject.setIdObject(data.getInt("idObject"));
+                oneObject.setName( data.getString("name"));
+                oneObject.setIdCollectiveOwner(data.getInt("idCollectiveOwner"));
+                oneObject.setCommandable(data.getInt("isCommandable") == 1);
                 data.getDate("purchaseDate");
                 if(!data.wasNull()) {
                     calendar.setTime(data.getDate("purchaseDate"));
-                    object.setPurchaseDate(calendar);
+                    oneObject.setPurchaseDate(calendar);
                 }
 
-                System.out.println(object.getName());
 
-                allObjectsCollective.add(object);
-
-                System.out.println("--- Boucle for ---");
-                for (OneObject o : allObjectsCollective) {
-                    System.out.println(o.getIdObject());
-                }
+                allObjectsCollective.add(oneObject);
             }
 
-            System.out.println("--- Out while ---");
-            System.out.println(allObjectsCollective.get(0).getIdObject());
-            System.out.println(allObjectsCollective.get(1).getIdObject());
-            System.out.println(allObjectsCollective.get(2).getIdObject());
-
-            System.out.println("--- Boucle for ---");
-            for (OneObject o : allObjectsCollective) {
-                System.out.println(o.getIdObject());
-            }
+            return allObjectsCollective;
 
         } catch (SQLException e) {
             throw new DAOConfigurationException("Erreur lors de la récupération des objets pour un collectif");
         }
-
-        return allObjectsCollective;
     }
 }

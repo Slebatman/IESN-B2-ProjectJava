@@ -15,18 +15,14 @@ public class main {
         ArrayList<OneObject> allObjectsForOneCollective;
 
         try {
-           /* allObjectsForOneCollective = oneObjectManager.getAllOneCollective(1);
+            allObjectsForOneCollective = oneObjectManager.getAllOneCollective(1);
 
             for (OneObject o : allObjectsForOneCollective) {
-                //System.out.println(o.getIdObject());
-            }*/
-            Collective collective = collectiveManager.searchACollectiveBasedId(8);
-            System.out.println("Info collectif : " + collective.getName());
+                System.out.println(o.getName());
+            }
         }
         catch (DAOConfigurationException e) {
             System.out.println(e.getMessage());
         }
-
-
     }
 }
