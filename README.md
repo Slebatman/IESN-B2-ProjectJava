@@ -1,7 +1,7 @@
 # Project Java - Baetslé Antoine & Antoine Valentin
 
 ## Questions 
-
+- Fermeture de la db. Where ? 
 ## Requêtes pour Val
 
 * Select tout les collectifs ==> Done 
