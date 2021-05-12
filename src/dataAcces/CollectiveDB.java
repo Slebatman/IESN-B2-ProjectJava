@@ -73,12 +73,7 @@ public class CollectiveDB implements ICollectiveDAO {
 
             // Convert
             while(data.next()) {
-                collective = new Collective(
-                        data.getInt("idCollective"),
-                        data.getString("name"),
-                        data.getString("category"),
-                        data.getString("physicalAddress"),
-                        data.getString("emailAddress"));
+                collective = this.convertToCollective(data);
                 allCollectives.add(collective);
             }
 
@@ -102,12 +97,7 @@ public class CollectiveDB implements ICollectiveDAO {
             // Convert
             Collective collective = null;
             while(data.next()) {
-                collective = new Collective(
-                        data.getInt("idCollective"),
-                        data.getString("name"),
-                        data.getString("category"),
-                        data.getString("physicalAddress"),
-                        data.getString("emailAddress"));
+                collective = this.convertToCollective(data);
             }
 
             return collective;
@@ -118,4 +108,17 @@ public class CollectiveDB implements ICollectiveDAO {
         }
     }
 
+    // Function convert sql to java
+    public Collective convertToCollective(ResultSet data) throws SQLException {
+        Collective collective = null;
+
+        collective = new Collective(
+                data.getInt("idCollective"),
+                data.getString("name"),
+                data.getString("category"),
+                data.getString("physicalAddress"),
+                data.getString("emailAddress"));
+
+        return collective;
+    }
 }

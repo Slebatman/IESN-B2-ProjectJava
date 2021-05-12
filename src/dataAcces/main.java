@@ -12,13 +12,13 @@ public class main {
         CollectiveManager collectiveManager = new CollectiveManager();
         OneObjectManager oneObjectManager = new OneObjectManager();
 
-        ArrayList<OneObject> allObjectsForOneCollective;
+        ArrayList<Collective> allCollective;
 
         try {
-            allObjectsForOneCollective = oneObjectManager.getAllOneCollective(1);
+            allCollective = collectiveManager.getAllCollectives();
 
-            for (OneObject o : allObjectsForOneCollective) {
-                System.out.println(o);
+            for (Collective c : allCollective) {
+                System.out.println(c);
             }
         }
         catch (DAOConfigurationException e) {

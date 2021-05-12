@@ -3,6 +3,7 @@ package dataAcces.dao;
 import dataAcces.exception.DAOConfigurationException;
 import type.Collective;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 public interface ICollectiveDAO {
