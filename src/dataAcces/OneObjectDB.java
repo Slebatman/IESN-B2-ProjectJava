@@ -40,7 +40,6 @@ public class OneObjectDB implements IOneObjectDAO {
                     oneObject.setPurchaseDate(calendar);
                 }
 
-
                 allObjectsCollective.add(oneObject);
             }
 
