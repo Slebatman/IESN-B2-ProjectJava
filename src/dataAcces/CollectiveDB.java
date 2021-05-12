@@ -19,8 +19,8 @@ public class CollectiveDB implements ICollectiveDAO {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, c.getName());
             statement.setString(2,c.getCategory());
-            statement.setString(3,c.getPhysicalAdress());
-            statement.setString(4,c.getEmailAdress());
+            statement.setString(3,c.getPhysicalAddress());
+            statement.setString(4,c.getEmailAddress());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOConfigurationException("Une erreur d'accès à la base de données s'est produit, méthode appelée sur une connexion fermée ou erreur SQL.");
@@ -31,16 +31,29 @@ public class CollectiveDB implements ICollectiveDAO {
     @Override
     public void update(Collective c) throws DAOConfigurationException {
         try {
-            String sql = "UPDATE collective SET name = ?, category = ?, physicalAdress = ?, emailAdress = ? where idCollective = ?";
+            String sql = "UPDATE collective SET name = ?, category = ?, physicalAddress = ?, emailAddress = ? where idCollective = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, c.getName());
             statement.setString(2,c.getCategory());
-            statement.setString(3,c.getPhysicalAdress());
-            statement.setString(4,c.getEmailAdress());
+            statement.setString(3,c.getPhysicalAddress());
+            statement.setString(4,c.getEmailAddress());
             statement.setInt(5,c.getIdCollective());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DAOConfigurationException("Une erreur d'accès à la base de données s'est produit, méthode appelée sur une connexion fermée ou erreur SQL.");
+        }
+    }
+
+    // Delete
+    @Override
+    public void delete(int idCollective) throws DAOConfigurationException {
+        try {
+            String sql = "DELETE collective WHERE idCollective = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, idCollective);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOConfigurationException("Erreur lors de la tentative de suppression");
         }
     }
 
@@ -54,13 +67,18 @@ public class CollectiveDB implements ICollectiveDAO {
 
         try {
             // SQL statement
-            String sql = "SELECT * FROM inventory.collective";
+            String sql = "SELECT * FROM collective";
             PreparedStatement statement = connection.prepareStatement(sql);
             data = statement.executeQuery();
 
             // Convert
             while(data.next()) {
-                collective = new Collective(data.getInt("idCollective"), data.getString("name"), data.getString("category"), data.getString("physicalAdress"), data.getString("emailAdress"));
+                collective = new Collective(
+                        data.getInt("idCollective"),
+                        data.getString("name"),
+                        data.getString("category"),
+                        data.getString("physicalAddress"),
+                        data.getString("emailAddress"));
                 allCollectives.add(collective);
             }
 
@@ -70,4 +88,34 @@ public class CollectiveDB implements ICollectiveDAO {
             throw new DAOConfigurationException("Erreur lors de la récupération de l'ensemble des collectifs");
         }
     }
+
+    // Search for a collective based on its id
+    @Override
+    public Collective searchACollectiveBasedId(int idCollective) throws DAOConfigurationException {
+        try {
+            // SQL statement
+            String sql = "SELECT * FROM collective WHERE idCollective = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, idCollective);
+            ResultSet data = statement.executeQuery();
+
+            // Convert
+            Collective collective = null;
+            while(data.next()) {
+                collective = new Collective(
+                        data.getInt("idCollective"),
+                        data.getString("name"),
+                        data.getString("category"),
+                        data.getString("physicalAddress"),
+                        data.getString("emailAddress"));
+            }
+
+            return collective;
+
+        } catch (SQLException e) {
+            e.fillInStackTrace();
+            throw new DAOConfigurationException("Erreur. Soit le collectif n'a pas été trouvé en base de donnée, soit une erreur SQL a eu lieu.");
+        }
+    }
+
 }

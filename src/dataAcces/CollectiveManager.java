@@ -25,11 +25,23 @@ public class CollectiveManager {
         dao.update(collective);
     }
 
+    // Delete a collective
+    public void deleteCollective(int idCollective) throws DAOConfigurationException {
+        dao.delete(idCollective);
+    }
+
+    public void deleteCollective(Collective collective) throws DAOConfigurationException {
+        this.deleteCollective(collective.getIdCollective());
+    }
+
     // get all collective in memory
     public ArrayList<Collective> getAllCollectives() throws DAOConfigurationException {
         return dao.getAllCollective();
     }
 
-
+    // Search for a collective based on its id
+    public Collective searchACollectiveBasedId(int idCollective) {
+        return dao.searchACollectiveBasedId(idCollective);
+    }
 
 }

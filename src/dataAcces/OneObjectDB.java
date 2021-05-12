@@ -10,15 +10,15 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class OneObjectDB implements IOneObjectDAO {
-    // Data Access
+    // Variables
     private final Connection connection = SingletonConnexion.getConnection();
+    CollectiveManager collectiveManager = new CollectiveManager();
 
     @Override
     public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) {
         // Variables
         ResultSet data;
         ArrayList<OneObject> allObjectsCollective = new ArrayList<>();
-        OneObject object = new OneObject();
         GregorianCalendar calendar = new GregorianCalendar();
 
         try {
@@ -30,40 +30,45 @@ public class OneObjectDB implements IOneObjectDAO {
 
             // Convert
             while(data.next()) {
-                object.setIdObject(data.getInt("idObject"));
-                object.setName( data.getString("name"));
-                object.setIdCollectiveOwner(data.getInt("idCollectiveOwner"));
-                object.setCommandable(data.getInt("isCommandable") == 1);
+                // Create object
+                OneObject oneObject = new OneObject();
+                // ID
+                oneObject.setIdObject(data.getInt("idObject"));
+                // Name
+                oneObject.setName( data.getString("name"));
+                // Collective Owner
+                oneObject.setIdCollectiveOwner(data.getInt("idCollectiveOwner"));
+                int idCollectiveOwner = oneObject.getIdCollectiveOwner();
+                oneObject.setCollectiveOwner(collectiveManager.searchACollectiveBasedId(idCollectiveOwner));
+                // isCommendable
+                oneObject.setCommandable(data.getInt("isCommandable") == 1);
+                // PurchaseDate [optional]
                 data.getDate("purchaseDate");
                 if(!data.wasNull()) {
                     calendar.setTime(data.getDate("purchaseDate"));
-                    object.setPurchaseDate(calendar);
+                    oneObject.setPurchaseDate(calendar);
                 }
-
-                System.out.println(object.getName());
-
-                allObjectsCollective.add(object);
-
-                System.out.println("--- Boucle for ---");
-                for (OneObject o : allObjectsCollective) {
-                    System.out.println(o.getIdObject());
+                // Purchase price [optional]
+                data.getDouble("purchasePrice");
+                if(!data.wasNull()) {
+                    oneObject.setPurchasePrice(data.getDouble("purchasePrice"));
                 }
+                // Deposit [optional]
+                data.getInt("deposit");
+                if(!data.wasNull()) {
+                    oneObject.setDeposit(data.getInt("deposit"));
+                }
+                // maxRentalPeriod
+                oneObject.setMaxRentalPeriod(data.getInt("maxRentalPeriod"));
+
+                // Add object
+                allObjectsCollective.add(oneObject);
             }
 
-            System.out.println("--- Out while ---");
-            System.out.println(allObjectsCollective.get(0).getIdObject());
-            System.out.println(allObjectsCollective.get(1).getIdObject());
-            System.out.println(allObjectsCollective.get(2).getIdObject());
-
-            System.out.println("--- Boucle for ---");
-            for (OneObject o : allObjectsCollective) {
-                System.out.println(o.getIdObject());
-            }
+            return allObjectsCollective;
 
         } catch (SQLException e) {
             throw new DAOConfigurationException("Erreur lors de la récupération des objets pour un collectif");
         }
-
-        return allObjectsCollective;
     }
 }
