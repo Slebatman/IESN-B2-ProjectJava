@@ -16,7 +16,7 @@ public class OneObjectDB implements IOneObjectDAO {
     @Override
     public void insert(OneObject o) {
         try {
-            String sql = "INSERT INTO oneobject (idObject, name, idCollectiveOwner, isCommandable, purchaseDate, purchasePrice, deposit, maxRentalPeriod) " +
+            String sql = "INSERT INTO oneobject (idObject, name, idCollectiveOwner, isCommendable, purchaseDate, purchasePrice, deposit, maxRentalPeriod) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             // Not null value
@@ -57,7 +57,7 @@ public class OneObjectDB implements IOneObjectDAO {
     @Override
     public void update(OneObject o) {
         try {
-            String sql = "UPDATE oneobject SET name = ?, idCollectiveOwner = ?, isCommandable = ?, purchaseDate = ?, purchasePrice = ?, " +
+            String sql = "UPDATE oneobject SET name = ?, idCollectiveOwner = ?, isCommendable = ?, purchaseDate = ?, purchasePrice = ?, " +
                     "deposit = ?, maxRentalPeriod = ? WHERE idObject = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             // Not null value
@@ -165,7 +165,7 @@ public class OneObjectDB implements IOneObjectDAO {
         // Collective Owner
         oneObject.setIdCollectiveOwner(data.getInt("idCollectiveOwner"));
         // isCommendable
-        oneObject.setCommendable(data.getInt("isCommandable") == 1);
+        oneObject.setCommendable(data.getInt("isCommendable") == 1);
         // PurchaseDate [optional]
         data.getDate("purchaseDate");
         if(!data.wasNull()) {
