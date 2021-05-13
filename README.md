@@ -1,8 +1,15 @@
 # Project Java - Baetslé Antoine & Antoine Valentin
 
+## Fonctionnalités 
+- Finir le formulaire INSERT 
+- Listing de tout les objets SELECT
+- Supprimer un objet DELETE 
+- Mettre à jour un objet UPDATE
+
+--> Vendredi max
+
 ## Questions 
 - Fermeture de la db. Where ? 
-- Peut-on faire appel au Manager/Buiness depuis le DAO
 ## Requêtes pour Val
 
 * Select tout les collectifs ==> Done 

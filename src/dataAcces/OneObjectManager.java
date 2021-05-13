@@ -8,19 +8,43 @@ import java.util.ArrayList;
 
 public class OneObjectManager {
     // Variable
-    IOneObjectDAO dao;
+    private final IOneObjectDAO dao;
 
     // Constructor
     public OneObjectManager() {
         this.dao = new OneObjectDB();
     }
 
+    // Insert
+    public void addNewObject(OneObject oneObject) {
+        dao.insert(oneObject);
+    }
+
+    // Update
+    public void updateAnObject(OneObject oneObject) {
+        dao.update(oneObject);
+    }
+
+    // Delete
+    public void deleteAnObject(int idObject) {
+        dao.delete(idObject);
+    }
+
+    public void deleteAnObject(OneObject oneObject) {
+        this.deleteAnObject(oneObject.getIdObject());
+    }
+
+    // Get all object
+    ArrayList<OneObject> getAllObjects() {
+        return dao.getAllObjects();
+    }
+
     // Get all object for one collective
-    ArrayList<OneObject> getAllOneCollective(int idCollective) {
+    ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) {
         return dao.getAllObjectsForOneCollective(idCollective);
     }
 
-    ArrayList<OneObject> getAllOneCollective(Collective collective) {
-        return this.getAllOneCollective(collective.getIdCollective());
+    ArrayList<OneObject> getAllObjectsForOneCollective(Collective collective) {
+        return this.getAllObjectsForOneCollective(collective.getIdCollective());
     }
 }

@@ -48,7 +48,7 @@ public class CollectiveDB implements ICollectiveDAO {
     @Override
     public void delete(int idCollective) throws DAOConfigurationException {
         try {
-            String sql = "DELETE collective WHERE idCollective = ?";
+            String sql = "DELETE FROM collective WHERE idCollective = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, idCollective);
             statement.executeUpdate();
