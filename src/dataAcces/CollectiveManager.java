@@ -48,5 +48,4 @@ public class CollectiveManager {
     public int searchACollectiveIDBasedName(String name) {
         return dao.getACollectiveIDBasedName(name);
     }
-
 }
