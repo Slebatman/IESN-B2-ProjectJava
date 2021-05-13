@@ -48,6 +48,7 @@ public class OneObjectDB implements IOneObjectDAO {
             statement.setInt(8, o.getMaxRentalPeriod());
 
             statement.executeUpdate();
+
         } catch (SQLException e) {
             throw new DAOConfigurationException("Oups... Une erreur lors de l'insertion d'un objet en base de donnée est survenue.");
         }
