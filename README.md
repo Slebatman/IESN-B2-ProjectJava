@@ -1,11 +1,9 @@
 # Project Java - Baetslé Antoine & Antoine Valentin
 
-- Base de données
-
 ## Fonctionnalités 
 - Finir le formulaire INSERT 
 - Listing de tout les objets SELECT
-- Supprimer un objet DELET 
+- Supprimer un objet DELETE 
 - Mettre à jour un objet UPDATE
 
 --> Vendredi max
