@@ -16,23 +16,25 @@ public class main {
 
         GregorianCalendar date = new GregorianCalendar();
         OneObject oneObject = new OneObject(
-                "Projecteur",
+                "PC E-kot",
                 1,
                 false,
-                date,
-                350.99,
-                20,
-                3
+                null,
+                Types.NULL,
+                Types.NULL,
+                5
                 );
 
-        ArrayList<OneObject> allArrayList = new ArrayList<>();
-
         try {
-            allArrayList = oneObjectManager.getAllObjectsForOneCollective(1);
+            //oneObjectManager.addNewObject(oneObject);
+            ArrayList<OneObject> allArrayList = oneObjectManager.getAllObjectsForOneCollective(1);
 
             for(OneObject o : allArrayList) {
-                System.out.println(o.getName());
+                System.out.println(o.getPurchasePrice());
             }
+
+            OneObject newObject = allArrayList.get(0);
+            oneObjectManager.deleteAnObject(12);
         }
         catch (DAOConfigurationException e) {
             System.out.println(e.getMessage());

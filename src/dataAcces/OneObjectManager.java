@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class OneObjectManager {
     // Variable
-    IOneObjectDAO dao;
+    private final IOneObjectDAO dao;
 
     // Constructor
     public OneObjectManager() {
@@ -18,6 +18,20 @@ public class OneObjectManager {
     // Insert
     public void addNewObject(OneObject oneObject) {
         dao.insert(oneObject);
+    }
+
+    // Update
+    public void updateAnObject(OneObject oneObject) {
+        dao.update(oneObject);
+    }
+
+    // Delete
+    public void deleteAnObject(int idObject) {
+        dao.delete(idObject);
+    }
+
+    public void deleteAnObject(OneObject oneObject) {
+        this.deleteAnObject(oneObject.getIdObject());
     }
 
     // Get all object for one collective

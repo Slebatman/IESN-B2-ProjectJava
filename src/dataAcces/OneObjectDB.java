@@ -53,6 +53,60 @@ public class OneObjectDB implements IOneObjectDAO {
         }
     }
 
+    // Update an object
+    @Override
+    public void update(OneObject o) {
+        try {
+            String sql = "UPDATE oneobject SET name = ?, idCollectiveOwner = ?, isCommandable = ?, purchaseDate = ?, purchasePrice = ?, " +
+                    "deposit = ?, maxRentalPeriod = ? WHERE idObject = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            // Not null value
+            statement.setString(1,o.getName());
+            statement.setInt(2,o.getIdCollectiveOwner());
+            statement.setBoolean(3,o.isCommendable());
+
+            // Nul value
+            if(o.getPurchaseDate() != null) {
+                statement.setDate(4, new Date(o.getPurchaseDate().getTimeInMillis()));
+            } else {
+                statement.setNull(4, Types.NULL);
+            }
+
+            if(o.getPurchasePrice() != Types.NULL) {
+                statement.setDouble(5, o.getPurchasePrice());
+            } else {
+                statement.setNull(5, Types.NULL);
+            }
+
+            if(o.getDeposit() != Types.NULL) {
+                statement.setInt(6, o.getDeposit());
+            } else {
+                statement.setNull(6, Types.NULL);
+            }
+
+            // Not null value
+            statement.setInt(7, o.getMaxRentalPeriod());
+            statement.setInt(8, o.getIdObject());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOConfigurationException("Une erreur d'accès à la base de données s'est produit, méthode appelée sur une connexion fermée ou erreur SQL.");
+        }
+    }
+
+    // Delete
+    @Override
+    public void delete(int idObject) {
+        try {
+            String sql = "DELETE FROM oneobject WHERE idObject = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, idObject);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOConfigurationException("Erreur lors de la suppression de l'objet en base de donnée");
+        }
+    }
+
     // Select all objects for one collective
     @Override
     public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) {
