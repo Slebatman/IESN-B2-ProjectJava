@@ -15,12 +15,17 @@ public class OneObjectManager {
         this.dao = new OneObjectDB();
     }
 
+    // Insert
+    public void addNewObject(OneObject oneObject) {
+        dao.insert(oneObject);
+    }
+
     // Get all object for one collective
-    ArrayList<OneObject> getAllOneCollective(int idCollective) {
+    ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) {
         return dao.getAllObjectsForOneCollective(idCollective);
     }
 
-    ArrayList<OneObject> getAllOneCollective(Collective collective) {
-        return this.getAllOneCollective(collective.getIdCollective());
+    ArrayList<OneObject> getAllObjectsForOneCollective(Collective collective) {
+        return this.getAllObjectsForOneCollective(collective.getIdCollective());
     }
 }

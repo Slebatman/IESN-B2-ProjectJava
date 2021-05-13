@@ -6,9 +6,8 @@ public class OneObject {
     // Link to DB
     private int idObject;
     private String name;
-    private Collective collectiveOwner;
     private int idCollectiveOwner;
-    private boolean isCommandable;
+    private boolean isCommendable;
     private GregorianCalendar purchaseDate;
     private double purchasePrice;
     private int deposit;
@@ -17,33 +16,18 @@ public class OneObject {
     // Constructor
     public OneObject() {};
 
-    public OneObject(String name, Collective collectiveOwner, boolean isCommandable, GregorianCalendar purchaseDate, double purchasePrice, int deposit, int maxRentalPeriod) {
-        this.name = name;
-        this.collectiveOwner = collectiveOwner;
-        this.isCommandable = isCommandable;
-        this.purchaseDate = purchaseDate;
-        this.purchasePrice = purchasePrice;
-        this.deposit = deposit;
-        this.maxRentalPeriod = maxRentalPeriod;
-    }
-
-    public OneObject(int idObject, String name, Collective collectiveOwner, boolean isCommandable, GregorianCalendar purchaseDate, double purchasePrice, int deposit, int maxRentalPeriod) {
-        this(name, collectiveOwner, isCommandable, purchaseDate, purchasePrice, deposit, maxRentalPeriod);
-        this.idObject = idObject;
-    }
-
-    public OneObject(String name, int idCollectiveOwner, boolean isCommandable, GregorianCalendar purchaseDate, double purchasePrice, int deposit, int maxRentalPeriod) {
+    public OneObject(String name, int idCollectiveOwner, boolean isCommendable, GregorianCalendar purchaseDate, double purchasePrice, int deposit, int maxRentalPeriod) {
         this.name = name;
         this.idCollectiveOwner = idCollectiveOwner;
-        this.isCommandable = isCommandable;
+        this.isCommendable = isCommendable;
         this.purchaseDate = purchaseDate;
         this.purchasePrice = purchasePrice;
         this.deposit = deposit;
         this.maxRentalPeriod = maxRentalPeriod;
     }
 
-    public OneObject(int idObject, String name, int idCollectiveOwner, boolean isCommandable, GregorianCalendar purchaseDate, double purchasePrice, int deposit, int maxRentalPeriod) {
-        this(name, idCollectiveOwner, isCommandable, purchaseDate, purchasePrice, deposit, maxRentalPeriod);
+    public OneObject(int idObject, String name, int idCollectiveOwner, boolean isCommendable, GregorianCalendar purchaseDate, double purchasePrice, int deposit, int maxRentalPeriod) {
+        this(name, idCollectiveOwner, isCommendable, purchaseDate, purchasePrice, deposit, maxRentalPeriod);
         this.idObject = idObject;
     }
 
@@ -56,16 +40,12 @@ public class OneObject {
         return name;
     }
 
-    public Collective getCollectiveOwner() {
-        return collectiveOwner;
-    }
-
     public int getIdCollectiveOwner() {
         return idCollectiveOwner;
     }
 
-    public boolean isCommandable() {
-        return isCommandable;
+    public boolean isCommendable() {
+        return isCommendable;
     }
 
     public GregorianCalendar getPurchaseDate() {
@@ -93,16 +73,12 @@ public class OneObject {
         this.name = name;
     }
 
-    public void setCollectiveOwner(Collective collectiveOwner) {
-        this.collectiveOwner = collectiveOwner;
-    }
-
     public void setIdCollectiveOwner(int idCollectiveOwner) {
         this.idCollectiveOwner = idCollectiveOwner;
     }
 
-    public void setCommandable(boolean commandable) {
-        isCommandable = commandable;
+    public void setCommendable(boolean commendable) {
+        isCommendable = commendable;
     }
 
     public void setPurchaseDate(GregorianCalendar purchaseDate) {
@@ -126,9 +102,8 @@ public class OneObject {
         return "OneObject{" +
                 "idObject=" + idObject +
                 ", name='" + name + '\'' +
-                ", collectiveOwner=" + collectiveOwner +
                 ", idCollectiveOwner=" + idCollectiveOwner +
-                ", isCommandable=" + isCommandable +
+                ", isCommandable=" + isCommendable +
                 ", purchaseDate=" + purchaseDate +
                 ", purchasePrice=" + purchasePrice +
                 ", deposit=" + deposit +
