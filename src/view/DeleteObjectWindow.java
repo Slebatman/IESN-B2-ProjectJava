@@ -1,20 +1,32 @@
 package view;
 
+import controler.CollectiveControler;
+import type.Collective;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class DeleteObjectWindow extends JFrame{
     private JComboBox listCollective, listObjects;
     private JPanel panelCollectives, panelObjects, panelWindow, panelButton, mainPanel;
     private JLabel labelCollective, labelObject;
     private JButton buttonCancel, buttonDelete, buttonCollectives;
+    private ArrayList<Collective> arrayCollectives;
+    private CollectiveControler collectiveControler;
+    private ArrayList<String> collectives;
 
     DeleteObjectWindow(){
         super("Delete an object");
         setBounds(150, 150, 400, 400);
-        String[] collectives = {"info", "math", "philo", "éco" ,"chygé"};
+        collectiveControler = new CollectiveControler();
+        arrayCollectives = collectiveControler.getAllCollectives();
+        collectives = new ArrayList<String>();
+        for(Collective col : arrayCollectives){
+            collectives.add(col.getName());
+        }
         String[] objects = {"gobelets", "tables", "cruches", "micro" ,"banc"};
 
         this.setLayout(new FlowLayout());
@@ -25,7 +37,7 @@ public class DeleteObjectWindow extends JFrame{
         panelCollectives = new JPanel();
         panelButton = new JPanel();
         panelObjects = new JPanel();
-        listCollective = new JComboBox(collectives);
+        listCollective = new JComboBox(collectives.toArray());
         listObjects = new JComboBox(objects);
         labelCollective = new JLabel("Collectif : ");
         labelObject = new JLabel("Objet : ");

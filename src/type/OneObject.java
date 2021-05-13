@@ -1,6 +1,7 @@
 package type;
 
 import java.util.GregorianCalendar;
+import controler.exception.*;
 
 public class OneObject {
     // Link to DB
@@ -10,8 +11,8 @@ public class OneObject {
     private int idCollectiveOwner;
     private boolean isCommandable;
     private GregorianCalendar purchaseDate;
-    private double purchasePrice;
-    private int deposit;
+    private Double purchasePrice;
+    private Integer deposit;
     private int maxRentalPeriod;
 
     // Constructor
@@ -46,6 +47,7 @@ public class OneObject {
         this(name, idCollectiveOwner, isCommandable, purchaseDate, purchasePrice, deposit, maxRentalPeriod);
         this.idObject = idObject;
     }
+
 
     // Getters
     public int getIdObject() {
@@ -89,7 +91,7 @@ public class OneObject {
         this.idObject = idObject;
     }
 
-    public void setName(String name) {
+    public void setName(String name){
         this.name = name;
     }
 
