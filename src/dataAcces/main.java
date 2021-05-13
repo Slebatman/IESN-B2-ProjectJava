@@ -16,7 +16,6 @@ public class main {
         OneObjectManager oneObjectManager = new OneObjectManager();
         RentalManager rentalManager = new RentalManager();
 
-
         try {
             ArrayList<Rental> listArray;
             listArray = rentalManager.getRentalsForOneCollectiveCategory("KàP");
@@ -24,6 +23,9 @@ public class main {
             for(Rental r : listArray) {
                 System.out.println(r.getRentalManager());
             }
+
+            FirstResearchManager firstResearchManager = new FirstResearchManager(listArray.get(0));
+            System.out.println(firstResearchManager);
         }
         catch (DAOConfigurationException e) {
             System.out.println(e.getMessage());

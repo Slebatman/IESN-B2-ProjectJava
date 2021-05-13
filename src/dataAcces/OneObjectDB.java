@@ -123,6 +123,20 @@ public class OneObjectDB implements IOneObjectDAO {
         return listOfOneObject;
     }
 
+    // Generic function to select one object
+    public OneObject selectOneObject(PreparedStatement statement) throws SQLException {
+        ResultSet data;
+        OneObject oneObject = null;
+
+        data = statement.executeQuery();
+
+        while(data.next()) {
+            oneObject = dataToOneObject(data);
+        }
+
+        return oneObject;
+    }
+
     // Select all objects
     @Override
     public ArrayList<OneObject> getAllObjects() {
@@ -151,6 +165,21 @@ public class OneObjectDB implements IOneObjectDAO {
 
         } catch (SQLException e) {
             throw new DAOConfigurationException("Erreur lors de la récupération des objets pour un collectif");
+        }
+    }
+
+    // Retrieving the name of an object via its id
+    @Override
+    public OneObject getObjectByID(int idObject) {
+        try {
+            String sql = "SELECT * FROM oneobject WHERE idObject = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, idObject);
+
+            return selectOneObject(statement);
+
+        } catch (SQLException e) {
+            throw new DAOConfigurationException("Erreur lors de la récupération du nom d'un objet");
         }
     }
 

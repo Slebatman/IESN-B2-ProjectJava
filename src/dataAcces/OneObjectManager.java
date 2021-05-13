@@ -47,4 +47,9 @@ public class OneObjectManager {
     ArrayList<OneObject> getAllObjectsForOneCollective(Collective collective) {
         return this.getAllObjectsForOneCollective(collective.getIdCollective());
     }
+
+    //
+    public OneObject getObjectByID(int idObject) {
+        return dao.getObjectByID(idObject);
+    }
 }

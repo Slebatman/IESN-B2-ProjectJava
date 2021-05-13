@@ -10,4 +10,5 @@ public interface IOneObjectDAO {
     void delete(int idObject);
     ArrayList<OneObject> getAllObjects();
     ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective);
+    OneObject getObjectByID(int idObject);
 }

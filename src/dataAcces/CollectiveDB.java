@@ -132,6 +132,7 @@ public class CollectiveDB implements ICollectiveDAO {
         }
     }
 
+
     // Function convert sql to java object Collective
     public Collective convertToCollective(ResultSet data) throws SQLException {
         Collective collective = null;
