@@ -34,6 +34,11 @@ public class OneObjectManager {
         this.deleteAnObject(oneObject.getIdObject());
     }
 
+    // Get all object
+    ArrayList<OneObject> getAllObjects() {
+        return dao.getAllObjects();
+    }
+
     // Get all object for one collective
     ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) {
         return dao.getAllObjectsForOneCollective(idCollective);

@@ -107,27 +107,46 @@ public class OneObjectDB implements IOneObjectDAO {
         }
     }
 
+    // Generic function to select several objects
+    public ArrayList<OneObject> selectMultipleObject(PreparedStatement statement) throws SQLException {
+        ResultSet data;
+        ArrayList<OneObject> listOfOneObject = new ArrayList<>();
+
+        data = statement.executeQuery();
+
+        while(data.next()) {
+            OneObject oneObject = dataToOneObject(data);
+            listOfOneObject.add(oneObject);
+        }
+
+        return listOfOneObject;
+    }
+
+    // Select all objects
+    @Override
+    public ArrayList<OneObject> getAllObjects() {
+
+        try {
+            String sql = "SELECT * FROM oneobject";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            return selectMultipleObject(statement);
+
+        } catch (SQLException e) {
+            throw new DAOConfigurationException("Erreur lors de la récupération de l'ensemble des objets");
+        }
+    }
+
     // Select all objects for one collective
     @Override
     public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) {
-        // Variables
-        ResultSet data;
-        ArrayList<OneObject> allObjectsCollective = new ArrayList<>();
 
         try {
-            // SQL statement
             String sql = "SELECT * FROM oneobject WHERE idCollectiveOwner = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, idCollective);
-            data = statement.executeQuery();
 
-            // Convert
-            while(data.next()) {
-                OneObject oneObject = dataToOneObject(data);
-                allObjectsCollective.add(oneObject);
-            }
-
-            return allObjectsCollective;
+            return selectMultipleObject(statement);
 
         } catch (SQLException e) {
             throw new DAOConfigurationException("Erreur lors de la récupération des objets pour un collectif");

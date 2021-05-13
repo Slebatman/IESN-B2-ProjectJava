@@ -15,9 +15,10 @@ public class main {
         OneObjectManager oneObjectManager = new OneObjectManager();
 
         GregorianCalendar date = new GregorianCalendar();
+
         OneObject oneObject = new OneObject(
-                "PC E-kot",
-                1,
+                "Micro sans fil",
+                3,
                 false,
                 null,
                 Types.NULL,
@@ -26,15 +27,12 @@ public class main {
                 );
 
         try {
-            //oneObjectManager.addNewObject(oneObject);
-            ArrayList<OneObject> allArrayList = oneObjectManager.getAllObjectsForOneCollective(1);
+           // oneObjectManager.addNewObject(oneObject);
+            ArrayList<OneObject> allArrayList = oneObjectManager.getAllObjectsForOneCollective(2);
 
             for(OneObject o : allArrayList) {
-                System.out.println(o.getPurchasePrice());
+                System.out.println(o.getName());
             }
-
-            OneObject newObject = allArrayList.get(0);
-            oneObjectManager.deleteAnObject(12);
         }
         catch (DAOConfigurationException e) {
             System.out.println(e.getMessage());
