@@ -39,9 +39,14 @@ public class CollectiveManager {
         return dao.getAllCollective();
     }
 
-    // Search for a collective based on its id
+    // Get a collective based on its id
     public Collective searchACollectiveBasedId(int idCollective) {
-        return dao.searchACollectiveBasedId(idCollective);
+        return dao.getACollectiveBasedId(idCollective);
+    }
+
+    // Get id of a collective based on its name
+    public int searchACollectiveIDBasedName(String name) {
+        return dao.getACollectiveIDBasedName(name);
     }
 
 }
