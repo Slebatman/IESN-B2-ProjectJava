@@ -16,7 +16,7 @@
 * Select tout les objets d'un collectif ==> Almost Done
 * Select tout les objets
 
-##Todo Val
+## Todo Val
 * Gestion du null dans le spinner et dans le listing
 * modifier commendable
 * Utiliser le getIdCollectif by Name
