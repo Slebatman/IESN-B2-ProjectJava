@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class CollectiveManager {
     // Variable
-    ICollectiveDAO dao;
+    private final ICollectiveDAO dao;
 
     // Constructor
     public CollectiveManager() {
