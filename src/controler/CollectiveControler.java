@@ -1,18 +1,22 @@
 package controler;
 
-import business.*;
+import dataAcces.CollectiveManager;
 import type.Collective;
 
 import java.util.ArrayList;
 
 public class CollectiveControler {
-    private CollectiveBusiness business;
+    private CollectiveManager manager;
 
     public CollectiveControler(){
-        business = new CollectiveBusiness();
+        manager = new CollectiveManager();
     }
 
     public ArrayList<Collective> getAllCollectives(){
-        return  business.getAllCollectives();
+        return  manager.getAllCollectives();
+    }
+
+    public int searchACollectiveIDBasedName(String name) {
+        return manager.searchACollectiveIDBasedName(name);
     }
 }

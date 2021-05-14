@@ -44,11 +44,16 @@ public class ListingObjetWindow extends JFrame{
             listPanel.add(new JLabel(object.getName()));
             listPanel.add(new JLabel(String.valueOf(object.getIdCollectiveOwner())));
             listPanel.add(new JLabel(String.valueOf(object.isCommendable())));
-            GregorianCalendar date = new GregorianCalendar();
-            date = object.getPurchaseDate();
-            formatDate.setCalendar(date);
-            String dateFormatted = formatDate.format(date.getTime());
-            listPanel.add(new JLabel(dateFormatted));
+            if(object.getPurchaseDate() != null){
+                GregorianCalendar date = new GregorianCalendar();
+                date = object.getPurchaseDate();
+                formatDate.setCalendar(date);
+                String dateFormatted = formatDate.format(date.getTime());
+                listPanel.add(new JLabel(dateFormatted));
+            }else{
+                listPanel.add(new JLabel(" - "));
+            }
+
             if(object.getPurchasePrice() == 0){
                 listPanel.add(new JLabel(" - "));
             }else{

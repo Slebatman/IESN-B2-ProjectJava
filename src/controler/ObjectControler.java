@@ -20,4 +20,11 @@ public class ObjectControler {
       return manager.getAllObjects();
    }
 
+   public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) {
+      return manager.getAllObjectsForOneCollective(idCollective);
+   }
+   public void deleteAnObject(OneObject oneObject) {
+      manager.deleteAnObject(oneObject);
+   }
+
 }

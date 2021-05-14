@@ -139,12 +139,15 @@ public class AddObjectWindow extends JFrame {
         @Override
         public void actionPerformed(ActionEvent evt){
             if(!textName.getText().equals("")){
+                String value = listCollective.getSelectedItem().toString();
+                int idCollective = collectiveControler.searchACollectiveIDBasedName(value);
+                System.out.println(value + "  " + idCollective);
                 boolean price = false;
                 boolean deposit = !textDeposit.getText().equals("");
                 if(!textPrice.getText().equals("")){
                     price = true;
                 }
-                object = new OneObject(textName.getText(), 1, commandableValue, dateObject, (price ? Double.parseDouble(textPrice.getText()) : Types.NULL), (deposit ? Integer.parseInt(textDeposit.getText()): Types.NULL), (Integer)spinnerPeriod.getValue());
+                object = new OneObject(textName.getText(), idCollective, commandableValue, dateObject, (price ? Double.parseDouble(textPrice.getText()) : Types.NULL), (deposit ? Integer.parseInt(textDeposit.getText()): Types.NULL), (Integer)spinnerPeriod.getValue());
                 controler.addObject(object);
                 AddObjectWindow.this.dispose();
             }

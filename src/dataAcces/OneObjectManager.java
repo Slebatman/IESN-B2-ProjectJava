@@ -40,7 +40,7 @@ public class OneObjectManager {
     }
 
     // Get all object for one collective
-    ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) {
+    public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) {
         return dao.getAllObjectsForOneCollective(idCollective);
     }
 

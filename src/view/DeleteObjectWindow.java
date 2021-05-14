@@ -1,7 +1,9 @@
 package view;
 
 import controler.CollectiveControler;
+import controler.ObjectControler;
 import type.Collective;
+import type.OneObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,24 +12,39 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class DeleteObjectWindow extends JFrame{
-    private JComboBox listCollective, listObjects;
+    private JComboBox listCollective;
+    private JComboBox<String> listObjects;
     private JPanel panelCollectives, panelObjects, panelWindow, panelButton, mainPanel;
     private JLabel labelCollective, labelObject;
     private JButton buttonCancel, buttonDelete, buttonCollectives;
     private ArrayList<Collective> arrayCollectives;
+    private ArrayList<OneObject> arrayObjects;
     private CollectiveControler collectiveControler;
+    private ObjectControler objectControler;
     private ArrayList<String> collectives;
+    private ArrayList<String> objects;
+    private int idCollective;
 
     DeleteObjectWindow(){
         super("Delete an object");
         setBounds(150, 150, 400, 400);
+
         collectiveControler = new CollectiveControler();
-        arrayCollectives = collectiveControler.getAllCollectives();
+        objectControler = new ObjectControler();
         collectives = new ArrayList<String>();
+        objects = new ArrayList<String>();
+        arrayCollectives = collectiveControler.getAllCollectives();
         for(Collective col : arrayCollectives){
             collectives.add(col.getName());
         }
-        String[] objects = {"gobelets", "tables", "cruches", "micro" ,"banc"};
+        arrayCollectives = collectiveControler.getAllCollectives();
+
+        int idCollective = 1;
+        arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
+        listObjects = new JComboBox<String>();
+        for(OneObject object : arrayObjects){
+            listObjects.addItem(object.getName());
+        }
 
         this.setLayout(new FlowLayout());
 
@@ -38,7 +55,7 @@ public class DeleteObjectWindow extends JFrame{
         panelButton = new JPanel();
         panelObjects = new JPanel();
         listCollective = new JComboBox(collectives.toArray());
-        listObjects = new JComboBox(objects);
+
         labelCollective = new JLabel("Collectif : ");
         labelObject = new JLabel("Objet : ");
 
@@ -60,6 +77,7 @@ public class DeleteObjectWindow extends JFrame{
         buttonCancel = new JButton("Cancel");
         buttonCancel.addActionListener(new CancelButtonListener());
         buttonDelete = new JButton("Delete");
+        buttonDelete.addActionListener(new DeleteObjectListener());
         buttonDelete.setVisible(false);
 
         panelButton.add(buttonCancel);
@@ -81,6 +99,15 @@ public class DeleteObjectWindow extends JFrame{
     private class PanelObject implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent evt){
+            String value = listCollective.getSelectedItem().toString();
+            int idCollective = collectiveControler.searchACollectiveIDBasedName(value);
+            //System.out.println(listObjects.getSelectedIndex());
+
+            arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
+            listObjects.removeAllItems();
+            for(OneObject object : arrayObjects){
+                listObjects.addItem(object.getName());
+            }
             panelObjects.setVisible(true);
             buttonDelete.setVisible(true);
         }
@@ -93,10 +120,16 @@ public class DeleteObjectWindow extends JFrame{
         }
     }
 
-    private class DeleteObject implements ActionListener{
+    private class DeleteObjectListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
-
+            OneObject objetTest = arrayObjects.get(listObjects.getSelectedIndex());
+            objectControler.deleteAnObject(objetTest);
+            arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
+            listObjects.removeAllItems();
+            for(OneObject object : arrayObjects){
+                listObjects.addItem(object.getName());
+            }
         }
     }
 }

@@ -202,6 +202,8 @@ public class OneObjectDB implements IOneObjectDAO{
         if(!data.wasNull()) {
             calendar.setTime(data.getDate("purchaseDate"));
             oneObject.setPurchaseDate(calendar);
+        }else{
+            oneObject.setPurchaseDate(null);
         }
         // Purchase price [optional]
         data.getDouble("purchasePrice");
