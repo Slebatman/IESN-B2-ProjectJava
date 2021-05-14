@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.text.DateFormatter;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Types;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,10 +32,12 @@ public class AddObjectWindow extends JFrame {
     private ArrayList<Collective> arrayCollectives;
     private CollectiveControler collectiveControler;
     private ArrayList<String> collectives;
+    private ObjectControler controler;
 
     public AddObjectWindow(){
         super("Create an object");
         setBounds(250, 200, 600, 400);
+        controler  = new ObjectControler();
         collectiveControler = new CollectiveControler();
         arrayCollectives = collectiveControler.getAllCollectives();
         collectives = new ArrayList<String>();
@@ -135,16 +138,19 @@ public class AddObjectWindow extends JFrame {
     private class CreateObject implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
-            double price = 0;
-            int deposit = 0;
-            if(!textDeposit.getText().equals("")){
-                deposit = Integer.parseInt(textDeposit.getText());
+            if(!textName.getText().equals("")){
+                boolean price = false;
+                boolean deposit = !textDeposit.getText().equals("");
+                if(!textPrice.getText().equals("")){
+                    price = true;
+                }
+                object = new OneObject(textName.getText(), 1, commandableValue, dateObject, (price ? Double.parseDouble(textPrice.getText()) : Types.NULL), (deposit ? Integer.parseInt(textDeposit.getText()): Types.NULL), (Integer)spinnerPeriod.getValue());
+                controler.addObject(object);
+                AddObjectWindow.this.dispose();
             }
-            if(!textPrice.getText().equals("")){
-                price = Double.parseDouble(textPrice.getText());
+            else{
+                System.out.println("Nom incorrect");
             }
-            object = new OneObject(textName.getText(), 1, commandableValue, dateObject, price, deposit, (Integer)spinnerPeriod.getValue());
-            System.out.println(object.toString());
         }
     }
 

@@ -1,18 +1,23 @@
 package controler;
 import type.*;
 import controler.exception.*;
+import dataAcces.OneObjectManager;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class ObjectControler {
-   ObjectControler(){ }
-/*
-   public void addObject(OneObject object)throws ObjectNameException, ObjectDateException, ObjectCommandableException{
-      try{
-
-      }catch(ObjectNameException e){
-         JOptionPane.showMessageDialog(null, e.getMessage(),"Name exception", JOptionPane.ERROR_MESSAGE);
-      }
+   private OneObjectManager manager;
+   public ObjectControler(){
+      manager = new OneObjectManager();
    }
-   */
+
+   public void addObject(OneObject object){
+      manager.addNewObject(object);
+   }
+
+   public ArrayList<OneObject> getAllObjects(){
+      return manager.getAllObjects();
+   }
+
 }

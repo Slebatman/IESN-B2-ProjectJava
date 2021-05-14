@@ -35,7 +35,7 @@ public class OneObjectManager {
     }
 
     // Get all object
-    ArrayList<OneObject> getAllObjects() {
+    public ArrayList<OneObject> getAllObjects() {
         return dao.getAllObjects();
     }
 

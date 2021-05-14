@@ -4,11 +4,12 @@ import dataAcces.dao.IOneObjectDAO;
 import dataAcces.exception.DAOConfigurationException;
 import type.OneObject;
 
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-public class OneObjectDB implements IOneObjectDAO {
+public class OneObjectDB implements IOneObjectDAO{
     // Variables
     private final Connection connection = SingletonConnexion.getConnection();
 
@@ -176,11 +177,15 @@ public class OneObjectDB implements IOneObjectDAO {
         data.getDouble("purchasePrice");
         if(!data.wasNull()) {
             oneObject.setPurchasePrice(data.getDouble("purchasePrice"));
+        }else{
+            oneObject.setPurchasePrice(Types.NULL);
         }
         // Deposit [optional]
         data.getInt("deposit");
         if(!data.wasNull()) {
             oneObject.setDeposit(data.getInt("deposit"));
+        }else{
+            oneObject.setDeposit(Types.NULL);
         }
         // maxRentalPeriod
         oneObject.setMaxRentalPeriod(data.getInt("maxRentalPeriod"));
