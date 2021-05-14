@@ -15,7 +15,7 @@ public class RentalDB implements IRentalDAO {
     // Date base connection
     private final Connection connection = SingletonConnexion.getConnection();
 
-    // Select
+    // Generic function to select several objects
     public ArrayList<Rental> selectListRental(PreparedStatement statement) throws SQLException {
         ResultSet data;
         ArrayList<Rental> listRental = new ArrayList<>();
@@ -30,6 +30,18 @@ public class RentalDB implements IRentalDAO {
         return listRental;
     }
 
+    // Generic function to select one object
+    public Rental selectOneRental(PreparedStatement statement) throws SQLException {
+        Rental rental = null;
+        ResultSet data = statement.executeQuery();
+
+        while (data.next()) {
+            rental = sqlDataToJavaRental(data);
+        }
+
+        return rental;
+    }
+
     // Research n°1
     @Override
     public ArrayList<Rental> rentalsForOneCollectiveCategory(String category) throws DAOConfigurationException {
@@ -42,6 +54,20 @@ public class RentalDB implements IRentalDAO {
 
         } catch (SQLException e) {
             throw new DAOConfigurationException("Erreur SQL : impossible de recuperer les locations pour la categorie " + category);
+        }
+    }
+
+    @Override
+    public Rental getOneRentalBasedID(int idRental) {
+        try {
+            String sql = "SELECT * FROM rental WHERE idRental = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, idRental);
+
+            return selectOneRental(statement);
+
+        } catch (SQLException e) {
+            throw new DAOConfigurationException("Erreur SQL lors de la récupération d'une location");
         }
     }
 

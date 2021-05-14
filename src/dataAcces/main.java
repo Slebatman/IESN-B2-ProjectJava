@@ -3,6 +3,7 @@ package dataAcces;
 import dataAcces.exception.DAOConfigurationException;
 import type.FirstResearch;
 import type.Rental;
+import type.SecondResearch;
 
 import java.util.ArrayList;
 
@@ -15,11 +16,11 @@ public class main {
         ResearchManager researchManager = new ResearchManager();
 
         try {
-            ArrayList<FirstResearch> listArray;
-            listArray = researchManager.rentalsForOneCollectiveCategory("Cercle");
+            ArrayList<SecondResearch> listArray;
+            listArray = researchManager.problemRentalBasedOnTypeOfProblem(1);
 
-            for(FirstResearch fr : listArray) {
-                System.out.println(fr);
+            for(SecondResearch sr : listArray) {
+                System.out.println(sr);
             }
         }
         catch (DAOConfigurationException e) {

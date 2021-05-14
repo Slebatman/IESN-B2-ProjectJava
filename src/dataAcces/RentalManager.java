@@ -17,4 +17,9 @@ public class RentalManager {
     public ArrayList<Rental> getRentalsForOneCollectiveCategory(String category) throws DAOConfigurationException {
         return dao.rentalsForOneCollectiveCategory(category);
     }
+
+    // Getting rentals base on a ID
+    public Rental getRentalBasedID(int idRental) {
+        return dao.getOneRentalBasedID(idRental);
+    }
 }
