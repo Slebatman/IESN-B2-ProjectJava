@@ -1,17 +1,19 @@
-package dataAcces;
+package type;
 
+import dataAcces.CollectiveManager;
+import dataAcces.OneObjectManager;
 import type.Rental;
 
 import java.util.GregorianCalendar;
 
-public class FirstResearchManager {
+public class FirstResearch {
     // Variables
     private GregorianCalendar startDate;
     private String objectName;
     private String collectiveName;
 
     // Constructors
-    public FirstResearchManager(Rental rental) {
+    public FirstResearch(Rental rental) {
         setStartDate(rental.getStartDate());
         setObjectName(rental.getIdObject());
         setCollectiveName(rental.getIdTenant());
@@ -35,7 +37,7 @@ public class FirstResearchManager {
     // ToString
     @Override
     public String toString() {
-        return "FirstResearchManager{" +
+        return "FirstResearch{" +
                 "startDate=" + startDate +
                 ", objectName='" + objectName + '\'' +
                 ", collectiveName='" + collectiveName + '\'' +

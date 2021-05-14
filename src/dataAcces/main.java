@@ -1,13 +1,10 @@
 package dataAcces;
 
 import dataAcces.exception.DAOConfigurationException;
-import type.Collective;
-import type.OneObject;
+import type.FirstResearch;
 import type.Rental;
 
-import java.sql.Types;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 public class main {
     public static void main(String[] args)  {
@@ -15,17 +12,15 @@ public class main {
         CollectiveManager collectiveManager = new CollectiveManager();
         OneObjectManager oneObjectManager = new OneObjectManager();
         RentalManager rentalManager = new RentalManager();
+        ResearchManager researchManager = new ResearchManager();
 
         try {
-            ArrayList<Rental> listArray;
-            listArray = rentalManager.getRentalsForOneCollectiveCategory("KàP");
+            ArrayList<FirstResearch> listArray;
+            listArray = researchManager.rentalsForOneCollectiveCategory("Cercle");
 
-            for(Rental r : listArray) {
-                System.out.println(r.getRentalManager());
+            for(FirstResearch fr : listArray) {
+                System.out.println(fr);
             }
-
-            FirstResearchManager firstResearchManager = new FirstResearchManager(listArray.get(0));
-            System.out.println(firstResearchManager);
         }
         catch (DAOConfigurationException e) {
             System.out.println(e.getMessage());
