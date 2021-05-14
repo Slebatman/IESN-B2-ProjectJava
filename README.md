@@ -20,7 +20,6 @@
 * Gestion du null dans le spinner et dans le listing
 * Gestion des exceptions ?
 * Forcer des champs obligatoires
-* Faire le delete
 * Faire l'update
 
 ## Design Patterns 
