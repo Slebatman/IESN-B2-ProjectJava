@@ -11,7 +11,7 @@ public class CollectiveDB implements ICollectiveDAO {
     // DB Access
     private final Connection connection = SingletonConnexion.getConnection();
 
-    // Insert
+    // [IMPLEMENT] Insert
     @Override
     public void insert(Collective c) throws DAOConfigurationException {
         try {
@@ -27,7 +27,7 @@ public class CollectiveDB implements ICollectiveDAO {
         }
     }
 
-    // Update
+    // [IMPLEMENT] Update
     @Override
     public void update(Collective c) throws DAOConfigurationException {
         try {
@@ -44,7 +44,7 @@ public class CollectiveDB implements ICollectiveDAO {
         }
     }
 
-    // Delete
+    // [IMPLEMENT] Delete
     @Override
     public void delete(int idCollective) throws DAOConfigurationException {
         try {
@@ -57,58 +57,83 @@ public class CollectiveDB implements ICollectiveDAO {
         }
     }
 
-    // Get all collective
+    // Generic function to select several collective
+    public ArrayList<Collective> selectListOfCollective(PreparedStatement statement) throws SQLException {
+        ResultSet data;
+        ArrayList<Collective> listOfCollective = new ArrayList<>();
+
+        data = statement.executeQuery();
+
+        while(data.next()) {
+            Collective collective = this.convertToCollective(data);
+            listOfCollective.add(collective);
+        }
+
+        return listOfCollective;
+    }
+
+    // Generic function to select one collective
+    public Collective selectACollective(PreparedStatement statement) throws SQLException {
+        ResultSet data;
+        data = statement.executeQuery();
+        Collective collective = null;
+
+        while(data.next()) {
+            collective = this.convertToCollective(data);
+        }
+
+        return collective;
+    }
+
+    // [IMPLEMENT] Get all collective
     @Override
     public ArrayList<Collective> getAllCollective() throws DAOConfigurationException {
-        // Variables
-        ResultSet data;
-        ArrayList<Collective> allCollectives = new ArrayList<>();
-        Collective collective;
 
         try {
             // SQL statement
             String sql = "SELECT * FROM collective";
             PreparedStatement statement = connection.prepareStatement(sql);
-            data = statement.executeQuery();
 
-            // Convert
-            while(data.next()) {
-                collective = this.convertToCollective(data);
-                allCollectives.add(collective);
-            }
-
-            return allCollectives;
+            return selectListOfCollective(statement);
 
         } catch (SQLException e) {
             throw new DAOConfigurationException("Erreur lors de la récupération de l'ensemble des collectifs");
         }
     }
 
-    // Search for a collective based on its id
+    // [IMPLEMENT] Search for a collective based on its id
     @Override
-    public Collective searchACollectiveBasedId(int idCollective) throws DAOConfigurationException {
+    public Collective getACollectiveBasedId(int idCollective) throws DAOConfigurationException {
+
         try {
-            // SQL statement
             String sql = "SELECT * FROM collective WHERE idCollective = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, idCollective);
-            ResultSet data = statement.executeQuery();
 
-            // Convert
-            Collective collective = null;
-            while(data.next()) {
-                collective = this.convertToCollective(data);
-            }
-
-            return collective;
+            return selectACollective(statement);
 
         } catch (SQLException e) {
-            e.fillInStackTrace();
             throw new DAOConfigurationException("Erreur. Soit le collectif n'a pas été trouvé en base de donnée, soit une erreur SQL a eu lieu.");
         }
     }
 
-    // Function convert sql to java
+    // [IMPLEMENT] Retrieving a collective's ID based on its name
+    @Override
+    public int getACollectiveIDBasedName(String name) throws DAOConfigurationException {
+        try {
+            String sql = "SELECT * FROM collective WHERE name = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, name);
+
+            return selectACollective(statement).getIdCollective();
+
+        } catch (SQLException e) {
+            throw new DAOConfigurationException("Erreur SQL lors de la recherche d'un collectif sur base de son nom");
+        }
+    }
+
+
+    // Function convert sql to java object Collective
     public Collective convertToCollective(ResultSet data) throws SQLException {
         Collective collective = null;
 

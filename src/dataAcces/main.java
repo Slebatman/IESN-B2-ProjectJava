@@ -3,6 +3,7 @@ package dataAcces;
 import dataAcces.exception.DAOConfigurationException;
 import type.Collective;
 import type.OneObject;
+import type.Rental;
 
 import java.sql.Types;
 import java.util.ArrayList;
@@ -13,26 +14,18 @@ public class main {
         // Init
         CollectiveManager collectiveManager = new CollectiveManager();
         OneObjectManager oneObjectManager = new OneObjectManager();
-
-        GregorianCalendar date = new GregorianCalendar();
-
-        OneObject oneObject = new OneObject(
-                "Micro sans fil",
-                3,
-                false,
-                null,
-                Types.NULL,
-                Types.NULL,
-                5
-                );
+        RentalManager rentalManager = new RentalManager();
 
         try {
-           // oneObjectManager.addNewObject(oneObject);
-            ArrayList<OneObject> allArrayList = oneObjectManager.getAllObjectsForOneCollective(2);
+            ArrayList<Rental> listArray;
+            listArray = rentalManager.getRentalsForOneCollectiveCategory("KàP");
 
-            for(OneObject o : allArrayList) {
-                System.out.println(o.getName());
+            for(Rental r : listArray) {
+                System.out.println(r.getRentalManager());
             }
+
+            FirstResearchManager firstResearchManager = new FirstResearchManager(listArray.get(0));
+            System.out.println(firstResearchManager);
         }
         catch (DAOConfigurationException e) {
             System.out.println(e.getMessage());

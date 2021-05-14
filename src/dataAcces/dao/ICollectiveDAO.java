@@ -12,6 +12,7 @@ public interface ICollectiveDAO {
     void update(Collective c) throws DAOConfigurationException;
     void delete(int idCollective) throws DAOConfigurationException;
     ArrayList<Collective> getAllCollective() throws DAOConfigurationException;
-    Collective searchACollectiveBasedId(int idCollective) throws DAOConfigurationException;
+    Collective getACollectiveBasedId(int idCollective) throws DAOConfigurationException;
+    int getACollectiveIDBasedName(String name) throws DAOConfigurationException;
 
 }

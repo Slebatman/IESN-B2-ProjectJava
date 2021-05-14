@@ -17,7 +17,7 @@ public class OneObjectDB implements IOneObjectDAO{
     @Override
     public void insert(OneObject o) {
         try {
-            String sql = "INSERT INTO oneobject (idObject, name, idCollectiveOwner, isCommandable, purchaseDate, purchasePrice, deposit, maxRentalPeriod) " +
+            String sql = "INSERT INTO oneobject (idObject, name, idCollectiveOwner, isCommendable, purchaseDate, purchasePrice, deposit, maxRentalPeriod) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             // Not null value
@@ -49,6 +49,7 @@ public class OneObjectDB implements IOneObjectDAO{
             statement.setInt(8, o.getMaxRentalPeriod());
 
             statement.executeUpdate();
+
         } catch (SQLException e) {
             throw new DAOConfigurationException("Oups... Une erreur lors de l'insertion d'un objet en base de donnée est survenue.");
         }
@@ -58,7 +59,7 @@ public class OneObjectDB implements IOneObjectDAO{
     @Override
     public void update(OneObject o) {
         try {
-            String sql = "UPDATE oneobject SET name = ?, idCollectiveOwner = ?, isCommandable = ?, purchaseDate = ?, purchasePrice = ?, " +
+            String sql = "UPDATE oneobject SET name = ?, idCollectiveOwner = ?, isCommendable = ?, purchaseDate = ?, purchasePrice = ?, " +
                     "deposit = ?, maxRentalPeriod = ? WHERE idObject = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             // Not null value
@@ -123,6 +124,20 @@ public class OneObjectDB implements IOneObjectDAO{
         return listOfOneObject;
     }
 
+    // Generic function to select one object
+    public OneObject selectOneObject(PreparedStatement statement) throws SQLException {
+        ResultSet data;
+        OneObject oneObject = null;
+
+        data = statement.executeQuery();
+
+        while(data.next()) {
+            oneObject = dataToOneObject(data);
+        }
+
+        return oneObject;
+    }
+
     // Select all objects
     @Override
     public ArrayList<OneObject> getAllObjects() {
@@ -154,6 +169,21 @@ public class OneObjectDB implements IOneObjectDAO{
         }
     }
 
+    // Retrieving the name of an object via its id
+    @Override
+    public OneObject getObjectByID(int idObject) {
+        try {
+            String sql = "SELECT * FROM oneobject WHERE idObject = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, idObject);
+
+            return selectOneObject(statement);
+
+        } catch (SQLException e) {
+            throw new DAOConfigurationException("Erreur lors de la récupération du nom d'un objet");
+        }
+    }
+
     // Convert ResultSet to object OneObject
     public OneObject dataToOneObject(ResultSet data) throws SQLException {
         GregorianCalendar calendar = new GregorianCalendar();
@@ -166,7 +196,7 @@ public class OneObjectDB implements IOneObjectDAO{
         // Collective Owner
         oneObject.setIdCollectiveOwner(data.getInt("idCollectiveOwner"));
         // isCommendable
-        oneObject.setCommendable(data.getInt("isCommandable") == 1);
+        oneObject.setCommendable(data.getInt("isCommendable") == 1);
         // PurchaseDate [optional]
         data.getDate("purchaseDate");
         if(!data.wasNull()) {
