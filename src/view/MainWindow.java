@@ -48,6 +48,7 @@ public class MainWindow extends JFrame {
         objects.add(deleteObject);
 
         showObjects = new JMenuItem("Show all");
+        showObjects.addActionListener(new ListingObjects());
         objects.add(showObjects);
 
 
@@ -79,6 +80,13 @@ public class MainWindow extends JFrame {
         @Override
         public void actionPerformed(ActionEvent evt){
             UpdateObjectWindow updateWindow = new UpdateObjectWindow();
+        }
+    }
+
+    private class ListingObjects implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent evt){
+            ListingObjetWindow listWindow = new ListingObjetWindow();
         }
     }
 

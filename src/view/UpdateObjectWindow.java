@@ -1,6 +1,8 @@
 package view;
 
+import controler.CollectiveControler;
 import controler.ObjectControler;
+import type.Collective;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class UpdateObjectWindow extends JFrame{
     private JLabel labelCollective, labelName, labelCommandable, labelDate, labelPrice, labelDeposit, labelPeriod;
@@ -19,13 +22,20 @@ public class UpdateObjectWindow extends JFrame{
     private JButton buttonUpdate, buttonCancel;
     private JFormattedTextField dateArea;
     private ObjectControler addObjectControler;
+    private ArrayList<Collective> arrayCollectives;
+    private CollectiveControler collectiveControler;
+    private ArrayList<String> collectives;
 
     UpdateObjectWindow(){
         super("Create an object");
         setBounds(250, 200, 600, 400);
-        String[] collectives = {"info", "math", "philo", "éco" ,"chygé"};
-        listCollective = new JComboBox(collectives);
-        listCollective.setSelectedItem("info");
+        collectiveControler = new CollectiveControler();
+        arrayCollectives = collectiveControler.getAllCollectives();
+        collectives = new ArrayList<String>();
+        for(Collective col : arrayCollectives){
+            collectives.add(col.getName());
+        }
+        listCollective = new JComboBox(collectives.toArray());
 
         this.setLayout(new FlowLayout());
 
