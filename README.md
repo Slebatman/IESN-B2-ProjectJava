@@ -18,7 +18,6 @@
 
 ## Todo Val
 * Gestion du null dans le spinner et dans le listing
-* Utiliser le getIdCollectif by Name
 * Gestion des exceptions ?
 * Forcer des champs obligatoires
 * Faire le delete
