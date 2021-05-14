@@ -18,11 +18,8 @@
 
 ## Todo Val
 * Gestion du null dans le spinner et dans le listing
-* modifier commendable
-* Utiliser le getIdCollectif by Name
 * Gestion des exceptions ?
 * Forcer des champs obligatoires
-* Faire le delete
 * Faire l'update
 
 ## Design Patterns 
