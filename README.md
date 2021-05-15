@@ -22,7 +22,6 @@
 * Gestion des dates un peu partout :
 * * update qui récupère la date (ou null)
 * * update peut mettre la date à null
-* * insert peut mettre une date null
 *   Comparaison des dates dans la 3ème recherche
 
 ## Design Patterns 
