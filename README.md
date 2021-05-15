@@ -16,13 +16,9 @@
 * Select tous les types de problemes de retour DISTINCT
 
 ## Todo Val
-* Gestion du -1 spinnerPeriod
 * Gestion des exceptions ?
 * Forcer des champs obligatoires
-* Gestion des dates un peu partout :
-* * update qui récupère la date (ou null)
-* * update peut mettre la date à null
-*   Comparaison des dates dans la 3ème recherche
+* Comparaison des dates dans la 3ème recherche
 
 ## Design Patterns 
 ### Couche Controler
