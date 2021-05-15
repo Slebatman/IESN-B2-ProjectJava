@@ -14,13 +14,14 @@ public class main {
         OneObjectManager oneObjectManager = new OneObjectManager();
         RentalManager rentalManager = new RentalManager();
         ResearchManager researchManager = new ResearchManager();
+        TypeOfProblemRentalManager typeOfProblemRentalManager = new TypeOfProblemRentalManager();
 
         try {
-            ArrayList<SecondResearch> listArray;
-            listArray = researchManager.problemRentalBasedOnTypeOfProblem(1);
+            ArrayList<String> listArray;
+            listArray = typeOfProblemRentalManager.selectDistinctNameOfTypeOfProblemExitRental();
 
-            for(SecondResearch sr : listArray) {
-                System.out.println(sr);
+            for(String s : listArray) {
+                System.out.println(s);
             }
         }
         catch (DAOConfigurationException e) {
