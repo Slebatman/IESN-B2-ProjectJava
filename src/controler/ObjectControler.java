@@ -27,4 +27,8 @@ public class ObjectControler {
       manager.deleteAnObject(oneObject);
    }
 
+   public void updateAnObject(OneObject object){
+      manager.updateAnObject(object);
+   }
+
 }

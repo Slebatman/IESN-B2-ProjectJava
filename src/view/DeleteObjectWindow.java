@@ -16,7 +16,7 @@ public class DeleteObjectWindow extends JFrame{
     private JComboBox<String> listObjects;
     private JPanel panelCollectives, panelObjects, panelWindow, panelButton, mainPanel;
     private JLabel labelCollective, labelObject;
-    private JButton buttonCancel, buttonDelete, buttonCollectives;
+    private JButton buttonCancel, buttonDelete;
     private ArrayList<Collective> arrayCollectives;
     private ArrayList<OneObject> arrayObjects;
     private CollectiveControler collectiveControler;
@@ -55,6 +55,7 @@ public class DeleteObjectWindow extends JFrame{
         panelButton = new JPanel();
         panelObjects = new JPanel();
         listCollective = new JComboBox(collectives.toArray());
+        listCollective.addActionListener(new PanelObject());
 
         labelCollective = new JLabel("Collectif : ");
         labelObject = new JLabel("Objet : ");
@@ -69,16 +70,12 @@ public class DeleteObjectWindow extends JFrame{
         panelObjects.add(listObjects);
 
         panelCollectives.setVisible(true);
-        panelObjects.setVisible(false);
-
-        buttonCollectives = new JButton("Ok");
-        buttonCollectives.addActionListener(new PanelObject());
+        panelObjects.setVisible(true);
 
         buttonCancel = new JButton("Cancel");
         buttonCancel.addActionListener(new CancelButtonListener());
         buttonDelete = new JButton("Delete");
         buttonDelete.addActionListener(new DeleteObjectListener());
-        buttonDelete.setVisible(false);
 
         panelButton.add(buttonCancel);
         panelButton.add(buttonDelete);
@@ -92,7 +89,6 @@ public class DeleteObjectWindow extends JFrame{
         mainPanel.add(panelButton);
 
         this.add(mainPanel);
-        this.add(buttonCollectives);
         setVisible(true);
     }
 
@@ -108,8 +104,6 @@ public class DeleteObjectWindow extends JFrame{
             for(OneObject object : arrayObjects){
                 listObjects.addItem(object.getName());
             }
-            panelObjects.setVisible(true);
-            buttonDelete.setVisible(true);
         }
     }
 
@@ -123,6 +117,8 @@ public class DeleteObjectWindow extends JFrame{
     private class DeleteObjectListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
+            String value = listCollective.getSelectedItem().toString();
+            int idCollective = collectiveControler.searchACollectiveIDBasedName(value);
             OneObject objetTest = arrayObjects.get(listObjects.getSelectedIndex());
             objectControler.deleteAnObject(objetTest);
             arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);

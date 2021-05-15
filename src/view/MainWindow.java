@@ -10,7 +10,7 @@ public class MainWindow extends JFrame {
     private MainWindowPanel panel;
     private JMenuBar menu;
     private JMenu application, objects, research;
-    JMenuItem leave, createObject, updateObject, deleteObject, showObjects;
+    JMenuItem leave, createObject, updateObject, deleteObject, showObjects, firstSearch, secondSearch, thirdSearch;
     public MainWindow(){
         super("Gestion d'inventaire");
         setBounds(100, 100, 500, 500);
@@ -51,6 +51,18 @@ public class MainWindow extends JFrame {
         showObjects.addActionListener(new ListingObjects());
         objects.add(showObjects);
 
+        firstSearch = new JMenuItem("Search rentals by collective category");
+        firstSearch.addActionListener(new FirstSearch());
+        research.add(firstSearch);
+
+        secondSearch = new JMenuItem("Search rentals by type of problem");
+        secondSearch.addActionListener(new SecondSearch());
+        research.add(secondSearch);
+
+        thirdSearch = new JMenuItem("Search rentals between 2 dates");
+        thirdSearch.addActionListener(new ThirdSearch());
+        research.add(thirdSearch);
+
 
         setVisible(true);
     }
@@ -87,6 +99,27 @@ public class MainWindow extends JFrame {
         @Override
         public void actionPerformed(ActionEvent evt){
             ListingObjetWindow listWindow = new ListingObjetWindow();
+        }
+    }
+
+    private class FirstSearch implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent evt){
+            FirstSearchForm firstSearchForm = new FirstSearchForm();
+        }
+    }
+
+    private class SecondSearch implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent evt){
+            SecondSearchForm secondSearchForm = new SecondSearchForm();
+        }
+    }
+
+    private class ThirdSearch implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent evt){
+            ThirdSearchForm thirdSearchForm = new ThirdSearchForm();
         }
     }
 

@@ -139,9 +139,9 @@ public class AddObjectWindow extends JFrame {
         @Override
         public void actionPerformed(ActionEvent evt){
             if(!textName.getText().equals("")){
+                dateObject.setTime((Date)spinnerDate.getModel().getValue());
                 String value = listCollective.getSelectedItem().toString();
                 int idCollective = collectiveControler.searchACollectiveIDBasedName(value);
-                System.out.println(value + "  " + idCollective);
                 boolean price = false;
                 boolean deposit = !textDeposit.getText().equals("");
                 if(!textPrice.getText().equals("")){
