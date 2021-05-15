@@ -13,6 +13,7 @@
 ## Requêtes pour Val
 
 * Select toutes les catégories DISTINCT
+* Select tous les types de problemes de retour DISTINCT
 
 ## Todo Val
 * Gestion du -1 spinnerPeriod
