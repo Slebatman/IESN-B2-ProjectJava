@@ -18,7 +18,7 @@ public class main {
 
         try {
             ArrayList<String> listArray;
-            listArray = typeOfProblemRentalManager.selectDistinctNameOfTypeOfProblemExitRental();
+            listArray = collectiveManager.getDistinctCategoryCollective();
 
             for(String s : listArray) {
                 System.out.println(s);

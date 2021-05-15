@@ -132,6 +132,27 @@ public class CollectiveDB implements ICollectiveDAO {
         }
     }
 
+    // [IMPLEMENT] Separately retrieve the category of Collective
+    @Override
+    public ArrayList<String> getDistinctCategoryCollective() {
+        ArrayList<String> distinctNameCollective = new ArrayList<>();
+
+        try {
+            String sql = "SELECT DISTINCT category FROM collective";
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            ResultSet data = statement.executeQuery();
+
+            while (data.next()) {
+                distinctNameCollective.add(data.getString("category"));
+            }
+
+        } catch (SQLException e) {
+            throw new DAOConfigurationException("Erreur SQL : impossible de récuperer les categories distinctes de la table collective");
+        }
+
+        return distinctNameCollective;
+    }
 
     // Function convert sql to java object Collective
     public Collective convertToCollective(ResultSet data) throws SQLException {

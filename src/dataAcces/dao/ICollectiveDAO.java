@@ -14,5 +14,6 @@ public interface ICollectiveDAO {
     ArrayList<Collective> getAllCollective() throws DAOConfigurationException;
     Collective getACollectiveBasedId(int idCollective) throws DAOConfigurationException;
     int getACollectiveIDBasedName(String name) throws DAOConfigurationException;
+    ArrayList<String> getDistinctCategoryCollective();
 
 }

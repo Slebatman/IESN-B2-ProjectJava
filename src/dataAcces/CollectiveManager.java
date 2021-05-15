@@ -48,4 +48,9 @@ public class CollectiveManager {
     public int searchACollectiveIDBasedName(String name) {
         return dao.getACollectiveIDBasedName(name);
     }
+
+    // Separately retrieve the category of collective
+    public ArrayList<String> getDistinctCategoryCollective() {
+        return dao.getDistinctCategoryCollective();
+    }
 }
