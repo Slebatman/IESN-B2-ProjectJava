@@ -17,10 +17,9 @@
 * Select tout les objets
 
 ## Todo Val
-* Gestion du null dans le spinner et dans le listing
+* Gestion du -1 spinnerPeriod
 * Gestion des exceptions ?
 * Forcer des champs obligatoires
-* Recharger liste des objest après un delete
 * Gestion des dates un peu partout :
 * * update qui récupère la date (ou null)
 * * update peut mettre la date à null
