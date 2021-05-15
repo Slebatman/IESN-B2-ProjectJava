@@ -21,6 +21,10 @@
 * Gestion des exceptions ?
 * Forcer des champs obligatoires
 * Recharger liste des objest après un delete
+* Gestion des dates un peu partout :
+* * update qui récupère la date (ou null)
+* * update peut mettre la date à null
+* * insert peut mettre une date null
 
 ## Design Patterns 
 ### Couche Controler
