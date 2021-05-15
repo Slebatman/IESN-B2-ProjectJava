@@ -13,7 +13,7 @@
 ## Requêtes pour Val
 
 * Select toutes les catégories DISTINCT
-* Select tous les types de problemes de retour DISTINCT
+* Select tous les types de problemes de retour DISTINCT ==> Done
 
 ## Todo Val
 * Gestion des exceptions ?

@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class TypeOfProblemRentalDB implements ITypeOfProblemRentalDAO {
     // Connection to the data base
@@ -37,6 +38,27 @@ public class TypeOfProblemRentalDB implements ITypeOfProblemRentalDAO {
         } catch (SQLException e) {
             throw new DAOConfigurationException("Erreur SQL lors de la récuperation de l'id du probleme avec comme critère de recherche : " + nameProblem);
         }
+    }
+
+    // Select DISTINCT name of typeOfProblemExitLocation
+    @Override
+    public ArrayList<String> selectDistinctNameOfTypeOfProblemExitRental() {
+        ArrayList<String> distinctNameOfTypeOfExitRental = new ArrayList<>();
+
+        try {
+            String sql = "SELECT DISTINCT name FROM typeOfProblemRental";
+            PreparedStatement statement = connexion.prepareStatement(sql);
+
+            ResultSet data = statement.executeQuery();
+
+            while (data.next()) {
+                distinctNameOfTypeOfExitRental.add(data.getString("name"));
+            }
+        } catch (SQLException e) {
+            throw new DAOConfigurationException("Erreur SQL : impossible de récuperer de manière distincte les noms de typeOfProblemExitLocation");
+        }
+
+        return distinctNameOfTypeOfExitRental;
     }
 
     // Convert sql info to java object TypeOfProblemRental
