@@ -12,9 +12,7 @@
 - Fermeture de la db. Where ? 
 ## Requêtes pour Val
 
-* Select tout les collectifs ==> Done 
-* Select tout les objets d'un collectif ==> Almost Done
-* Select tout les objets
+* Select toutes les catégories DISTINCT
 
 ## Todo Val
 * Gestion du -1 spinnerPeriod
