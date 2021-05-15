@@ -20,7 +20,7 @@
 * Gestion du null dans le spinner et dans le listing
 * Gestion des exceptions ?
 * Forcer des champs obligatoires
-* Faire l'update
+* Recharger liste des objest après un delete
 
 ## Design Patterns 
 ### Couche Controler
