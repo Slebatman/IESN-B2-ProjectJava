@@ -24,8 +24,8 @@ public class UpdateObjectWindow extends JFrame{
     private JRadioButton commandable, notCommandable;
     private ButtonGroup radioGroup;
     private JComboBox listCollective;
-    private JPanel panel, panelRadio, panelButton, panelWindow, panelCollectives;
-    private JButton buttonUpdate, buttonCancel;
+    private JPanel panel, panelRadio, panelButton, panelWindow, panelCollectives, panelDate;
+    private JButton buttonUpdate, buttonCancel, buttonDate;
     private JFormattedTextField dateArea;
     private ObjectControler addObjectControler;
     private ArrayList<Collective> arrayCollectives;
@@ -40,10 +40,11 @@ public class UpdateObjectWindow extends JFrame{
     private OneObject object;
     private Boolean commandableValue;
     private OneObject objectDefault;
+    private SimpleDateFormat formatDate;
 
     UpdateObjectWindow(){
         super("Update an object");
-        setBounds(250, 200, 600, 400);
+        setBounds(250, 200, 800, 450);
         collectiveControler = new CollectiveControler();
         arrayCollectives = collectiveControler.getAllCollectives();
         collectives = new ArrayList<String>();
@@ -68,7 +69,7 @@ public class UpdateObjectWindow extends JFrame{
         this.setLayout(new FlowLayout());
 
 
-        DateFormat formatDate = new SimpleDateFormat("yyyy/mm/dd");
+        formatDate = new SimpleDateFormat("dd/MM/yyyy");
 
         SpinnerDateModel model = new SpinnerDateModel();
         spinnerDate = new JSpinner(model);
@@ -76,7 +77,9 @@ public class UpdateObjectWindow extends JFrame{
         JSpinner.DateEditor editor = new JSpinner.DateEditor(spinnerDate, "dd/MM/yyyy");
         spinnerDate.setEditor(editor);
         //spinnerDate.setEnabled(false);
-        spinnerPeriod = new JSpinner();
+        SpinnerNumberModel modelSpinnerPeriod = new SpinnerNumberModel(1.0, 1.0, 100.0, 1.0);
+        spinnerPeriod = new JSpinner(modelSpinnerPeriod);
+
 
 
         labelCollective = new JLabel("Collectif : ");
@@ -121,7 +124,25 @@ public class UpdateObjectWindow extends JFrame{
         if(objectDefault.getDeposit() != Types.NULL){
             textDeposit.setText(objectDefault.getDeposit() +"");
         }
+        GregorianCalendar date = objectDefault.getPurchaseDate();
+        formatDate.setCalendar(date);
+        buttonDate = new JButton("Ajouter");
+        buttonDate.addActionListener(new AddDate());
+        if(date != null){
+            spinnerDate.setValue(date.getTime());
+            spinnerDate.setEnabled(true);
+            buttonDate.setText("Retirer");
+        }else{
+            spinnerDate.setEnabled(false);
+            buttonDate.setText("Ajouter");
+        }
         spinnerPeriod.setValue(objectDefault.getMaxRentalPeriod());
+        panelDate = new JPanel();
+
+        panelDate.setLayout(new GridLayout(1,2, 10, 5));
+        panelDate.add(labelDate);
+        panelDate.add(buttonDate);
+        spinnerDate.setEnabled(false);
         panel.setLayout(new GridLayout(7,2, 10, 5));
         panel.add(labelCollective);
         panel.add(listCollective);
@@ -129,7 +150,7 @@ public class UpdateObjectWindow extends JFrame{
         panel.add(listObjects);
         panel.add(labelCommandable);
         panel.add(panelRadio);
-        panel.add(labelDate);
+        panel.add(panelDate);
         panel.add(spinnerDate);
         panel.add(labelPrice);
         panel.add(textPrice);
@@ -180,6 +201,9 @@ public class UpdateObjectWindow extends JFrame{
             if(!textPrice.getText().equals("")){
                 price = true;
             }
+            if(buttonDate.getText().equals("Ajouter")){
+                dateObject = null;
+            }
             object = new OneObject(idObject, objectTest.getName(), idCollective, commandableValue, dateObject, (price ? Double.parseDouble(textPrice.getText()) : Types.NULL), (deposit ? Integer.parseInt(textDeposit.getText()): Types.NULL), (Integer)spinnerPeriod.getValue());
             objectControler.updateAnObject(object);
             UpdateObjectWindow.this.dispose();
@@ -221,7 +245,19 @@ public class UpdateObjectWindow extends JFrame{
             if(objectDefault.getDeposit() != Types.NULL){
                 textDeposit.setText(objectDefault.getDeposit() +"");
             }
+
             spinnerPeriod.setValue(objectDefault.getMaxRentalPeriod());
+            GregorianCalendar date = objectDefault.getPurchaseDate();
+            formatDate.setCalendar(date);
+            if(date != null){
+                spinnerDate.setValue(date.getTime());
+                spinnerDate.setEnabled(true);
+                buttonDate.setText("Retirer");
+            }else{
+                spinnerDate.setEnabled(false);
+                buttonDate.setText("Ajouter");
+            }
+
         }
     }
 
@@ -229,6 +265,20 @@ public class UpdateObjectWindow extends JFrame{
         public void itemStateChanged(ItemEvent event){
             if(event.getSource() == commandable && event.getStateChange() == ItemEvent.SELECTED) commandableValue = true;
             else if(event.getSource() == notCommandable && event.getStateChange() == ItemEvent.SELECTED) commandableValue = false;
+        }
+    }
+
+    private class AddDate implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent evt){
+            if(buttonDate.getText().equals("Ajouter")){
+                spinnerDate.setEnabled(true);
+                buttonDate.setText("Retirer");
+            }else{
+                spinnerDate.setEnabled(false);
+                buttonDate.setText("Ajouter");
+            }
+
         }
     }
 }

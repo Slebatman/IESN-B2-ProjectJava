@@ -21,8 +21,8 @@ public class AddObjectWindow extends JFrame {
     private JRadioButton commandable, notCommandable;
     private ButtonGroup radioGroup;
     private JComboBox listCollective;
-    private JPanel panel, panelRadio, panelButton, panelWindow;
-    private JButton buttonValid, buttonCancel;
+    private JPanel panel, panelRadio, panelButton, panelWindow, panelDate;
+    private JButton buttonValid, buttonCancel, buttonDate;
     private JTextField dateArea;
     private ObjectControler addObjectControler;
     private OneObject object;
@@ -33,6 +33,7 @@ public class AddObjectWindow extends JFrame {
     private CollectiveControler collectiveControler;
     private ArrayList<String> collectives;
     private ObjectControler controler;
+    private boolean dateNull;
 
     public AddObjectWindow(){
         super("Create an object");
@@ -52,6 +53,7 @@ public class AddObjectWindow extends JFrame {
 
         SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
 
+        SpinnerNumberModel modelSpinnerPeriod = new SpinnerNumberModel(1.0, 1.0, 100.0, 1.0);
 
         labelCollective = new JLabel("Collectif : ");
         labelName = new JLabel("Nom de l'objet : ");
@@ -81,10 +83,16 @@ public class AddObjectWindow extends JFrame {
         JSpinner.DateEditor editor = new JSpinner.DateEditor(spinnerDate, "dd/MM/yyyy");
         spinnerDate.setEditor(editor);
         //spinnerDate.setEnabled(false);
-        spinnerPeriod = new JSpinner();
+        spinnerPeriod = new JSpinner(modelSpinnerPeriod);
         panel = new JPanel();
         panelButton = new JPanel();
         panelWindow = new JPanel();
+        panelDate = new JPanel();
+        buttonDate = new JButton("Ajouter");
+        panelDate.setLayout(new GridLayout(1,2, 10, 5));
+        panelDate.add(labelDate);
+        buttonDate.addActionListener(new AddDate());
+        panelDate.add(buttonDate);
         panel.setLayout(new GridLayout(7,2, 10, 5));
         panel.add(labelCollective);
         panel.add(listCollective);
@@ -92,7 +100,7 @@ public class AddObjectWindow extends JFrame {
         panel.add(textName);
         panel.add(labelCommandable);
         panel.add(panelRadio);
-        panel.add(labelDate);
+        panel.add(panelDate);
         panel.add(spinnerDate);
         panel.add(labelPrice);
         panel.add(textPrice);
@@ -100,6 +108,8 @@ public class AddObjectWindow extends JFrame {
         panel.add(textDeposit);
         panel.add(labelPeriod);
         panel.add(spinnerPeriod);
+
+        spinnerDate.setEnabled(false);
 
         RadioButtonListener listener = new RadioButtonListener();
         commandable.addItemListener(listener);
@@ -147,6 +157,9 @@ public class AddObjectWindow extends JFrame {
                 if(!textPrice.getText().equals("")){
                     price = true;
                 }
+                if(buttonDate.getText().equals("Ajouter")){
+                    dateObject = null;
+                }
                 object = new OneObject(textName.getText(), idCollective, commandableValue, dateObject, (price ? Double.parseDouble(textPrice.getText()) : Types.NULL), (deposit ? Integer.parseInt(textDeposit.getText()): Types.NULL), (Integer)spinnerPeriod.getValue());
                 controler.addObject(object);
                 AddObjectWindow.this.dispose();
@@ -161,6 +174,20 @@ public class AddObjectWindow extends JFrame {
         public void itemStateChanged(ItemEvent event){
             if(event.getSource() == commandable && event.getStateChange() == ItemEvent.SELECTED) commandableValue = true;
             else if(event.getSource() == notCommandable && event.getStateChange() == ItemEvent.SELECTED) commandableValue = false;
+        }
+    }
+
+    private class AddDate implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent evt){
+            if(buttonDate.getText().equals("Ajouter")){
+                spinnerDate.setEnabled(true);
+                buttonDate.setText("Retirer");
+            }else{
+                spinnerDate.setEnabled(false);
+                buttonDate.setText("Ajouter");
+            }
+
         }
     }
 
