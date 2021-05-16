@@ -2,7 +2,7 @@ package dataAcces;
 
 import dataAcces.dao.IOneObjectDAO;
 import dataAcces.exception.DAOConfigurationException;
-import type.OneObject;
+import Model.OneObject;
 
 
 import java.sql.*;

@@ -2,8 +2,8 @@ package view;
 
 import controler.CollectiveControler;
 import controler.ObjectControler;
-import type.Collective;
-import type.OneObject;
+import Model.Collective;
+import Model.OneObject;
 
 import javax.swing.*;
 import java.awt.*;

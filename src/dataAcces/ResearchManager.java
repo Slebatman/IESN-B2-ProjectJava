@@ -2,10 +2,10 @@ package dataAcces;
 
 import dataAcces.dao.IProblemExitRental;
 import dataAcces.dao.IRentalDAO;
-import type.FirstResearch;
-import type.ProblemExitRental;
-import type.Rental;
-import type.SecondResearch;
+import Model.FirstResearch;
+import Model.ProblemExitRental;
+import Model.Rental;
+import Model.SecondResearch;
 
 import java.util.ArrayList;
 

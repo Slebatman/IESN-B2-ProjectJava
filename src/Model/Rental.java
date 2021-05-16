@@ -1,6 +1,5 @@
-package type;
+package Model;
 
-import java.util.Collections;
 import java.util.GregorianCalendar;
 
 public class Rental {

@@ -1,7 +1,7 @@
 package controler;
 
 import dataAcces.CollectiveManager;
-import type.Collective;
+import Model.Collective;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package type;
+package Model;
 
 public class Collective {
     // Link to DB

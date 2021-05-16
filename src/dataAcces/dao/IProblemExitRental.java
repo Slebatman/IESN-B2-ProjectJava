@@ -1,6 +1,6 @@
 package dataAcces.dao;
 
-import type.ProblemExitRental;
+import Model.ProblemExitRental;
 
 import java.util.ArrayList;
 

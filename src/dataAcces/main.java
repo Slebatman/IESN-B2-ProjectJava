@@ -1,9 +1,6 @@
 package dataAcces;
 
 import dataAcces.exception.DAOConfigurationException;
-import type.FirstResearch;
-import type.Rental;
-import type.SecondResearch;
 
 import java.util.ArrayList;
 

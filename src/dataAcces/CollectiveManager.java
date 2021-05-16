@@ -2,7 +2,7 @@ package dataAcces;
 
 import dataAcces.dao.ICollectiveDAO;
 import dataAcces.exception.DAOConfigurationException;
-import type.Collective;
+import Model.Collective;
 
 import java.util.ArrayList;
 

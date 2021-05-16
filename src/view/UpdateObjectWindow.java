@@ -2,8 +2,8 @@ package view;
 
 import controler.CollectiveControler;
 import controler.ObjectControler;
-import type.Collective;
-import type.OneObject;
+import Model.Collective;
+import Model.OneObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.Types;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;

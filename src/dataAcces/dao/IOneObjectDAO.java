@@ -1,6 +1,6 @@
 package dataAcces.dao;
 
-import type.*;
+import Model.*;
 
 import java.util.ArrayList;
 

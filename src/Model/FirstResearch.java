@@ -1,8 +1,7 @@
-package type;
+package Model;
 
 import dataAcces.CollectiveManager;
 import dataAcces.OneObjectManager;
-import type.Rental;
 
 import java.util.GregorianCalendar;
 

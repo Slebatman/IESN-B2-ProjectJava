@@ -1,4 +1,4 @@
-package type;
+package Model;
 
 public class TypeOfProblemRental {
     // Link to DB

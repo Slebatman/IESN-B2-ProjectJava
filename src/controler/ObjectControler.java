@@ -1,9 +1,7 @@
 package controler;
-import type.*;
-import controler.exception.*;
+import Model.*;
 import dataAcces.OneObjectManager;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
 public class ObjectControler {

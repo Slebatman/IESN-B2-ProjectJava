@@ -1,6 +1,6 @@
 package dataAcces.dao;
 
-import type.Rental;
+import Model.Rental;
 
 import java.util.ArrayList;
 

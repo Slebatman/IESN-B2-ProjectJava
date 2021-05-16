@@ -1,8 +1,6 @@
-package type;
+package Model;
 
 import java.util.GregorianCalendar;
-import controler.exception.*;
-import controler.exception.*;
 
 public class OneObject {
     // Link to DB

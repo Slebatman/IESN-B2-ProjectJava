@@ -1,11 +1,9 @@
 package view;
 import controler.*;
-import type.OneObject;
+import Model.OneObject;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.sql.Types;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
