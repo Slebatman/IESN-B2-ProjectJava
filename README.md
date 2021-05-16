@@ -18,7 +18,7 @@
 ## Todo Val
 * Gestion des exceptions ?
 * Forcer des champs obligatoires
-* Comparaison des dates dans la 3ème recherche
+* 1ere recherche : n'afficher que les categories possédant au moins 1 location ? ou pas?
 
 ## Design Patterns 
 ### Couche Controler
