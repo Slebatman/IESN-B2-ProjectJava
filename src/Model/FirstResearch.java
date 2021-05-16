@@ -33,6 +33,18 @@ public class FirstResearch {
         this.collectiveName = collectiveManager.searchACollectiveBasedId(idCollective).getName();
     }
 
+    public GregorianCalendar getStartDate() {
+        return startDate;
+    }
+
+    public String getCollectiveName() {
+        return collectiveName;
+    }
+
+    public String getObjectName() {
+        return objectName;
+    }
+
     // ToString
     @Override
     public String toString() {

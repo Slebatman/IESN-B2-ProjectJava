@@ -67,6 +67,34 @@ public class SecondResearch {
         this.emailAddressCollectiveOwner = collective.getEmailAddress();
     }
 
+    public GregorianCalendar getStartDate() {
+        return startDate;
+    }
+
+    public GregorianCalendar getReturnDate() {
+        return returnDate;
+    }
+
+    public int getDeposit() {
+        return deposit;
+    }
+
+    public int getMaxRentalPeriod() {
+        return maxRentalPeriod;
+    }
+
+    public String getNameObject() {
+        return nameObject;
+    }
+
+    public String getNameCollectiveOwner() {
+        return nameCollectiveOwner;
+    }
+
+    public String getEmailAddressCollectiveOwner() {
+        return emailAddressCollectiveOwner;
+    }
+
     // ToString
     @Override
     public String toString() {

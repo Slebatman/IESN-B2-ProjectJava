@@ -50,7 +50,7 @@ public class AddObjectWindow extends JFrame {
 
         SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
 
-        SpinnerNumberModel modelSpinnerPeriod = new SpinnerNumberModel(1.0, 1.0, 100.0, 1.0);
+        SpinnerNumberModel modelSpinnerPeriod = new SpinnerNumberModel(1, 1, 100, 1);
 
         labelCollective = new JLabel("Collectif : ");
         labelName = new JLabel("Nom de l'objet : ");
@@ -146,7 +146,9 @@ public class AddObjectWindow extends JFrame {
         @Override
         public void actionPerformed(ActionEvent evt){
             if(!textName.getText().equals("")){
-                dateObject.setTime((Date)spinnerDate.getModel().getValue());
+                if(dateObject != null){
+                    dateObject.setTime((Date)spinnerDate.getModel().getValue());
+                }
                 String value = listCollective.getSelectedItem().toString();
                 int idCollective = collectiveControler.searchACollectiveIDBasedName(value);
                 boolean price = false;
@@ -157,7 +159,7 @@ public class AddObjectWindow extends JFrame {
                 if(buttonDate.getText().equals("Ajouter")){
                     dateObject = null;
                 }
-                object = new OneObject(textName.getText(), idCollective, commandableValue, dateObject, (price ? Double.parseDouble(textPrice.getText()) : Types.NULL), (deposit ? Integer.parseInt(textDeposit.getText()): Types.NULL), (Integer)spinnerPeriod.getValue());
+                object = new OneObject(textName.getText(), idCollective, commandableValue, dateObject, (price ? Double.parseDouble(textPrice.getText()) : Types.NULL), (deposit ? Integer.parseInt(textDeposit.getText()): Types.NULL),(Integer)spinnerPeriod.getValue());
                 controler.addObject(object);
                 AddObjectWindow.this.dispose();
             }

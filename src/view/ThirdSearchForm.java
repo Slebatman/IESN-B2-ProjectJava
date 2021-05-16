@@ -1,6 +1,8 @@
 package view;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,19 +37,20 @@ public class ThirdSearchForm extends JFrame {
         this.add(spinnerSecondDate);
         this.add(button);
         this.setVisible(true);
-
-        firstDate = new GregorianCalendar();
-        firstDate.setTime((Date)spinnerFirstDate.getModel().getValue());
-        secondDate = new GregorianCalendar();
-        secondDate.setTime((Date)spinnerSecondDate.getModel().getValue());
     }
 
     private class SearchButton implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent evt){
+            firstDate = new GregorianCalendar();
+            firstDate.setTime((Date)spinnerFirstDate.getModel().getValue());
+            secondDate = new GregorianCalendar();
+            secondDate.setTime((Date)spinnerSecondDate.getModel().getValue());
             if(firstDate != secondDate && firstDate.compareTo(secondDate) < 0){
+                ThirdSearchWindows thirdSearchWindows = new ThirdSearchWindows(firstDate, secondDate);
                 ThirdSearchForm.this.dispose();
             }
         }
     }
+
 }

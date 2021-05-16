@@ -1,22 +1,29 @@
 package view;
 
+import dataAcces.CollectiveManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class FirstSearchForm extends JFrame {
     private JLabel labelCategory;
     private JComboBox listCategory;
     private JButton button;
+    private CollectiveManager manager;
+    private ArrayList<String> categoryList;
 
     public FirstSearchForm(){
         super("Search rentals by collective category");
         setBounds(200, 150, 400, 100);
-        String[] list = {"Cercle", "Kap", "Régio"};
+        manager = new CollectiveManager();
+        categoryList = manager.getDistinctCategoryCollective();
+
         this.setLayout(new FlowLayout());
         labelCategory = new JLabel("Select a category : ");
-        listCategory = new JComboBox(list);
+        listCategory = new JComboBox(categoryList.toArray());
         button = new JButton("Search");
         button.addActionListener(new SearchButton());
         this.add(labelCategory);
@@ -28,6 +35,8 @@ public class FirstSearchForm extends JFrame {
     private class SearchButton implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent evt){
+            String category = listCategory.getSelectedItem().toString();
+            FirstSearchWindow firstSearchWindow = new FirstSearchWindow(category);
             FirstSearchForm.this.dispose();
         }
     }

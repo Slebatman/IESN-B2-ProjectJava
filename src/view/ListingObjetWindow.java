@@ -15,56 +15,14 @@ public class ListingObjetWindow extends JFrame{
     private ObjectControler controler;
     private int nbObjects;
     private SimpleDateFormat formatDate;
+    private JTable table;
 
     public ListingObjetWindow(){
         super("List of the objects");
-        setBounds(500, 200, 1000, 400);
+        setBounds(500, 200, 650, 500);
         this.setLayout(new FlowLayout());
-        controler = new ObjectControler();
-        listObjects = controler.getAllObjects();
-        nbObjects = listObjects.size();
-        listPanel = new JPanel();
-        formatDate = new SimpleDateFormat("dd/MM/yyyy");
-        Border border = BorderFactory.createLineBorder(Color.BLUE, 2);
-
-        listPanel.setLayout(new GridLayout(nbObjects+1,8, 10, 15));
-        listPanel.add(new JLabel("IdObject"));
-        listPanel.add(new JLabel("Name"));
-        listPanel.add(new JLabel("idCollectiveOwner"));
-        listPanel.add(new JLabel("isCommandable"));
-        listPanel.add(new JLabel("purchaseDate"));
-        listPanel.add(new JLabel("purchasePrice"));
-        listPanel.add(new JLabel("deposit"));
-        listPanel.add(new JLabel("MaxRentalPeriod"));
-
-        for(OneObject object : listObjects){
-            listPanel.add(new JLabel(String.valueOf(object.getIdObject())));
-            listPanel.add(new JLabel(object.getName()));
-            listPanel.add(new JLabel(String.valueOf(object.getIdCollectiveOwner())));
-            listPanel.add(new JLabel(String.valueOf(object.isCommendable())));
-            if(object.getPurchaseDate() != null){
-                GregorianCalendar date = new GregorianCalendar();
-                date = object.getPurchaseDate();
-                formatDate.setCalendar(date);
-                String dateFormatted = formatDate.format(date.getTime());
-                listPanel.add(new JLabel(dateFormatted));
-            }else{
-                listPanel.add(new JLabel(" - "));
-            }
-
-            if(object.getPurchasePrice() == 0){
-                listPanel.add(new JLabel(" - "));
-            }else{
-                listPanel.add(new JLabel(String.valueOf(object.getPurchasePrice())));
-            }
-            if(object.getDeposit() == 0){
-                listPanel.add(new JLabel(" - "));
-            }else{
-                listPanel.add(new JLabel(String.valueOf(object.getDeposit())));
-            }
-            listPanel.add(new JLabel(String.valueOf(object.getMaxRentalPeriod())));
-        }
-        this.add(listPanel);
+        JTable tableau = new JTable(new ModeleStatiqueListingObjects());
+        this.add(new JScrollPane(tableau),BorderLayout.CENTER);
         this.setVisible(true);
     }
 }
