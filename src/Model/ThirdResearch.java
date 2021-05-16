@@ -48,6 +48,31 @@ public class ThirdResearch {
         this.rentalManager = rentalManager;
     }
 
+    // Getters
+    public String getObjectName() {
+        return objectName;
+    }
+
+    public GregorianCalendar getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public Double getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public Double getInvoicedPrice() {
+        return invoicedPrice;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public String getRentalManager() {
+        return rentalManager;
+    }
+
     // ToString
     @Override
     public String toString() {
