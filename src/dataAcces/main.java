@@ -1,8 +1,10 @@
 package dataAcces;
 
+import Model.ThirdResearch;
 import dataAcces.exception.DAOConfigurationException;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public class main {
     public static void main(String[] args)  {
@@ -14,11 +16,14 @@ public class main {
         TypeOfProblemRentalManager typeOfProblemRentalManager = new TypeOfProblemRentalManager();
 
         try {
-            ArrayList<String> listArray;
-            listArray = collectiveManager.getDistinctCategoryCollective();
+            GregorianCalendar date1 = new GregorianCalendar(2020,12,01);
+            GregorianCalendar date2 = new GregorianCalendar(2021,12,01);
 
-            for(String s : listArray) {
-                System.out.println(s);
+            ArrayList<ThirdResearch> listArray;
+            listArray = researchManager.getRentalBetween2Dates(date1, date2);
+
+            for(ThirdResearch r : listArray) {
+                System.out.println(r);
             }
         }
         catch (DAOConfigurationException e) {

@@ -1,13 +1,11 @@
 package dataAcces;
 
+import Model.*;
 import dataAcces.dao.IProblemExitRental;
 import dataAcces.dao.IRentalDAO;
-import Model.FirstResearch;
-import Model.ProblemExitRental;
-import Model.Rental;
-import Model.SecondResearch;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 public class ResearchManager {
     private IRentalDAO daoRental;
@@ -43,5 +41,10 @@ public class ResearchManager {
         }
 
         return problemExitRentalConverted;
+    }
+
+    // Third research
+    public ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) {
+        return daoRental.getRentalBetween2Dates(firstDate, secondDate);
     }
 }
