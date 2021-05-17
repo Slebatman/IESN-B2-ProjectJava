@@ -155,7 +155,7 @@ public class OneObjectDB implements IOneObjectDAO{
 
     // Select all objects for one collective
     @Override
-    public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) {
+    public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOConfigurationException {
 
         try {
             String sql = "SELECT * FROM oneobject WHERE idCollectiveOwner = ?";
@@ -171,7 +171,7 @@ public class OneObjectDB implements IOneObjectDAO{
 
     // Retrieving the name of an object via its id
     @Override
-    public OneObject getObjectByID(int idObject) {
+    public OneObject getObjectByID(int idObject) throws DAOConfigurationException {
         try {
             String sql = "SELECT * FROM oneobject WHERE idObject = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -224,5 +224,4 @@ public class OneObjectDB implements IOneObjectDAO{
 
         return oneObject;
     }
-
 }

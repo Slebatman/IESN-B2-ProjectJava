@@ -1,6 +1,7 @@
 package controler;
 import Model.*;
 import dataAcces.OneObjectManager;
+import dataAcces.exception.DAOConfigurationException;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ public class ObjectControler {
       return manager.getAllObjects();
    }
 
-   public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) {
+   public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOConfigurationException {
       return manager.getAllObjectsForOneCollective(idCollective);
    }
    public void deleteAnObject(OneObject oneObject) {

@@ -3,6 +3,7 @@ package dataAcces;
 import dataAcces.dao.IOneObjectDAO;
 import Model.Collective;
 import Model.OneObject;
+import dataAcces.exception.DAOConfigurationException;
 
 import java.util.ArrayList;
 
@@ -40,7 +41,7 @@ public class OneObjectManager {
     }
 
     // Get all object for one collective
-    public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) {
+    public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOConfigurationException {
         return dao.getAllObjectsForOneCollective(idCollective);
     }
 
