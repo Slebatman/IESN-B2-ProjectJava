@@ -41,17 +41,25 @@ public class ModeleStatiqueSecondSearch extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex){
         switch (columnIndex){
             case 0:
-                date = new GregorianCalendar();
-                date = search[rowIndex].getStartDate();
-                formatDate.setCalendar(date);
-                dateFormatted = formatDate.format(date.getTime());
-                return dateFormatted;
+                if(search[rowIndex].getStartDate() != null){
+                    GregorianCalendar date = new GregorianCalendar();
+                    date = search[rowIndex].getStartDate();
+                    formatDate.setCalendar(date);
+                    dateFormatted = formatDate.format(date.getTime());
+                    return dateFormatted;
+                }else{
+                    return " - ";
+                }
             case 1:
-                date = new GregorianCalendar();
-                date = search[rowIndex].getReturnDate();
-                formatDate.setCalendar(date);
-                dateFormatted = formatDate.format(date.getTime());
-                return dateFormatted;
+                if(search[rowIndex].getReturnDate() != null){
+                    GregorianCalendar date = new GregorianCalendar();
+                    date = search[rowIndex].getReturnDate();
+                    formatDate.setCalendar(date);
+                    dateFormatted = formatDate.format(date.getTime());
+                    return dateFormatted;
+                }else{
+                    return " - ";
+                }
             case 2 :
                 return search[rowIndex].getNameObject();
             case 3 :
