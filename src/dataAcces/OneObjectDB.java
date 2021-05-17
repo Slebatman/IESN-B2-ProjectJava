@@ -64,8 +64,7 @@ public class OneObjectDB implements IOneObjectDAO{
         ResultSet data = statement.executeQuery();
 
         while(data.next()) {
-            OneObject oneObject = sqlToJavaObject(data);
-            listOfOneObject.add(oneObject);
+            listOfOneObject.add(sqlToJavaObject(data));
         }
         return listOfOneObject;
     }
