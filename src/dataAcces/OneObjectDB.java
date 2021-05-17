@@ -10,92 +10,41 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class OneObjectDB implements IOneObjectDAO{
-    // Variables
+    // Data base access
     private final Connection connection = SingletonConnexion.getConnection();
 
-    // Insert
+    // [IMPLEMENT] Insert a new object
     @Override
     public void insert(OneObject o) throws DAOException {
         try {
             String sql = "INSERT INTO oneobject (name, idCollectiveOwner, isCommendable, purchaseDate, purchasePrice, deposit, maxRentalPeriod) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
-            // Not null value
-            statement.setString(1,o.getName());
-            statement.setInt(2,o.getIdCollectiveOwner());
-            statement.setBoolean(3,o.isCommendable());
-
-            // Nul value
-            if(o.getPurchaseDate() != null) {
-                statement.setDate(4, new Date(o.getPurchaseDate().getTimeInMillis()));
-            } else {
-                statement.setNull(4, Types.NULL);
-            }
-
-            if(o.getPurchasePrice() != Types.NULL) {
-                statement.setDouble(5, o.getPurchasePrice());
-            } else {
-                statement.setNull(5, Types.NULL);
-            }
-
-            if(o.getDeposit() != Types.NULL) {
-                statement.setInt(6, o.getDeposit());
-            } else {
-                statement.setNull(6, Types.NULL);
-            }
-
-            // Not null value
-            statement.setInt(7, o.getMaxRentalPeriod());
-
+            editPreparedStatement(statement, o);
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            throw new DAOException("Oups... Une erreur lors de l'insertion d'un objet en base de donnée est survenue.");
+            throw new DAOException("Erreur SQL : impossible d'ajouter l'objet en base de données");
         }
     }
 
-    // Update an object
+    // [IMPLEMENT] Update an object
     @Override
     public void update(OneObject o) throws DAOException {
         try {
             String sql = "UPDATE oneobject SET name = ?, idCollectiveOwner = ?, isCommendable = ?, purchaseDate = ?, purchasePrice = ?, " +
                     "deposit = ?, maxRentalPeriod = ? WHERE idObject = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            // Not null value
-            statement.setString(1,o.getName());
-            statement.setInt(2,o.getIdCollectiveOwner());
-            statement.setBoolean(3,o.isCommendable());
-
-            // Nul value
-            if(o.getPurchaseDate() != null) {
-                statement.setDate(4, new Date(o.getPurchaseDate().getTimeInMillis()));
-            } else {
-                statement.setNull(4, Types.NULL);
-            }
-
-            if(o.getPurchasePrice() != Types.NULL) {
-                statement.setDouble(5, o.getPurchasePrice());
-            } else {
-                statement.setNull(5, Types.NULL);
-            }
-
-            if(o.getDeposit() != Types.NULL) {
-                statement.setInt(6, o.getDeposit());
-            } else {
-                statement.setNull(6, Types.NULL);
-            }
-
-            // Not null value
-            statement.setInt(7, o.getMaxRentalPeriod());
+            editPreparedStatement(statement, o);
             statement.setInt(8, o.getIdObject());
-
             statement.executeUpdate();
+
         } catch (SQLException e) {
-            throw new DAOException("Une erreur d'accès à la base de données s'est produit, méthode appelée sur une connexion fermée ou erreur SQL.");
+            throw new DAOException("Erreur SQL : impossible de mettre à jour l'objet en base de données");
         }
     }
 
-    // Delete
+    // [IMPLEMENT] Delete an object
     @Override
     public void delete(int idObject) throws DAOException {
         try {
@@ -103,41 +52,35 @@ public class OneObjectDB implements IOneObjectDAO{
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, idObject);
             statement.executeUpdate();
+
         } catch (SQLException e) {
-            throw new DAOException("Erreur lors de la suppression de l'objet en base de donnée");
+            throw new DAOException("Erreur SQL : impossible de supprimer l'objet en base de données");
         }
     }
 
     // Generic function to select several objects
-    public ArrayList<OneObject> selectMultipleObject(PreparedStatement statement) throws SQLException {
-        ResultSet data;
+    private ArrayList<OneObject> selectMultipleObject(PreparedStatement statement) throws SQLException {
         ArrayList<OneObject> listOfOneObject = new ArrayList<>();
-
-        data = statement.executeQuery();
+        ResultSet data = statement.executeQuery();
 
         while(data.next()) {
-            OneObject oneObject = dataToOneObject(data);
+            OneObject oneObject = sqlToJavaObject(data);
             listOfOneObject.add(oneObject);
         }
-
         return listOfOneObject;
     }
 
     // Generic function to select one object
-    public OneObject selectOneObject(PreparedStatement statement) throws SQLException {
-        ResultSet data;
-        OneObject oneObject = null;
+    private OneObject selectOneObject(PreparedStatement statement) throws SQLException {
 
-        data = statement.executeQuery();
-
+        ResultSet data = statement.executeQuery();
         while(data.next()) {
-            oneObject = dataToOneObject(data);
+            return sqlToJavaObject(data);
         }
-
-        return oneObject;
+        return null;
     }
 
-    // Select all objects
+    // [IMPLEMENT] Retrieve all objects from the database
     @Override
     public ArrayList<OneObject> getAllObjects() throws DAOException {
 
@@ -148,11 +91,11 @@ public class OneObjectDB implements IOneObjectDAO{
             return selectMultipleObject(statement);
 
         } catch (SQLException e) {
-            throw new DAOException("Erreur lors de la récupération de l'ensemble des objets");
+            throw new DAOException("Erreur SQL : impossible de récuperer l'ensemble des objets en base de données");
         }
     }
 
-    // Select all objects for one collective
+    // [IMPLEMENT] Recovering all the objects of a collective
     @Override
     public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOException {
 
@@ -160,31 +103,29 @@ public class OneObjectDB implements IOneObjectDAO{
             String sql = "SELECT * FROM oneobject WHERE idCollectiveOwner = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, idCollective);
-
             return selectMultipleObject(statement);
 
         } catch (SQLException e) {
-            throw new DAOException("Erreur lors de la récupération des objets pour un collectif");
+            throw new DAOException("Erreur SQL : impossible de récuperer l'ensemble des objets pour le collectif d'identidiant : " + idCollective);
         }
     }
 
-    // Retrieving the name of an object via its id
+    // [IMPLEMENT] Retrieving an object via its id
     @Override
     public OneObject getObjectByID(int idObject) throws DAOException {
         try {
             String sql = "SELECT * FROM oneobject WHERE idObject = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, idObject);
-
             return selectOneObject(statement);
 
         } catch (SQLException e) {
-            throw new DAOException("Erreur lors de la récupération du nom d'un objet");
+            throw new DAOException("Erreur SQL : impssoble de récuperer l'objet sur base de son ID");
         }
     }
 
-    // Convert ResultSet to object OneObject
-    public OneObject dataToOneObject(ResultSet data) throws SQLException {
+    // Convert sql to java object OneObject
+    private OneObject sqlToJavaObject(ResultSet data) throws SQLException {
         GregorianCalendar calendar = new GregorianCalendar();
         OneObject oneObject = new OneObject();
 
@@ -218,9 +159,42 @@ public class OneObjectDB implements IOneObjectDAO{
         }else{
             oneObject.setDeposit(Types.NULL);
         }
+
         // maxRentalPeriod
         oneObject.setMaxRentalPeriod(data.getInt("maxRentalPeriod"));
 
         return oneObject;
+    }
+
+    // Edit PreparedStatement for include et update
+    private PreparedStatement editPreparedStatement(PreparedStatement statement, OneObject o) throws SQLException {
+        // Not null value
+        statement.setString(1,o.getName());
+        statement.setInt(2,o.getIdCollectiveOwner());
+        statement.setBoolean(3,o.isCommendable());
+
+        // Null values
+        if(o.getPurchaseDate() != null) {
+            statement.setDate(4, new Date(o.getPurchaseDate().getTimeInMillis()));
+        } else {
+            statement.setNull(4, Types.NULL);
+        }
+
+        if(o.getPurchasePrice() != Types.NULL) {
+            statement.setDouble(5, o.getPurchasePrice());
+        } else {
+            statement.setNull(5, Types.NULL);
+        }
+
+        if(o.getDeposit() != Types.NULL) {
+            statement.setInt(6, o.getDeposit());
+        } else {
+            statement.setNull(6, Types.NULL);
+        }
+
+        // Not null values
+        statement.setInt(7, o.getMaxRentalPeriod());
+
+        return statement;
     }
 }

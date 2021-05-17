@@ -6,9 +6,11 @@ import business.RentalManager;
 import business.ResearchManager;
 import business.TypeOfProblemRentalManager;
 import model.Collective;
+import model.OneObject;
 import model.ThirdResearch;
 import exception.DAOException;
 
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -22,8 +24,18 @@ public class testDAO {
         TypeOfProblemRentalManager typeOfProblemRentalManager = new TypeOfProblemRentalManager();
 
         try {
-            Collective collective = collectiveManager.searchACollectiveBasedId(8);
-            System.out.println(collective);
+            OneObject oneObject = new OneObject(
+                    "Pioche",
+                    8,
+                    true,
+                    null,
+                    Types.NULL,
+                    Types.NULL,
+                    5
+            );
+
+            oneObjectManager.addNewObject(oneObject);
+
         }
         catch (DAOException e) {
             System.out.println(e.getMessage());
