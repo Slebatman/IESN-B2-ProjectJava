@@ -98,18 +98,15 @@ public class DeleteObjectWindow extends JFrame{
         public void actionPerformed(ActionEvent evt){
             String value = listCollective.getSelectedItem().toString();
             int idCollective = 0;
+            // Todo : implement exception
             try {
                 idCollective = collectiveControler.searchACollectiveIDBasedName(value);
+                arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
             } catch (DAOConfigurationException e) {
                 e.printStackTrace();
             }
             //System.out.println(listObjects.getSelectedIndex());
 
-            try {
-                arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
-            } catch (DAOConfigurationException e) {
-                e.printStackTrace();
-            }
             listObjects.removeAllItems();
             for(OneObject object : arrayObjects){
                 listObjects.addItem(object.getName());
@@ -129,22 +126,16 @@ public class DeleteObjectWindow extends JFrame{
         public void actionPerformed(ActionEvent evt){
             String value = listCollective.getSelectedItem().toString();
             int idCollective = 0;
+            // Todo : implement exception
             try {
                 idCollective = collectiveControler.searchACollectiveIDBasedName(value);
-            } catch (DAOConfigurationException e) {
-                e.printStackTrace();
-            }
-            OneObject objetTest = arrayObjects.get(listObjects.getSelectedIndex());
-            try {
+                OneObject objetTest = arrayObjects.get(listObjects.getSelectedIndex());
                 objectControler.deleteAnObject(objetTest);
-            } catch (DAOConfigurationException e) {
-                e.printStackTrace();
-            }
-            try {
                 arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
             } catch (DAOConfigurationException e) {
                 e.printStackTrace();
             }
+
             listObjects.removeAllItems();
             for(OneObject object : arrayObjects){
                 listObjects.addItem(object.getName());

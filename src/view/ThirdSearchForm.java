@@ -49,6 +49,7 @@ public class ThirdSearchForm extends JFrame {
             secondDate = new GregorianCalendar();
             secondDate.setTime((Date)spinnerSecondDate.getModel().getValue());
             if(firstDate != secondDate && firstDate.compareTo(secondDate) < 0){
+                // Todo : implement exception
                 try {
                     ThirdSearchWindows thirdSearchWindows = new ThirdSearchWindows(firstDate, secondDate);
                 } catch (DAOConfigurationException e) {

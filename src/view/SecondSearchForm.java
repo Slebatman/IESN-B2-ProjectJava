@@ -36,6 +36,7 @@ public class SecondSearchForm extends JFrame {
         @Override
         public void actionPerformed(ActionEvent evt){
             int idTypeOfProblem = listProblems.getSelectedIndex()+1;
+            // Todo : implement exception
             try {
                 SecondSearchWindows secondSearchWindows = new SecondSearchWindows(idTypeOfProblem);
             } catch (DAOConfigurationException e) {

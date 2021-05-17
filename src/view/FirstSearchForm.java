@@ -37,6 +37,7 @@ public class FirstSearchForm extends JFrame {
         @Override
         public void actionPerformed(ActionEvent evt){
             String category = listCategory.getSelectedItem().toString();
+            // Todo : implement exception
             try {
                 FirstSearchWindow firstSearchWindow = new FirstSearchWindow(category);
             } catch (DAOConfigurationException e) {

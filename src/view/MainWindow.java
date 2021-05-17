@@ -79,6 +79,7 @@ public class MainWindow extends JFrame {
     private class AddObject implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
+            // Todo : implement exception
             try {
                 AddObjectWindow addObjectWindow = new AddObjectWindow();
             } catch (DAOConfigurationException e) {
@@ -90,6 +91,7 @@ public class MainWindow extends JFrame {
     private class DeleteObject implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
+            // Todo : implement exception
             try {
                 DeleteObjectWindow deleteWindow = new DeleteObjectWindow();
             } catch (DAOConfigurationException e) {
@@ -101,6 +103,7 @@ public class MainWindow extends JFrame {
     private class UpdateObject implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
+            // Todo : implement exception
             try {
                 UpdateObjectWindow updateWindow = new UpdateObjectWindow();
             } catch (DAOConfigurationException e) {
@@ -112,6 +115,7 @@ public class MainWindow extends JFrame {
     private class ListingObjects implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
+            // Todo : implement exception
             try {
                 ListingObjetWindow listWindow = new ListingObjetWindow();
             } catch (DAOConfigurationException e) {
@@ -123,6 +127,7 @@ public class MainWindow extends JFrame {
     private class FirstSearch implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
+            // Todo : implement exception
             try {
                 FirstSearchForm firstSearchForm = new FirstSearchForm();
             } catch (DAOConfigurationException e) {
@@ -134,6 +139,7 @@ public class MainWindow extends JFrame {
     private class SecondSearch implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
+            // Todo : implement exception
             try {
                 SecondSearchForm secondSearchForm = new SecondSearchForm();
             } catch (DAOConfigurationException e) {

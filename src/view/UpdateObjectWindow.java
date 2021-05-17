@@ -210,6 +210,7 @@ public class UpdateObjectWindow extends JFrame{
                 dateObject = null;
             }
             object = new OneObject(idObject, objectTest.getName(), idCollective, commandableValue, dateObject, (price ? Double.parseDouble(textPrice.getText()) : Types.NULL), (deposit ? Integer.parseInt(textDeposit.getText()): Types.NULL), (Integer)spinnerPeriod.getValue());
+            // Todo : implement exception
             try {
                 objectControler.updateAnObject(object);
             } catch (DAOConfigurationException e) {
@@ -223,18 +224,15 @@ public class UpdateObjectWindow extends JFrame{
         public void actionPerformed(ActionEvent evt){
             String value = listCollective.getSelectedItem().toString();
             int idCollective = 0;
+            // Todo : implement exception
             try {
                 idCollective = collectiveControler.searchACollectiveIDBasedName(value);
+                arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
             } catch (DAOConfigurationException e) {
                 e.printStackTrace();
             }
             //System.out.println(listObjects.getSelectedIndex());
 
-            try {
-                arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
-            } catch (DAOConfigurationException e) {
-                e.printStackTrace();
-            }
             listObjects.removeAllItems();
             for(OneObject object : arrayObjects){
                 listObjects.addItem(object.getName());

@@ -152,6 +152,7 @@ public class AddObjectWindow extends JFrame {
                 }
                 String value = listCollective.getSelectedItem().toString();
                 int idCollective = 0;
+                // Todo : implement exception
                 try {
                     idCollective = collectiveControler.searchACollectiveIDBasedName(value);
                 } catch (DAOConfigurationException e) {
@@ -166,6 +167,7 @@ public class AddObjectWindow extends JFrame {
                     dateObject = null;
                 }
                 object = new OneObject(textName.getText(), idCollective, commandableValue, dateObject, (price ? Double.parseDouble(textPrice.getText()) : Types.NULL), (deposit ? Integer.parseInt(textDeposit.getText()): Types.NULL),(Integer)spinnerPeriod.getValue());
+                // Todo : implement exception
                 try {
                     controler.addObject(object);
                 } catch (DAOConfigurationException e) {
