@@ -5,6 +5,7 @@ import business.OneObjectManager;
 import business.RentalManager;
 import business.ResearchManager;
 import business.TypeOfProblemRentalManager;
+import model.Collective;
 import model.ThirdResearch;
 import exception.DAOException;
 
@@ -21,15 +22,8 @@ public class testDAO {
         TypeOfProblemRentalManager typeOfProblemRentalManager = new TypeOfProblemRentalManager();
 
         try {
-            GregorianCalendar date1 = new GregorianCalendar(2020,12,01);
-            GregorianCalendar date2 = new GregorianCalendar(2021,12,01);
-
-            ArrayList<ThirdResearch> listArray;
-            listArray = researchManager.getRentalBetween2Dates(date1, date2);
-
-            for(ThirdResearch r : listArray) {
-                System.out.println(r);
-            }
+            Collective collective = collectiveManager.searchACollectiveBasedId(8);
+            System.out.println(collective);
         }
         catch (DAOException e) {
             System.out.println(e.getMessage());
