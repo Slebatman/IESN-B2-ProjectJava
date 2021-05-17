@@ -4,7 +4,7 @@ import Model.FirstResearch;
 import Model.SecondResearch;
 import Model.ThirdResearch;
 import dataAcces.ResearchManager;
-import dataAcces.exception.DAOException;
+import exception.DAOException;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;

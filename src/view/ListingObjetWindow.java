@@ -1,7 +1,7 @@
 package view;
 import controler.*;
 import Model.OneObject;
-import dataAcces.exception.DAOException;
+import exception.DAOException;
 
 import javax.swing.*;
 import java.awt.*;

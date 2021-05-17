@@ -1,4 +1,4 @@
-package dataAcces.exception;
+package exception;
 
 public class DAOException extends Exception {
     // Constructor 1

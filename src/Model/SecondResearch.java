@@ -3,7 +3,7 @@ package Model;
 import dataAcces.CollectiveManager;
 import dataAcces.OneObjectManager;
 import dataAcces.RentalManager;
-import dataAcces.exception.DAOException;
+import exception.DAOException;
 
 import java.util.GregorianCalendar;
 

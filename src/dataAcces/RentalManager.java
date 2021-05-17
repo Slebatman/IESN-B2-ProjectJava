@@ -1,7 +1,7 @@
 package dataAcces;
 
 import dataAcces.dao.IRentalDAO;
-import dataAcces.exception.DAOException;
+import exception.DAOException;
 import Model.Rental;
 
 import java.util.ArrayList;

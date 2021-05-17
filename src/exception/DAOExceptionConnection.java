@@ -1,4 +1,4 @@
-package dataAcces.exception;
+package exception;
 
 public class DAOExceptionConnection extends RuntimeException {
     // Constructor 1

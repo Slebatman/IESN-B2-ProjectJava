@@ -1,7 +1,7 @@
 package dataAcces;
 
 import dataAcces.dao.IOneObjectDAO;
-import dataAcces.exception.DAOException;
+import exception.DAOException;
 import Model.OneObject;
 
 

@@ -1,7 +1,7 @@
 package dataAcces;
 
 import dataAcces.dao.ICollectiveDAO;
-import dataAcces.exception.DAOException;
+import exception.DAOException;
 import Model.Collective;
 
 import java.sql.*;

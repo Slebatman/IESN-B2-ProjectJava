@@ -1,7 +1,7 @@
 package dataAcces;
 
 import Model.ThirdResearch;
-import dataAcces.exception.DAOException;
+import exception.DAOException;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;

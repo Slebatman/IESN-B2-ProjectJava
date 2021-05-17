@@ -2,7 +2,7 @@ package view;
 
 import Model.OneObject;
 import controler.ObjectControler;
-import dataAcces.exception.DAOException;
+import exception.DAOException;
 
 import javax.swing.table.AbstractTableModel;
 import java.text.SimpleDateFormat;

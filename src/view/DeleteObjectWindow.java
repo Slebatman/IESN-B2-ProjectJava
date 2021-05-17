@@ -4,7 +4,7 @@ import controler.CollectiveControler;
 import controler.ObjectControler;
 import Model.Collective;
 import Model.OneObject;
-import dataAcces.exception.DAOException;
+import exception.DAOException;
 
 import javax.swing.*;
 import java.awt.*;
