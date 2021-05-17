@@ -55,11 +55,12 @@ public class RentalDB implements IRentalDAO {
         ArrayList<ThirdResearch> rentalBetween2Dates = new ArrayList<>();
 
         try {
-            String sql = "select o.name, o.purchaseDate, o.purchasePrice, p.invocedPrice, p.note, r.rentalManager\n" +
-                    "from rental r\n" +
-                    "JOIN problemexitrental p on r.idRental = p.idRental\n" +
-                    "JOIN oneobject o on o.idObject = r.idObject\n" +
-                    "WHERE r.startDate BETWEEN ? AND ? ;";
+            String sql = """
+                    select o.name, o.purchaseDate, o.purchasePrice, p.invocedPrice, p.note, r.rentalManager
+                    from rental r
+                    JOIN problemexitrental p on r.idRental = p.idRental
+                    JOIN oneobject o on o.idObject = r.idObject
+                    WHERE r.startDate BETWEEN ? AND ? ;""";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setDate(1, new Date(firstDate.getTimeInMillis()));
