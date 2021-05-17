@@ -34,8 +34,7 @@ public class testDAO {
                     5
             );
 
-            oneObjectManager.addNewObject(oneObject);
-
+           oneObjectManager.updateAnObject(oneObject);
         }
         catch (DAOException e) {
             System.out.println(e.getMessage());

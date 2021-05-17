@@ -39,8 +39,7 @@ public class ResearchManager {
         ArrayList<SecondResearch> problemExitRentalConverted = new ArrayList<>();
 
         for(ProblemExitRental p : problemExitRentals) {
-            SecondResearch result = new SecondResearch(p);
-            problemExitRentalConverted.add(result);
+            problemExitRentalConverted.add(new SecondResearch(p));
         }
 
         return problemExitRentalConverted;

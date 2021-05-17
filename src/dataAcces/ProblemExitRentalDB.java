@@ -30,7 +30,7 @@ public class ProblemExitRentalDB implements IProblemExitRental {
     @Override
     public ArrayList<ProblemExitRental> getProblemExitRentalBasedTypeProblem(int idTypeOfProblemRental) throws DAOException {
         try {
-            String sql = "SELECT * FROM problemexitrental WHERE idproblemExitLocation = ?";
+            String sql = "SELECT * FROM problemexitrental WHERE idTypeOfProblemRental = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, idTypeOfProblemRental);
 

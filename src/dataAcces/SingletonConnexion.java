@@ -6,9 +6,9 @@ import exception.DAOExceptionConnection;
 import java.sql.*;
 
 public class SingletonConnexion {
-    private static final String url = "jdbc:mysql://localhost:3306/inventory";
-    private static final String user = "admin";
-    private static final String password = "projetJava";
+    private static String url = "jdbc:mysql://localhost:3306/inventory";
+    private static String user = "admin";
+    private static String password = "projetJava";
     private static Connection connection;
 
     static
