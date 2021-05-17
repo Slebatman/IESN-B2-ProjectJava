@@ -1,6 +1,6 @@
 package view;
 import controler.*;
-import Model.OneObject;
+import model.OneObject;
 import exception.DAOException;
 
 import javax.swing.*;

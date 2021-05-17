@@ -1,7 +1,7 @@
 package controler;
 
 import dataAcces.CollectiveManager;
-import Model.Collective;
+import model.Collective;
 import exception.DAOException;
 
 import java.util.ArrayList;

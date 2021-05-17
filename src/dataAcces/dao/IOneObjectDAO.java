@@ -1,6 +1,6 @@
 package dataAcces.dao;
 
-import Model.*;
+import model.*;
 import exception.DAOException;
 
 import java.util.ArrayList;

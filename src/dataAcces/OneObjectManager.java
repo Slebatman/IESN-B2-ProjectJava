@@ -1,8 +1,8 @@
 package dataAcces;
 
 import dataAcces.dao.IOneObjectDAO;
-import Model.Collective;
-import Model.OneObject;
+import model.Collective;
+import model.OneObject;
 import exception.DAOException;
 
 import java.util.ArrayList;

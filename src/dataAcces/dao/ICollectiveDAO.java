@@ -1,7 +1,7 @@
 package dataAcces.dao;
 
 import exception.DAOException;
-import Model.Collective;
+import model.Collective;
 
 import java.util.ArrayList;
 

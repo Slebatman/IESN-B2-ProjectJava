@@ -1,5 +1,5 @@
 package controler;
-import Model.*;
+import model.*;
 import dataAcces.OneObjectManager;
 import exception.DAOException;
 

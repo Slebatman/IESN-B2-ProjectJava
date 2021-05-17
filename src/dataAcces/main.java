@@ -1,6 +1,6 @@
 package dataAcces;
 
-import Model.ThirdResearch;
+import model.ThirdResearch;
 import exception.DAOException;
 
 import java.util.ArrayList;

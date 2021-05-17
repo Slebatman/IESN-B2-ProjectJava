@@ -2,7 +2,7 @@ package dataAcces;
 
 import dataAcces.dao.IProblemExitRental;
 import exception.DAOException;
-import Model.ProblemExitRental;
+import model.ProblemExitRental;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

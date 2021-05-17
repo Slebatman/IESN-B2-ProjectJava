@@ -1,6 +1,6 @@
 package view;
 
-import Model.OneObject;
+import model.OneObject;
 import controler.ObjectControler;
 import exception.DAOException;
 

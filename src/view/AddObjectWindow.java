@@ -1,7 +1,7 @@
 package view;
 import controler.*;
-import Model.Collective;
-import Model.OneObject;
+import model.Collective;
+import model.OneObject;
 import exception.DAOException;
 
 import javax.swing.*;

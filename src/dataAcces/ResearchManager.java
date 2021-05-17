@@ -1,6 +1,6 @@
 package dataAcces;
 
-import Model.*;
+import model.*;
 import dataAcces.dao.IProblemExitRental;
 import dataAcces.dao.IRentalDAO;
 import exception.DAOException;

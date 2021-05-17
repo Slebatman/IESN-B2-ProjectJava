@@ -1,8 +1,8 @@
 package controler;
 
-import Model.FirstResearch;
-import Model.SecondResearch;
-import Model.ThirdResearch;
+import model.FirstResearch;
+import model.SecondResearch;
+import model.ThirdResearch;
 import dataAcces.ResearchManager;
 import exception.DAOException;
 

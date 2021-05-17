@@ -1,6 +1,6 @@
 package view;
 
-import Model.ThirdResearch;
+import model.ThirdResearch;
 import controler.SearchControler;
 import exception.DAOException;
 
