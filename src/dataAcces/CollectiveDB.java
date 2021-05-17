@@ -68,8 +68,7 @@ public class CollectiveDB implements ICollectiveDAO {
         ResultSet data = statement.executeQuery();
 
         while(data.next()) {
-            Collective collective = sqlToJavaObject(data);
-            listOfCollective.add(collective);
+            listOfCollective.add(sqlToJavaObject(data));
         }
 
         return listOfCollective;
@@ -80,7 +79,7 @@ public class CollectiveDB implements ICollectiveDAO {
 
         ResultSet data = statement.executeQuery();
         while (data.next()) {
-            return this.sqlToJavaObject(data);
+            return sqlToJavaObject(data);
         }
         return null;
     }
@@ -142,6 +141,7 @@ public class CollectiveDB implements ICollectiveDAO {
             String sql = "SELECT DISTINCT category FROM collective";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet data = statement.executeQuery();
+
             while (data.next()) {
                 distinctNameCollective.add(data.getString("category"));
             }
