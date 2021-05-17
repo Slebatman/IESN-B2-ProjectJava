@@ -3,7 +3,7 @@ package dataAcces;
 import Model.*;
 import dataAcces.dao.IProblemExitRental;
 import dataAcces.dao.IRentalDAO;
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -18,7 +18,7 @@ public class ResearchManager {
     }
 
     // First research
-    public ArrayList<FirstResearch> rentalsForOneCollectiveCategory(String category) throws DAOConfigurationException {
+    public ArrayList<FirstResearch> rentalsForOneCollectiveCategory(String category) throws DAOException {
 
         ArrayList<Rental> rentalResultResearch = daoRental.rentalsForOneCollectiveCategory(category);
         ArrayList<FirstResearch> rentalsConverted = new ArrayList<>();
@@ -32,7 +32,7 @@ public class ResearchManager {
     }
 
     // Second research
-    public ArrayList<SecondResearch> problemRentalBasedOnTypeOfProblem(int idTypeOfProblemRental) throws DAOConfigurationException {
+    public ArrayList<SecondResearch> problemRentalBasedOnTypeOfProblem(int idTypeOfProblemRental) throws DAOException {
         ArrayList<ProblemExitRental> problemExitRentals = daoProblemExitRental.getProblemExitRentalBasedTypeProblem(idTypeOfProblemRental);
         ArrayList<SecondResearch> problemExitRentalConverted = new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class ResearchManager {
     }
 
     // Third research
-    public ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOConfigurationException {
+    public ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException {
         return daoRental.getRentalBetween2Dates(firstDate, secondDate);
     }
 }

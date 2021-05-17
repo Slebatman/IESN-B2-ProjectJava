@@ -2,13 +2,13 @@ package dataAcces.dao;
 
 import Model.Rental;
 import Model.ThirdResearch;
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public interface IRentalDAO {
-    ArrayList<Rental> rentalsForOneCollectiveCategory(String category) throws DAOConfigurationException;
-    Rental getOneRentalBasedID(int idRental) throws DAOConfigurationException;
-    ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOConfigurationException;
+    ArrayList<Rental> rentalsForOneCollectiveCategory(String category) throws DAOException;
+    Rental getOneRentalBasedID(int idRental) throws DAOException;
+    ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException;
 }

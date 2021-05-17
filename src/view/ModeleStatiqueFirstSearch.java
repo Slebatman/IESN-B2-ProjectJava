@@ -1,10 +1,8 @@
 package view;
 
 import Model.FirstResearch;
-import Model.OneObject;
-import controler.ObjectControler;
 import controler.SearchControler;
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 
 import javax.swing.table.AbstractTableModel;
 import java.text.SimpleDateFormat;
@@ -18,7 +16,7 @@ public class ModeleStatiqueFirstSearch extends AbstractTableModel {
     private ArrayList<FirstResearch> listSearch;
     private SearchControler controler;
     private SimpleDateFormat formatDate;
-    public ModeleStatiqueFirstSearch(String category) throws DAOConfigurationException {
+    public ModeleStatiqueFirstSearch(String category) throws DAOException {
         super();
         controler = new SearchControler();
         listSearch = controler.rentalsForOneCollectiveCategory(category);

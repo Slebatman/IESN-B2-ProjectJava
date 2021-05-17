@@ -1,8 +1,7 @@
 // Class implement Singleton Pattern
 package dataAcces;
 
-import dataAcces.exception.DAOConfigurationException;
-import dataAcces.exception.DAOException;
+import dataAcces.exception.DAOExceptionConnection;
 
 import java.sql.*;
 
@@ -20,7 +19,7 @@ public class SingletonConnexion {
                     DriverManager.getConnection(url, user, password);
         }
         catch(ClassNotFoundException | SQLException e) {
-            throw new DAOException("Erreur lors de la connection à la base de données.");
+            throw new DAOExceptionConnection("Erreur lors de la connection à la base de données.");
         }
     }
 

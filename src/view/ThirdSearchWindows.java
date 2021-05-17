@@ -1,6 +1,6 @@
 package view;
 
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
 
 public class ThirdSearchWindows extends JFrame {
     private JTable table;
-    public ThirdSearchWindows(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOConfigurationException {
+    public ThirdSearchWindows(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException {
         super("Third search");
         setBounds(500, 200, 650, 500);
         this.setLayout(new FlowLayout());

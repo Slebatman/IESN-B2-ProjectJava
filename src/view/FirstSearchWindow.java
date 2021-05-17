@@ -1,13 +1,13 @@
 package view;
 
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class FirstSearchWindow extends JFrame {
     private JTable table;
-    FirstSearchWindow(String category) throws DAOConfigurationException {
+    FirstSearchWindow(String category) throws DAOException {
         super("First search");
         setBounds(500, 200, 650, 500);
         this.setLayout(new FlowLayout());

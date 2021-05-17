@@ -1,9 +1,8 @@
 package view;
 
-import Model.FirstResearch;
 import Model.SecondResearch;
 import controler.SearchControler;
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 
 import javax.swing.table.AbstractTableModel;
 import java.text.SimpleDateFormat;
@@ -18,7 +17,7 @@ public class ModeleStatiqueSecondSearch extends AbstractTableModel {
     private SimpleDateFormat formatDate;
     GregorianCalendar date;
     String dateFormatted;
-    public ModeleStatiqueSecondSearch(int typeOfProblem) throws DAOConfigurationException {
+    public ModeleStatiqueSecondSearch(int typeOfProblem) throws DAOException {
         super();
         controler = new SearchControler();
         listSearch = controler.problemRentalBasedOnTypeOfProblem(typeOfProblem);

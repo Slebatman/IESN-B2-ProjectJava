@@ -1,13 +1,13 @@
 package view;
 
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class SecondSearchWindows extends JFrame {
     private JTable table;
-    public SecondSearchWindows(int idTypeOfProlem) throws DAOConfigurationException {
+    public SecondSearchWindows(int idTypeOfProlem) throws DAOException {
         super("Second search");
         setBounds(500, 200, 650, 500);
         this.setLayout(new FlowLayout());

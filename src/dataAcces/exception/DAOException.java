@@ -1,6 +1,6 @@
 package dataAcces.exception;
 
-public class DAOException extends RuntimeException {
+public class DAOException extends Exception {
     // Constructor 1
     public DAOException(String msg) {
         super(msg);
@@ -8,7 +8,7 @@ public class DAOException extends RuntimeException {
 
     // Constructor 2
     public DAOException(String msg, Throwable reason) {
-       super(msg, reason);
+        super(msg, reason);
     }
 
     // Constructor 3

@@ -1,6 +1,6 @@
 package view;
 
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -82,7 +82,7 @@ public class MainWindow extends JFrame {
             // Todo : implement exception
             try {
                 AddObjectWindow addObjectWindow = new AddObjectWindow();
-            } catch (DAOConfigurationException e) {
+            } catch (DAOException e) {
                 e.printStackTrace();
             }
         }
@@ -94,7 +94,7 @@ public class MainWindow extends JFrame {
             // Todo : implement exception
             try {
                 DeleteObjectWindow deleteWindow = new DeleteObjectWindow();
-            } catch (DAOConfigurationException e) {
+            } catch (DAOException e) {
                 e.printStackTrace();
             }
         }
@@ -106,7 +106,7 @@ public class MainWindow extends JFrame {
             // Todo : implement exception
             try {
                 UpdateObjectWindow updateWindow = new UpdateObjectWindow();
-            } catch (DAOConfigurationException e) {
+            } catch (DAOException e) {
                 e.printStackTrace();
             }
         }
@@ -118,7 +118,7 @@ public class MainWindow extends JFrame {
             // Todo : implement exception
             try {
                 ListingObjetWindow listWindow = new ListingObjetWindow();
-            } catch (DAOConfigurationException e) {
+            } catch (DAOException e) {
                 e.printStackTrace();
             }
         }
@@ -130,7 +130,7 @@ public class MainWindow extends JFrame {
             // Todo : implement exception
             try {
                 FirstSearchForm firstSearchForm = new FirstSearchForm();
-            } catch (DAOConfigurationException e) {
+            } catch (DAOException e) {
                 e.printStackTrace();
             }
         }
@@ -142,7 +142,7 @@ public class MainWindow extends JFrame {
             // Todo : implement exception
             try {
                 SecondSearchForm secondSearchForm = new SecondSearchForm();
-            } catch (DAOConfigurationException e) {
+            } catch (DAOException e) {
                 e.printStackTrace();
             }
         }

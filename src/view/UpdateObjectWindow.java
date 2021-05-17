@@ -4,7 +4,7 @@ import controler.CollectiveControler;
 import controler.ObjectControler;
 import Model.Collective;
 import Model.OneObject;
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,7 +42,7 @@ public class UpdateObjectWindow extends JFrame{
     private OneObject objectDefault;
     private SimpleDateFormat formatDate;
 
-    UpdateObjectWindow() throws DAOConfigurationException {
+    UpdateObjectWindow() throws DAOException {
         super("Update an object");
         setBounds(250, 200, 800, 450);
         collectiveControler = new CollectiveControler();
@@ -194,7 +194,7 @@ public class UpdateObjectWindow extends JFrame{
             int idCollective = 0;
             try {
                 idCollective = collectiveControler.searchACollectiveIDBasedName(value);
-            } catch (DAOConfigurationException e) {
+            } catch (DAOException e) {
                 e.printStackTrace();
             }
             int indexObject = listObjects.getSelectedIndex();
@@ -213,7 +213,7 @@ public class UpdateObjectWindow extends JFrame{
             // Todo : implement exception
             try {
                 objectControler.updateAnObject(object);
-            } catch (DAOConfigurationException e) {
+            } catch (DAOException e) {
                 e.printStackTrace();
             }
             UpdateObjectWindow.this.dispose();
@@ -228,7 +228,7 @@ public class UpdateObjectWindow extends JFrame{
             try {
                 idCollective = collectiveControler.searchACollectiveIDBasedName(value);
                 arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
-            } catch (DAOConfigurationException e) {
+            } catch (DAOException e) {
                 e.printStackTrace();
             }
             //System.out.println(listObjects.getSelectedIndex());

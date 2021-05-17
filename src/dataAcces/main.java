@@ -1,7 +1,7 @@
 package dataAcces;
 
 import Model.ThirdResearch;
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -26,7 +26,7 @@ public class main {
                 System.out.println(r);
             }
         }
-        catch (DAOConfigurationException e) {
+        catch (DAOException e) {
             System.out.println(e.getMessage());
         }
     }

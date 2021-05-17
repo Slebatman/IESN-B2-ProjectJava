@@ -1,7 +1,7 @@
 package dataAcces;
 
 import dataAcces.dao.IRentalDAO;
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 import Model.Rental;
 
 import java.util.ArrayList;
@@ -14,12 +14,12 @@ public class RentalManager {
     }
 
     // Getting rentals for a category
-    public ArrayList<Rental> getRentalsForOneCollectiveCategory(String category) throws DAOConfigurationException {
+    public ArrayList<Rental> getRentalsForOneCollectiveCategory(String category) throws DAOException {
         return dao.rentalsForOneCollectiveCategory(category);
     }
 
     // Getting rentals base on a ID
-    public Rental getRentalBasedID(int idRental) throws DAOConfigurationException {
+    public Rental getRentalBasedID(int idRental) throws DAOException {
         return dao.getOneRentalBasedID(idRental);
     }
 }

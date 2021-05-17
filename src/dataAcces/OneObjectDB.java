@@ -1,7 +1,7 @@
 package dataAcces;
 
 import dataAcces.dao.IOneObjectDAO;
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 import Model.OneObject;
 
 
@@ -15,7 +15,7 @@ public class OneObjectDB implements IOneObjectDAO{
 
     // Insert
     @Override
-    public void insert(OneObject o) throws DAOConfigurationException {
+    public void insert(OneObject o) throws DAOException {
         try {
             String sql = "INSERT INTO oneobject (idObject, name, idCollectiveOwner, isCommendable, purchaseDate, purchasePrice, deposit, maxRentalPeriod) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -51,13 +51,13 @@ public class OneObjectDB implements IOneObjectDAO{
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            throw new DAOConfigurationException("Oups... Une erreur lors de l'insertion d'un objet en base de donnée est survenue.");
+            throw new DAOException("Oups... Une erreur lors de l'insertion d'un objet en base de donnée est survenue.");
         }
     }
 
     // Update an object
     @Override
-    public void update(OneObject o) throws DAOConfigurationException {
+    public void update(OneObject o) throws DAOException {
         try {
             String sql = "UPDATE oneobject SET name = ?, idCollectiveOwner = ?, isCommendable = ?, purchaseDate = ?, purchasePrice = ?, " +
                     "deposit = ?, maxRentalPeriod = ? WHERE idObject = ?";
@@ -92,20 +92,20 @@ public class OneObjectDB implements IOneObjectDAO{
 
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOConfigurationException("Une erreur d'accès à la base de données s'est produit, méthode appelée sur une connexion fermée ou erreur SQL.");
+            throw new DAOException("Une erreur d'accès à la base de données s'est produit, méthode appelée sur une connexion fermée ou erreur SQL.");
         }
     }
 
     // Delete
     @Override
-    public void delete(int idObject) throws DAOConfigurationException {
+    public void delete(int idObject) throws DAOException {
         try {
             String sql = "DELETE FROM oneobject WHERE idObject = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, idObject);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOConfigurationException("Erreur lors de la suppression de l'objet en base de donnée");
+            throw new DAOException("Erreur lors de la suppression de l'objet en base de donnée");
         }
     }
 
@@ -140,7 +140,7 @@ public class OneObjectDB implements IOneObjectDAO{
 
     // Select all objects
     @Override
-    public ArrayList<OneObject> getAllObjects() throws DAOConfigurationException {
+    public ArrayList<OneObject> getAllObjects() throws DAOException {
 
         try {
             String sql = "SELECT * FROM oneobject";
@@ -149,13 +149,13 @@ public class OneObjectDB implements IOneObjectDAO{
             return selectMultipleObject(statement);
 
         } catch (SQLException e) {
-            throw new DAOConfigurationException("Erreur lors de la récupération de l'ensemble des objets");
+            throw new DAOException("Erreur lors de la récupération de l'ensemble des objets");
         }
     }
 
     // Select all objects for one collective
     @Override
-    public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOConfigurationException {
+    public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOException {
 
         try {
             String sql = "SELECT * FROM oneobject WHERE idCollectiveOwner = ?";
@@ -165,13 +165,13 @@ public class OneObjectDB implements IOneObjectDAO{
             return selectMultipleObject(statement);
 
         } catch (SQLException e) {
-            throw new DAOConfigurationException("Erreur lors de la récupération des objets pour un collectif");
+            throw new DAOException("Erreur lors de la récupération des objets pour un collectif");
         }
     }
 
     // Retrieving the name of an object via its id
     @Override
-    public OneObject getObjectByID(int idObject) throws DAOConfigurationException {
+    public OneObject getObjectByID(int idObject) throws DAOException {
         try {
             String sql = "SELECT * FROM oneobject WHERE idObject = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -180,7 +180,7 @@ public class OneObjectDB implements IOneObjectDAO{
             return selectOneObject(statement);
 
         } catch (SQLException e) {
-            throw new DAOConfigurationException("Erreur lors de la récupération du nom d'un objet");
+            throw new DAOException("Erreur lors de la récupération du nom d'un objet");
         }
     }
 

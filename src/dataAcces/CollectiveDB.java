@@ -1,7 +1,7 @@
 package dataAcces;
 
 import dataAcces.dao.ICollectiveDAO;
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 import Model.Collective;
 
 import java.sql.*;
@@ -13,7 +13,7 @@ public class CollectiveDB implements ICollectiveDAO {
 
     // [IMPLEMENT] Insert
     @Override
-    public void insert(Collective c) throws DAOConfigurationException {
+    public void insert(Collective c) throws DAOException {
         try {
             String sql = "INSERT INTO collective (name, category, physicalAdress, emailAdress) VALUES (?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -23,13 +23,13 @@ public class CollectiveDB implements ICollectiveDAO {
             statement.setString(4,c.getEmailAddress());
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOConfigurationException("Une erreur d'accès à la base de données s'est produit, méthode appelée sur une connexion fermée ou erreur SQL.");
+            throw new DAOException("Une erreur d'accès à la base de données s'est produit, méthode appelée sur une connexion fermée ou erreur SQL.");
         }
     }
 
     // [IMPLEMENT] Update
     @Override
-    public void update(Collective c) throws DAOConfigurationException {
+    public void update(Collective c) throws DAOException {
         try {
             String sql = "UPDATE collective SET name = ?, category = ?, physicalAddress = ?, emailAddress = ? where idCollective = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -40,20 +40,20 @@ public class CollectiveDB implements ICollectiveDAO {
             statement.setInt(5,c.getIdCollective());
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOConfigurationException("Une erreur d'accès à la base de données s'est produit, méthode appelée sur une connexion fermée ou erreur SQL.");
+            throw new DAOException("Une erreur d'accès à la base de données s'est produit, méthode appelée sur une connexion fermée ou erreur SQL.");
         }
     }
 
     // [IMPLEMENT] Delete
     @Override
-    public void delete(int idCollective) throws DAOConfigurationException {
+    public void delete(int idCollective) throws DAOException {
         try {
             String sql = "DELETE FROM collective WHERE idCollective = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, idCollective);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new DAOConfigurationException("Erreur lors de la tentative de suppression");
+            throw new DAOException("Erreur lors de la tentative de suppression");
         }
     }
 
@@ -87,7 +87,7 @@ public class CollectiveDB implements ICollectiveDAO {
 
     // [IMPLEMENT] Get all collective
     @Override
-    public ArrayList<Collective> getAllCollective() throws DAOConfigurationException {
+    public ArrayList<Collective> getAllCollective() throws DAOException {
 
         try {
             // SQL statement
@@ -97,13 +97,13 @@ public class CollectiveDB implements ICollectiveDAO {
             return selectListOfCollective(statement);
 
         } catch (SQLException e) {
-            throw new DAOConfigurationException("Erreur lors de la récupération de l'ensemble des collectifs");
+            throw new DAOException("Erreur lors de la récupération de l'ensemble des collectifs");
         }
     }
 
     // [IMPLEMENT] Search for a collective based on its id
     @Override
-    public Collective getACollectiveBasedId(int idCollective) throws DAOConfigurationException {
+    public Collective getACollectiveBasedId(int idCollective) throws DAOException {
 
         try {
             String sql = "SELECT * FROM collective WHERE idCollective = ?";
@@ -113,13 +113,13 @@ public class CollectiveDB implements ICollectiveDAO {
             return selectACollective(statement);
 
         } catch (SQLException e) {
-            throw new DAOConfigurationException("Erreur. Soit le collectif n'a pas été trouvé en base de donnée, soit une erreur SQL a eu lieu.");
+            throw new DAOException("Erreur. Soit le collectif n'a pas été trouvé en base de donnée, soit une erreur SQL a eu lieu.");
         }
     }
 
     // [IMPLEMENT] Retrieving a collective's ID based on its name
     @Override
-    public int getACollectiveIDBasedName(String name) throws DAOConfigurationException {
+    public int getACollectiveIDBasedName(String name) throws DAOException {
         try {
             String sql = "SELECT * FROM collective WHERE name = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -128,13 +128,13 @@ public class CollectiveDB implements ICollectiveDAO {
             return selectACollective(statement).getIdCollective();
 
         } catch (SQLException e) {
-            throw new DAOConfigurationException("Erreur SQL lors de la recherche d'un collectif sur base de son nom");
+            throw new DAOException("Erreur SQL lors de la recherche d'un collectif sur base de son nom");
         }
     }
 
     // [IMPLEMENT] Separately retrieve the category of Collective
     @Override
-    public ArrayList<String> getDistinctCategoryCollective() throws DAOConfigurationException {
+    public ArrayList<String> getDistinctCategoryCollective() throws DAOException {
         ArrayList<String> distinctNameCollective = new ArrayList<>();
 
         try {
@@ -148,7 +148,7 @@ public class CollectiveDB implements ICollectiveDAO {
             }
 
         } catch (SQLException e) {
-            throw new DAOConfigurationException("Erreur SQL : impossible de récuperer les categories distinctes de la table collective");
+            throw new DAOException("Erreur SQL : impossible de récuperer les categories distinctes de la table collective");
         }
 
         return distinctNameCollective;

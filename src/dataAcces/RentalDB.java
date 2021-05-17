@@ -2,7 +2,7 @@ package dataAcces;
 
 import Model.ThirdResearch;
 import dataAcces.dao.IRentalDAO;
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 import Model.Rental;
 
 import java.sql.*;
@@ -42,7 +42,7 @@ public class RentalDB implements IRentalDAO {
 
     // Research n°1
     @Override
-    public ArrayList<Rental> rentalsForOneCollectiveCategory(String category) throws DAOConfigurationException {
+    public ArrayList<Rental> rentalsForOneCollectiveCategory(String category) throws DAOException {
         try {
             String sql = "SELECT * FROM rental JOIN collective ON (rental.idTenant = collective.idCollective) WHERE collective.category = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -51,13 +51,13 @@ public class RentalDB implements IRentalDAO {
             return selectListRental(statement);
 
         } catch (SQLException e) {
-            throw new DAOConfigurationException("Erreur SQL : impossible de recuperer les locations pour la categorie " + category);
+            throw new DAOException("Erreur SQL : impossible de recuperer les locations pour la categorie " + category);
         }
     }
 
     // Research n°3
     @Override
-    public ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOConfigurationException {
+    public ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException {
         ArrayList<ThirdResearch> rentalBetween2Dates = new ArrayList<>();
 
         try {
@@ -103,14 +103,14 @@ public class RentalDB implements IRentalDAO {
             }
 
         } catch (SQLException e) {
-            throw new DAOConfigurationException("Erreur SQL : recherche des locations entre les 2 dates ayant rencontré un problème n'est pas possible");
+            throw new DAOException("Erreur SQL : recherche des locations entre les 2 dates ayant rencontré un problème n'est pas possible");
         }
 
         return rentalBetween2Dates;
     }
 
     @Override
-    public Rental getOneRentalBasedID(int idRental) throws DAOConfigurationException {
+    public Rental getOneRentalBasedID(int idRental) throws DAOException {
         try {
             String sql = "SELECT * FROM rental WHERE idRental = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -119,7 +119,7 @@ public class RentalDB implements IRentalDAO {
             return selectOneRental(statement);
 
         } catch (SQLException e) {
-            throw new DAOConfigurationException("Erreur SQL lors de la récupération d'une location");
+            throw new DAOException("Erreur SQL lors de la récupération d'une location");
         }
     }
 

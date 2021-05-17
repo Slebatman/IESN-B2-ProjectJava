@@ -1,7 +1,7 @@
 package dataAcces;
 
 import dataAcces.dao.ITypeOfProblemRentalDAO;
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public class TypeOfProblemRentalManager {
     }
 
     // Separately retrieve the names of typeOfProblemExitRental
-    public ArrayList<String> selectDistinctNameOfTypeOfProblemExitRental() throws DAOConfigurationException {
+    public ArrayList<String> selectDistinctNameOfTypeOfProblemExitRental() throws DAOException {
         return dao.selectDistinctNameOfTypeOfProblemExitRental();
     }
 }

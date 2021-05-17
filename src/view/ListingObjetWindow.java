@@ -1,14 +1,12 @@
 package view;
 import controler.*;
 import Model.OneObject;
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 
 public class ListingObjetWindow extends JFrame{
@@ -19,7 +17,7 @@ public class ListingObjetWindow extends JFrame{
     private SimpleDateFormat formatDate;
     private JTable table;
 
-    public ListingObjetWindow() throws DAOConfigurationException {
+    public ListingObjetWindow() throws DAOException {
         super("List of the objects");
         setBounds(500, 200, 650, 500);
         this.setLayout(new FlowLayout());

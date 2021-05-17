@@ -4,7 +4,7 @@ import controler.CollectiveControler;
 import controler.ObjectControler;
 import Model.Collective;
 import Model.OneObject;
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +26,7 @@ public class DeleteObjectWindow extends JFrame{
     private ArrayList<String> objects;
     private int idCollective;
 
-    DeleteObjectWindow() throws DAOConfigurationException {
+    DeleteObjectWindow() throws DAOException {
         super("Delete an object");
         setBounds(150, 150, 400, 400);
 
@@ -102,7 +102,7 @@ public class DeleteObjectWindow extends JFrame{
             try {
                 idCollective = collectiveControler.searchACollectiveIDBasedName(value);
                 arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
-            } catch (DAOConfigurationException e) {
+            } catch (DAOException e) {
                 e.printStackTrace();
             }
             //System.out.println(listObjects.getSelectedIndex());
@@ -132,7 +132,7 @@ public class DeleteObjectWindow extends JFrame{
                 OneObject objetTest = arrayObjects.get(listObjects.getSelectedIndex());
                 objectControler.deleteAnObject(objetTest);
                 arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
-            } catch (DAOConfigurationException e) {
+            } catch (DAOException e) {
                 e.printStackTrace();
             }
 

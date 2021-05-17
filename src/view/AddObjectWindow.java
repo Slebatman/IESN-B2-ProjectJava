@@ -2,7 +2,7 @@ package view;
 import controler.*;
 import Model.Collective;
 import Model.OneObject;
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +33,7 @@ public class AddObjectWindow extends JFrame {
     private ObjectControler controler;
     private boolean dateNull;
 
-    public AddObjectWindow() throws DAOConfigurationException {
+    public AddObjectWindow() throws DAOException {
         super("Create an object");
         setBounds(250, 200, 600, 400);
         controler  = new ObjectControler();
@@ -155,7 +155,7 @@ public class AddObjectWindow extends JFrame {
                 // Todo : implement exception
                 try {
                     idCollective = collectiveControler.searchACollectiveIDBasedName(value);
-                } catch (DAOConfigurationException e) {
+                } catch (DAOException e) {
                     e.printStackTrace();
                 }
                 boolean price = false;
@@ -170,7 +170,7 @@ public class AddObjectWindow extends JFrame {
                 // Todo : implement exception
                 try {
                     controler.addObject(object);
-                } catch (DAOConfigurationException e) {
+                } catch (DAOException e) {
                     e.printStackTrace();
                 }
                 AddObjectWindow.this.dispose();

@@ -1,7 +1,7 @@
 package dataAcces;
 
 import dataAcces.dao.IProblemExitRental;
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 import Model.ProblemExitRental;
 
 import java.sql.Connection;
@@ -29,7 +29,7 @@ public class ProblemExitRentalDB implements IProblemExitRental {
 
     // Select all ProblemExitRental based on a TypeOfExitRental
     @Override
-    public ArrayList<ProblemExitRental> getProblemExitRentalBasedTypeProblem(int idTypeOfProblemRental) throws DAOConfigurationException {
+    public ArrayList<ProblemExitRental> getProblemExitRentalBasedTypeProblem(int idTypeOfProblemRental) throws DAOException {
         try {
             String sql = "SELECT * FROM problemexitrental WHERE idproblemExitLocation = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -38,7 +38,7 @@ public class ProblemExitRentalDB implements IProblemExitRental {
             return selectListOfProblemExitRental(statement);
 
         } catch (SQLException e) {
-            throw new DAOConfigurationException("Erreur SQL lors de la récuparation des locations qui ont rencontré un problème d'id : " + idTypeOfProblemRental);
+            throw new DAOException("Erreur SQL lors de la récuparation des locations qui ont rencontré un problème d'id : " + idTypeOfProblemRental);
         }
     }
 

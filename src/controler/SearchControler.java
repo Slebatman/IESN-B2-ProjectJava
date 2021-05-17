@@ -4,7 +4,7 @@ import Model.FirstResearch;
 import Model.SecondResearch;
 import Model.ThirdResearch;
 import dataAcces.ResearchManager;
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -16,15 +16,15 @@ public class SearchControler {
         manager = new ResearchManager();
     }
 
-    public ArrayList<FirstResearch> rentalsForOneCollectiveCategory(String category) throws DAOConfigurationException {
+    public ArrayList<FirstResearch> rentalsForOneCollectiveCategory(String category) throws DAOException {
         return manager.rentalsForOneCollectiveCategory(category);
     }
 
-    public ArrayList<SecondResearch> problemRentalBasedOnTypeOfProblem(int idTypeOfProblemRental) throws DAOConfigurationException {
+    public ArrayList<SecondResearch> problemRentalBasedOnTypeOfProblem(int idTypeOfProblemRental) throws DAOException {
         return manager.problemRentalBasedOnTypeOfProblem(idTypeOfProblemRental);
     }
 
-    public ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOConfigurationException {
+    public ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException {
         return manager.getRentalBetween2Dates(firstDate, secondDate);
     }
 }

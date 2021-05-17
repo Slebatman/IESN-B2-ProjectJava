@@ -1,7 +1,7 @@
 package dataAcces;
 
 import dataAcces.dao.ITypeOfProblemRentalDAO;
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 import Model.TypeOfProblemRental;
 
 import java.sql.Connection;
@@ -27,7 +27,7 @@ public class TypeOfProblemRentalDB implements ITypeOfProblemRentalDAO {
 
     // Select id of a problem base on its name
     @Override
-    public int selectIdBaseName(String nameProblem) throws DAOConfigurationException {
+    public int selectIdBaseName(String nameProblem) throws DAOException {
         try {
             String sql = "SELECT * FROM typeofproblemrental WHERE name = ?";
             PreparedStatement statement = connexion.prepareStatement(sql);
@@ -36,13 +36,13 @@ public class TypeOfProblemRentalDB implements ITypeOfProblemRentalDAO {
             return selectOneTypeOfProblemRental(statement).getIdTypeOfProblemRental();
 
         } catch (SQLException e) {
-            throw new DAOConfigurationException("Erreur SQL lors de la récuperation de l'id du probleme avec comme critère de recherche : " + nameProblem);
+            throw new DAOException("Erreur SQL lors de la récuperation de l'id du probleme avec comme critère de recherche : " + nameProblem);
         }
     }
 
     // Select DISTINCT name of typeOfProblemExitLocation
     @Override
-    public ArrayList<String> selectDistinctNameOfTypeOfProblemExitRental() throws DAOConfigurationException {
+    public ArrayList<String> selectDistinctNameOfTypeOfProblemExitRental() throws DAOException {
         ArrayList<String> distinctNameOfTypeOfExitRental = new ArrayList<>();
 
         try {
@@ -55,7 +55,7 @@ public class TypeOfProblemRentalDB implements ITypeOfProblemRentalDAO {
                 distinctNameOfTypeOfExitRental.add(data.getString("name"));
             }
         } catch (SQLException e) {
-            throw new DAOConfigurationException("Erreur SQL : impossible de récuperer de manière distincte les noms de typeOfProblemExitLocation");
+            throw new DAOException("Erreur SQL : impossible de récuperer de manière distincte les noms de typeOfProblemExitLocation");
         }
 
         return distinctNameOfTypeOfExitRental;

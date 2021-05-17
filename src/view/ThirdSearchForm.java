@@ -1,10 +1,8 @@
 package view;
 
-import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,7 +50,7 @@ public class ThirdSearchForm extends JFrame {
                 // Todo : implement exception
                 try {
                     ThirdSearchWindows thirdSearchWindows = new ThirdSearchWindows(firstDate, secondDate);
-                } catch (DAOConfigurationException e) {
+                } catch (DAOException e) {
                     e.printStackTrace();
                 }
                 ThirdSearchForm.this.dispose();
