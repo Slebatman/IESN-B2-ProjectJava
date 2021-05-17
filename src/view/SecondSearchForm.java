@@ -1,6 +1,7 @@
 package view;
 
 import dataAcces.TypeOfProblemRentalManager;
+import dataAcces.exception.DAOConfigurationException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +16,7 @@ public class SecondSearchForm extends JFrame {
     private TypeOfProblemRentalManager manager;
     private ArrayList<String> problemList;
 
-    public SecondSearchForm(){
+    public SecondSearchForm() throws DAOConfigurationException {
         super("Search rentals by type of problem");
         setBounds(200, 150, 400, 100);
         manager = new TypeOfProblemRentalManager();
@@ -35,7 +36,11 @@ public class SecondSearchForm extends JFrame {
         @Override
         public void actionPerformed(ActionEvent evt){
             int idTypeOfProblem = listProblems.getSelectedIndex()+1;
-            SecondSearchWindows secondSearchWindows = new SecondSearchWindows(idTypeOfProblem);
+            try {
+                SecondSearchWindows secondSearchWindows = new SecondSearchWindows(idTypeOfProblem);
+            } catch (DAOConfigurationException e) {
+                e.printStackTrace();
+            }
             SecondSearchForm.this.dispose();
         }
     }

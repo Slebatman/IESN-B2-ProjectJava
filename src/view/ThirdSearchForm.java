@@ -1,5 +1,7 @@
 package view;
 
+import dataAcces.exception.DAOConfigurationException;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -47,7 +49,11 @@ public class ThirdSearchForm extends JFrame {
             secondDate = new GregorianCalendar();
             secondDate.setTime((Date)spinnerSecondDate.getModel().getValue());
             if(firstDate != secondDate && firstDate.compareTo(secondDate) < 0){
-                ThirdSearchWindows thirdSearchWindows = new ThirdSearchWindows(firstDate, secondDate);
+                try {
+                    ThirdSearchWindows thirdSearchWindows = new ThirdSearchWindows(firstDate, secondDate);
+                } catch (DAOConfigurationException e) {
+                    e.printStackTrace();
+                }
                 ThirdSearchForm.this.dispose();
             }
         }

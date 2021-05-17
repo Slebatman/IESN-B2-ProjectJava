@@ -11,22 +11,22 @@ public class ObjectControler {
       manager = new OneObjectManager();
    }
 
-   public void addObject(OneObject object){
+   public void addObject(OneObject object) throws DAOConfigurationException {
       manager.addNewObject(object);
    }
 
-   public ArrayList<OneObject> getAllObjects(){
+   public ArrayList<OneObject> getAllObjects() throws DAOConfigurationException {
       return manager.getAllObjects();
    }
 
    public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOConfigurationException {
       return manager.getAllObjectsForOneCollective(idCollective);
    }
-   public void deleteAnObject(OneObject oneObject) {
+   public void deleteAnObject(OneObject oneObject) throws DAOConfigurationException {
       manager.deleteAnObject(oneObject);
    }
 
-   public void updateAnObject(OneObject object){
+   public void updateAnObject(OneObject object) throws DAOConfigurationException {
       manager.updateAnObject(object);
    }
 

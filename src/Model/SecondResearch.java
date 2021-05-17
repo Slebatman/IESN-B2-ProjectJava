@@ -3,6 +3,7 @@ package Model;
 import dataAcces.CollectiveManager;
 import dataAcces.OneObjectManager;
 import dataAcces.RentalManager;
+import dataAcces.exception.DAOConfigurationException;
 
 import java.util.GregorianCalendar;
 
@@ -19,7 +20,7 @@ public class SecondResearch {
     private static CollectiveManager collectiveManager;
     private static OneObjectManager oneObjectManager;
 
-    public SecondResearch(ProblemExitRental problemExitRental) {
+    public SecondResearch(ProblemExitRental problemExitRental) throws DAOConfigurationException {
         rentalManager = new RentalManager();
         collectiveManager = new CollectiveManager();
         oneObjectManager = new OneObjectManager();
@@ -42,27 +43,27 @@ public class SecondResearch {
         this.returnDate = rental.getReturnDate();
     }
 
-    public void setNameObject(Rental rental) {
+    public void setNameObject(Rental rental) throws DAOConfigurationException {
         OneObject oneObject = oneObjectManager.getObjectByID(rental.getIdObject());
         this.nameObject = oneObject.getName();
     }
 
-    public void setDeposit(Rental rental) {
+    public void setDeposit(Rental rental) throws DAOConfigurationException {
         OneObject oneObject = oneObjectManager.getObjectByID(rental.getIdObject());
         this.deposit = oneObject.getDeposit();
     }
 
-    public void setMaxRentalPeriod(Rental rental) {
+    public void setMaxRentalPeriod(Rental rental) throws DAOConfigurationException {
         OneObject oneObject = oneObjectManager.getObjectByID(rental.getIdObject());
         this.maxRentalPeriod = oneObject.getMaxRentalPeriod();
     }
 
-    public void setNameCollectiveOwner(Rental rental) {
+    public void setNameCollectiveOwner(Rental rental) throws DAOConfigurationException {
         Collective collective = collectiveManager.searchACollectiveBasedId(rental.getIdTenant());
         this.nameCollectiveOwner = collective.getName();
     }
 
-    public void setEmailAddressCollectiveOwner(Rental rental) {
+    public void setEmailAddressCollectiveOwner(Rental rental) throws DAOConfigurationException {
         Collective collective = collectiveManager.searchACollectiveBasedId(rental.getIdTenant());
         this.emailAddressCollectiveOwner = collective.getEmailAddress();
     }

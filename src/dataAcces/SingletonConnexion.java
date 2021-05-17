@@ -2,6 +2,7 @@
 package dataAcces;
 
 import dataAcces.exception.DAOConfigurationException;
+import dataAcces.exception.DAOException;
 
 import java.sql.*;
 
@@ -19,7 +20,7 @@ public class SingletonConnexion {
                     DriverManager.getConnection(url, user, password);
         }
         catch(ClassNotFoundException | SQLException e) {
-            throw new DAOConfigurationException("Erreur lors de la connection à la base de données.");
+            throw new DAOException("Erreur lors de la connection à la base de données.");
         }
     }
 

@@ -29,7 +29,7 @@ public class ProblemExitRentalDB implements IProblemExitRental {
 
     // Select all ProblemExitRental based on a TypeOfExitRental
     @Override
-    public ArrayList<ProblemExitRental> getProblemExitRentalBasedTypeProblem(int idTypeOfProblemRental) {
+    public ArrayList<ProblemExitRental> getProblemExitRentalBasedTypeProblem(int idTypeOfProblemRental) throws DAOConfigurationException {
         try {
             String sql = "SELECT * FROM problemexitrental WHERE idproblemExitLocation = ?";
             PreparedStatement statement = connection.prepareStatement(sql);

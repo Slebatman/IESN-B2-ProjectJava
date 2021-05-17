@@ -1,5 +1,7 @@
 package view;
 
+import dataAcces.exception.DAOConfigurationException;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -77,42 +79,66 @@ public class MainWindow extends JFrame {
     private class AddObject implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
-            AddObjectWindow addObjectWindow = new AddObjectWindow();
+            try {
+                AddObjectWindow addObjectWindow = new AddObjectWindow();
+            } catch (DAOConfigurationException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     private class DeleteObject implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
-            DeleteObjectWindow deleteWindow = new DeleteObjectWindow();
+            try {
+                DeleteObjectWindow deleteWindow = new DeleteObjectWindow();
+            } catch (DAOConfigurationException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     private class UpdateObject implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
-            UpdateObjectWindow updateWindow = new UpdateObjectWindow();
+            try {
+                UpdateObjectWindow updateWindow = new UpdateObjectWindow();
+            } catch (DAOConfigurationException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     private class ListingObjects implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
-            ListingObjetWindow listWindow = new ListingObjetWindow();
+            try {
+                ListingObjetWindow listWindow = new ListingObjetWindow();
+            } catch (DAOConfigurationException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     private class FirstSearch implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
-            FirstSearchForm firstSearchForm = new FirstSearchForm();
+            try {
+                FirstSearchForm firstSearchForm = new FirstSearchForm();
+            } catch (DAOConfigurationException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     private class SecondSearch implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
-            SecondSearchForm secondSearchForm = new SecondSearchForm();
+            try {
+                SecondSearchForm secondSearchForm = new SecondSearchForm();
+            } catch (DAOConfigurationException e) {
+                e.printStackTrace();
+            }
         }
     }
 

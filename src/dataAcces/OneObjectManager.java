@@ -17,26 +17,26 @@ public class OneObjectManager {
     }
 
     // Insert
-    public void addNewObject(OneObject oneObject) {
+    public void addNewObject(OneObject oneObject) throws DAOConfigurationException {
         dao.insert(oneObject);
     }
 
     // Update
-    public void updateAnObject(OneObject oneObject) {
+    public void updateAnObject(OneObject oneObject) throws DAOConfigurationException {
         dao.update(oneObject);
     }
 
     // Delete
-    public void deleteAnObject(int idObject) {
+    public void deleteAnObject(int idObject) throws DAOConfigurationException {
         dao.delete(idObject);
     }
 
-    public void deleteAnObject(OneObject oneObject) {
+    public void deleteAnObject(OneObject oneObject) throws DAOConfigurationException {
         this.deleteAnObject(oneObject.getIdObject());
     }
 
     // Get all object
-    public ArrayList<OneObject> getAllObjects() {
+    public ArrayList<OneObject> getAllObjects() throws DAOConfigurationException {
         return dao.getAllObjects();
     }
 
@@ -45,12 +45,12 @@ public class OneObjectManager {
         return dao.getAllObjectsForOneCollective(idCollective);
     }
 
-    ArrayList<OneObject> getAllObjectsForOneCollective(Collective collective) {
+    ArrayList<OneObject> getAllObjectsForOneCollective(Collective collective) throws DAOConfigurationException {
         return this.getAllObjectsForOneCollective(collective.getIdCollective());
     }
 
     //
-    public OneObject getObjectByID(int idObject) {
+    public OneObject getObjectByID(int idObject) throws DAOConfigurationException {
         return dao.getObjectByID(idObject);
     }
 }

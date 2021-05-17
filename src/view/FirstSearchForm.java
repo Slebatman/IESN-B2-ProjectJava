@@ -1,6 +1,7 @@
 package view;
 
 import dataAcces.CollectiveManager;
+import dataAcces.exception.DAOConfigurationException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +16,7 @@ public class FirstSearchForm extends JFrame {
     private CollectiveManager manager;
     private ArrayList<String> categoryList;
 
-    public FirstSearchForm(){
+    public FirstSearchForm() throws DAOConfigurationException {
         super("Search rentals by collective category");
         setBounds(200, 150, 400, 100);
         manager = new CollectiveManager();
@@ -36,7 +37,11 @@ public class FirstSearchForm extends JFrame {
         @Override
         public void actionPerformed(ActionEvent evt){
             String category = listCategory.getSelectedItem().toString();
-            FirstSearchWindow firstSearchWindow = new FirstSearchWindow(category);
+            try {
+                FirstSearchWindow firstSearchWindow = new FirstSearchWindow(category);
+            } catch (DAOConfigurationException e) {
+                e.printStackTrace();
+            }
             FirstSearchForm.this.dispose();
         }
     }

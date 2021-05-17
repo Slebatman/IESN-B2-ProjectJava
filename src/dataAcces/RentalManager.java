@@ -19,7 +19,7 @@ public class RentalManager {
     }
 
     // Getting rentals base on a ID
-    public Rental getRentalBasedID(int idRental) {
+    public Rental getRentalBasedID(int idRental) throws DAOConfigurationException {
         return dao.getOneRentalBasedID(idRental);
     }
 }

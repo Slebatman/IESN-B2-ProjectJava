@@ -40,17 +40,17 @@ public class CollectiveManager {
     }
 
     // Get a collective based on its id
-    public Collective searchACollectiveBasedId(int idCollective) {
+    public Collective searchACollectiveBasedId(int idCollective) throws DAOConfigurationException {
         return dao.getACollectiveBasedId(idCollective);
     }
 
     // Get id of a collective based on its name
-    public int searchACollectiveIDBasedName(String name) {
+    public int searchACollectiveIDBasedName(String name) throws DAOConfigurationException {
         return dao.getACollectiveIDBasedName(name);
     }
 
     // Separately retrieve the category of collective
-    public ArrayList<String> getDistinctCategoryCollective() {
+    public ArrayList<String> getDistinctCategoryCollective() throws DAOConfigurationException {
         return dao.getDistinctCategoryCollective();
     }
 }

@@ -3,6 +3,7 @@ package view;
 import Model.SecondResearch;
 import Model.ThirdResearch;
 import controler.SearchControler;
+import dataAcces.exception.DAOConfigurationException;
 
 import javax.swing.table.AbstractTableModel;
 import java.text.SimpleDateFormat;
@@ -18,7 +19,7 @@ public class ModeleStatiqueThirdSearch extends AbstractTableModel {
     GregorianCalendar date;
     String dateFormatted;
 
-    public ModeleStatiqueThirdSearch(GregorianCalendar firstDate, GregorianCalendar secondDate){
+    public ModeleStatiqueThirdSearch(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOConfigurationException {
         super();
         controler = new SearchControler();
         listSearch = controler.getRentalBetween2Dates(firstDate, secondDate);

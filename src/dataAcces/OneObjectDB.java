@@ -15,7 +15,7 @@ public class OneObjectDB implements IOneObjectDAO{
 
     // Insert
     @Override
-    public void insert(OneObject o) {
+    public void insert(OneObject o) throws DAOConfigurationException {
         try {
             String sql = "INSERT INTO oneobject (idObject, name, idCollectiveOwner, isCommendable, purchaseDate, purchasePrice, deposit, maxRentalPeriod) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -57,7 +57,7 @@ public class OneObjectDB implements IOneObjectDAO{
 
     // Update an object
     @Override
-    public void update(OneObject o) {
+    public void update(OneObject o) throws DAOConfigurationException {
         try {
             String sql = "UPDATE oneobject SET name = ?, idCollectiveOwner = ?, isCommendable = ?, purchaseDate = ?, purchasePrice = ?, " +
                     "deposit = ?, maxRentalPeriod = ? WHERE idObject = ?";
@@ -98,7 +98,7 @@ public class OneObjectDB implements IOneObjectDAO{
 
     // Delete
     @Override
-    public void delete(int idObject) {
+    public void delete(int idObject) throws DAOConfigurationException {
         try {
             String sql = "DELETE FROM oneobject WHERE idObject = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -140,7 +140,7 @@ public class OneObjectDB implements IOneObjectDAO{
 
     // Select all objects
     @Override
-    public ArrayList<OneObject> getAllObjects() {
+    public ArrayList<OneObject> getAllObjects() throws DAOConfigurationException {
 
         try {
             String sql = "SELECT * FROM oneobject";

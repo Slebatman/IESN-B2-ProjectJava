@@ -4,6 +4,7 @@ import controler.CollectiveControler;
 import controler.ObjectControler;
 import Model.Collective;
 import Model.OneObject;
+import dataAcces.exception.DAOConfigurationException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,7 +42,7 @@ public class UpdateObjectWindow extends JFrame{
     private OneObject objectDefault;
     private SimpleDateFormat formatDate;
 
-    UpdateObjectWindow(){
+    UpdateObjectWindow() throws DAOConfigurationException {
         super("Update an object");
         setBounds(250, 200, 800, 450);
         collectiveControler = new CollectiveControler();
@@ -190,7 +191,12 @@ public class UpdateObjectWindow extends JFrame{
         public void actionPerformed(ActionEvent evt){
             dateObject.setTime((Date)spinnerDate.getModel().getValue());
             String value = listCollective.getSelectedItem().toString();
-            int idCollective = collectiveControler.searchACollectiveIDBasedName(value);
+            int idCollective = 0;
+            try {
+                idCollective = collectiveControler.searchACollectiveIDBasedName(value);
+            } catch (DAOConfigurationException e) {
+                e.printStackTrace();
+            }
             int indexObject = listObjects.getSelectedIndex();
             OneObject objectTest = arrayObjects.get(indexObject);
             int idObject = objectTest.getIdObject();
@@ -204,7 +210,11 @@ public class UpdateObjectWindow extends JFrame{
                 dateObject = null;
             }
             object = new OneObject(idObject, objectTest.getName(), idCollective, commandableValue, dateObject, (price ? Double.parseDouble(textPrice.getText()) : Types.NULL), (deposit ? Integer.parseInt(textDeposit.getText()): Types.NULL), (Integer)spinnerPeriod.getValue());
-            objectControler.updateAnObject(object);
+            try {
+                objectControler.updateAnObject(object);
+            } catch (DAOConfigurationException e) {
+                e.printStackTrace();
+            }
             UpdateObjectWindow.this.dispose();
         }
     }
@@ -212,10 +222,19 @@ public class UpdateObjectWindow extends JFrame{
         @Override
         public void actionPerformed(ActionEvent evt){
             String value = listCollective.getSelectedItem().toString();
-            int idCollective = collectiveControler.searchACollectiveIDBasedName(value);
+            int idCollective = 0;
+            try {
+                idCollective = collectiveControler.searchACollectiveIDBasedName(value);
+            } catch (DAOConfigurationException e) {
+                e.printStackTrace();
+            }
             //System.out.println(listObjects.getSelectedIndex());
 
-            arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
+            try {
+                arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
+            } catch (DAOConfigurationException e) {
+                e.printStackTrace();
+            }
             listObjects.removeAllItems();
             for(OneObject object : arrayObjects){
                 listObjects.addItem(object.getName());

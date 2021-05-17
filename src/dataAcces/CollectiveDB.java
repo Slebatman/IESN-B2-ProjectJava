@@ -134,7 +134,7 @@ public class CollectiveDB implements ICollectiveDAO {
 
     // [IMPLEMENT] Separately retrieve the category of Collective
     @Override
-    public ArrayList<String> getDistinctCategoryCollective() {
+    public ArrayList<String> getDistinctCategoryCollective() throws DAOConfigurationException {
         ArrayList<String> distinctNameCollective = new ArrayList<>();
 
         try {

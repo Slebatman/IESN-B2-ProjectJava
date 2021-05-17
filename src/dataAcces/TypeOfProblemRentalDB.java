@@ -27,7 +27,7 @@ public class TypeOfProblemRentalDB implements ITypeOfProblemRentalDAO {
 
     // Select id of a problem base on its name
     @Override
-    public int selectIdBaseName(String nameProblem) {
+    public int selectIdBaseName(String nameProblem) throws DAOConfigurationException {
         try {
             String sql = "SELECT * FROM typeofproblemrental WHERE name = ?";
             PreparedStatement statement = connexion.prepareStatement(sql);
@@ -42,7 +42,7 @@ public class TypeOfProblemRentalDB implements ITypeOfProblemRentalDAO {
 
     // Select DISTINCT name of typeOfProblemExitLocation
     @Override
-    public ArrayList<String> selectDistinctNameOfTypeOfProblemExitRental() {
+    public ArrayList<String> selectDistinctNameOfTypeOfProblemExitRental() throws DAOConfigurationException {
         ArrayList<String> distinctNameOfTypeOfExitRental = new ArrayList<>();
 
         try {

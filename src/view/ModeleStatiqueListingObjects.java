@@ -2,6 +2,7 @@ package view;
 
 import Model.OneObject;
 import controler.ObjectControler;
+import dataAcces.exception.DAOConfigurationException;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -16,7 +17,7 @@ public class ModeleStatiqueListingObjects extends AbstractTableModel {
     private ArrayList<OneObject> listObjects;
     private ObjectControler controler;
     private SimpleDateFormat formatDate;
-    public ModeleStatiqueListingObjects(){
+    public ModeleStatiqueListingObjects() throws DAOConfigurationException {
         super();
         controler = new ObjectControler();
         listObjects = controler.getAllObjects();

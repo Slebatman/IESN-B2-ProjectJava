@@ -1,6 +1,8 @@
 package view;
 import controler.*;
 import Model.OneObject;
+import dataAcces.exception.DAOConfigurationException;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -17,7 +19,7 @@ public class ListingObjetWindow extends JFrame{
     private SimpleDateFormat formatDate;
     private JTable table;
 
-    public ListingObjetWindow(){
+    public ListingObjetWindow() throws DAOConfigurationException {
         super("List of the objects");
         setBounds(500, 200, 650, 500);
         this.setLayout(new FlowLayout());

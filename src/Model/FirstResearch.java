@@ -2,6 +2,7 @@ package Model;
 
 import dataAcces.CollectiveManager;
 import dataAcces.OneObjectManager;
+import dataAcces.exception.DAOConfigurationException;
 
 import java.util.GregorianCalendar;
 
@@ -12,7 +13,7 @@ public class FirstResearch {
     private String collectiveName;
 
     // Constructors
-    public FirstResearch(Rental rental) {
+    public FirstResearch(Rental rental) throws DAOConfigurationException {
         setStartDate(rental.getStartDate());
         setObjectName(rental.getIdObject());
         setCollectiveName(rental.getIdTenant());
@@ -23,12 +24,12 @@ public class FirstResearch {
         this.startDate = startDate;
     }
 
-    public void setObjectName(int idObject) {
+    public void setObjectName(int idObject) throws DAOConfigurationException {
         OneObjectManager oneObjectManager = new OneObjectManager();
         this.objectName = oneObjectManager.getObjectByID(idObject).getName();
     }
 
-    public void setCollectiveName(int idCollective) {
+    public void setCollectiveName(int idCollective) throws DAOConfigurationException {
         CollectiveManager collectiveManager = new CollectiveManager();
         this.collectiveName = collectiveManager.searchACollectiveBasedId(idCollective).getName();
     }

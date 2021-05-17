@@ -2,6 +2,7 @@ package view;
 import controler.*;
 import Model.Collective;
 import Model.OneObject;
+import dataAcces.exception.DAOConfigurationException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,7 +33,7 @@ public class AddObjectWindow extends JFrame {
     private ObjectControler controler;
     private boolean dateNull;
 
-    public AddObjectWindow(){
+    public AddObjectWindow() throws DAOConfigurationException {
         super("Create an object");
         setBounds(250, 200, 600, 400);
         controler  = new ObjectControler();
@@ -150,7 +151,12 @@ public class AddObjectWindow extends JFrame {
                     dateObject.setTime((Date)spinnerDate.getModel().getValue());
                 }
                 String value = listCollective.getSelectedItem().toString();
-                int idCollective = collectiveControler.searchACollectiveIDBasedName(value);
+                int idCollective = 0;
+                try {
+                    idCollective = collectiveControler.searchACollectiveIDBasedName(value);
+                } catch (DAOConfigurationException e) {
+                    e.printStackTrace();
+                }
                 boolean price = false;
                 boolean deposit = !textDeposit.getText().equals("");
                 if(!textPrice.getText().equals("")){
@@ -160,7 +166,11 @@ public class AddObjectWindow extends JFrame {
                     dateObject = null;
                 }
                 object = new OneObject(textName.getText(), idCollective, commandableValue, dateObject, (price ? Double.parseDouble(textPrice.getText()) : Types.NULL), (deposit ? Integer.parseInt(textDeposit.getText()): Types.NULL),(Integer)spinnerPeriod.getValue());
-                controler.addObject(object);
+                try {
+                    controler.addObject(object);
+                } catch (DAOConfigurationException e) {
+                    e.printStackTrace();
+                }
                 AddObjectWindow.this.dispose();
             }
             else{

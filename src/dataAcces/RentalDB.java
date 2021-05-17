@@ -57,7 +57,7 @@ public class RentalDB implements IRentalDAO {
 
     // Research n°3
     @Override
-    public ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) {
+    public ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOConfigurationException {
         ArrayList<ThirdResearch> rentalBetween2Dates = new ArrayList<>();
 
         try {
@@ -110,7 +110,7 @@ public class RentalDB implements IRentalDAO {
     }
 
     @Override
-    public Rental getOneRentalBasedID(int idRental) {
+    public Rental getOneRentalBasedID(int idRental) throws DAOConfigurationException {
         try {
             String sql = "SELECT * FROM rental WHERE idRental = ?";
             PreparedStatement statement = connection.prepareStatement(sql);

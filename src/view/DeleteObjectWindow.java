@@ -4,6 +4,7 @@ import controler.CollectiveControler;
 import controler.ObjectControler;
 import Model.Collective;
 import Model.OneObject;
+import dataAcces.exception.DAOConfigurationException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +26,7 @@ public class DeleteObjectWindow extends JFrame{
     private ArrayList<String> objects;
     private int idCollective;
 
-    DeleteObjectWindow(){
+    DeleteObjectWindow() throws DAOConfigurationException {
         super("Delete an object");
         setBounds(150, 150, 400, 400);
 
@@ -96,10 +97,19 @@ public class DeleteObjectWindow extends JFrame{
         @Override
         public void actionPerformed(ActionEvent evt){
             String value = listCollective.getSelectedItem().toString();
-            int idCollective = collectiveControler.searchACollectiveIDBasedName(value);
+            int idCollective = 0;
+            try {
+                idCollective = collectiveControler.searchACollectiveIDBasedName(value);
+            } catch (DAOConfigurationException e) {
+                e.printStackTrace();
+            }
             //System.out.println(listObjects.getSelectedIndex());
 
-            arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
+            try {
+                arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
+            } catch (DAOConfigurationException e) {
+                e.printStackTrace();
+            }
             listObjects.removeAllItems();
             for(OneObject object : arrayObjects){
                 listObjects.addItem(object.getName());
@@ -118,10 +128,23 @@ public class DeleteObjectWindow extends JFrame{
         @Override
         public void actionPerformed(ActionEvent evt){
             String value = listCollective.getSelectedItem().toString();
-            int idCollective = collectiveControler.searchACollectiveIDBasedName(value);
+            int idCollective = 0;
+            try {
+                idCollective = collectiveControler.searchACollectiveIDBasedName(value);
+            } catch (DAOConfigurationException e) {
+                e.printStackTrace();
+            }
             OneObject objetTest = arrayObjects.get(listObjects.getSelectedIndex());
-            objectControler.deleteAnObject(objetTest);
-            arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
+            try {
+                objectControler.deleteAnObject(objetTest);
+            } catch (DAOConfigurationException e) {
+                e.printStackTrace();
+            }
+            try {
+                arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
+            } catch (DAOConfigurationException e) {
+                e.printStackTrace();
+            }
             listObjects.removeAllItems();
             for(OneObject object : arrayObjects){
                 listObjects.addItem(object.getName());
