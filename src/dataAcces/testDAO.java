@@ -5,9 +5,12 @@ import business.OneObjectManager;
 import business.RentalManager;
 import business.ResearchManager;
 import business.TypeOfProblemRentalManager;
+import model.Collective;
+import model.OneObject;
 import model.ThirdResearch;
 import exception.DAOException;
 
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -21,15 +24,18 @@ public class testDAO {
         TypeOfProblemRentalManager typeOfProblemRentalManager = new TypeOfProblemRentalManager();
 
         try {
-            GregorianCalendar date1 = new GregorianCalendar(2020,12,01);
-            GregorianCalendar date2 = new GregorianCalendar(2021,12,01);
+            OneObject oneObject = new OneObject(
+                    "PC portable",
+                    8,
+                    true,
+                    null,
+                    Types.NULL,
+                    Types.NULL,
+                    5
+            );
 
-            ArrayList<ThirdResearch> listArray;
-            listArray = researchManager.getRentalBetween2Dates(date1, date2);
+            oneObjectManager.addNewObject(oneObject);
 
-            for(ThirdResearch r : listArray) {
-                System.out.println(r);
-            }
         }
         catch (DAOException e) {
             System.out.println(e.getMessage());

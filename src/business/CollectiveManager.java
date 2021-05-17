@@ -16,7 +16,7 @@ public class CollectiveManager {
         this.dao = new CollectiveDB();
     }
 
-    // Insert a collective
+    // Add a new collective
     public void addCollective(Collective collective) throws DAOException {
         dao.insert(collective);
     }
@@ -35,17 +35,17 @@ public class CollectiveManager {
         this.deleteCollective(collective.getIdCollective());
     }
 
-    // get all collective in memory
+    // Retrieve all collective data from the database
     public ArrayList<Collective> getAllCollectives() throws DAOException {
         return dao.getAllCollective();
     }
 
-    // Get a collective based on its id
+    // Search for a collective based on its id
     public Collective searchACollectiveBasedId(int idCollective) throws DAOException {
         return dao.getACollectiveBasedId(idCollective);
     }
 
-    // Get id of a collective based on its name
+    // Retrieving a collective's ID based on its name
     public int searchACollectiveIDBasedName(String name) throws DAOException {
         return dao.getACollectiveIDBasedName(name);
     }
