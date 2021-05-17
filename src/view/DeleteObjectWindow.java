@@ -24,12 +24,13 @@ public class DeleteObjectWindow extends JFrame{
     private ObjectControler objectControler;
     private ArrayList<String> collectives;
     private ArrayList<String> objects;
-    private int idCollective;
 
     DeleteObjectWindow() throws DAOException {
         super("Delete an object");
         setBounds(150, 150, 400, 400);
+        this.setLayout(new FlowLayout());
 
+        //Controlers et récupérations de listes
         collectiveControler = new CollectiveControler();
         objectControler = new ObjectControler();
         collectives = new ArrayList<String>();
@@ -38,7 +39,6 @@ public class DeleteObjectWindow extends JFrame{
         for(Collective col : arrayCollectives){
             collectives.add(col.getName());
         }
-        arrayCollectives = collectiveControler.getAllCollectives();
 
         int idCollective = 1;
         arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
@@ -46,8 +46,6 @@ public class DeleteObjectWindow extends JFrame{
         for(OneObject object : arrayObjects){
             listObjects.addItem(object.getName());
         }
-
-        this.setLayout(new FlowLayout());
 
         panelWindow = new JPanel();
         panelWindow.setLayout(new GridLayout(2,1, 50, 20));
@@ -98,15 +96,12 @@ public class DeleteObjectWindow extends JFrame{
         public void actionPerformed(ActionEvent evt){
             String value = listCollective.getSelectedItem().toString();
             int idCollective = 0;
-            // Todo : implement exception
             try {
                 idCollective = collectiveControler.searchACollectiveIDBasedName(value);
                 arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
             } catch (DAOException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Get collective values Exception", JOptionPane.ERROR_MESSAGE);
             }
-            //System.out.println(listObjects.getSelectedIndex());
-
             listObjects.removeAllItems();
             for(OneObject object : arrayObjects){
                 listObjects.addItem(object.getName());
@@ -126,16 +121,15 @@ public class DeleteObjectWindow extends JFrame{
         public void actionPerformed(ActionEvent evt){
             String value = listCollective.getSelectedItem().toString();
             int idCollective = 0;
-            // Todo : implement exception
+
             try {
                 idCollective = collectiveControler.searchACollectiveIDBasedName(value);
                 OneObject objetTest = arrayObjects.get(listObjects.getSelectedIndex());
                 objectControler.deleteAnObject(objetTest);
                 arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
             } catch (DAOException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Delete an object Exception", JOptionPane.ERROR_MESSAGE);
             }
-
             listObjects.removeAllItems();
             for(OneObject object : arrayObjects){
                 listObjects.addItem(object.getName());

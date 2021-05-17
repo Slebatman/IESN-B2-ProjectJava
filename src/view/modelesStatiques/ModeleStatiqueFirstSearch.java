@@ -1,9 +1,10 @@
-package view;
+package view.modelesStatiques;
 
 import model.FirstResearch;
 import controler.SearchControler;
 import exception.DAOException;
 
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

@@ -20,7 +20,13 @@ public class FirstSearchForm extends JFrame {
         super("Search rentals by collective category");
         setBounds(200, 150, 400, 100);
         manager = new CollectiveManager();
-        categoryList = manager.getDistinctCategoryCollective();
+
+        try{
+            categoryList = manager.getDistinctCategoryCollective();
+        }catch(DAOException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Get list of category", JOptionPane.ERROR_MESSAGE);
+        }
+
 
         this.setLayout(new FlowLayout());
         labelCategory = new JLabel("Select a category : ");
@@ -37,11 +43,10 @@ public class FirstSearchForm extends JFrame {
         @Override
         public void actionPerformed(ActionEvent evt){
             String category = listCategory.getSelectedItem().toString();
-            // Todo : implement exception
             try {
                 FirstSearchWindow firstSearchWindow = new FirstSearchWindow(category);
             } catch (DAOException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage(), "First research Exception", JOptionPane.ERROR_MESSAGE);
             }
             FirstSearchForm.this.dispose();
         }

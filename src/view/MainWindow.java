@@ -79,11 +79,10 @@ public class MainWindow extends JFrame {
     private class AddObject implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
-            // Todo : implement exception
             try {
                 AddObjectWindow addObjectWindow = new AddObjectWindow();
             } catch (DAOException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Get list of collective Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -91,11 +90,10 @@ public class MainWindow extends JFrame {
     private class DeleteObject implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
-            // Todo : implement exception
             try {
                 DeleteObjectWindow deleteWindow = new DeleteObjectWindow();
             } catch (DAOException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Get list of collective or Objects Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -103,11 +101,10 @@ public class MainWindow extends JFrame {
     private class UpdateObject implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
-            // Todo : implement exception
             try {
                 UpdateObjectWindow updateWindow = new UpdateObjectWindow();
             } catch (DAOException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Get list of collective Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -115,11 +112,10 @@ public class MainWindow extends JFrame {
     private class ListingObjects implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
-            // Todo : implement exception
             try {
                 ListingObjetWindow listWindow = new ListingObjetWindow();
             } catch (DAOException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Get list of Objects Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -127,11 +123,10 @@ public class MainWindow extends JFrame {
     private class FirstSearch implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
-            // Todo : implement exception
             try {
                 FirstSearchForm firstSearchForm = new FirstSearchForm();
             } catch (DAOException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Get list of Rentals by category Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -139,11 +134,10 @@ public class MainWindow extends JFrame {
     private class SecondSearch implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
-            // Todo : implement exception
             try {
                 SecondSearchForm secondSearchForm = new SecondSearchForm();
             } catch (DAOException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Get list of Rentals problems by typeOfProblem Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -152,7 +146,8 @@ public class MainWindow extends JFrame {
         @Override
         public void actionPerformed(ActionEvent evt){
             ThirdSearchForm thirdSearchForm = new ThirdSearchForm();
+            }
+
         }
-    }
 
 }

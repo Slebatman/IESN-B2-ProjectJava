@@ -15,7 +15,7 @@ public class CollectiveDB implements ICollectiveDAO {
     @Override
     public void insert(Collective c) throws DAOException {
         try {
-            String sql = "INSERT INTO collective (name, category, physicalAdress, emailAdress) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO collective (name, category, physicalAddress, emailAddress) VALUES (?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, c.getName());
             statement.setString(2,c.getCategory());
@@ -129,6 +129,8 @@ public class CollectiveDB implements ICollectiveDAO {
 
         } catch (SQLException e) {
             throw new DAOException("Erreur SQL lors de la recherche d'un collectif sur base de son nom");
+        }catch (Exception e){
+            throw new DAOException("Erreur dans le nom du collectif");
         }
     }
 

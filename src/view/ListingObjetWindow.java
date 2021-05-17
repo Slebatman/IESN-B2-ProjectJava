@@ -1,22 +1,12 @@
 package view;
-import controler.*;
-import model.OneObject;
 import exception.DAOException;
+import view.modelesStatiques.ModeleStatiqueListingObjects;
 
 import javax.swing.*;
 import java.awt.*;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
 
 public class ListingObjetWindow extends JFrame{
-    private JPanel listPanel;
-    private ArrayList<OneObject> listObjects;
-    private ObjectControler controler;
-    private int nbObjects;
-    private SimpleDateFormat formatDate;
-    private JTable table;
-
     public ListingObjetWindow() throws DAOException {
         super("List of the objects");
         setBounds(500, 200, 650, 500);

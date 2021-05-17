@@ -2,6 +2,6 @@ package view;
 
 public class Principal {
     public static void main(String[] args){
-        PrincipalView view = new PrincipalView();
+        MainWindow window = new MainWindow();
     }
 }

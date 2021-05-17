@@ -47,15 +47,14 @@ public class ThirdSearchForm extends JFrame {
             secondDate = new GregorianCalendar();
             secondDate.setTime((Date)spinnerSecondDate.getModel().getValue());
             if(firstDate != secondDate && firstDate.compareTo(secondDate) < 0){
-                // Todo : implement exception
                 try {
                     ThirdSearchWindows thirdSearchWindows = new ThirdSearchWindows(firstDate, secondDate);
                 } catch (DAOException e) {
-                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Get list of Rentals between 2 dates Exception", JOptionPane.ERROR_MESSAGE);
+                }
                 }
                 ThirdSearchForm.this.dispose();
             }
         }
-    }
 
 }

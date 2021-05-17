@@ -1,4 +1,4 @@
-package view;
+package view.modelesStatiques;
 
 import model.ThirdResearch;
 import controler.SearchControler;
