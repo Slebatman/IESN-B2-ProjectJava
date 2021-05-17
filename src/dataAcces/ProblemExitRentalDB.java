@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ProblemExitRentalDB implements IProblemExitRental {
-    // Date base connection
+    // Date base access
     Connection connection = SingletonConnexion.getConnection();
 
     // Generic function who select a list of ProblemExitLocation
@@ -20,14 +20,13 @@ public class ProblemExitRentalDB implements IProblemExitRental {
         ResultSet data = statement.executeQuery();
 
         while (data.next()) {
-            ProblemExitRental problemExitRental = convertSqlToJava(data);
-            listOfProblemExitRental.add(problemExitRental);
+            listOfProblemExitRental.add(sqlToJavaObject(data));
         }
 
         return listOfProblemExitRental;
     }
 
-    // Select all ProblemExitRental based on a TypeOfExitRental
+    // [IMPLEMENT] Select all ProblemExitRental based on a TypeOfExitRental
     @Override
     public ArrayList<ProblemExitRental> getProblemExitRentalBasedTypeProblem(int idTypeOfProblemRental) throws DAOException {
         try {
@@ -43,7 +42,7 @@ public class ProblemExitRentalDB implements IProblemExitRental {
     }
 
     // Convert sql data to Java ProblemExitRental Object
-    private ProblemExitRental convertSqlToJava(ResultSet data) throws SQLException {
+    private ProblemExitRental sqlToJavaObject(ResultSet data) throws SQLException {
         return new ProblemExitRental(
                 data.getInt("idproblemExitLocation"),
                 data.getInt("idRental"),
