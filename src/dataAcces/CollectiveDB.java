@@ -6,6 +6,7 @@ import model.Collective;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CollectiveDB implements ICollectiveDAO {
     // Data base access
@@ -123,10 +124,12 @@ public class CollectiveDB implements ICollectiveDAO {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, name);
 
-            return selectACollective(statement).getIdCollective();
+            return Objects.requireNonNull(selectACollective(statement)).getIdCollective();
 
         } catch (SQLException e) {
             throw new DAOException("Erreur SQL : impossible de récuper l'identifiant du collectif '" + name + "' ");
+        } catch (NullPointerException e) {
+            throw new DAOException("Le collectif n'exite pas en base de données");
         }
     }
 
