@@ -61,7 +61,7 @@ public class CollectiveDB implements ICollectiveDAO {
 
     // SELECT
     // Generic function to select several collective
-    public ArrayList<Collective> selectListOfCollective(PreparedStatement statement) throws SQLException {
+    private ArrayList<Collective> selectListOfCollective(PreparedStatement statement) throws SQLException {
 
         ArrayList<Collective> listOfCollective = new ArrayList<>();
         ResultSet data = statement.executeQuery();
@@ -75,7 +75,7 @@ public class CollectiveDB implements ICollectiveDAO {
     }
 
     // Generic function to select a specific collective
-    public Collective selectACollective(PreparedStatement statement) throws SQLException {
+    private Collective selectACollective(PreparedStatement statement) throws SQLException {
 
         ResultSet data = statement.executeQuery();
         while (data.next()) {
@@ -149,7 +149,7 @@ public class CollectiveDB implements ICollectiveDAO {
     }
 
     // Function convert sql to java object Collective
-    public Collective sqlToJavaObject(ResultSet data) throws SQLException {
+    private Collective sqlToJavaObject(ResultSet data) throws SQLException {
         return new Collective(
             data.getInt("idCollective"),
             data.getString("name"),
