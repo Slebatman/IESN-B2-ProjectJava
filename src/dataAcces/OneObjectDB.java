@@ -167,7 +167,7 @@ public class OneObjectDB implements IOneObjectDAO{
     }
 
     // Edit PreparedStatement for include et update
-    private PreparedStatement editPreparedStatement(PreparedStatement statement, OneObject o) throws SQLException {
+    private void editPreparedStatement(PreparedStatement statement, OneObject o) throws SQLException {
         // Not null value
         statement.setString(1,o.getName());
         statement.setInt(2,o.getIdCollectiveOwner());
@@ -194,7 +194,5 @@ public class OneObjectDB implements IOneObjectDAO{
 
         // Not null values
         statement.setInt(7, o.getMaxRentalPeriod());
-
-        return statement;
     }
 }

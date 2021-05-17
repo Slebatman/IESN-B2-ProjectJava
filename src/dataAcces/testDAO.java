@@ -25,7 +25,7 @@ public class testDAO {
 
         try {
             OneObject oneObject = new OneObject(
-                    "Pioche",
+                    "PC portable",
                     8,
                     true,
                     null,
