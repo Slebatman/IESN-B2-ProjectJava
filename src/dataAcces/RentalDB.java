@@ -10,19 +10,16 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class RentalDB implements IRentalDAO {
-    // Date base connection
+    // Date base access
     private final Connection connection = SingletonConnexion.getConnection();
 
     // Generic function to select several objects
     public ArrayList<Rental> selectListRental(PreparedStatement statement) throws SQLException {
-        ResultSet data;
         ArrayList<Rental> listRental = new ArrayList<>();
-
-        data = statement.executeQuery();
+        ResultSet data = statement.executeQuery();
 
         while (data.next()) {
-            Rental rental = sqlDataToJavaRental(data);
-            listRental.add(rental);
+            listRental.add(sqlToJavaObject(data));
         }
 
         return listRental;
@@ -30,24 +27,21 @@ public class RentalDB implements IRentalDAO {
 
     // Generic function to select one object
     public Rental selectOneRental(PreparedStatement statement) throws SQLException {
-        Rental rental = null;
         ResultSet data = statement.executeQuery();
 
         while (data.next()) {
-            rental = sqlDataToJavaRental(data);
+            return sqlToJavaObject(data);
         }
-
-        return rental;
+        return null;
     }
 
-    // Research n°1
+    // [IMPLEMENT] (Research n°1) All rentals for a category of collectives
     @Override
     public ArrayList<Rental> rentalsForOneCollectiveCategory(String category) throws DAOException {
         try {
             String sql = "SELECT * FROM rental JOIN collective ON (rental.idTenant = collective.idCollective) WHERE collective.category = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, category);
-
             return selectListRental(statement);
 
         } catch (SQLException e) {
@@ -55,7 +49,7 @@ public class RentalDB implements IRentalDAO {
         }
     }
 
-    // Research n°3
+    // [IMPLEMENT] (Research n°3) All rentals between 2 dates
     @Override
     public ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException {
         ArrayList<ThirdResearch> rentalBetween2Dates = new ArrayList<>();
@@ -109,13 +103,13 @@ public class RentalDB implements IRentalDAO {
         return rentalBetween2Dates;
     }
 
+    // [IMPLEMENT] Recovering a location based on its ID
     @Override
     public Rental getOneRentalBasedID(int idRental) throws DAOException {
         try {
             String sql = "SELECT * FROM rental WHERE idRental = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, idRental);
-
             return selectOneRental(statement);
 
         } catch (SQLException e) {
@@ -124,7 +118,7 @@ public class RentalDB implements IRentalDAO {
     }
 
     // Convert sql to java object Rental
-    public Rental sqlDataToJavaRental(ResultSet data) throws SQLException {
+    private Rental sqlToJavaObject(ResultSet data) throws SQLException {
         GregorianCalendar startDate = new GregorianCalendar(), endDate = new GregorianCalendar();
         Rental rental = new Rental();
 
