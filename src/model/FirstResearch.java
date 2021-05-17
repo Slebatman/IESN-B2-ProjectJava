@@ -1,7 +1,7 @@
 package model;
 
-import dataAcces.CollectiveManager;
-import dataAcces.OneObjectManager;
+import business.CollectiveManager;
+import business.OneObjectManager;
 import exception.DAOException;
 
 import java.util.GregorianCalendar;

@@ -1,6 +1,6 @@
 package controler;
 
-import dataAcces.CollectiveManager;
+import business.CollectiveManager;
 import model.Collective;
 import exception.DAOException;
 

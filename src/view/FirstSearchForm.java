@@ -1,6 +1,6 @@
 package view;
 
-import dataAcces.CollectiveManager;
+import business.CollectiveManager;
 import exception.DAOException;
 
 import javax.swing.*;

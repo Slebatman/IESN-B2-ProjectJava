@@ -1,5 +1,6 @@
-package dataAcces;
+package controler.exception;
 
+import dataAcces.RentalDB;
 import dataAcces.dao.IRentalDAO;
 import exception.DAOException;
 import model.Rental;

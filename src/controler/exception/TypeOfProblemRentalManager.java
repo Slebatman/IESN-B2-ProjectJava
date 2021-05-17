@@ -1,5 +1,6 @@
-package dataAcces;
+package controler.exception;
 
+import dataAcces.TypeOfProblemRentalDB;
 import dataAcces.dao.ITypeOfProblemRentalDAO;
 import exception.DAOException;
 

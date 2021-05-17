@@ -1,6 +1,6 @@
 package controler;
 import model.*;
-import dataAcces.OneObjectManager;
+import business.OneObjectManager;
 import exception.DAOException;
 
 import java.util.ArrayList;

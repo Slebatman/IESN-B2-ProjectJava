@@ -1,5 +1,6 @@
-package dataAcces;
+package business;
 
+import dataAcces.OneObjectDB;
 import dataAcces.dao.IOneObjectDAO;
 import model.Collective;
 import model.OneObject;

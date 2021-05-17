@@ -1,5 +1,6 @@
-package dataAcces;
+package business;
 
+import dataAcces.CollectiveDB;
 import dataAcces.dao.ICollectiveDAO;
 import exception.DAOException;
 import model.Collective;
