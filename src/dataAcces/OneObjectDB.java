@@ -17,36 +17,35 @@ public class OneObjectDB implements IOneObjectDAO{
     @Override
     public void insert(OneObject o) throws DAOException {
         try {
-            String sql = "INSERT INTO oneobject (idObject, name, idCollectiveOwner, isCommendable, purchaseDate, purchasePrice, deposit, maxRentalPeriod) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO oneobject (name, idCollectiveOwner, isCommendable, purchaseDate, purchasePrice, deposit, maxRentalPeriod) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             // Not null value
-            statement.setInt(1, o.getIdObject());
-            statement.setString(2,o.getName());
-            statement.setInt(3,o.getIdCollectiveOwner());
-            statement.setBoolean(4,o.isCommendable());
+            statement.setString(1,o.getName());
+            statement.setInt(2,o.getIdCollectiveOwner());
+            statement.setBoolean(3,o.isCommendable());
 
             // Nul value
             if(o.getPurchaseDate() != null) {
-                statement.setDate(5, new Date(o.getPurchaseDate().getTimeInMillis()));
+                statement.setDate(4, new Date(o.getPurchaseDate().getTimeInMillis()));
+            } else {
+                statement.setNull(4, Types.NULL);
+            }
+
+            if(o.getPurchasePrice() != Types.NULL) {
+                statement.setDouble(5, o.getPurchasePrice());
             } else {
                 statement.setNull(5, Types.NULL);
             }
 
-            if(o.getPurchasePrice() != Types.NULL) {
-                statement.setDouble(6, o.getPurchasePrice());
+            if(o.getDeposit() != Types.NULL) {
+                statement.setInt(6, o.getDeposit());
             } else {
                 statement.setNull(6, Types.NULL);
             }
 
-            if(o.getDeposit() != Types.NULL) {
-                statement.setInt(7, o.getDeposit());
-            } else {
-                statement.setNull(7, Types.NULL);
-            }
-
             // Not null value
-            statement.setInt(8, o.getMaxRentalPeriod());
+            statement.setInt(7, o.getMaxRentalPeriod());
 
             statement.executeUpdate();
 
