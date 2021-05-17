@@ -2,7 +2,7 @@ package model;
 
 import business.CollectiveManager;
 import business.OneObjectManager;
-import controler.exception.RentalManager;
+import business.RentalManager;
 import exception.DAOException;
 
 import java.util.GregorianCalendar;

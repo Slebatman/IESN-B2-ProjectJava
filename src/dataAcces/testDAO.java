@@ -2,9 +2,9 @@ package dataAcces;
 
 import business.CollectiveManager;
 import business.OneObjectManager;
-import controler.exception.RentalManager;
-import controler.exception.ResearchManager;
-import controler.exception.TypeOfProblemRentalManager;
+import business.RentalManager;
+import business.ResearchManager;
+import business.TypeOfProblemRentalManager;
 import model.ThirdResearch;
 import exception.DAOException;
 

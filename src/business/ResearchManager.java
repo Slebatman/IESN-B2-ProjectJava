@@ -1,4 +1,4 @@
-package controler.exception;
+package business;
 
 import dataAcces.ProblemExitRentalDB;
 import dataAcces.RentalDB;

@@ -3,7 +3,7 @@ package controler;
 import model.FirstResearch;
 import model.SecondResearch;
 import model.ThirdResearch;
-import controler.exception.ResearchManager;
+import business.ResearchManager;
 import exception.DAOException;
 
 import java.util.ArrayList;

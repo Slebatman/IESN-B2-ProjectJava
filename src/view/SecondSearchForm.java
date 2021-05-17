@@ -1,6 +1,6 @@
 package view;
 
-import controler.exception.TypeOfProblemRentalManager;
+import business.TypeOfProblemRentalManager;
 import exception.DAOException;
 
 import javax.swing.*;
