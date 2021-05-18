@@ -1,4 +1,4 @@
-package view;
+package userInterface;
 
 import business.CollectiveManager;
 import exception.DAOException;

@@ -1,4 +1,4 @@
-package view;
+package userInterface;
 import controller.*;
 import model.Collective;
 import model.OneObject;

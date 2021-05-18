@@ -1,6 +1,6 @@
-package view;
+package userInterface;
 import exception.DAOException;
-import view.modelesStatiques.ModeleStatiqueListingObjects;
+import userInterface.modelesStatiques.ModeleStatiqueListingObjects;
 
 import javax.swing.*;
 import java.awt.*;

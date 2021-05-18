@@ -1,7 +1,7 @@
-package view;
+package userInterface;
 
 import exception.DAOException;
-import view.modelesStatiques.ModeleStatiqueThirdSearch;
+import userInterface.modelesStatiques.ModeleStatiqueThirdSearch;
 
 import javax.swing.*;
 import java.awt.*;

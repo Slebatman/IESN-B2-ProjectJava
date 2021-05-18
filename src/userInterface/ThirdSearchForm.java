@@ -1,4 +1,4 @@
-package view;
+package userInterface;
 
 import exception.DAOException;
 

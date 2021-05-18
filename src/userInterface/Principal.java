@@ -1,4 +1,4 @@
-package view;
+package userInterface;
 
 public class Principal {
     public static void main(String[] args){

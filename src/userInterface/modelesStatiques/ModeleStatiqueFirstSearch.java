@@ -1,4 +1,4 @@
-package view.modelesStatiques;
+package userInterface.modelesStatiques;
 
 import model.FirstResearch;
 import controller.ResearchController;
