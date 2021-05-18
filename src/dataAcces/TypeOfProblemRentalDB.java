@@ -26,7 +26,7 @@ public class TypeOfProblemRentalDB implements ITypeOfProblemRentalDAO {
 
     // [IMPLEMENT] Select id of a problem base on its name
     @Override
-    public int selectIdBaseName(String nameProblem) throws DAOException {
+    public int getIdBaseName(String nameProblem) throws DAOException {
         try {
             String sql = "SELECT * FROM typeofproblemrental WHERE name = ?";
             PreparedStatement statement = connexion.prepareStatement(sql);
