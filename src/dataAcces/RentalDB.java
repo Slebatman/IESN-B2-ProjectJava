@@ -1,6 +1,7 @@
 package dataAcces;
 
 import model.FirstResearch;
+import model.SecondResearch;
 import model.ThirdResearch;
 import dataAcces.dao.IRentalDAO;
 import exception.DAOException;
@@ -61,6 +62,47 @@ public class RentalDB implements IRentalDAO {
 
         } catch (SQLException e) {
             throw new DAOException("Erreur SQL : impossible de récuperer les locations pour la categorie " + category);
+        }
+    }
+
+    // [IMPLEMENT] (Research n°2) List all rentals that have had the same type of return problem
+    @Override
+    public ArrayList<SecondResearch> getRentalsBasedOnSameTypeReturnProblem(int idTypeOfProblemExitProblemRental) throws DAOException {
+        try {
+            ArrayList<SecondResearch> allRentalsBasedOnSameTypeReturnProblem = new ArrayList<>();
+
+            String sql = """
+                    SELECT r.startDate, r.returnDate, o.name, o.deposit, o.maxRentalPeriod, c.name, c.emailAddress FROM rental r
+                        JOIN problemexitrental p on r.idRental = p.idRental
+                        JOIN collective c on c.idCollective = r.idTenant
+                        JOIN oneobject o on o.idObject = r.idObject
+                    WHERE p.idTypeOfProblemRental = ?; """;
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, idTypeOfProblemExitProblemRental);
+
+            ResultSet data = statement.executeQuery();
+
+            while (data.next()) {
+                GregorianCalendar startDate = new GregorianCalendar(), endDate = new GregorianCalendar();
+                startDate.setTime(data.getDate("r.startDate"));
+                endDate.setTime(data.getDate("r.returnDate"));
+
+                allRentalsBasedOnSameTypeReturnProblem.add(new SecondResearch(
+                        startDate,
+                        endDate,
+                        data.getString("o.name"),
+                        data.getInt("o.deposit"),
+                        data.getInt("o.maxRentalPeriod"),
+                        data.getString("c.name"),
+                        data.getString("c.emailAddress")
+                ));
+            }
+
+            return allRentalsBasedOnSameTypeReturnProblem;
+
+        } catch (SQLException e) {
+            throw new DAOException("Erreur SQL : impossible de récuperer la liste de toutes es locations ayant eu le même type de problème de retour");
         }
     }
 

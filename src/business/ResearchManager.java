@@ -12,43 +12,30 @@ import java.util.GregorianCalendar;
 
 public class ResearchManager {
     // Variables
-    private IRentalDAO daoRental;
-    private IProblemExitRental daoProblemExitRental;
+    private IRentalDAO dao;
 
     // Constructor
     public ResearchManager() {
-        setDaoRental(new RentalDB());
-        setDaoProblemExitRental(new ProblemExitRentalDB());
+        setDao(new RentalDB());
     }
 
     // Setters
-    private void setDaoRental(IRentalDAO daoRental) {
-        this.daoRental = daoRental;
-    }
-
-    private void setDaoProblemExitRental(IProblemExitRental daoProblemExitRental) {
-        this.daoProblemExitRental = daoProblemExitRental;
+    private void setDao(IRentalDAO dao) {
+        this.dao = dao;
     }
 
     // (Research n°1) All rentals for a category of collectives
     public ArrayList<FirstResearch> getRentalsForOneCollectiveCategory(String category) throws DAOException {
-        return daoRental.getRentalsForOneCollectiveCategory(category);
+        return dao.getRentalsForOneCollectiveCategory(category);
     }
 
     // (Research n°2) Select all ProblemExitRental based on a TypeOfExitRental
     public ArrayList<SecondResearch> getProblemRentalBasedOnTypeOfProblem(int idTypeOfProblemRental) throws DAOException {
-        ArrayList<ProblemExitRental> problemExitRentals = daoProblemExitRental.getProblemExitRentalBasedTypeProblem(idTypeOfProblemRental);
-        ArrayList<SecondResearch> problemExitRentalConverted = new ArrayList<>();
-
-        for(ProblemExitRental p : problemExitRentals) {
-            problemExitRentalConverted.add(new SecondResearch(p));
-        }
-
-        return problemExitRentalConverted;
+        return dao.getRentalsBasedOnSameTypeReturnProblem(idTypeOfProblemRental);
     }
 
     // (Research n°3) All rentals between 2 dates
     public ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException {
-        return daoRental.getRentalBetween2Dates(firstDate, secondDate);
+        return dao.getRentalBetween2Dates(firstDate, secondDate);
     }
 }
