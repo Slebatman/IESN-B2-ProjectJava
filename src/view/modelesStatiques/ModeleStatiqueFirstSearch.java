@@ -1,10 +1,9 @@
 package view.modelesStatiques;
 
 import model.FirstResearch;
-import controler.SearchControler;
+import controller.ResearchController;
 import exception.DAOException;
 
-import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,11 +14,11 @@ public class ModeleStatiqueFirstSearch extends AbstractTableModel {
     private final String[] entetes = {"startDate", "objectName", "collectiveName"};
 
     private ArrayList<FirstResearch> listSearch;
-    private SearchControler controler;
+    private ResearchController controler;
     private SimpleDateFormat formatDate;
     public ModeleStatiqueFirstSearch(String category) throws DAOException {
         super();
-        controler = new SearchControler();
+        controler = new ResearchController();
         listSearch = controler.rentalsForOneCollectiveCategory(category);
         search = listSearch.toArray(new FirstResearch[0]);
         formatDate = new SimpleDateFormat("dd/MM/yyyy");

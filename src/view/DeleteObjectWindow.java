@@ -1,7 +1,7 @@
 package view;
 
-import controler.CollectiveControler;
-import controler.ObjectControler;
+import controller.CollectiveController;
+import controller.OneObjectController;
 import model.Collective;
 import model.OneObject;
 import exception.DAOException;
@@ -20,8 +20,8 @@ public class DeleteObjectWindow extends JFrame{
     private JButton buttonCancel, buttonDelete;
     private ArrayList<Collective> arrayCollectives;
     private ArrayList<OneObject> arrayObjects;
-    private CollectiveControler collectiveControler;
-    private ObjectControler objectControler;
+    private CollectiveController collectiveController;
+    private OneObjectController oneObjectController;
     private ArrayList<String> collectives;
     private ArrayList<String> objects;
 
@@ -31,17 +31,17 @@ public class DeleteObjectWindow extends JFrame{
         this.setLayout(new FlowLayout());
 
         //Controlers et récupérations de listes
-        collectiveControler = new CollectiveControler();
-        objectControler = new ObjectControler();
+        collectiveController = new CollectiveController();
+        oneObjectController = new OneObjectController();
         collectives = new ArrayList<String>();
         objects = new ArrayList<String>();
-        arrayCollectives = collectiveControler.getAllCollectives();
+        arrayCollectives = collectiveController.getAllCollectives();
         for(Collective col : arrayCollectives){
             collectives.add(col.getName());
         }
 
         int idCollective = 1;
-        arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
+        arrayObjects = oneObjectController.getAllObjectsForOneCollective(idCollective);
         listObjects = new JComboBox<String>();
         for(OneObject object : arrayObjects){
             listObjects.addItem(object.getName());
@@ -97,8 +97,8 @@ public class DeleteObjectWindow extends JFrame{
             String value = listCollective.getSelectedItem().toString();
             int idCollective = 0;
             try {
-                idCollective = collectiveControler.searchACollectiveIDBasedName(value);
-                arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
+                idCollective = collectiveController.getACollectiveIDBasedName(value);
+                arrayObjects = oneObjectController.getAllObjectsForOneCollective(idCollective);
             } catch (DAOException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Get collective values Exception", JOptionPane.ERROR_MESSAGE);
             }
@@ -123,10 +123,10 @@ public class DeleteObjectWindow extends JFrame{
             int idCollective = 0;
 
             try {
-                idCollective = collectiveControler.searchACollectiveIDBasedName(value);
+                idCollective = collectiveController.getACollectiveIDBasedName(value);
                 OneObject objetTest = arrayObjects.get(listObjects.getSelectedIndex());
-                objectControler.deleteAnObject(objetTest);
-                arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
+                oneObjectController.deleteAnObject(objetTest);
+                arrayObjects = oneObjectController.getAllObjectsForOneCollective(idCollective);
             } catch (DAOException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Delete an object Exception", JOptionPane.ERROR_MESSAGE);
             }

@@ -1,7 +1,7 @@
 package view;
 
-import controler.CollectiveControler;
-import controler.ObjectControler;
+import controller.CollectiveController;
+import controller.OneObjectController;
 import model.Collective;
 import model.OneObject;
 import exception.DAOException;
@@ -27,10 +27,10 @@ public class UpdateObjectWindow extends JFrame{
     private JPanel panel, panelRadio, panelButton, panelWindow, panelCollectives, panelDate;
     private JButton buttonUpdate, buttonCancel, buttonDate;
     private ArrayList<Collective> arrayCollectives;
-    private CollectiveControler collectiveControler;
+    private CollectiveController collectiveController;
     private ArrayList<String> collectives;
     private ArrayList<OneObject> arrayObjects;
-    private ObjectControler objectControler;
+    private OneObjectController oneObjectController;
     private JComboBox<String> listObjects;
     private GregorianCalendar dateObject;
     private JSpinner spinnerDate, spinnerPeriod;
@@ -47,12 +47,12 @@ public class UpdateObjectWindow extends JFrame{
 
         //Controlers et récupérations
         //List des collective
-        collectiveControler = new CollectiveControler();
-        objectControler = new ObjectControler();
-        arrayCollectives = collectiveControler.getAllCollectives();
+        collectiveController = new CollectiveController();
+        oneObjectController = new OneObjectController();
+        arrayCollectives = collectiveController.getAllCollectives();
         collectives = new ArrayList<String>();
         for(Collective col : arrayCollectives){
-            if(objectControler.getAllObjectsForOneCollective(col.getIdCollective()).size() > 0){
+            if(oneObjectController.getAllObjectsForOneCollective(col.getIdCollective()).size() > 0){
                 collectives.add(col.getName());
             }
         }
@@ -63,8 +63,8 @@ public class UpdateObjectWindow extends JFrame{
 
         String value = listCollective.getItemAt(0).toString();
         System.out.println(value);
-        idCollective = collectiveControler.searchACollectiveIDBasedName(value);
-        arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
+        idCollective = collectiveController.getACollectiveIDBasedName(value);
+        arrayObjects = oneObjectController.getAllObjectsForOneCollective(idCollective);
         listObjects = new JComboBox<String>();
         for(OneObject object : arrayObjects){
             listObjects.addItem(object.getName());
@@ -191,7 +191,7 @@ public class UpdateObjectWindow extends JFrame{
                 String value = listCollective.getSelectedItem().toString();
                 int idCollective = -1;
                 try {
-                    idCollective = collectiveControler.searchACollectiveIDBasedName(value);
+                    idCollective = collectiveController.getACollectiveIDBasedName(value);
                 } catch (DAOException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Get idCollective by name Exception", JOptionPane.ERROR_MESSAGE);
                 }
@@ -210,7 +210,7 @@ public class UpdateObjectWindow extends JFrame{
                     }
                     object = new OneObject(idObject, objectDefault.getName(), idCollective, commandableValue, dateObject, (price ? Double.parseDouble(textPrice.getText()) : Types.NULL), (deposit ? Integer.parseInt(textDeposit.getText()): Types.NULL), (Integer)spinnerPeriod.getValue());
                     try {
-                        objectControler.updateAnObject(object);
+                        oneObjectController.updateAnObject(object);
                     } catch (DAOException e) {
                         JOptionPane.showMessageDialog(null, e.getMessage(), "Update an object Exception", JOptionPane.ERROR_MESSAGE);
                     }
@@ -232,8 +232,8 @@ public class UpdateObjectWindow extends JFrame{
             int idCollective = 0;
 
             try {
-                idCollective = collectiveControler.searchACollectiveIDBasedName(value);
-                arrayObjects = objectControler.getAllObjectsForOneCollective(idCollective);
+                idCollective = collectiveController.getACollectiveIDBasedName(value);
+                arrayObjects = oneObjectController.getAllObjectsForOneCollective(idCollective);
             } catch (DAOException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Get idCollective or list of objects from a collective Exception", JOptionPane.ERROR_MESSAGE);
             }

@@ -1,5 +1,5 @@
 package view;
-import controler.*;
+import controller.*;
 import model.Collective;
 import model.OneObject;
 import exception.DAOException;
@@ -25,9 +25,9 @@ public class AddObjectWindow extends JFrame {
     private GregorianCalendar dateObject;
     private JSpinner spinnerDate, spinnerPeriod;
     private ArrayList<Collective> arrayCollectives;
-    private CollectiveControler collectiveControler;
+    private CollectiveController collectiveController;
     private ArrayList<String> collectives;
-    private ObjectControler controler;
+    private OneObjectController controler;
 
     public AddObjectWindow() throws DAOException {
         super("Create an object");
@@ -35,9 +35,9 @@ public class AddObjectWindow extends JFrame {
         this.setLayout(new FlowLayout());
 
         //Controlers et liste des collectives
-        controler  = new ObjectControler();
-        collectiveControler = new CollectiveControler();
-        arrayCollectives = collectiveControler.getAllCollectives();
+        controler  = new OneObjectController();
+        collectiveController = new CollectiveController();
+        arrayCollectives = collectiveController.getAllCollectives();
         collectives = new ArrayList<String>();
         for(Collective col : arrayCollectives){
             collectives.add(col.getName());
@@ -148,7 +148,7 @@ public class AddObjectWindow extends JFrame {
                 int idCollective = 0;
 
                 try {
-                    idCollective = collectiveControler.searchACollectiveIDBasedName(value);
+                    idCollective = collectiveController.getACollectiveIDBasedName(value);
                 } catch (DAOException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Collective name exception", JOptionPane.ERROR_MESSAGE);
                 }

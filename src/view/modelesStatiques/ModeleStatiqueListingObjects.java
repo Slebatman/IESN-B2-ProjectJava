@@ -1,7 +1,7 @@
 package view.modelesStatiques;
 
 import model.OneObject;
-import controler.ObjectControler;
+import controller.OneObjectController;
 import exception.DAOException;
 
 import javax.swing.table.AbstractTableModel;
@@ -14,11 +14,11 @@ public class ModeleStatiqueListingObjects extends AbstractTableModel {
     private final String[] entetes = {"IdObject","Name","idCollectiveOwner","isCommandable","purchaseDate","purchasePrice","deposit","MaxRentalPeriod"};
 
     private ArrayList<OneObject> listObjects;
-    private ObjectControler controler;
+    private OneObjectController controler;
     private SimpleDateFormat formatDate;
     public ModeleStatiqueListingObjects() throws DAOException {
         super();
-        controler = new ObjectControler();
+        controler = new OneObjectController();
         listObjects = controler.getAllObjects();
         objects = listObjects.toArray(new OneObject[1]);
         formatDate = new SimpleDateFormat("dd/MM/yyyy");
