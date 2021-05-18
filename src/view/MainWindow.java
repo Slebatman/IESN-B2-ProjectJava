@@ -123,11 +123,7 @@ public class MainWindow extends JFrame {
     private class FirstSearch implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
-            try {
-                FirstSearchForm firstSearchForm = new FirstSearchForm();
-            } catch (DAOException e) {
-                JOptionPane.showMessageDialog(null, e.getMessage(), "Get list of Rentals by category Exception", JOptionPane.ERROR_MESSAGE);
-            }
+            FirstSearchForm firstSearchForm = new FirstSearchForm();
         }
     }
 
