@@ -18,6 +18,6 @@ public class CollectiveControler {
     }
 
     public int searchACollectiveIDBasedName(String name) throws DAOException {
-        return manager.searchACollectiveIDBasedName(name);
+        return manager.getACollectiveIDBasedName(name);
     }
 }

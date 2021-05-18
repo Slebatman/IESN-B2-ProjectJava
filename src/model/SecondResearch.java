@@ -59,12 +59,12 @@ public class SecondResearch {
     }
 
     public void setNameCollectiveOwner(Rental rental) throws DAOException {
-        Collective collective = collectiveManager.searchACollectiveBasedId(rental.getIdTenant());
+        Collective collective = collectiveManager.getACollectiveBasedId(rental.getIdTenant());
         this.nameCollectiveOwner = collective.getName();
     }
 
     public void setEmailAddressCollectiveOwner(Rental rental) throws DAOException {
-        Collective collective = collectiveManager.searchACollectiveBasedId(rental.getIdTenant());
+        Collective collective = collectiveManager.getACollectiveBasedId(rental.getIdTenant());
         this.emailAddressCollectiveOwner = collective.getEmailAddress();
     }
 

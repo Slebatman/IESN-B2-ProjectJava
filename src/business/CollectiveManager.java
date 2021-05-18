@@ -8,12 +8,17 @@ import model.Collective;
 import java.util.ArrayList;
 
 public class CollectiveManager {
-    // Variable
-    private final ICollectiveDAO dao;
+    // Variables
+    private ICollectiveDAO dao;
 
     // Constructor
     public CollectiveManager() {
-        this.dao = new CollectiveDB();
+        setDao(new CollectiveDB());
+    }
+
+    // Setter
+    private void setDao(ICollectiveDAO dao) {
+        this.dao = dao;
     }
 
     // Add a new collective
@@ -41,12 +46,12 @@ public class CollectiveManager {
     }
 
     // Search for a collective based on its id
-    public Collective searchACollectiveBasedId(int idCollective) throws DAOException {
+    public Collective getACollectiveBasedId(int idCollective) throws DAOException {
         return dao.getACollectiveBasedId(idCollective);
     }
 
     // Retrieving a collective's ID based on its name
-    public int searchACollectiveIDBasedName(String name) throws DAOException {
+    public int getACollectiveIDBasedName(String name) throws DAOException {
         return dao.getACollectiveIDBasedName(name);
     }
 

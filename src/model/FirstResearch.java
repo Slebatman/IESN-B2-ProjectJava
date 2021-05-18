@@ -31,7 +31,7 @@ public class FirstResearch {
 
     public void setCollectiveName(int idCollective) throws DAOException {
         CollectiveManager collectiveManager = new CollectiveManager();
-        this.collectiveName = collectiveManager.searchACollectiveBasedId(idCollective).getName();
+        this.collectiveName = collectiveManager.getACollectiveBasedId(idCollective).getName();
     }
 
     public GregorianCalendar getStartDate() {
