@@ -5,14 +5,6 @@ import business.OneObjectManager;
 import business.RentalManager;
 import business.ResearchManager;
 import business.TypeOfProblemRentalManager;
-import model.Collective;
-import model.OneObject;
-import model.ThirdResearch;
-import exception.DAOException;
-
-import java.sql.Types;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 public class testDAO {
     public static void main(String[] args)  {

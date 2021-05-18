@@ -1,4 +1,4 @@
-package model;
+package model.research;
 
 import java.util.GregorianCalendar;
 

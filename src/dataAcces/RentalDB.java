@@ -1,8 +1,8 @@
 package dataAcces;
 
-import model.FirstResearch;
-import model.SecondResearch;
-import model.ThirdResearch;
+import model.research.FirstResearch;
+import model.research.SecondResearch;
+import model.research.ThirdResearch;
 import dataAcces.dao.IRentalDAO;
 import exception.DAOException;
 import model.Rental;

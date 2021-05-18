@@ -1,9 +1,11 @@
 package business;
 
 import dataAcces.RentalDB;
-import model.*;
 import dataAcces.dao.IRentalDAO;
 import exception.DAOException;
+import model.research.FirstResearch;
+import model.research.SecondResearch;
+import model.research.ThirdResearch;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;

@@ -3,7 +3,7 @@ package business;
 import dataAcces.RentalDB;
 import dataAcces.dao.IRentalDAO;
 import exception.DAOException;
-import model.FirstResearch;
+import model.research.FirstResearch;
 import model.Rental;
 
 import java.util.ArrayList;

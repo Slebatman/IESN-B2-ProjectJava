@@ -1,9 +1,9 @@
 package dataAcces.dao;
 
-import model.FirstResearch;
+import model.research.FirstResearch;
 import model.Rental;
-import model.SecondResearch;
-import model.ThirdResearch;
+import model.research.SecondResearch;
+import model.research.ThirdResearch;
 import exception.DAOException;
 
 import java.util.ArrayList;

@@ -34,15 +34,18 @@ public class OneObject {
     }
 
     // Setters
-    public void setIdObject(Integer idObject) {
+    public void setIdObject(Integer idObject) throws ModelException {
+        if (idObject < 1) throw new ModelException("L'identifiant doit être suppérieur à 0");
         this.idObject = idObject;
     }
 
-    public void setName(String name){
+    public void setName(String name) throws ModelException {
+        if (name.equals("")) throw new ModelException("Le nom ne peut être vide");
         this.name = name;
     }
 
-    public void setIdCollectiveOwner(Integer idCollectiveOwner) {
+    public void setIdCollectiveOwner(Integer idCollectiveOwner) throws ModelException {
+        if (idCollectiveOwner < 1) throw new ModelException("L'identifiant doit être suppérieur à 0");
         this.idCollectiveOwner = idCollectiveOwner;
     }
 
@@ -59,11 +62,13 @@ public class OneObject {
         this.purchasePrice = purchasePrice;
     }
 
-    public void setDeposit(int deposit) {
+    public void setDeposit(int deposit) throws ModelException {
+        if (deposit < 1) throw new ModelException("La caution doit être suppérieure ou égale à 0");
         this.deposit = deposit;
     }
 
-    public void setMaxRentalPeriod(Integer maxRentalPeriod) {
+    public void setMaxRentalPeriod(Integer maxRentalPeriod) throws ModelException {
+        if (maxRentalPeriod < 1) throw new ModelException("La période maximal de location doit être suppérieur à 0");
         this.maxRentalPeriod = maxRentalPeriod;
     }
 

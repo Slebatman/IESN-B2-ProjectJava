@@ -1,6 +1,6 @@
 package userInterface.modelesStatiques;
 
-import model.SecondResearch;
+import model.research.SecondResearch;
 import controller.ResearchController;
 import exception.DAOException;
 
