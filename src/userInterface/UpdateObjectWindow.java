@@ -193,7 +193,7 @@ public class UpdateObjectWindow extends JFrame{
                 int idCollective = -1;
                 try {
                     idCollective = collectiveController.getACollectiveIDBasedName(value);
-                } catch (DAOException e) {
+                } catch (DAOException | ModelException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Get idCollective by name Exception", JOptionPane.ERROR_MESSAGE);
                 }
                 if(idCollective > -1){

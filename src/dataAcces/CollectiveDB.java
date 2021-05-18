@@ -2,6 +2,7 @@ package dataAcces;
 
 import dataAcces.dao.ICollectiveDAO;
 import exception.DAOException;
+import exception.ModelException;
 import model.Collective;
 
 import java.sql.*;
@@ -62,7 +63,7 @@ public class CollectiveDB implements ICollectiveDAO {
 
     // SELECT
     // Generic function to select several collective
-    private ArrayList<Collective> selectListOfCollective(PreparedStatement statement) throws SQLException {
+    private ArrayList<Collective> selectListOfCollective(PreparedStatement statement) throws SQLException, ModelException {
 
         ArrayList<Collective> listOfCollective = new ArrayList<>();
         ResultSet data = statement.executeQuery();
@@ -75,7 +76,7 @@ public class CollectiveDB implements ICollectiveDAO {
     }
 
     // Generic function to select a specific collective
-    private Collective selectACollective(PreparedStatement statement) throws SQLException {
+    private Collective selectACollective(PreparedStatement statement) throws SQLException, ModelException {
 
         ResultSet data = statement.executeQuery();
         while (data.next()) {
@@ -94,7 +95,7 @@ public class CollectiveDB implements ICollectiveDAO {
 
             return selectListOfCollective(statement);
 
-        } catch (SQLException e) {
+        } catch (SQLException | ModelException e) {
             throw new DAOException("Erreur SQL : impossible de récuperer l'ensemble des collectifs en base de données");
         }
     }
@@ -110,14 +111,14 @@ public class CollectiveDB implements ICollectiveDAO {
 
             return selectACollective(statement);
 
-        } catch (SQLException e) {
+        } catch (SQLException | ModelException e) {
             throw new DAOException("Erreur SQL : impossible de récuperer le collectif sur base l'identifiant : " + idCollective);
         }
     }
 
     // [IMPLEMENT] Retrieving a collective's ID based on its name
     @Override
-    public int getACollectiveIDBasedName(String name) throws DAOException {
+    public int getACollectiveIDBasedName(String name) throws DAOException, ModelException {
         try {
             String sql = "SELECT * FROM collective WHERE name = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -152,7 +153,7 @@ public class CollectiveDB implements ICollectiveDAO {
     }
 
     // Function convert sql to java object Collective
-    private Collective sqlToJavaObject(ResultSet data) throws SQLException {
+    private Collective sqlToJavaObject(ResultSet data) throws SQLException, ModelException {
         return new Collective(
             data.getInt("idCollective"),
             data.getString("name"),

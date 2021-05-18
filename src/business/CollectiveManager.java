@@ -3,6 +3,7 @@ package business;
 import dataAcces.CollectiveDB;
 import dataAcces.dao.ICollectiveDAO;
 import exception.DAOException;
+import exception.ModelException;
 import model.Collective;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class CollectiveManager {
     }
 
     // Retrieving a collective's ID based on its name
-    public int getACollectiveIDBasedName(String name) throws DAOException {
+    public int getACollectiveIDBasedName(String name) throws DAOException, ModelException {
         return dao.getACollectiveIDBasedName(name);
     }
 

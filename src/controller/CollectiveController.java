@@ -1,6 +1,7 @@
 package controller;
 
 import business.CollectiveManager;
+import exception.ModelException;
 import model.Collective;
 import exception.DAOException;
 
@@ -26,7 +27,7 @@ public class CollectiveController {
     }
 
     // Retrieving a collective's ID based on its name
-    public int getACollectiveIDBasedName(String name) throws DAOException {
+    public int getACollectiveIDBasedName(String name) throws DAOException, ModelException {
         return manager.getACollectiveIDBasedName(name);
     }
 }

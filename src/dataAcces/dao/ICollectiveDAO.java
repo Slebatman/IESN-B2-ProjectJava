@@ -1,6 +1,7 @@
 package dataAcces.dao;
 
 import exception.DAOException;
+import exception.ModelException;
 import model.Collective;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public interface ICollectiveDAO {
     Collective getACollectiveBasedId(int idCollective) throws DAOException;
 
     // Retrieving a collective's ID based on its name
-    int getACollectiveIDBasedName(String name) throws DAOException;
+    int getACollectiveIDBasedName(String name) throws DAOException, ModelException;
 
     // Separately retrieve the category of Collective
     ArrayList<String> getDistinctCategoryCollective() throws DAOException;
