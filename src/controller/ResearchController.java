@@ -25,12 +25,12 @@ public class ResearchController {
 
     // (Research n°1) All rentals for a category of collectives
     public ArrayList<FirstResearch> rentalsForOneCollectiveCategory(String category) throws DAOException {
-        return manager.rentalsForOneCollectiveCategory(category);
+        return manager.getRentalsForOneCollectiveCategory(category);
     }
 
     // (Research n°2) Select all ProblemExitRental based on a TypeOfExitRental
     public ArrayList<SecondResearch> problemRentalBasedOnTypeOfProblem(int idTypeOfProblemRental) throws DAOException {
-        return manager.problemRentalBasedOnTypeOfProblem(idTypeOfProblemRental);
+        return manager.getProblemRentalBasedOnTypeOfProblem(idTypeOfProblemRental);
     }
 
     // (Research n°3) All rentals between 2 dates

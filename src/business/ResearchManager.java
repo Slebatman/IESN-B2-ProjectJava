@@ -31,7 +31,7 @@ public class ResearchManager {
     }
 
     // (Research n°1) All rentals for a category of collectives
-    public ArrayList<FirstResearch> rentalsForOneCollectiveCategory(String category) throws DAOException {
+    public ArrayList<FirstResearch> getRentalsForOneCollectiveCategory(String category) throws DAOException {
 
         ArrayList<Rental> rentalResultResearch = daoRental.getRentalsForOneCollectiveCategory(category);
         ArrayList<FirstResearch> rentalsConverted = new ArrayList<>();
@@ -45,7 +45,7 @@ public class ResearchManager {
     }
 
     // (Research n°2) Select all ProblemExitRental based on a TypeOfExitRental
-    public ArrayList<SecondResearch> problemRentalBasedOnTypeOfProblem(int idTypeOfProblemRental) throws DAOException {
+    public ArrayList<SecondResearch> getProblemRentalBasedOnTypeOfProblem(int idTypeOfProblemRental) throws DAOException {
         ArrayList<ProblemExitRental> problemExitRentals = daoProblemExitRental.getProblemExitRentalBasedTypeProblem(idTypeOfProblemRental);
         ArrayList<SecondResearch> problemExitRentalConverted = new ArrayList<>();
 
