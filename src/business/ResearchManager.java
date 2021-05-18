@@ -11,15 +11,26 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class ResearchManager {
+    // Variables
     private IRentalDAO daoRental;
     private IProblemExitRental daoProblemExitRental;
 
+    // Constructor
     public ResearchManager() {
-        this.daoRental = new RentalDB();
-        this.daoProblemExitRental = new ProblemExitRentalDB();
+        setDaoRental(new RentalDB());
+        setDaoProblemExitRental(new ProblemExitRentalDB());
     }
 
-    // First research
+    // Setters
+    private void setDaoRental(IRentalDAO daoRental) {
+        this.daoRental = daoRental;
+    }
+
+    private void setDaoProblemExitRental(IProblemExitRental daoProblemExitRental) {
+        this.daoProblemExitRental = daoProblemExitRental;
+    }
+
+    // (Research n°1) All rentals for a category of collectives
     public ArrayList<FirstResearch> rentalsForOneCollectiveCategory(String category) throws DAOException {
 
         ArrayList<Rental> rentalResultResearch = daoRental.getRentalsForOneCollectiveCategory(category);
@@ -33,7 +44,7 @@ public class ResearchManager {
         return rentalsConverted;
     }
 
-    // Second research
+    // (Research n°2) Select all ProblemExitRental based on a TypeOfExitRental
     public ArrayList<SecondResearch> problemRentalBasedOnTypeOfProblem(int idTypeOfProblemRental) throws DAOException {
         ArrayList<ProblemExitRental> problemExitRentals = daoProblemExitRental.getProblemExitRentalBasedTypeProblem(idTypeOfProblemRental);
         ArrayList<SecondResearch> problemExitRentalConverted = new ArrayList<>();
@@ -45,7 +56,7 @@ public class ResearchManager {
         return problemExitRentalConverted;
     }
 
-    // Third research
+    // (Research n°3) All rentals between 2 dates
     public ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException {
         return daoRental.getRentalBetween2Dates(firstDate, secondDate);
     }

@@ -26,7 +26,7 @@ public class ProblemExitRentalDB implements IProblemExitRental {
         return listOfProblemExitRental;
     }
 
-    // [IMPLEMENT] Select all ProblemExitRental based on a TypeOfExitRental
+    // [IMPLEMENT] (Research n°2) Select all ProblemExitRental based on a TypeOfExitRental
     @Override
     public ArrayList<ProblemExitRental> getProblemExitRentalBasedTypeProblem(int idTypeOfProblemRental) throws DAOException {
         try {
