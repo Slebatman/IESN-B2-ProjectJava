@@ -37,7 +37,7 @@ public class RentalDB implements IRentalDAO {
 
     // [IMPLEMENT] (Research n°1) All rentals for a category of collectives
     @Override
-    public ArrayList<Rental> rentalsForOneCollectiveCategory(String category) throws DAOException {
+    public ArrayList<Rental> getRentalsForOneCollectiveCategory(String category) throws DAOException {
         try {
             String sql = "SELECT * FROM rental JOIN collective ON (rental.idTenant = collective.idCollective) WHERE collective.category = ?";
             PreparedStatement statement = connection.prepareStatement(sql);

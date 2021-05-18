@@ -8,15 +8,22 @@ import model.Rental;
 import java.util.ArrayList;
 
 public class RentalManager {
-    private final IRentalDAO dao;
+    // Variable
+    private IRentalDAO dao;
 
+    // Constructor
     public RentalManager() {
-        this.dao = new RentalDB();
+        setDao(new RentalDB());
+    }
+
+    // Setter
+    private void setDao(IRentalDAO dao) {
+        this.dao = dao;
     }
 
     // Getting rentals for a category
     public ArrayList<Rental> getRentalsForOneCollectiveCategory(String category) throws DAOException {
-        return dao.rentalsForOneCollectiveCategory(category);
+        return dao.getRentalsForOneCollectiveCategory(category);
     }
 
     // Getting rentals base on a ID

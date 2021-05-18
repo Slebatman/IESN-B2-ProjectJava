@@ -22,7 +22,7 @@ public class ResearchManager {
     // First research
     public ArrayList<FirstResearch> rentalsForOneCollectiveCategory(String category) throws DAOException {
 
-        ArrayList<Rental> rentalResultResearch = daoRental.rentalsForOneCollectiveCategory(category);
+        ArrayList<Rental> rentalResultResearch = daoRental.getRentalsForOneCollectiveCategory(category);
         ArrayList<FirstResearch> rentalsConverted = new ArrayList<>();
 
         for (Rental rental : rentalResultResearch) {

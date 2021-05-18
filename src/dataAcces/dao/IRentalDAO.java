@@ -10,7 +10,7 @@ import java.util.GregorianCalendar;
 public interface IRentalDAO {
 
     // All rentals for a category of collectives
-    ArrayList<Rental> rentalsForOneCollectiveCategory(String category) throws DAOException;
+    ArrayList<Rental> getRentalsForOneCollectiveCategory(String category) throws DAOException;
 
     // Recovering a location based on its ID
     Rental getOneRentalBasedID(int idRental) throws DAOException;
