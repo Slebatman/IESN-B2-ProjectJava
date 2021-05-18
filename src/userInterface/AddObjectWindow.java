@@ -1,5 +1,6 @@
 package userInterface;
 import controller.*;
+import exception.ModelException;
 import model.Collective;
 import model.OneObject;
 import exception.DAOException;
@@ -7,88 +8,118 @@ import exception.DAOException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class AddObjectWindow extends JFrame {
-    private JLabel labelCollective, labelName, labelCommandable, labelDate, labelPrice, labelDeposit, labelPeriod, obligatoryLabel;
+    // Variables
+    private JLabel labelCollective, labelName, labelCommendable, labelDate, labelPrice, labelDeposit, labelPeriod, obligatoryLabel;
     private JTextField textName, textPrice, textDeposit;
-    private JRadioButton commandable, notCommandable;
+    private JRadioButton commendable, notCommendable;
     private ButtonGroup radioGroup;
-    private JComboBox listCollective;
+    private JComboBox comboboxAllCollectives;
     private JPanel panel, panelRadio, panelButton, panelWindow, panelDate;
     private JButton buttonValid, buttonCancel, buttonDate;
     private OneObject object;
-    private Boolean commandableValue;
+    private Boolean commendableValue;
     private GregorianCalendar dateObject;
     private JSpinner spinnerDate, spinnerPeriod;
-    private ArrayList<Collective> arrayCollectives;
+    private ArrayList<Collective> arrayAllCollectives;
     private CollectiveController collectiveController;
-    private ArrayList<String> collectives;
-    private OneObjectController controler;
+    private ArrayList<String> listAllCollectives;
+    private OneObjectController oneObjectController;
 
+    // Constructor
     public AddObjectWindow() throws DAOException {
-        super("Create an object");
+        // Title frame
+        super("Créer et ajouter un nouvel objet");
         setBounds(250, 200, 600, 450);
         this.setLayout(new FlowLayout());
 
-        //Controlers et liste des collectives
-        controler  = new OneObjectController();
+        // Controllers
+        oneObjectController = new OneObjectController();
         collectiveController = new CollectiveController();
-        arrayCollectives = collectiveController.getAllCollectives();
-        collectives = new ArrayList<String>();
-        for(Collective col : arrayCollectives){
-            collectives.add(col.getName());
-        }
-        listCollective = new JComboBox(collectives.toArray());
 
-        SpinnerNumberModel modelSpinnerPeriod = new SpinnerNumberModel(1, 1, 100, 1);
-
+        // Collective
         labelCollective = new JLabel("Collectif : *");
+        arrayAllCollectives = collectiveController.getAllCollectives();
+        listAllCollectives = new ArrayList<>();
+
+        for(Collective col : arrayAllCollectives){
+            listAllCollectives.add(col.getName());
+        }
+        comboboxAllCollectives = new JComboBox(listAllCollectives.toArray());
+
+        // ObjectName
         labelName = new JLabel("Nom de l'objet : *");
-        labelCommandable = new JLabel("Commandable : *");
-        labelDate = new JLabel("Date de l'achat : ");
-        labelPrice = new JLabel("Prix d'achat : ");
-        labelDeposit = new JLabel("Montant de la caution : ");
-        labelPeriod = new JLabel("Combien de jours maximum peut-il être loué : *");
         textName = new JTextField();
-        textDeposit = new JTextField();
-        textPrice = new JTextField();
-        commandable = new JRadioButton("Yes");
-        notCommandable = new JRadioButton("No");
+
+        // IsCommendable
+        labelCommendable = new JLabel("Commandable : *");
+        commendable = new JRadioButton("Yes");
+        notCommendable = new JRadioButton("No");
         radioGroup = new ButtonGroup();
-        radioGroup.add(notCommandable);
-        radioGroup.add(commandable);
+        radioGroup.add(notCommendable);
+        radioGroup.add(commendable);
         panelRadio = new JPanel();
-        panelRadio.add(commandable);
-        panelRadio.add(notCommandable);
-        buttonValid = new JButton("Create");
-        buttonCancel= new JButton("Cancel");
+        panelRadio.add(commendable);
+        panelRadio.add(notCommendable);
+        RadioButtonListener listener = new RadioButtonListener();
+        commendable.addItemListener(listener);
+        notCommendable.addItemListener(listener);
+
+        // PurchaseDate
+        labelDate = new JLabel("Date de l'achat : ");
         SpinnerDateModel model = new SpinnerDateModel();
         spinnerDate = new JSpinner(model);
         spinnerDate.setModel(model);
         JSpinner.DateEditor editor = new JSpinner.DateEditor(spinnerDate, "dd/MM/yyyy");
         spinnerDate.setEditor(editor);
-        spinnerPeriod = new JSpinner(modelSpinnerPeriod);
-        obligatoryLabel = new JLabel("(* : champs obligatoires)");
-        obligatoryLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        panel = new JPanel();
-        panelButton = new JPanel();
-        panelWindow = new JPanel();
         panelDate = new JPanel();
         buttonDate = new JButton("Ajouter");
         panelDate.setLayout(new GridLayout(1,2, 10, 5));
         panelDate.add(labelDate);
         buttonDate.addActionListener(new AddDate());
         panelDate.add(buttonDate);
+        spinnerDate.setEnabled(false);
+        dateObject = new GregorianCalendar();
+        dateObject.setTime((Date)spinnerDate.getModel().getValue());
+
+        // PurchasePrice
+        labelPrice = new JLabel("Prix d'achat : ");
+        textPrice = new JTextField();
+
+        // Deposit
+        labelDeposit = new JLabel("Montant de la caution : ");
+        textDeposit = new JTextField();
+
+        // MaxPeriodRental
+        labelPeriod = new JLabel("Combien de jours maximum peut-il être loué : *");
+        SpinnerNumberModel modelSpinnerPeriod = new SpinnerNumberModel(1, 1, 100, 1);
+        spinnerPeriod = new JSpinner(modelSpinnerPeriod);
+
+        // Information about require field
+        obligatoryLabel = new JLabel("(* : champs obligatoires)");
+        obligatoryLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+
+        // Validation
+        panelButton = new JPanel();
+        buttonValid = new JButton("Create");
+        buttonCancel= new JButton("Cancel");
+        buttonCancel.addActionListener(new CancelButtonListener());
+        panelButton.add(buttonCancel);
+        buttonValid.addActionListener(new CreateObject());
+        panelButton.add(buttonValid);
+
+        // Create Panel & Window
+        panel = new JPanel();
         panel.setLayout(new GridLayout(8,2, 10, 5));
         panel.add(labelCollective);
-        panel.add(listCollective);
+        panel.add(comboboxAllCollectives);
         panel.add(labelName);
         panel.add(textName);
-        panel.add(labelCommandable);
+        panel.add(labelCommendable);
         panel.add(panelRadio);
         panel.add(panelDate);
         panel.add(spinnerDate);
@@ -101,20 +132,7 @@ public class AddObjectWindow extends JFrame {
         panel.add(new JLabel());
         panel.add(obligatoryLabel);
 
-        spinnerDate.setEnabled(false);
-
-        RadioButtonListener listener = new RadioButtonListener();
-        commandable.addItemListener(listener);
-        notCommandable.addItemListener(listener);
-
-        dateObject = new GregorianCalendar();
-        dateObject.setTime((Date)spinnerDate.getModel().getValue());
-
-        buttonCancel.addActionListener(new CancelButtonListener());
-        panelButton.add(buttonCancel);
-        buttonValid.addActionListener(new CreateObject());
-        panelButton.add(buttonValid);
-
+        panelWindow = new JPanel();
         panelWindow.setLayout(new GridLayout(2,1, 10, 30));
         panelWindow.add(panel);
         panelWindow.add(panelButton);
@@ -123,6 +141,7 @@ public class AddObjectWindow extends JFrame {
         setVisible(true);
     }
 
+    // Events
     private class ExitButtonListener extends WindowAdapter{
         @Override
         public void windowClosing(WindowEvent evt){
@@ -139,64 +158,94 @@ public class AddObjectWindow extends JFrame {
 
     private class CreateObject implements ActionListener{
         @Override
-        public void actionPerformed(ActionEvent evt){
-            if(!textName.getText().equals("") && commandableValue != null){
-                if(dateObject != null){
-                    dateObject.setTime((Date)spinnerDate.getModel().getValue());
-                }
-                String value = listCollective.getSelectedItem().toString();
-                int idCollective = 0;
-
+        public void actionPerformed(ActionEvent evt) {
+            if(!textName.getText().equals("") && commendableValue != null) {
                 try {
-                    idCollective = collectiveController.getACollectiveIDBasedName(value);
-                } catch (DAOException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage(), "Collective name exception", JOptionPane.ERROR_MESSAGE);
-                }
-                boolean price = false;
-                boolean deposit = !textDeposit.getText().equals("");
-                if(!textPrice.getText().equals("")){
-                    price = true;
-                }
-                if(buttonDate.getText().equals("Ajouter")){
-                    dateObject = null;
-                }
-                object = new OneObject(textName.getText(), idCollective, commandableValue, dateObject, (price ? Double.parseDouble(textPrice.getText()) : Types.NULL), (deposit ? Integer.parseInt(textDeposit.getText()): Types.NULL),(Integer)spinnerPeriod.getValue());
+                    Boolean canAdd = true;
+                    // Collective
+                        String collectiveName = comboboxAllCollectives.getSelectedItem().toString();
+                        int idCollective = collectiveController.getACollectiveIDBasedName(collectiveName);
+                    // Name
+                        String objectName = textName.getText();
+                    // isCommendable
+                        Boolean isCommendable = commendableValue;
+                    // PurchaseDate
+                        if(dateObject != null) {
+                            dateObject.setTime((Date)spinnerDate.getModel().getValue());
+                        }
+                    // PurchasePrice
+                        Double purchasePrice = null;
+                        if(!textPrice.getText().equals("")) {
+                            purchasePrice = Double.parseDouble(textPrice.getText());
+                            if (purchasePrice < 0) {
+                                showErrorMessage("Le prix d'achat ne peut être négatif");
+                                canAdd = false;
+                            }
+                        }
+                    // Deposit
+                        Integer deposit = null;
+                        if(!textDeposit.getText().equals("")){
+                            deposit = Integer.parseInt(textDeposit.getText());
+                            if (deposit < 0) {
+                                showErrorMessage("La caution ne peut pas être négative");
+                                canAdd = false;
+                            }
+                        }
+                    // MaxPeriodRental
+                        Integer maxPeriodRental = (Integer)spinnerPeriod.getValue();
 
-                try {
-                    controler.addObject(object);
-                } catch (DAOException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage(), "Addobject Exception", JOptionPane.ERROR_MESSAGE);
+                    // Add object
+                        if (canAdd) {
+                            oneObjectController.addObject(
+                                    new OneObject(
+                                            objectName,
+                                            idCollective,
+                                            isCommendable,
+                                            dateObject,
+                                            purchasePrice,
+                                            deposit,
+                                            maxPeriodRental)
+                            );
+
+                            AddObjectWindow.this.dispose();
+                        }
+
+                } catch (DAOException | ModelException e) {
+                    showErrorMessage(e.getMessage());
                 }
-                AddObjectWindow.this.dispose();
             }
-            else{
+            else {
                 labelCollective.setForeground(Color.red);
-                labelCommandable.setForeground(Color.red);
+                labelCommendable.setForeground(Color.red);
                 labelName.setForeground(Color.red);
                 labelPeriod.setForeground(Color.red);
-                JOptionPane.showMessageDialog(null, "Veuillez remplir les champs obligatoires !", "Addobject Exception", JOptionPane.ERROR_MESSAGE);
-            }
+                showErrorMessage("Attention de bien compléter l'ensemble des champs obligatoires"); }
         }
     }
 
     private class RadioButtonListener implements ItemListener{
         public void itemStateChanged(ItemEvent event){
-            if(event.getSource() == commandable && event.getStateChange() == ItemEvent.SELECTED) commandableValue = true;
-            else if(event.getSource() == notCommandable && event.getStateChange() == ItemEvent.SELECTED) commandableValue = false;
+            if(event.getSource() == commendable && event.getStateChange() == ItemEvent.SELECTED) commendableValue = true;
+            else if(event.getSource() == notCommendable && event.getStateChange() == ItemEvent.SELECTED) commendableValue = false;
         }
     }
 
     private class AddDate implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
-            if(buttonDate.getText().equals("Ajouter")){
+            if(buttonDate.getText().equals("Ajouter")) {
                 spinnerDate.setEnabled(true);
                 buttonDate.setText("Retirer");
-            }else{
+            } else {
                 spinnerDate.setEnabled(false);
                 buttonDate.setText("Ajouter");
             }
         }
+    }
+
+    // Error message
+    private void showErrorMessage(String msg) {
+        JOptionPane.showMessageDialog(null, msg, "Erreur lors de l'ajout de l'objet", JOptionPane.ERROR_MESSAGE);
     }
 
 }

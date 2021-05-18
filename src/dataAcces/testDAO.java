@@ -22,22 +22,5 @@ public class testDAO {
         RentalManager rentalManager = new RentalManager();
         ResearchManager researchManager = new ResearchManager();
         TypeOfProblemRentalManager typeOfProblemRentalManager = new TypeOfProblemRentalManager();
-
-        try {
-            OneObject oneObject = new OneObject(
-                    "PC portable",
-                    8,
-                    true,
-                    null,
-                    Types.NULL,
-                    Types.NULL,
-                    5
-            );
-
-           oneObjectManager.updateAnObject(oneObject);
-        }
-        catch (DAOException e) {
-            System.out.println(e.getMessage());
-        }
     }
 }

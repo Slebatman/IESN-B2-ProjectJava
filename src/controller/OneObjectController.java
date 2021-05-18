@@ -1,4 +1,5 @@
 package controller;
+import exception.ModelException;
 import model.*;
 import business.OneObjectManager;
 import exception.DAOException;
@@ -35,12 +36,12 @@ public class OneObjectController {
    }
 
    // Retrieve all objects
-   public ArrayList<OneObject> getAllObjects() throws DAOException {
+   public ArrayList<OneObject> getAllObjects() throws DAOException, ModelException {
       return manager.getAllObjects();
    }
 
    // Recovering all the objects of a collective
-   public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOException {
+   public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOException, ModelException {
       return manager.getAllObjectsForOneCollective(idCollective);
    }
 

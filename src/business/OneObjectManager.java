@@ -2,6 +2,7 @@ package business;
 
 import dataAcces.OneObjectDB;
 import dataAcces.dao.IOneObjectDAO;
+import exception.ModelException;
 import model.Collective;
 import model.OneObject;
 import exception.DAOException;
@@ -42,21 +43,21 @@ public class OneObjectManager {
     }
 
     // Retrieve all objects
-    public ArrayList<OneObject> getAllObjects() throws DAOException {
+    public ArrayList<OneObject> getAllObjects() throws DAOException, ModelException {
         return dao.getAllObjects();
     }
 
     // Recovering all the objects of a collective
-    public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOException {
+    public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOException, ModelException {
         return dao.getAllObjectsForOneCollective(idCollective);
     }
 
-    ArrayList<OneObject> getAllObjectsForOneCollective(Collective collective) throws DAOException {
+    ArrayList<OneObject> getAllObjectsForOneCollective(Collective collective) throws DAOException, ModelException {
         return this.getAllObjectsForOneCollective(collective.getIdCollective());
     }
 
     // Retrieving an object via its id
-    public OneObject getObjectByID(int idObject) throws DAOException {
+    public OneObject getObjectByID(int idObject) throws DAOException, ModelException {
         return dao.getObjectByID(idObject);
     }
 }

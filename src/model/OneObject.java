@@ -1,5 +1,7 @@
 package model;
 
+import exception.ModelException;
+
 import java.util.GregorianCalendar;
 
 public class OneObject {
@@ -7,7 +9,7 @@ public class OneObject {
     private Integer idObject;
     private String name;
     private Integer idCollectiveOwner;
-    private boolean isCommendable;
+    private Boolean isCommendable;
     private GregorianCalendar purchaseDate;
     private Double purchasePrice;
     private Integer deposit;
@@ -16,7 +18,7 @@ public class OneObject {
     // Constructors
     public OneObject() {}
 
-    public OneObject(String name, int idCollectiveOwner, boolean isCommendable, GregorianCalendar purchaseDate, double purchasePrice, int deposit, int maxRentalPeriod){
+    public OneObject(String name, int idCollectiveOwner, boolean isCommendable, GregorianCalendar purchaseDate, double purchasePrice, int deposit, int maxRentalPeriod) throws ModelException {
         setName(name);
         setIdCollectiveOwner(idCollectiveOwner);
         setCommendable(isCommendable);
@@ -26,7 +28,7 @@ public class OneObject {
         setMaxRentalPeriod(maxRentalPeriod);
     }
 
-    public OneObject(int idObject, String name, int idCollectiveOwner, boolean isCommendable, GregorianCalendar purchaseDate, double purchasePrice, int deposit, int maxRentalPeriod){
+    public OneObject(int idObject, String name, int idCollectiveOwner, boolean isCommendable, GregorianCalendar purchaseDate, double purchasePrice, int deposit, int maxRentalPeriod) throws ModelException {
         this(name, idCollectiveOwner, isCommendable, purchaseDate, purchasePrice, deposit, maxRentalPeriod);
         setIdObject(idObject);
     }
@@ -52,7 +54,8 @@ public class OneObject {
         this.purchaseDate = purchaseDate;
     }
 
-    public void setPurchasePrice(double purchasePrice) {
+    public void setPurchasePrice(double purchasePrice) throws ModelException {
+        if (purchasePrice < 0) throw new ModelException("Le prix d'achat doit être suppérieur ou égal à 0");
         this.purchasePrice = purchasePrice;
     }
 

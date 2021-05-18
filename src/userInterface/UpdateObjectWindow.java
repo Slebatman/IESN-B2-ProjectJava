@@ -2,6 +2,7 @@ package userInterface;
 
 import controller.CollectiveController;
 import controller.OneObjectController;
+import exception.ModelException;
 import model.Collective;
 import model.OneObject;
 import exception.DAOException;
@@ -40,7 +41,7 @@ public class UpdateObjectWindow extends JFrame{
     private SimpleDateFormat formatDate;
     int idCollective;
 
-    UpdateObjectWindow() throws DAOException {
+    UpdateObjectWindow() throws DAOException, ModelException {
         super("Update an object");
         setBounds(250, 200, 800, 450);
         this.setLayout(new FlowLayout());
@@ -208,7 +209,12 @@ public class UpdateObjectWindow extends JFrame{
                     if(buttonDate.getText().equals("Ajouter")){
                         dateObject = null;
                     }
-                    object = new OneObject(idObject, objectDefault.getName(), idCollective, commandableValue, dateObject, (price ? Double.parseDouble(textPrice.getText()) : Types.NULL), (deposit ? Integer.parseInt(textDeposit.getText()): Types.NULL), (Integer)spinnerPeriod.getValue());
+                    try {
+                        object = new OneObject(idObject, objectDefault.getName(), idCollective, commandableValue, dateObject, (price ? Double.parseDouble(textPrice.getText()) : Types.NULL), (deposit ? Integer.parseInt(textDeposit.getText()): Types.NULL), (Integer)spinnerPeriod.getValue());
+                    } catch (ModelException e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage(), "UpdateObject Exception", JOptionPane.ERROR_MESSAGE);
+                    }
+
                     try {
                         oneObjectController.updateAnObject(object);
                     } catch (DAOException e) {
@@ -234,7 +240,7 @@ public class UpdateObjectWindow extends JFrame{
             try {
                 idCollective = collectiveController.getACollectiveIDBasedName(value);
                 arrayObjects = oneObjectController.getAllObjectsForOneCollective(idCollective);
-            } catch (DAOException e) {
+            } catch (DAOException | ModelException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Get idCollective or list of objects from a collective Exception", JOptionPane.ERROR_MESSAGE);
             }
             listObjects.removeAllItems();
