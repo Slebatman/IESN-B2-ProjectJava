@@ -13,10 +13,13 @@ public class FirstResearch {
     private String collectiveName;
 
     // Constructors
-    public FirstResearch(Rental rental) throws DAOException {
-        setStartDate(rental.getStartDate());
-        setObjectName(rental.getIdObject());
-        setCollectiveName(rental.getIdTenant());
+    public FirstResearch() {
+    }
+
+    public FirstResearch(GregorianCalendar startDate, String objectName, String collectiveName) throws DAOException {
+        setStartDate(startDate);
+        setObjectName(objectName);
+        setCollectiveName(collectiveName);
     }
 
     // Setters
@@ -24,14 +27,12 @@ public class FirstResearch {
         this.startDate = startDate;
     }
 
-    public void setObjectName(int idObject) throws DAOException {
-        OneObjectManager oneObjectManager = new OneObjectManager();
-        this.objectName = oneObjectManager.getObjectByID(idObject).getName();
+    public void setObjectName(String objectName) {
+        this.objectName = objectName;
     }
 
-    public void setCollectiveName(int idCollective) throws DAOException {
-        CollectiveManager collectiveManager = new CollectiveManager();
-        this.collectiveName = collectiveManager.getACollectiveBasedId(idCollective).getName();
+    public void setCollectiveName(String collectiveName)  {
+        this.collectiveName = collectiveName;
     }
 
     // Getters

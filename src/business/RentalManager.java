@@ -3,6 +3,7 @@ package business;
 import dataAcces.RentalDB;
 import dataAcces.dao.IRentalDAO;
 import exception.DAOException;
+import model.FirstResearch;
 import model.Rental;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class RentalManager {
     }
 
     // Getting rentals for a category
-    public ArrayList<Rental> getRentalsForOneCollectiveCategory(String category) throws DAOException {
+    public ArrayList<FirstResearch> getRentalsForOneCollectiveCategory(String category) throws DAOException {
         return dao.getRentalsForOneCollectiveCategory(category);
     }
 

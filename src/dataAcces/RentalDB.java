@@ -1,5 +1,6 @@
 package dataAcces;
 
+import model.FirstResearch;
 import model.ThirdResearch;
 import dataAcces.dao.IRentalDAO;
 import exception.DAOException;
@@ -37,15 +38,29 @@ public class RentalDB implements IRentalDAO {
 
     // [IMPLEMENT] (Research n°1) All rentals for a category of collectives
     @Override
-    public ArrayList<Rental> getRentalsForOneCollectiveCategory(String category) throws DAOException {
+    public ArrayList<FirstResearch> getRentalsForOneCollectiveCategory(String category) throws DAOException {
         try {
-            String sql = "SELECT * FROM rental JOIN collective ON (rental.idTenant = collective.idCollective) WHERE collective.category = ?";
+            ArrayList<FirstResearch> allRentalsForOneCollectiveCategory = new ArrayList<>();
+
+            String sql = "SELECT r.startDate, o.name, c.name FROM rental r JOIN collective c ON (r.idTenant = c.idCollective) JOIN oneobject o on o.idObject = r.idObject WHERE c.category = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, category);
-            return selectListRental(statement);
+
+            ResultSet data = statement.executeQuery();
+            while (data.next()) {
+                GregorianCalendar startDate = new GregorianCalendar();
+                startDate.setTime(data.getDate("r.startDate"));
+                allRentalsForOneCollectiveCategory.add(new FirstResearch(
+                        startDate,
+                        data.getString("o.name"),
+                        data.getString("c.name")
+                ));
+            }
+
+            return allRentalsForOneCollectiveCategory;
 
         } catch (SQLException e) {
-            throw new DAOException("Erreur SQL : impossible de recuperer les locations pour la categorie " + category);
+            throw new DAOException("Erreur SQL : impossible de récuperer les locations pour la categorie " + category);
         }
     }
 
