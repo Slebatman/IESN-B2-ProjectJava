@@ -10,5 +10,5 @@ public interface ITypeOfProblemRentalDAO {
     int selectIdBaseName(String nameProblem) throws DAOException;
 
     // Select DISTINCT name of typeOfProblemExitLocation
-    ArrayList<String> selectDistinctNameOfTypeOfProblemExitRental() throws DAOException;
+    ArrayList<String> getDistinctNameOfTypeOfProblemExitRental() throws DAOException;
 }

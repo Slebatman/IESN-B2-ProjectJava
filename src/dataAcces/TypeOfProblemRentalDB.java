@@ -40,7 +40,7 @@ public class TypeOfProblemRentalDB implements ITypeOfProblemRentalDAO {
 
     // [IMPLEMENT] Select DISTINCT name of typeOfProblemExitLocation
     @Override
-    public ArrayList<String> selectDistinctNameOfTypeOfProblemExitRental() throws DAOException {
+    public ArrayList<String> getDistinctNameOfTypeOfProblemExitRental() throws DAOException {
         ArrayList<String> distinctNameOfTypeOfExitRental = new ArrayList<>();
 
         try {

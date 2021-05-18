@@ -20,7 +20,7 @@ public class SecondSearchForm extends JFrame {
         super("Search rentals by type of problem");
         setBounds(200, 150, 400, 100);
         manager = new TypeOfProblemRentalManager();
-        problemList = manager.selectDistinctNameOfTypeOfProblemExitRental();
+        problemList = manager.getDistinctNameOfTypeOfProblemExitRental();
         this.setLayout(new FlowLayout());
         labelProblem = new JLabel("Select a type of problem : ");
         listProblems = new JComboBox(problemList.toArray());
