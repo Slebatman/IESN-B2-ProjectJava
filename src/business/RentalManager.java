@@ -3,6 +3,7 @@ package business;
 import dataAcces.RentalDB;
 import dataAcces.dao.IRentalDAO;
 import exception.DAOException;
+import exception.ModelException;
 import model.research.FirstResearch;
 import model.Rental;
 
@@ -28,7 +29,7 @@ public class RentalManager {
     }
 
     // Getting rentals base on a ID
-    public Rental getRentalBasedID(int idRental) throws DAOException {
+    public Rental getRentalBasedID(int idRental) throws DAOException, ModelException {
         return dao.getOneRentalBasedID(idRental);
     }
 }

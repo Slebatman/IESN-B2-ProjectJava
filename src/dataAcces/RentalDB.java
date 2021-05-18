@@ -1,5 +1,6 @@
 package dataAcces;
 
+import exception.ModelException;
 import model.research.FirstResearch;
 import model.research.SecondResearch;
 import model.research.ThirdResearch;
@@ -16,7 +17,7 @@ public class RentalDB implements IRentalDAO {
     private final Connection connection = SingletonConnexion.getConnection();
 
     // Generic function to select several objects
-    public ArrayList<Rental> selectListRental(PreparedStatement statement) throws SQLException {
+    public ArrayList<Rental> selectListRental(PreparedStatement statement) throws SQLException, ModelException {
         ArrayList<Rental> listRental = new ArrayList<>();
         ResultSet data = statement.executeQuery();
 
@@ -28,7 +29,7 @@ public class RentalDB implements IRentalDAO {
     }
 
     // Generic function to select one object
-    public Rental selectOneRental(PreparedStatement statement) throws SQLException {
+    public Rental selectOneRental(PreparedStatement statement) throws SQLException, ModelException {
         ResultSet data = statement.executeQuery();
 
         while (data.next()) {
@@ -163,7 +164,7 @@ public class RentalDB implements IRentalDAO {
 
     // [IMPLEMENT] Recovering a location based on its ID
     @Override
-    public Rental getOneRentalBasedID(int idRental) throws DAOException {
+    public Rental getOneRentalBasedID(int idRental) throws DAOException, ModelException {
         try {
             String sql = "SELECT * FROM rental WHERE idRental = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -176,7 +177,7 @@ public class RentalDB implements IRentalDAO {
     }
 
     // Convert sql to java object Rental
-    private Rental sqlToJavaObject(ResultSet data) throws SQLException {
+    private Rental sqlToJavaObject(ResultSet data) throws SQLException, ModelException {
         GregorianCalendar startDate = new GregorianCalendar(), endDate = new GregorianCalendar();
         Rental rental = new Rental();
 

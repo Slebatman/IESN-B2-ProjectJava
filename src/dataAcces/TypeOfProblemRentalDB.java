@@ -2,6 +2,7 @@ package dataAcces;
 
 import dataAcces.dao.ITypeOfProblemRentalDAO;
 import exception.DAOException;
+import exception.ModelException;
 import model.TypeOfProblemRental;
 
 import java.sql.Connection;
@@ -15,7 +16,7 @@ public class TypeOfProblemRentalDB implements ITypeOfProblemRentalDAO {
     Connection connexion = SingletonConnexion.getConnection();
 
     // Generic function who return one TypeOfProblemRental object
-    private TypeOfProblemRental selectOneTypeOfProblemRental(PreparedStatement statement) throws SQLException {
+    private TypeOfProblemRental selectOneTypeOfProblemRental(PreparedStatement statement) throws SQLException, ModelException {
         ResultSet data = statement.executeQuery();
 
         while (data.next()) {
@@ -26,7 +27,7 @@ public class TypeOfProblemRentalDB implements ITypeOfProblemRentalDAO {
 
     // [IMPLEMENT] Select id of a problem base on its name
     @Override
-    public int getIdBaseName(String nameProblem) throws DAOException {
+    public int getIdBaseName(String nameProblem) throws DAOException, ModelException {
         try {
             String sql = "SELECT * FROM typeofproblemrental WHERE name = ?";
             PreparedStatement statement = connexion.prepareStatement(sql);
@@ -60,7 +61,7 @@ public class TypeOfProblemRentalDB implements ITypeOfProblemRentalDAO {
     }
 
     // Convert sql info to java object TypeOfProblemRental
-    private TypeOfProblemRental sqlToJavaObject(ResultSet data) throws SQLException {
+    private TypeOfProblemRental sqlToJavaObject(ResultSet data) throws SQLException, ModelException {
         return new TypeOfProblemRental(
                 data.getInt("idtypeofproblemrental"),
                 data.getString("name"),

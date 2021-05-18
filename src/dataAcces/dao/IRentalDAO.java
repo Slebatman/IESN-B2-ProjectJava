@@ -1,5 +1,6 @@
 package dataAcces.dao;
 
+import exception.ModelException;
 import model.research.FirstResearch;
 import model.Rental;
 import model.research.SecondResearch;
@@ -21,6 +22,6 @@ public interface IRentalDAO {
     ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException;
 
     // Recovering a location based on its ID
-    Rental getOneRentalBasedID(int idRental) throws DAOException;
+    Rental getOneRentalBasedID(int idRental) throws DAOException, ModelException;
 
 }
