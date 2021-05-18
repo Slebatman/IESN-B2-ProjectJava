@@ -1,7 +1,7 @@
 package model;
 
 public class ProblemExitRental {
-    // Link to DB
+    // Variables
     private int idProblemExitRental;
     private int idRental;
     private int idTypeOfProblemExitRental;
@@ -10,10 +10,31 @@ public class ProblemExitRental {
 
     // Constructor
     public ProblemExitRental(int idProblemExitRental, int idRental, int idTypeOfProblemExitRental, double invoicedPrice, String note) {
+        setIdProblemExitRental(idProblemExitRental);
+        setIdRental(idRental);
+        setIdTypeOfProblemExitRental(idTypeOfProblemExitRental);
+        setInvoicedPrice(invoicedPrice);
+        setNote(note);
+    }
+
+    // Setters
+    public void setIdProblemExitRental(int idProblemExitRental) {
         this.idProblemExitRental = idProblemExitRental;
+    }
+
+    public void setIdRental(int idRental) {
         this.idRental = idRental;
+    }
+
+    public void setIdTypeOfProblemExitRental(int idTypeOfProblemExitRental) {
         this.idTypeOfProblemExitRental = idTypeOfProblemExitRental;
+    }
+
+    public void setInvoicedPrice(double invoicedPrice) {
         this.invoicedPrice = invoicedPrice;
+    }
+
+    public void setNote(String note) {
         this.note = note;
     }
 
@@ -36,5 +57,17 @@ public class ProblemExitRental {
 
     public String getNote() {
         return note;
+    }
+
+    // ToString for debug
+    @Override
+    public String toString() {
+        return "ProblemExitRental{" +
+                "idProblemExitRental=" + idProblemExitRental +
+                ", idRental=" + idRental +
+                ", idTypeOfProblemExitRental=" + idTypeOfProblemExitRental +
+                ", invoicedPrice=" + invoicedPrice +
+                ", note='" + note + '\'' +
+                '}';
     }
 }

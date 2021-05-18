@@ -3,7 +3,7 @@ package model;
 import java.util.GregorianCalendar;
 
 public class Rental {
-    // Variables link to DB
+    // Variables
     private int idRental;
     private GregorianCalendar startDate;
     private int idObject;
@@ -15,19 +15,44 @@ public class Rental {
     public Rental() {}
 
     public Rental(GregorianCalendar startDate, int idObject, int idTenant, GregorianCalendar returnDate, String rentalManager) {
-        this.startDate = startDate;
-        this.idObject = idObject;
-        this.idTenant = idTenant;
-        this.returnDate = returnDate;
-        this.rentalManager = rentalManager;
+        setStartDate(startDate);
+        setIdObject(idObject);
+        setIdTenant(idTenant);
+        setReturnDate(returnDate);
+        setRentalManager(rentalManager);
     }
 
     public Rental(int idRental, GregorianCalendar startDate, int idObject, int idTenant, GregorianCalendar returnDate, String rentalManager) {
         this(startDate, idObject, idTenant, returnDate, rentalManager);
+        setIdRental(idRental);
+    }
+
+    // Setters
+    public void setIdRental(int idRental) {
         this.idRental = idRental;
     }
 
-    // Getteurs
+    public void setStartDate(GregorianCalendar startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setIdObject(int idObject) {
+        this.idObject = idObject;
+    }
+
+    public void setIdTenant(int idTenant) {
+        this.idTenant = idTenant;
+    }
+
+    public void setReturnDate(GregorianCalendar returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public void setRentalManager(String rentalManager) {
+        this.rentalManager = rentalManager;
+    }
+
+    // Getters
     public int getIdRental() {
         return idRental;
     }
@@ -52,29 +77,16 @@ public class Rental {
         return rentalManager;
     }
 
-    // Setters
-
-    public void setIdRental(int idRental) {
-        this.idRental = idRental;
-    }
-
-    public void setStartDate(GregorianCalendar startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setIdObject(int idObject) {
-        this.idObject = idObject;
-    }
-
-    public void setIdTenant(int idTenant) {
-        this.idTenant = idTenant;
-    }
-
-    public void setReturnDate(GregorianCalendar returnDate) {
-        this.returnDate = returnDate;
-    }
-
-    public void setRentalManager(String rentalManager) {
-        this.rentalManager = rentalManager;
+    // ToString for debug
+    @Override
+    public String toString() {
+        return "Rental{" +
+                "idRental=" + idRental +
+                ", startDate=" + startDate +
+                ", idObject=" + idObject +
+                ", idTenant=" + idTenant +
+                ", returnDate=" + returnDate +
+                ", rentalManager='" + rentalManager + '\'' +
+                '}';
     }
 }

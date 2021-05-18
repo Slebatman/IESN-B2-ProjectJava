@@ -8,6 +8,7 @@ import exception.DAOException;
 import java.util.GregorianCalendar;
 
 public class SecondResearch {
+    // Variables
     private GregorianCalendar startDate;
     private GregorianCalendar returnDate;
     private String nameObject;
@@ -20,6 +21,7 @@ public class SecondResearch {
     private static CollectiveManager collectiveManager;
     private static OneObjectManager oneObjectManager;
 
+    // Constructor
     public SecondResearch(ProblemExitRental problemExitRental) throws DAOException {
         rentalManager = new RentalManager();
         collectiveManager = new CollectiveManager();
@@ -35,6 +37,7 @@ public class SecondResearch {
         setEmailAddressCollectiveOwner(rental);
     }
 
+    // Setters
     public void setStartDate(Rental rental) {
         this.startDate = rental.getStartDate();
     }
@@ -68,6 +71,7 @@ public class SecondResearch {
         this.emailAddressCollectiveOwner = collective.getEmailAddress();
     }
 
+    // Getters
     public GregorianCalendar getStartDate() {
         return startDate;
     }
@@ -96,7 +100,7 @@ public class SecondResearch {
         return emailAddressCollectiveOwner;
     }
 
-    // ToString
+    // ToString for debug
     @Override
     public String toString() {
         return "SecondResearch{" +

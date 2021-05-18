@@ -34,6 +34,7 @@ public class FirstResearch {
         this.collectiveName = collectiveManager.getACollectiveBasedId(idCollective).getName();
     }
 
+    // Getters
     public GregorianCalendar getStartDate() {
         return startDate;
     }
@@ -46,7 +47,7 @@ public class FirstResearch {
         return objectName;
     }
 
-    // ToString
+    // ToString for debug
     @Override
     public String toString() {
         return "FirstResearch{" +

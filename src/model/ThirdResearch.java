@@ -15,12 +15,12 @@ public class ThirdResearch {
     public ThirdResearch() {}
 
     public ThirdResearch(String objectName, GregorianCalendar purchaseDate, Double purchasePrice, Double invoicedPrice, String note, String rentalManager) {
-        this.objectName = objectName;
-        this.purchaseDate = purchaseDate;
-        this.purchasePrice = purchasePrice;
-        this.invoicedPrice = invoicedPrice;
-        this.note = note;
-        this.rentalManager = rentalManager;
+        setObjectName(objectName);
+        setPurchaseDate(purchaseDate);
+        setPurchasePrice(purchasePrice);
+        setInvoicedPrice(invoicedPrice);
+        setNote(note);
+        setRentalManager(rentalManager);
     }
 
     // Setters
@@ -73,7 +73,7 @@ public class ThirdResearch {
         return rentalManager;
     }
 
-    // ToString
+    // ToString for debug
     @Override
     public String toString() {
         return "ThirdResearch{" +

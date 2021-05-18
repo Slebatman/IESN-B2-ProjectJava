@@ -3,7 +3,7 @@ package model;
 import java.util.GregorianCalendar;
 
 public class OneObject {
-    // Link to DB
+    // Variables
     private int idObject;
     private String name;
     private int idCollectiveOwner;
@@ -13,56 +13,22 @@ public class OneObject {
     private Integer deposit;
     private int maxRentalPeriod;
 
-    // Constructor
+    // Constructors
     public OneObject() {};
 
     public OneObject(String name, int idCollectiveOwner, boolean isCommendable, GregorianCalendar purchaseDate, double purchasePrice, int deposit, int maxRentalPeriod){
         setName(name);
-        this.idCollectiveOwner = idCollectiveOwner;
+        setIdCollectiveOwner(idCollectiveOwner);
         setCommendable(isCommendable);
-        this.purchaseDate = purchaseDate;
-        this.purchasePrice = purchasePrice;
-        this.deposit = deposit;
-        this.maxRentalPeriod = maxRentalPeriod;
+        setPurchaseDate(purchaseDate);
+        setPurchasePrice(purchasePrice);
+        setDeposit(deposit);
+        setMaxRentalPeriod(maxRentalPeriod);
     }
 
     public OneObject(int idObject, String name, int idCollectiveOwner, boolean isCommendable, GregorianCalendar purchaseDate, double purchasePrice, int deposit, int maxRentalPeriod){
         this(name, idCollectiveOwner, isCommendable, purchaseDate, purchasePrice, deposit, maxRentalPeriod);
-        this.idObject = idObject;
-    }
-
-
-    // Getters
-    public int getIdObject() {
-        return idObject;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getIdCollectiveOwner() {
-        return idCollectiveOwner;
-    }
-
-    public boolean isCommendable() {
-        return isCommendable;
-    }
-
-    public GregorianCalendar getPurchaseDate() {
-        return purchaseDate;
-    }
-
-    public double getPurchasePrice() {
-        return purchasePrice;
-    }
-
-    public int getDeposit() {
-        return deposit;
-    }
-
-    public int getMaxRentalPeriod() {
-        return maxRentalPeriod;
+        setIdObject(idObject);
     }
 
     // Setters
@@ -98,6 +64,40 @@ public class OneObject {
         this.maxRentalPeriod = maxRentalPeriod;
     }
 
+    // Getters
+    public int getIdObject() {
+        return idObject;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getIdCollectiveOwner() {
+        return idCollectiveOwner;
+    }
+
+    public boolean isCommendable() {
+        return isCommendable;
+    }
+
+    public GregorianCalendar getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public double getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public int getDeposit() {
+        return deposit;
+    }
+
+    public int getMaxRentalPeriod() {
+        return maxRentalPeriod;
+    }
+
+    // ToString for debug
     @Override
     public String toString() {
         return "OneObject{" +
