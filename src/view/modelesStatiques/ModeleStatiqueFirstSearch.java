@@ -19,7 +19,7 @@ public class ModeleStatiqueFirstSearch extends AbstractTableModel {
     public ModeleStatiqueFirstSearch(String category) throws DAOException {
         super();
         controler = new ResearchController();
-        listSearch = controler.rentalsForOneCollectiveCategory(category);
+        listSearch = controler.getRentalsForOneCollectiveCategory(category);
         search = listSearch.toArray(new FirstResearch[0]);
         formatDate = new SimpleDateFormat("dd/MM/yyyy");
     }

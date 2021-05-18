@@ -20,7 +20,7 @@ public class ModeleStatiqueSecondSearch extends AbstractTableModel {
     public ModeleStatiqueSecondSearch(int typeOfProblem) throws DAOException {
         super();
         controler = new ResearchController();
-        listSearch = controler.problemRentalBasedOnTypeOfProblem(typeOfProblem);
+        listSearch = controler.getProblemRentalBasedOnTypeOfProblem(typeOfProblem);
         search = listSearch.toArray(new SecondResearch[0]);
         formatDate = new SimpleDateFormat("dd/MM/yyyy");
     }
