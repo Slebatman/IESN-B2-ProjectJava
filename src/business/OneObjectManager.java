@@ -10,24 +10,29 @@ import java.util.ArrayList;
 
 public class OneObjectManager {
     // Variable
-    private final IOneObjectDAO dao;
+    private IOneObjectDAO dao;
 
     // Constructor
     public OneObjectManager() {
-        this.dao = new OneObjectDB();
+        setDao(new OneObjectDB());
     }
 
-    // Insert
+    // Setter
+    private void setDao(IOneObjectDAO dao) {
+        this.dao = dao;
+    }
+
+    // Insert a new object
     public void addNewObject(OneObject oneObject) throws DAOException {
         dao.insert(oneObject);
     }
 
-    // Update
+    // Update an object
     public void updateAnObject(OneObject oneObject) throws DAOException {
         dao.update(oneObject);
     }
 
-    // Delete
+    // Delete an object
     public void deleteAnObject(int idObject) throws DAOException {
         dao.delete(idObject);
     }
@@ -36,12 +41,12 @@ public class OneObjectManager {
         this.deleteAnObject(oneObject.getIdObject());
     }
 
-    // Get all object
+    // Retrieve all objects
     public ArrayList<OneObject> getAllObjects() throws DAOException {
         return dao.getAllObjects();
     }
 
-    // Get all object for one collective
+    // Recovering all the objects of a collective
     public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOException {
         return dao.getAllObjectsForOneCollective(idCollective);
     }
@@ -50,7 +55,7 @@ public class OneObjectManager {
         return this.getAllObjectsForOneCollective(collective.getIdCollective());
     }
 
-    //
+    // Retrieving an object via its id
     public OneObject getObjectByID(int idObject) throws DAOException {
         return dao.getObjectByID(idObject);
     }
