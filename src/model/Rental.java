@@ -49,8 +49,8 @@ public class Rental {
         this.idTenant = idTenant;
     }
 
-    public void setReturnDate(GregorianCalendar returnDate) {
-        if (returnDate.compareTo(startDate) > 0)
+    public void setReturnDate(GregorianCalendar returnDate) throws ModelException {
+        if (returnDate.compareTo(startDate) > 0) throw new ModelException("La date de retour doit être plus ancienne ou égale à la date de départ");
         this.returnDate = returnDate;
     }
 

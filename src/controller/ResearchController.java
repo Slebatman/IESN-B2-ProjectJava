@@ -1,5 +1,6 @@
 package controller;
 
+import exception.ModelException;
 import model.research.FirstResearch;
 import model.research.SecondResearch;
 import model.research.ThirdResearch;
@@ -24,17 +25,17 @@ public class ResearchController {
     }
 
     // (Research n°1) All rentals for a category of collectives
-    public ArrayList<FirstResearch> getRentalsForOneCollectiveCategory(String category) throws DAOException {
+    public ArrayList<FirstResearch> getRentalsForOneCollectiveCategory(String category) throws DAOException, ModelException {
         return manager.getRentalsForOneCollectiveCategory(category);
     }
 
     // (Research n°2) Select all ProblemExitRental based on a TypeOfExitRental
-    public ArrayList<SecondResearch> getProblemRentalBasedOnTypeOfProblem(int idTypeOfProblemRental) throws DAOException {
+    public ArrayList<SecondResearch> getProblemRentalBasedOnTypeOfProblem(int idTypeOfProblemRental) throws DAOException, ModelException {
         return manager.getProblemRentalBasedOnTypeOfProblem(idTypeOfProblemRental);
     }
 
     // (Research n°3) All rentals between 2 dates
-    public ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException {
+    public ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException, ModelException {
         return manager.getRentalBetween2Dates(firstDate, secondDate);
     }
 }

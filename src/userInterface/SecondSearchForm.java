@@ -2,6 +2,7 @@ package userInterface;
 
 import business.TypeOfProblemRentalManager;
 import exception.DAOException;
+import exception.ModelException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,7 +39,7 @@ public class SecondSearchForm extends JFrame {
             int idTypeOfProblem = listProblems.getSelectedIndex()+1;
             try {
                 SecondSearchWindows secondSearchWindows = new SecondSearchWindows(idTypeOfProblem);
-            } catch (DAOException e) {
+            } catch (DAOException | ModelException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Get idTypeOfProblem Exception", JOptionPane.ERROR_MESSAGE);
             }
             SecondSearchForm.this.dispose();

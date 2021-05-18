@@ -82,7 +82,7 @@ public class MainWindow extends JFrame {
         public void actionPerformed(ActionEvent evt){
             try {
                 AddObjectWindow addObjectWindow = new AddObjectWindow();
-            } catch (DAOException e) {
+            } catch (DAOException | ModelException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Get list of collective Exception", JOptionPane.ERROR_MESSAGE);
             }
         }

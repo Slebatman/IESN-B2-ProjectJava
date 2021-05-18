@@ -40,7 +40,7 @@ public class RentalDB implements IRentalDAO {
 
     // [IMPLEMENT] (Research n°1) All rentals for a category of collectives
     @Override
-    public ArrayList<FirstResearch> getRentalsForOneCollectiveCategory(String category) throws DAOException {
+    public ArrayList<FirstResearch> getRentalsForOneCollectiveCategory(String category) throws DAOException, ModelException {
         try {
             ArrayList<FirstResearch> allRentalsForOneCollectiveCategory = new ArrayList<>();
 
@@ -68,7 +68,7 @@ public class RentalDB implements IRentalDAO {
 
     // [IMPLEMENT] (Research n°2) List all rentals that have had the same type of return problem
     @Override
-    public ArrayList<SecondResearch> getRentalsBasedOnSameTypeReturnProblem(int idTypeOfProblemExitProblemRental) throws DAOException {
+    public ArrayList<SecondResearch> getRentalsBasedOnSameTypeReturnProblem(int idTypeOfProblemExitProblemRental) throws DAOException, ModelException {
         try {
             ArrayList<SecondResearch> allRentalsBasedOnSameTypeReturnProblem = new ArrayList<>();
 
@@ -109,7 +109,7 @@ public class RentalDB implements IRentalDAO {
 
     // [IMPLEMENT] (Research n°3) All rentals between 2 dates
     @Override
-    public ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException {
+    public ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException, ModelException {
         ArrayList<ThirdResearch> rentalBetween2Dates = new ArrayList<>();
 
         try {

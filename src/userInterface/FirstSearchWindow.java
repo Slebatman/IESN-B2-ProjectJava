@@ -1,13 +1,14 @@
 package userInterface;
 
 import exception.DAOException;
+import exception.ModelException;
 import userInterface.modelesStatiques.ModeleStatiqueFirstSearch;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class FirstSearchWindow extends JFrame {
-    FirstSearchWindow(String category) throws DAOException {
+    FirstSearchWindow(String category) throws DAOException, ModelException {
         super("First search");
         setBounds(500, 200, 650, 500);
         this.setLayout(new FlowLayout());

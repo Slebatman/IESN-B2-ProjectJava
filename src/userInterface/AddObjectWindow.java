@@ -31,7 +31,7 @@ public class AddObjectWindow extends JFrame {
     private OneObjectController oneObjectController;
 
     // Constructor
-    public AddObjectWindow() throws DAOException {
+    public AddObjectWindow() throws DAOException, ModelException {
         // Title frame
         super("Créer et ajouter un nouvel objet");
         setBounds(250, 200, 600, 450);

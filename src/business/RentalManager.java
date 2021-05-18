@@ -24,7 +24,7 @@ public class RentalManager {
     }
 
     // Getting rentals for a category
-    public ArrayList<FirstResearch> getRentalsForOneCollectiveCategory(String category) throws DAOException {
+    public ArrayList<FirstResearch> getRentalsForOneCollectiveCategory(String category) throws DAOException, ModelException {
         return dao.getRentalsForOneCollectiveCategory(category);
     }
 

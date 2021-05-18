@@ -42,12 +42,12 @@ public class CollectiveManager {
     }
 
     // Retrieve all collective data from the database
-    public ArrayList<Collective> getAllCollectives() throws DAOException {
+    public ArrayList<Collective> getAllCollectives() throws DAOException, ModelException {
         return dao.getAllCollective();
     }
 
     // Search for a collective based on its id
-    public Collective getACollectiveBasedId(int idCollective) throws DAOException {
+    public Collective getACollectiveBasedId(int idCollective) throws DAOException, ModelException {
         return dao.getACollectiveBasedId(idCollective);
     }
 

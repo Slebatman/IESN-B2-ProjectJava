@@ -1,6 +1,7 @@
 package userInterface;
 
 import exception.DAOException;
+import exception.ModelException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,7 +50,7 @@ public class ThirdSearchForm extends JFrame {
             if(firstDate != secondDate && firstDate.compareTo(secondDate) < 0){
                 try {
                     ThirdSearchWindows thirdSearchWindows = new ThirdSearchWindows(firstDate, secondDate);
-                } catch (DAOException e) {
+                } catch (DAOException | ModelException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Get list of Rentals between 2 dates Exception", JOptionPane.ERROR_MESSAGE);
                 }
                 }

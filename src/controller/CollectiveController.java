@@ -22,7 +22,7 @@ public class CollectiveController {
     }
 
     // Retrieve all collective
-    public ArrayList<Collective> getAllCollectives() throws DAOException {
+    public ArrayList<Collective> getAllCollectives() throws DAOException, ModelException {
         return  manager.getAllCollectives();
     }
 

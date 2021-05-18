@@ -87,7 +87,7 @@ public class CollectiveDB implements ICollectiveDAO {
 
     // [IMPLEMENT] Retrieve all collective data from the database
     @Override
-    public ArrayList<Collective> getAllCollective() throws DAOException {
+    public ArrayList<Collective> getAllCollective() throws DAOException, ModelException {
 
         try {
             String sql = "SELECT * FROM collective";
@@ -95,14 +95,14 @@ public class CollectiveDB implements ICollectiveDAO {
 
             return selectListOfCollective(statement);
 
-        } catch (SQLException | ModelException e) {
+        } catch (SQLException e) {
             throw new DAOException("Erreur SQL : impossible de récuperer l'ensemble des collectifs en base de données");
         }
     }
 
     // [IMPLEMENT] Search for a collective based on its id
     @Override
-    public Collective getACollectiveBasedId(int idCollective) throws DAOException {
+    public Collective getACollectiveBasedId(int idCollective) throws DAOException, ModelException {
 
         try {
             String sql = "SELECT * FROM collective WHERE idCollective = ?";
@@ -111,7 +111,7 @@ public class CollectiveDB implements ICollectiveDAO {
 
             return selectACollective(statement);
 
-        } catch (SQLException | ModelException e) {
+        } catch (SQLException e) {
             throw new DAOException("Erreur SQL : impossible de récuperer le collectif sur base l'identifiant : " + idCollective);
         }
     }
