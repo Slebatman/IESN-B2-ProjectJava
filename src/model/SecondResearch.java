@@ -3,7 +3,6 @@ package model;
 import business.CollectiveManager;
 import business.OneObjectManager;
 import business.RentalManager;
-import exception.DAOException;
 
 import java.util.GregorianCalendar;
 
@@ -17,19 +16,15 @@ public class SecondResearch {
     private String nameCollectiveOwner;
     private String emailAddressCollectiveOwner;
 
-    private static RentalManager rentalManager;
-    private static CollectiveManager collectiveManager;
-    private static OneObjectManager oneObjectManager;
-
     // Constructor
     public SecondResearch(GregorianCalendar startDate, GregorianCalendar returnDate, String nameObject, int deposit, int maxRentalPeriod, String nameCollectiveOwner, String emailAddressCollectiveOwner) {
-        this.startDate = startDate;
-        this.returnDate = returnDate;
-        this.nameObject = nameObject;
-        this.deposit = deposit;
-        this.maxRentalPeriod = maxRentalPeriod;
-        this.nameCollectiveOwner = nameCollectiveOwner;
-        this.emailAddressCollectiveOwner = emailAddressCollectiveOwner;
+        setStartDate(startDate);
+        setStartDate(returnDate);
+        setNameObject(nameObject);
+        setDeposit(deposit);
+        setMaxRentalPeriod(maxRentalPeriod);
+        setNameCollectiveOwner(nameCollectiveOwner);
+        setEmailAddressCollectiveOwner(emailAddressCollectiveOwner);
     }
 
     // Setters
@@ -59,18 +54,6 @@ public class SecondResearch {
 
     public void setEmailAddressCollectiveOwner(String emailAddressCollectiveOwner) {
         this.emailAddressCollectiveOwner = emailAddressCollectiveOwner;
-    }
-
-    public static void setRentalManager(RentalManager rentalManager) {
-        SecondResearch.rentalManager = rentalManager;
-    }
-
-    public static void setCollectiveManager(CollectiveManager collectiveManager) {
-        SecondResearch.collectiveManager = collectiveManager;
-    }
-
-    public static void setOneObjectManager(OneObjectManager oneObjectManager) {
-        SecondResearch.oneObjectManager = oneObjectManager;
     }
 
     // Getters

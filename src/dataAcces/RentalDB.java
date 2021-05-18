@@ -76,7 +76,7 @@ public class RentalDB implements IRentalDAO {
                         JOIN problemexitrental p on r.idRental = p.idRental
                         JOIN collective c on c.idCollective = r.idTenant
                         JOIN oneobject o on o.idObject = r.idObject
-                    WHERE p.idTypeOfProblemRental = ?; """;
+                    WHERE p.idTypeOfProblemRental = ?;""";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, idTypeOfProblemExitProblemRental);

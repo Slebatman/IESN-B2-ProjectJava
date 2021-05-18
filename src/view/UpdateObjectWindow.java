@@ -168,7 +168,7 @@ public class UpdateObjectWindow extends JFrame{
         commandable.addItemListener(listener);
         notCommandable.addItemListener(listener);
 
-        panelWindow.setLayout(new GridLayout(2,1, 10, 30));;
+        panelWindow.setLayout(new GridLayout(2,1, 10, 30));
         panelWindow.add(panel);
         panelWindow.add(panelButton);
         panelWindow.setVisible(true);

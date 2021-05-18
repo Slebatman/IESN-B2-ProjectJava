@@ -15,7 +15,7 @@ public interface IRentalDAO {
     ArrayList<FirstResearch> getRentalsForOneCollectiveCategory(String category) throws DAOException;
 
     // (Research n°2) List all rentals that have had the same type of return problem
-    public ArrayList<SecondResearch> getRentalsBasedOnSameTypeReturnProblem(int idTypeOfProblemExitProblemRental) throws DAOException;
+    ArrayList<SecondResearch> getRentalsBasedOnSameTypeReturnProblem(int idTypeOfProblemExitProblemRental) throws DAOException;
 
     // (Research n°3) All rentals between 2 dates
     ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException;

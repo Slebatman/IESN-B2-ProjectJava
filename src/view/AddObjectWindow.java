@@ -115,7 +115,7 @@ public class AddObjectWindow extends JFrame {
         buttonValid.addActionListener(new CreateObject());
         panelButton.add(buttonValid);
 
-        panelWindow.setLayout(new GridLayout(2,1, 10, 30));;
+        panelWindow.setLayout(new GridLayout(2,1, 10, 30));
         panelWindow.add(panel);
         panelWindow.add(panelButton);
         panelWindow.setVisible(true);

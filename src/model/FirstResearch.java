@@ -1,9 +1,5 @@
 package model;
 
-import business.CollectiveManager;
-import business.OneObjectManager;
-import exception.DAOException;
-
 import java.util.GregorianCalendar;
 
 public class FirstResearch {
@@ -16,7 +12,7 @@ public class FirstResearch {
     public FirstResearch() {
     }
 
-    public FirstResearch(GregorianCalendar startDate, String objectName, String collectiveName) throws DAOException {
+    public FirstResearch(GregorianCalendar startDate, String objectName, String collectiveName) {
         setStartDate(startDate);
         setObjectName(objectName);
         setCollectiveName(collectiveName);

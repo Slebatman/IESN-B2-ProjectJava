@@ -14,7 +14,7 @@ public class OneObject {
     private int maxRentalPeriod;
 
     // Constructors
-    public OneObject() {};
+    public OneObject() {}
 
     public OneObject(String name, int idCollectiveOwner, boolean isCommendable, GregorianCalendar purchaseDate, double purchasePrice, int deposit, int maxRentalPeriod){
         setName(name);

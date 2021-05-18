@@ -16,7 +16,7 @@ public class FirstSearchForm extends JFrame {
     private CollectiveManager manager;
     private ArrayList<String> categoryList;
 
-    public FirstSearchForm() throws DAOException {
+    public FirstSearchForm() {
         super("Search rentals by collective category");
         setBounds(200, 150, 400, 100);
         manager = new CollectiveManager();
