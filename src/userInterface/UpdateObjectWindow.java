@@ -79,7 +79,7 @@ public class UpdateObjectWindow extends JFrame{
         spinnerDate.setModel(model);
         JSpinner.DateEditor editor = new JSpinner.DateEditor(spinnerDate, "dd/MM/yyyy");
         spinnerDate.setEditor(editor);
-        SpinnerNumberModel modelSpinnerPeriod = new SpinnerNumberModel(1.0, 1.0, 100.0, 1.0);
+        SpinnerNumberModel modelSpinnerPeriod = new SpinnerNumberModel(1, 1, 100, 1);
         spinnerPeriod = new JSpinner(modelSpinnerPeriod);
 
 
@@ -296,9 +296,11 @@ public class UpdateObjectWindow extends JFrame{
         if(objectDefault.isCommendable()){
             commandable.setSelected(true);
             notCommandable.setSelected(false);
+            commandableValue = true;
         }else{
             commandable.setSelected(false);
             notCommandable.setSelected(true);
+            commandableValue = false;
         }
         if(objectDefault.getPurchasePrice() != Types.NULL){
             textPrice.setText(objectDefault.getPurchasePrice() + "");
