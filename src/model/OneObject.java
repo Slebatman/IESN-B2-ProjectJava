@@ -63,7 +63,7 @@ public class OneObject {
     }
 
     public void setDeposit(int deposit) throws ModelException {
-        if (deposit < 1) throw new ModelException("La caution doit être suppérieure ou égale à 0");
+        if (deposit < 0) throw new ModelException("La caution doit être suppérieure ou égale à 0");
         this.deposit = deposit;
     }
 
