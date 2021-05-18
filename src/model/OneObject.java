@@ -4,14 +4,14 @@ import java.util.GregorianCalendar;
 
 public class OneObject {
     // Variables
-    private int idObject;
+    private Integer idObject;
     private String name;
-    private int idCollectiveOwner;
+    private Integer idCollectiveOwner;
     private boolean isCommendable;
     private GregorianCalendar purchaseDate;
     private Double purchasePrice;
     private Integer deposit;
-    private int maxRentalPeriod;
+    private Integer maxRentalPeriod;
 
     // Constructors
     public OneObject() {}
@@ -32,7 +32,7 @@ public class OneObject {
     }
 
     // Setters
-    public void setIdObject(int idObject) {
+    public void setIdObject(Integer idObject) {
         this.idObject = idObject;
     }
 
@@ -40,7 +40,7 @@ public class OneObject {
         this.name = name;
     }
 
-    public void setIdCollectiveOwner(int idCollectiveOwner) {
+    public void setIdCollectiveOwner(Integer idCollectiveOwner) {
         this.idCollectiveOwner = idCollectiveOwner;
     }
 
@@ -60,12 +60,12 @@ public class OneObject {
         this.deposit = deposit;
     }
 
-    public void setMaxRentalPeriod(int maxRentalPeriod) {
+    public void setMaxRentalPeriod(Integer maxRentalPeriod) {
         this.maxRentalPeriod = maxRentalPeriod;
     }
 
     // Getters
-    public int getIdObject() {
+    public Integer getIdObject() {
         return idObject;
     }
 
@@ -73,7 +73,7 @@ public class OneObject {
         return name;
     }
 
-    public int getIdCollectiveOwner() {
+    public Integer getIdCollectiveOwner() {
         return idCollectiveOwner;
     }
 
@@ -93,7 +93,7 @@ public class OneObject {
         return deposit;
     }
 
-    public int getMaxRentalPeriod() {
+    public Integer getMaxRentalPeriod() {
         return maxRentalPeriod;
     }
 

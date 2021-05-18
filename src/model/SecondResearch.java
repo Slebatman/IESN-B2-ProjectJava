@@ -1,9 +1,5 @@
 package model;
 
-import business.CollectiveManager;
-import business.OneObjectManager;
-import business.RentalManager;
-
 import java.util.GregorianCalendar;
 
 public class SecondResearch {
@@ -11,8 +7,8 @@ public class SecondResearch {
     private GregorianCalendar startDate;
     private GregorianCalendar returnDate;
     private String nameObject;
-    private int deposit;
-    private int maxRentalPeriod;
+    private Integer deposit;
+    private Integer maxRentalPeriod;
     private String nameCollectiveOwner;
     private String emailAddressCollectiveOwner;
 
@@ -40,11 +36,11 @@ public class SecondResearch {
         this.nameObject = nameObject;
     }
 
-    public void setDeposit(int deposit) {
+    public void setDeposit(Integer deposit) {
         this.deposit = deposit;
     }
 
-    public void setMaxRentalPeriod(int maxRentalPeriod) {
+    public void setMaxRentalPeriod(Integer maxRentalPeriod) {
         this.maxRentalPeriod = maxRentalPeriod;
     }
 
@@ -65,11 +61,11 @@ public class SecondResearch {
         return returnDate;
     }
 
-    public int getDeposit() {
+    public Integer getDeposit() {
         return deposit;
     }
 
-    public int getMaxRentalPeriod() {
+    public Integer getMaxRentalPeriod() {
         return maxRentalPeriod;
     }
 

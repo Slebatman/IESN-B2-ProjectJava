@@ -4,10 +4,10 @@ import java.util.GregorianCalendar;
 
 public class Rental {
     // Variables
-    private int idRental;
+    private Integer idRental;
     private GregorianCalendar startDate;
-    private int idObject;
-    private int idTenant;
+    private Integer idObject;
+    private Integer idTenant;
     private GregorianCalendar returnDate;
     private String rentalManager;
 
@@ -28,7 +28,7 @@ public class Rental {
     }
 
     // Setters
-    public void setIdRental(int idRental) {
+    public void setIdRental(Integer idRental) {
         this.idRental = idRental;
     }
 
@@ -36,11 +36,11 @@ public class Rental {
         this.startDate = startDate;
     }
 
-    public void setIdObject(int idObject) {
+    public void setIdObject(Integer idObject) {
         this.idObject = idObject;
     }
 
-    public void setIdTenant(int idTenant) {
+    public void setIdTenant(Integer idTenant) {
         this.idTenant = idTenant;
     }
 
@@ -53,7 +53,7 @@ public class Rental {
     }
 
     // Getters
-    public int getIdRental() {
+    public Integer getIdRental() {
         return idRental;
     }
 
@@ -61,11 +61,11 @@ public class Rental {
         return startDate;
     }
 
-    public int getIdObject() {
+    public Integer getIdObject() {
         return idObject;
     }
 
-    public int getIdTenant() {
+    public Integer getIdTenant() {
         return idTenant;
     }
 

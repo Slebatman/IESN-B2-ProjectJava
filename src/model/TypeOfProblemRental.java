@@ -2,7 +2,7 @@ package model;
 
 public class TypeOfProblemRental {
     // Variables
-    private int idTypeOfProblemRental;
+    private Integer idTypeOfProblemRental;
     private String name;
     private String description;
 
@@ -14,7 +14,7 @@ public class TypeOfProblemRental {
     }
 
     // Setters
-    public void setIdTypeOfProblemRental(int idTypeOfProblemRental) {
+    public void setIdTypeOfProblemRental(Integer idTypeOfProblemRental) {
         this.idTypeOfProblemRental = idTypeOfProblemRental;
     }
 
@@ -27,7 +27,7 @@ public class TypeOfProblemRental {
     }
 
     // Getters
-    public int getIdTypeOfProblemRental() {
+    public Integer getIdTypeOfProblemRental() {
         return idTypeOfProblemRental;
     }
 

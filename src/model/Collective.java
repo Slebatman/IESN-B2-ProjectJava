@@ -2,7 +2,7 @@ package model;
 
 public class Collective {
     // Variables
-    private int idCollective;
+    private Integer idCollective;
     private String name;
     private String category;
     private String physicalAddress;
@@ -22,7 +22,7 @@ public class Collective {
     }
 
     // Setters
-    public void setIdCollective(int idCollective) {
+    public void setIdCollective(Integer idCollective) {
         this.idCollective = idCollective;
     }
 
@@ -43,7 +43,7 @@ public class Collective {
     }
 
     // Getters
-    public int getIdCollective() {
+    public Integer getIdCollective() {
         return idCollective;
     }
 

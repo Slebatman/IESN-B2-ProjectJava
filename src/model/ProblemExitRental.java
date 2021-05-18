@@ -2,9 +2,9 @@ package model;
 
 public class ProblemExitRental {
     // Variables
-    private int idProblemExitRental;
-    private int idRental;
-    private int idTypeOfProblemExitRental;
+    private Integer idProblemExitRental;
+    private Integer idRental;
+    private Integer idTypeOfProblemExitRental;
     private double invoicedPrice;
     private String note;
 
@@ -18,15 +18,15 @@ public class ProblemExitRental {
     }
 
     // Setters
-    public void setIdProblemExitRental(int idProblemExitRental) {
+    public void setIdProblemExitRental(Integer idProblemExitRental) {
         this.idProblemExitRental = idProblemExitRental;
     }
 
-    public void setIdRental(int idRental) {
+    public void setIdRental(Integer idRental) {
         this.idRental = idRental;
     }
 
-    public void setIdTypeOfProblemExitRental(int idTypeOfProblemExitRental) {
+    public void setIdTypeOfProblemExitRental(Integer idTypeOfProblemExitRental) {
         this.idTypeOfProblemExitRental = idTypeOfProblemExitRental;
     }
 
@@ -39,15 +39,15 @@ public class ProblemExitRental {
     }
 
     // Getters
-    public int getIdProblemExitRental() {
+    public Integer getIdProblemExitRental() {
         return idProblemExitRental;
     }
 
-    public int getIdRental() {
+    public Integer getIdRental() {
         return idRental;
     }
 
-    public int getIdTypeOfProblemExitRental() {
+    public Integer getIdTypeOfProblemExitRental() {
         return idTypeOfProblemExitRental;
     }
 
