@@ -1,6 +1,7 @@
 package userInterface;
 
 import business.CollectiveManager;
+import exception.BusinessException;
 import exception.DAOException;
 import exception.ModelException;
 
@@ -46,7 +47,7 @@ public class FirstSearchForm extends JFrame {
             String category = listCategory.getSelectedItem().toString();
             try {
                 FirstSearchWindow firstSearchWindow = new FirstSearchWindow(category);
-            } catch (DAOException | ModelException e) {
+            } catch (DAOException | ModelException | BusinessException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "First research Exception", JOptionPane.ERROR_MESSAGE);
             }
             FirstSearchForm.this.dispose();

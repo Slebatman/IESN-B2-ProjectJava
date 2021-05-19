@@ -1,4 +1,5 @@
 package controller;
+import exception.BusinessException;
 import exception.ModelException;
 import model.*;
 import business.OneObjectManager;
@@ -31,7 +32,7 @@ public class OneObjectController {
    }
 
    // Delete an object
-   public void deleteAnObject(OneObject oneObject) throws DAOException {
+   public void deleteAnObject(OneObject oneObject) throws DAOException, BusinessException {
       manager.deleteAnObject(oneObject);
    }
 
@@ -41,7 +42,7 @@ public class OneObjectController {
    }
 
    // Recovering all the objects of a collective
-   public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOException, ModelException {
+   public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOException, ModelException, BusinessException {
       return manager.getAllObjectsForOneCollective(idCollective);
    }
 

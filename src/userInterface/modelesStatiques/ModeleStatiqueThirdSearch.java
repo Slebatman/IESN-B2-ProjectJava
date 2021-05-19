@@ -1,5 +1,6 @@
 package userInterface.modelesStatiques;
 
+import exception.BusinessException;
 import exception.ModelException;
 import model.research.ThirdResearch;
 import controller.ResearchController;
@@ -19,7 +20,7 @@ public class ModeleStatiqueThirdSearch extends AbstractTableModel {
     GregorianCalendar date;
     String dateFormatted;
 
-    public ModeleStatiqueThirdSearch(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException, ModelException {
+    public ModeleStatiqueThirdSearch(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException, ModelException, BusinessException {
         super();
         controler = new ResearchController();
         listSearch = controler.getRentalBetween2Dates(firstDate, secondDate);

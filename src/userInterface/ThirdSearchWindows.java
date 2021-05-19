@@ -1,5 +1,6 @@
 package userInterface;
 
+import exception.BusinessException;
 import exception.DAOException;
 import exception.ModelException;
 import userInterface.modelesStatiques.ModeleStatiqueThirdSearch;
@@ -10,7 +11,7 @@ import java.util.GregorianCalendar;
 
 public class ThirdSearchWindows extends JFrame {
     private JTable table;
-    public ThirdSearchWindows(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException, ModelException {
+    public ThirdSearchWindows(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException, ModelException, BusinessException {
         super("Third search");
         setBounds(500, 200, 650, 500);
         this.setLayout(new FlowLayout());

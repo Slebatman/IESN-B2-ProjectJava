@@ -1,5 +1,6 @@
 package userInterface;
 import controller.*;
+import exception.BusinessException;
 import exception.ModelException;
 import model.Collective;
 import model.OneObject;
@@ -210,7 +211,7 @@ public class AddObjectWindow extends JFrame {
                             AddObjectWindow.this.dispose();
                         }
 
-                } catch (DAOException | ModelException e) {
+                } catch (DAOException | ModelException | BusinessException e) {
                     showErrorMessage(e.getMessage());
                 }
             }

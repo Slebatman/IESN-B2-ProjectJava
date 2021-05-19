@@ -1,5 +1,6 @@
 package userInterface;
 
+import exception.BusinessException;
 import exception.DAOException;
 import exception.ModelException;
 
@@ -93,7 +94,7 @@ public class MainWindow extends JFrame {
         public void actionPerformed(ActionEvent evt){
             try {
                 DeleteObjectWindow deleteWindow = new DeleteObjectWindow();
-            } catch (DAOException | ModelException e) {
+            } catch (DAOException | ModelException | BusinessException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Get list of collective or Objects Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -104,7 +105,7 @@ public class MainWindow extends JFrame {
         public void actionPerformed(ActionEvent evt){
             try {
                 UpdateObjectWindow updateWindow = new UpdateObjectWindow();
-            } catch (DAOException | ModelException e) {
+            } catch (DAOException | ModelException | BusinessException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Get list of collective Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
