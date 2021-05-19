@@ -31,7 +31,7 @@ public class SecondResearch {
     }
 
     public void setReturnDate(GregorianCalendar returnDate) throws ModelException {
-        if (returnDate.compareTo(startDate) > 0) throw new ModelException("La date de retour doit être plus ancienne ou égale à la date de départ");
+        if (returnDate.compareTo(startDate) != 1) throw new ModelException("La date de retour doit être plus recente ou égale à la date de départ");
         this.returnDate = returnDate;
     }
 

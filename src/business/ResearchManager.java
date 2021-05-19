@@ -40,7 +40,7 @@ public class ResearchManager {
 
     // (Research n°3) All rentals between 2 dates
     public ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException, ModelException, BusinessException {
-        if (secondDate.compareTo(firstDate) > 0) throw new BusinessException("La date de retour doit être plus ancienne ou égale à la date de départ");
+        if (secondDate.compareTo(firstDate) != 1) throw new BusinessException("La date de retour doit être plus recente ou égale à la date de départ");
         return dao.getRentalBetween2Dates(firstDate, secondDate);
     }
 }
