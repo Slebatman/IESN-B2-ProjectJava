@@ -1,6 +1,7 @@
 package userInterface.modelesStatiques;
 
 import exception.BusinessException;
+import exception.ControllerException;
 import exception.ModelException;
 import model.research.FirstResearch;
 import controller.ResearchController;
@@ -18,7 +19,7 @@ public class ModeleStatiqueFirstSearch extends AbstractTableModel {
     private ArrayList<FirstResearch> listSearch;
     private ResearchController controler;
     private SimpleDateFormat formatDate;
-    public ModeleStatiqueFirstSearch(String category) throws DAOException, ModelException, BusinessException {
+    public ModeleStatiqueFirstSearch(String category) throws DAOException, ModelException, BusinessException, ControllerException {
         super();
         controler = new ResearchController();
         listSearch = controler.getRentalsForOneCollectiveCategory(category);

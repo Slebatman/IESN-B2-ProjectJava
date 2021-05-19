@@ -3,6 +3,7 @@ package userInterface;
 import controller.CollectiveController;
 import controller.OneObjectController;
 import exception.BusinessException;
+import exception.ControllerException;
 import exception.ModelException;
 import model.Collective;
 import model.OneObject;
@@ -42,7 +43,7 @@ public class UpdateObjectWindow extends JFrame{
     private SimpleDateFormat formatDate;
     int idCollective;
 
-    UpdateObjectWindow() throws DAOException, ModelException, BusinessException {
+    UpdateObjectWindow() throws DAOException, ModelException, BusinessException, ControllerException {
         super("Update an object");
         setBounds(250, 200, 800, 450);
         this.setLayout(new FlowLayout());
@@ -194,7 +195,7 @@ public class UpdateObjectWindow extends JFrame{
                 int idCollective = -1;
                 try {
                     idCollective = collectiveController.getACollectiveIDBasedName(value);
-                } catch (DAOException | ModelException | BusinessException e) {
+                } catch (DAOException | ModelException | BusinessException | ControllerException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Get idCollective by name Exception", JOptionPane.ERROR_MESSAGE);
                 }
                 if(idCollective > -1){
@@ -241,7 +242,7 @@ public class UpdateObjectWindow extends JFrame{
             try {
                 idCollective = collectiveController.getACollectiveIDBasedName(value);
                 arrayObjects = oneObjectController.getAllObjectsForOneCollective(idCollective);
-            } catch (DAOException | ModelException | BusinessException e) {
+            } catch (DAOException | ModelException | BusinessException | ControllerException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Get idCollective or list of objects from a collective Exception", JOptionPane.ERROR_MESSAGE);
             }
             listObjects.removeAllItems();

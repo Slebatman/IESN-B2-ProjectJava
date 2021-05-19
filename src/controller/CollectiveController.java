@@ -2,6 +2,7 @@ package controller;
 
 import business.CollectiveManager;
 import exception.BusinessException;
+import exception.ControllerException;
 import exception.ModelException;
 import model.Collective;
 import exception.DAOException;
@@ -28,7 +29,8 @@ public class CollectiveController {
     }
 
     // Retrieving a collective's ID based on its name
-    public int getACollectiveIDBasedName(String name) throws DAOException, ModelException, BusinessException {
+    public int getACollectiveIDBasedName(String name) throws DAOException, ModelException, BusinessException, ControllerException {
+        if (name.equals("")) throw new ControllerException("Erreur : le nom ne peut pas être une chaine vide");
         return manager.getACollectiveIDBasedName(name);
     }
 }

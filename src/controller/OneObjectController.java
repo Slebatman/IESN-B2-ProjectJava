@@ -1,5 +1,6 @@
 package controller;
 import exception.BusinessException;
+import exception.ControllerException;
 import exception.ModelException;
 import model.*;
 import business.OneObjectManager;
@@ -42,7 +43,8 @@ public class OneObjectController {
    }
 
    // Recovering all the objects of a collective
-   public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOException, ModelException, BusinessException {
+   public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOException, ModelException, BusinessException, ControllerException {
+      if (idCollective < 1) throw new ControllerException("Erreur : l'identifiant doit être suppérieur à 0");
       return manager.getAllObjectsForOneCollective(idCollective);
    }
 

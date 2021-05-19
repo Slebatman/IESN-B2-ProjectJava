@@ -3,6 +3,7 @@ package userInterface;
 import controller.CollectiveController;
 import controller.OneObjectController;
 import exception.BusinessException;
+import exception.ControllerException;
 import exception.ModelException;
 import model.Collective;
 import model.OneObject;
@@ -27,7 +28,7 @@ public class DeleteObjectWindow extends JFrame{
     private ArrayList<String> collectives;
     private ArrayList<String> objects;
 
-    DeleteObjectWindow() throws DAOException, ModelException, BusinessException {
+    DeleteObjectWindow() throws DAOException, ModelException, BusinessException, ControllerException {
         super("Delete an object");
         setBounds(150, 150, 400, 400);
         this.setLayout(new FlowLayout());
@@ -101,7 +102,7 @@ public class DeleteObjectWindow extends JFrame{
             try {
                 idCollective = collectiveController.getACollectiveIDBasedName(value);
                 arrayObjects = oneObjectController.getAllObjectsForOneCollective(idCollective);
-            } catch (DAOException | ModelException | BusinessException e) {
+            } catch (DAOException | ModelException | BusinessException | ControllerException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Get collective values Exception", JOptionPane.ERROR_MESSAGE);
             }
             listObjects.removeAllItems();
@@ -129,7 +130,7 @@ public class DeleteObjectWindow extends JFrame{
                 OneObject objetTest = arrayObjects.get(listObjects.getSelectedIndex());
                 oneObjectController.deleteAnObject(objetTest);
                 arrayObjects = oneObjectController.getAllObjectsForOneCollective(idCollective);
-            } catch (DAOException | ModelException | BusinessException e) {
+            } catch (DAOException | ModelException | BusinessException | ControllerException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Delete an object Exception", JOptionPane.ERROR_MESSAGE);
             }
             listObjects.removeAllItems();
