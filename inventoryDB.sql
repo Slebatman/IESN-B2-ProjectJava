@@ -19,7 +19,7 @@ CREATE TABLE `collective`
 -- oneobject: table
 CREATE TABLE `oneobject`
 (
-    `idObject`          int         NOT NULL AUTO_INCREMENT,
+    `idOneObject`          int         NOT NULL AUTO_INCREMENT,
     `name`              varchar(45) NOT NULL,
     `idCollectiveOwner` int         NOT NULL,
     `isCommendable`     tinyint     NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE `oneobject`
     `purchasePrice`     double DEFAULT NULL,
     `deposit`           int    DEFAULT 0,
     `maxRentalPeriod`   int         NOT NULL,
-    PRIMARY KEY (`idObject`, `name`, `idCollectiveOwner`),
+    PRIMARY KEY (`idOneObject`, `name`, `idCollectiveOwner`),
     UNIQUE KEY `name` (`name`),
     KEY `idCollectiveOwner_idx` (`idCollectiveOwner`),
     CONSTRAINT `idCollectiveOwner` FOREIGN KEY (`idCollectiveOwner`) REFERENCES `collective` (`idCollective`),
@@ -62,15 +62,15 @@ CREATE TABLE `rental`
 (
     `idRental`      int         NOT NULL AUTO_INCREMENT,
     `startDate`     date        NOT NULL,
-    `idObject`      int         NOT NULL,
+    `idOneObject`      int         NOT NULL,
     `idTenant`      int         NOT NULL,
     `returnDate`    date DEFAULT NULL,
     `rentalManager` varchar(45) NOT NULL,
-    PRIMARY KEY (`idRental`, `startDate`, `idObject`),
-    UNIQUE KEY `startDate` (`startDate`, `idObject`),
-    KEY `idObject_idx` (`idObject`),
+    PRIMARY KEY (`idRental`, `startDate`, `idOneObject`),
+    UNIQUE KEY `startDate` (`startDate`, `idOneObject`),
+    KEY `idObject_idx` (`idOneObject`),
     KEY `idTenant_idx` (`idTenant`),
-    CONSTRAINT `idObject` FOREIGN KEY (`idObject`) REFERENCES `oneobject` (`idObject`),
+    CONSTRAINT `idObject` FOREIGN KEY (`idOneObject`) REFERENCES `oneobject` (`idOneObject`),
     CONSTRAINT `idTenant` FOREIGN KEY (`idTenant`) REFERENCES `collective` (`idCollective`),
     CONSTRAINT `rental_chk_1` CHECK ((not ((`rentalManager` like _utf8mb3'')))),
     CONSTRAINT `rental_chk_2` CHECK ((`returnDate` >= `startDate`))
