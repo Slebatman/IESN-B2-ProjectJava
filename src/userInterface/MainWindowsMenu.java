@@ -1,0 +1,174 @@
+package userInterface;
+
+import exception.BusinessException;
+import exception.ControllerException;
+import exception.DAOException;
+import exception.ModelException;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class MainWindowsMenu extends JMenuBar {
+    // Variables
+    private JMenu application, objects, research, delays;
+    JMenuItem leave, createObject, updateObject, deleteObject, showObjects, firstSearch, secondSearch, thirdSearch, delaysManagement;
+
+    // Constructor
+    public MainWindowsMenu() {
+        // Main menu
+        application = new JMenu("Application");
+        objects = new JMenu("Object");
+        research = new JMenu("Research");
+        delays = new JMenu("Delays");
+        add(application);
+        add(objects);
+        add(research);
+        add(delays);
+
+        // Application menu
+        leave = new JMenuItem("Leave");
+        leave.addActionListener(new ExitListener());
+        application.add(leave);
+
+        // Object menu
+        createObject = new JMenuItem("Create");
+        createObject.addActionListener(new AddObject());
+        objects.add(createObject);
+
+        updateObject = new JMenuItem("Update");
+        updateObject.addActionListener(new UpdateObject());
+        objects.add(updateObject);
+
+        deleteObject = new JMenuItem("Delete");
+        deleteObject.addActionListener(new DeleteObject());
+        objects.add(deleteObject);
+
+        showObjects = new JMenuItem("Show all");
+        showObjects.addActionListener(new ListingObjects());
+        objects.add(showObjects);
+
+        // Research menu
+        firstSearch = new JMenuItem("Search rentals by collective category");
+        firstSearch.addActionListener(new FirstSearch());
+        research.add(firstSearch);
+
+        secondSearch = new JMenuItem("Search rentals by type of problem");
+        secondSearch.addActionListener(new SecondSearch());
+        research.add(secondSearch);
+
+        thirdSearch = new JMenuItem("Search rentals between 2 dates");
+        thirdSearch.addActionListener(new ThirdSearch());
+        research.add(thirdSearch);
+
+        // Delay menu
+        delaysManagement = new JMenuItem("Show all the delays");
+        delaysManagement.addActionListener(new Delays());
+        delays.add(delaysManagement);
+
+    }
+
+    // Show message error
+    private void showErrorMessage(String title, String msg) {
+        JOptionPane.showMessageDialog(null, msg, title, JOptionPane.ERROR_MESSAGE);
+    }
+
+    // Exit application
+    private class ExitListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent evt){
+            System.exit(0);
+        }
+    }
+
+    // Create and add an object
+    private class AddObject implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            try {
+                new AddObjectWindow();
+
+            } catch (DAOException | ModelException e) {
+                showErrorMessage("Erreur lors de l'ajout", e.getMessage());
+            }
+        }
+    }
+
+    // Delete an object
+    private class DeleteObject implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            try {
+                new DeleteObjectWindow();
+
+            } catch (DAOException | ModelException | BusinessException | ControllerException e) {
+                showErrorMessage("Erreur lors de la suppression", e.getMessage());
+            }
+        }
+    }
+
+    // Update an object
+    private class UpdateObject implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            try {
+                new UpdateObjectWindow();
+
+            } catch (DAOException | ModelException | BusinessException | ControllerException e) {
+                showErrorMessage("Erreur lors de la mise à jour", e.getMessage());
+            }
+        }
+    }
+
+    // Show all objects
+    private class ListingObjects implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            try {
+                new ListingObjetWindow();
+
+            } catch (DAOException | ModelException e) {
+                showErrorMessage("Erreur lors de l'affichage de l'ensemble des objets", e.getMessage());
+            }
+        }
+    }
+
+    // (Research n°1) All rentals for a category of collectives
+    private class FirstSearch implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            new FirstSearchForm();
+        }
+    }
+
+    // (Research n°2) Select all ProblemExitRental based on a TypeOfExitRental
+    private class SecondSearch implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            try {
+                new SecondSearchForm();
+
+            } catch (DAOException e) {
+                showErrorMessage("Erreur lors de la recherche n°2", e.getMessage());
+            }
+        }
+    }
+
+    // (Research n°3) All rentals between 2 dates
+    private class ThirdSearch implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            new ThirdSearchForm();
+        }
+    }
+
+    // (Job task)
+    private class Delays implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent evt){
+            new ThirdSearchForm();
+        }
+    }
+}
+
+
