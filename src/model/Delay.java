@@ -1,5 +1,7 @@
 package model;
 
+import exception.ModelException;
+
 import java.util.GregorianCalendar;
 
 public class Delay {
@@ -9,10 +11,13 @@ public class Delay {
     private String nameOneObject;
     private GregorianCalendar startDate;
     private int maxRentalPeriod;
+    private int nbDaysDelay;
     private int deposit;
 
+    public Delay(){}
+
     //Constructor
-    public Delay(String nameCollectiveOwner, String rentalManager, int idOneObject, String nameOneObject, GregorianCalendar startDate, int maxRentalPeriod, int deposit){
+    public Delay(String nameCollectiveOwner, String rentalManager, int idOneObject, String nameOneObject, GregorianCalendar startDate, int maxRentalPeriod, int deposit) throws ModelException {
         setNameCollectiveOwner(nameCollectiveOwner);
         setRentalManager(rentalManager);
         setIdOneObject(idOneObject);
@@ -23,7 +28,8 @@ public class Delay {
     }
 
     //Setters
-    public void setDeposit(int deposit) {
+    public void setDeposit(int deposit) throws ModelException{
+        if(deposit < 0) throw new ModelException("La caution doit être plus grande que zéro");
         this.deposit = deposit;
     }
 
@@ -31,19 +37,23 @@ public class Delay {
         this.idOneObject = idOneObject;
     }
 
-    public void setMaxRentalPeriod(int maxRentalPeriod) {
+    public void setMaxRentalPeriod(int maxRentalPeriod) throws ModelException{
+        if(maxRentalPeriod < 1) throw new ModelException("La caution doit être plus grande que zéro");
         this.maxRentalPeriod = maxRentalPeriod;
     }
 
-    public void setNameCollectiveOwner(String nameCollectiveOwner) {
+    public void setNameCollectiveOwner(String nameCollectiveOwner) throws ModelException{
+        if(nameCollectiveOwner.equals("")) throw new ModelException("Le nom du collectif doit être rempli");
         this.nameCollectiveOwner = nameCollectiveOwner;
     }
 
-    public void setNameOneObject(String nameOneObject) {
+    public void setNameOneObject(String nameOneObject) throws ModelException{
+        if(nameOneObject.equals("")) throw new ModelException("Le nom de l'objet doit être rempli");
         this.nameOneObject = nameOneObject;
     }
 
-    public void setRentalManager(String rentalManager) {
+    public void setRentalManager(String rentalManager) throws ModelException{
+        if(rentalManager.equals("")) throw new ModelException("Le nom du locataire doit être rempli");
         this.rentalManager = rentalManager;
     }
 
@@ -51,6 +61,10 @@ public class Delay {
         this.startDate = startDate;
     }
 
+    public void setNbDaysDelay(int nbDaysDelay)throws ModelException {
+        if(nbDaysDelay < 0) throw new ModelException("Le nombre de jours de retards ne peut pas être négatif")    ;
+        this.nbDaysDelay = nbDaysDelay;
+    }
 
     //Getters
     public GregorianCalendar getStartDate() {
@@ -79,5 +93,9 @@ public class Delay {
 
     public String getRentalManager() {
         return rentalManager;
+    }
+
+    public int getNbDaysDelay() {
+        return nbDaysDelay;
     }
 }

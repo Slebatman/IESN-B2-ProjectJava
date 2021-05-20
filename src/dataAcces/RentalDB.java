@@ -1,6 +1,7 @@
 package dataAcces;
 
 import exception.ModelException;
+import model.Delay;
 import model.research.FirstResearch;
 import model.research.SecondResearch;
 import model.research.ThirdResearch;
@@ -178,9 +179,45 @@ public class RentalDB implements IRentalDAO {
 
     // [IMPLEMENT] Tache metier
     @Override
-    public ArrayList<Rental> getTacheMetier() {
-        return null;
+    public ArrayList<Delay> getTacheMetier() throws DAOException, ModelException{
+        ArrayList<Delay> rentalsWithDelays = new ArrayList<>();
+
+        try{
+            String sql = """
+                    SELECT c.name, r.rentalManager, r.idOneObject, o.name, r.startDate, o.maxRentalPeriod, o.deposit  
+                    FROM rental r 
+                    JOIN oneobject o on r.idOneObject = o.idOneObject 
+                    JOIN collective c on c.idCollective = r.idTenant 
+                    WHERE r.returnDate IS null;
+                    """;
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet data = statement.executeQuery();
+
+            while (data.next()) {
+                GregorianCalendar startDate = new GregorianCalendar();
+                startDate.setTime(data.getDate("r.startDate"));
+
+                Delay delay = new Delay();
+
+                delay.setNameCollectiveOwner(data.getString("c.name"));
+                delay.setRentalManager(data.getString("r.rentalManager"));
+                delay.setIdOneObject(data.getInt("r.idOneObject"));
+                delay.setNameOneObject(data.getString("o.name"));
+                delay.setStartDate(startDate);
+                delay.setMaxRentalPeriod(data.getInt("o.maxRentalPeriod"));
+                data.getInt("o.deposit");
+                if (!data.wasNull()) {
+                    delay.setDeposit(data.getInt("o.deposit"));
+                }
+                rentalsWithDelays.add(delay);
+            }
+
+        }catch (SQLException e) {
+            throw new DAOException("Erreur SQL : recherche des retards dans les locations n'est pas possible");
+        }
+        return rentalsWithDelays;
     }
+
 
     // Convert sql to java object Rental
     private Rental sqlToJavaObject(ResultSet data) throws SQLException, ModelException {
