@@ -24,4 +24,7 @@ public interface IRentalDAO {
     // Recovering a location based on its ID
     Rental getOneRentalBasedID(int idRental) throws DAOException, ModelException;
 
+    // Tahce metier
+    ArrayList<Rental> getTacheMetier();
+
 }

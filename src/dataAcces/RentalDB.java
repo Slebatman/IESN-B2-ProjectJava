@@ -176,6 +176,12 @@ public class RentalDB implements IRentalDAO {
         }
     }
 
+    // [IMPLEMENT] Tache metier
+    @Override
+    public ArrayList<Rental> getTacheMetier() {
+        return null;
+    }
+
     // Convert sql to java object Rental
     private Rental sqlToJavaObject(ResultSet data) throws SQLException, ModelException {
         GregorianCalendar startDate = new GregorianCalendar(), endDate = new GregorianCalendar();
