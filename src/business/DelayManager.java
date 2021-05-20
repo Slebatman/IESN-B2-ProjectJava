@@ -31,14 +31,12 @@ public class DelayManager {
     public ArrayList<Delay> getTacheMetier() throws DAOException, ModelException {
         ArrayList<Delay> rentals = this.dao.getTacheMetier();
         ArrayList<Delay> delays = new ArrayList<>();
-        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+
         GregorianCalendar today = new GregorianCalendar();
-        Date todayDate = today.getTime();
         GregorianCalendar startDate = new GregorianCalendar();
 
         for(Delay delay : rentals){
             startDate = delay.getStartDate();
-            //formatDate.format(startDate.getTime());
             double diff =  ((double)(today.getTime().getTime() - startDate.getTime().getTime())) / (1000 * 60 * 60 *24);
             int days = (int)diff;
             if(diff > delay.getMaxRentalPeriod()){

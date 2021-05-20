@@ -166,7 +166,11 @@ public class MainWindowsMenu extends JMenuBar {
     private class Delays implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
-            new ThirdSearchForm();
+            try{
+                new RentalDelaysWindow();
+            }catch(DAOException | ModelException e){
+                showErrorMessage("Erreur lors du listing des retards", e.getMessage());
+            }
         }
     }
 }
