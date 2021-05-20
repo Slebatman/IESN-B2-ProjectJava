@@ -45,7 +45,7 @@ public class RentalDB implements IRentalDAO {
         try {
             ArrayList<FirstResearch> allRentalsForOneCollectiveCategory = new ArrayList<>();
 
-            String sql = "SELECT r.startDate, o.name, c.name FROM rental r JOIN collective c ON (r.idTenant = c.idCollective) JOIN oneobject o on o.idObject = r.idObject WHERE c.category = ?";
+            String sql = "SELECT r.startDate, o.name, c.name FROM rental r JOIN collective c ON (r.idTenant = c.idCollective) JOIN oneobject o on o.idOneObject = r.idOneObject WHERE c.category = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, category);
 
@@ -77,7 +77,7 @@ public class RentalDB implements IRentalDAO {
                     SELECT r.startDate, r.returnDate, o.name, o.deposit, o.maxRentalPeriod, c.name, c.emailAddress FROM rental r
                         JOIN problemexitrental p on r.idRental = p.idRental
                         JOIN collective c on c.idCollective = r.idTenant
-                        JOIN oneobject o on o.idObject = r.idObject
+                        JOIN oneobject o on o.idOneObject = r.idOneObject
                     WHERE p.idTypeOfProblemRental = ?;""";
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -88,7 +88,11 @@ public class RentalDB implements IRentalDAO {
             while (data.next()) {
                 GregorianCalendar startDate = new GregorianCalendar(), endDate = new GregorianCalendar();
                 startDate.setTime(data.getDate("r.startDate"));
-                endDate.setTime(data.getDate("r.returnDate"));
+
+                data.getDate("r.returnDate");
+                if(!data.wasNull()) {
+                    endDate.setTime(data.getDate("o.purchaseDate"));
+                }
 
                 allRentalsBasedOnSameTypeReturnProblem.add(new SecondResearch(
                         startDate,
@@ -118,7 +122,7 @@ public class RentalDB implements IRentalDAO {
                     select o.name, o.purchaseDate, o.purchasePrice, p.invocedPrice, p.note, r.rentalManager
                     from rental r
                     JOIN problemexitrental p on r.idRental = p.idRental
-                    JOIN oneobject o on o.idObject = r.idObject
+                    JOIN oneobject o on o.idOneObject = r.idOneObject
                     WHERE r.startDate BETWEEN ? AND ? ;""";
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -228,7 +232,7 @@ public class RentalDB implements IRentalDAO {
         rental.setIdRental(data.getInt("idRental"));
         startDate.setTime(data.getDate("startDate"));
         rental.setStartDate(startDate);
-        rental.setIdObject(data.getInt("idObject"));
+        rental.setIdObject(data.getInt("idOneObject"));
         rental.setIdTenant(data.getInt("idTenant"));
         rental.setRentalManager(data.getString("rentalManager"));
 
