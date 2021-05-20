@@ -62,7 +62,6 @@ public class UpdateObjectWindow extends JFrame{
         //List des OneObject
 
         String value = listCollective.getItemAt(0).toString();
-        System.out.println(value);
         idCollective = collectiveController.getACollectiveIDBasedName(value);
         arrayObjects = oneObjectController.getAllObjectsForOneCollective(idCollective);
         listObjects = new JComboBox<String>();

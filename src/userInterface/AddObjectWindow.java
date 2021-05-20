@@ -18,7 +18,7 @@ public class AddObjectWindow extends JFrame {
     private JRadioButton commandable, notCommandable;
     private ButtonGroup radioGroup;
     private JComboBox listCollective;
-    private JPanel panel, panelRadio, panelButton, panelWindow, panelDate;
+    private JPanel panel, panelRadio, panelButton, panelWindow, panelDate, panelThread;
     private JButton buttonValid, buttonCancel, buttonDate;
     private OneObject object;
     private Boolean commandableValue;
@@ -31,7 +31,7 @@ public class AddObjectWindow extends JFrame {
 
     public AddObjectWindow() throws DAOException {
         super("Create an object");
-        setBounds(250, 200, 600, 450);
+        setBounds(250, 200, 600, 700);
         this.setLayout(new FlowLayout());
 
         //Controlers et liste des collectives
@@ -119,7 +119,8 @@ public class AddObjectWindow extends JFrame {
         panelWindow.add(panel);
         panelWindow.add(panelButton);
         panelWindow.setVisible(true);
-        this.add(panelWindow);
+
+        this.getContentPane().add(panelWindow);
         setVisible(true);
     }
 
