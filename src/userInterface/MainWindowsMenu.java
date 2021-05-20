@@ -18,51 +18,51 @@ public class MainWindowsMenu extends JMenuBar {
     public MainWindowsMenu() {
         // Main menu
         application = new JMenu("Application");
-        objects = new JMenu("Object");
-        research = new JMenu("Research");
-        delays = new JMenu("Delays");
-        add(application);
+        objects = new JMenu("Objet");
+        research = new JMenu("Recherche");
+        delays = new JMenu("Retard");
         add(objects);
         add(research);
         add(delays);
+        add(application);
 
         // Application menu
-        leave = new JMenuItem("Leave");
+        leave = new JMenuItem("Quitter");
         leave.addActionListener(new ExitListener());
         application.add(leave);
 
         // Object menu
-        createObject = new JMenuItem("Create");
+        createObject = new JMenuItem("Ajouter");
         createObject.addActionListener(new AddObject());
         objects.add(createObject);
 
-        updateObject = new JMenuItem("Update");
+        updateObject = new JMenuItem("Mettre à jour");
         updateObject.addActionListener(new UpdateObject());
         objects.add(updateObject);
 
-        deleteObject = new JMenuItem("Delete");
+        deleteObject = new JMenuItem("Supprimer");
         deleteObject.addActionListener(new DeleteObject());
         objects.add(deleteObject);
 
-        showObjects = new JMenuItem("Show all");
+        showObjects = new JMenuItem("Listing complet");
         showObjects.addActionListener(new ListingObjects());
         objects.add(showObjects);
 
         // Research menu
-        firstSearch = new JMenuItem("Search rentals by collective category");
+        firstSearch = new JMenuItem("Via la catégorie");
         firstSearch.addActionListener(new FirstSearch());
         research.add(firstSearch);
 
-        secondSearch = new JMenuItem("Search rentals by type of problem");
+        secondSearch = new JMenuItem("Via le type de problème de retour");
         secondSearch.addActionListener(new SecondSearch());
         research.add(secondSearch);
 
-        thirdSearch = new JMenuItem("Search rentals between 2 dates");
+        thirdSearch = new JMenuItem("Entre 2 dates");
         thirdSearch.addActionListener(new ThirdSearch());
         research.add(thirdSearch);
 
         // Delay menu
-        delaysManagement = new JMenuItem("Show all the delays");
+        delaysManagement = new JMenuItem("Listing complet");
         delaysManagement.addActionListener(new Delays());
         delays.add(delaysManagement);
 
