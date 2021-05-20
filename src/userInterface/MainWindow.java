@@ -1,6 +1,9 @@
 package userInterface;
 
+import exception.BusinessException;
+import exception.ControllerException;
 import exception.DAOException;
+import exception.ModelException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -91,7 +94,7 @@ public class MainWindow extends JFrame {
         public void actionPerformed(ActionEvent evt){
             try {
                 AddObjectWindow addObjectWindow = new AddObjectWindow();
-            } catch (DAOException e) {
+            } catch (DAOException | ModelException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Get list of collective Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -102,7 +105,7 @@ public class MainWindow extends JFrame {
         public void actionPerformed(ActionEvent evt){
             try {
                 DeleteObjectWindow deleteWindow = new DeleteObjectWindow();
-            } catch (DAOException e) {
+            } catch (DAOException | ModelException | BusinessException | ControllerException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Get list of collective or Objects Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -113,7 +116,7 @@ public class MainWindow extends JFrame {
         public void actionPerformed(ActionEvent evt){
             try {
                 UpdateObjectWindow updateWindow = new UpdateObjectWindow();
-            } catch (DAOException e) {
+            } catch (DAOException | ModelException | BusinessException | ControllerException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Get list of collective Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
@@ -124,7 +127,7 @@ public class MainWindow extends JFrame {
         public void actionPerformed(ActionEvent evt){
             try {
                 ListingObjetWindow listWindow = new ListingObjetWindow();
-            } catch (DAOException e) {
+            } catch (DAOException | ModelException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Get list of Objects Exception", JOptionPane.ERROR_MESSAGE);
             }
         }

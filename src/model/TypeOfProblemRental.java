@@ -1,5 +1,7 @@
 package model;
 
+import exception.ModelException;
+
 public class TypeOfProblemRental {
     // Variables
     private Integer idTypeOfProblemRental;
@@ -7,7 +9,7 @@ public class TypeOfProblemRental {
     private String description;
 
     // Constructor
-    public TypeOfProblemRental(int idTypeOfProblemRental, String name, String description) {
+    public TypeOfProblemRental(int idTypeOfProblemRental, String name, String description) throws ModelException {
         setIdTypeOfProblemRental(idTypeOfProblemRental);
         setName(name);
         setDescription(description);
@@ -18,11 +20,13 @@ public class TypeOfProblemRental {
         this.idTypeOfProblemRental = idTypeOfProblemRental;
     }
 
-    public void setName(String name) {
+    public void setName(String name) throws ModelException {
+        if (name.equals("")) throw new ModelException("Le nom ne peut pas être une chaine vide");
         this.name = name;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description) throws ModelException {
+        if (description.equals("")) throw new ModelException("La description ne peut pas être une chaine vide");
         this.description = description;
     }
 

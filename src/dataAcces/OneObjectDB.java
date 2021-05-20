@@ -2,6 +2,7 @@ package dataAcces;
 
 import dataAcces.dao.IOneObjectDAO;
 import exception.DAOException;
+import exception.ModelException;
 import model.OneObject;
 
 
@@ -59,7 +60,7 @@ public class OneObjectDB implements IOneObjectDAO{
     }
 
     // Generic function to select several objects
-    private ArrayList<OneObject> selectMultipleObject(PreparedStatement statement) throws SQLException {
+    private ArrayList<OneObject> selectMultipleObject(PreparedStatement statement) throws SQLException, ModelException {
         ArrayList<OneObject> listOfOneObject = new ArrayList<>();
         ResultSet data = statement.executeQuery();
 
@@ -70,7 +71,7 @@ public class OneObjectDB implements IOneObjectDAO{
     }
 
     // Generic function to select one object
-    private OneObject selectOneObject(PreparedStatement statement) throws SQLException {
+    private OneObject selectOneObject(PreparedStatement statement) throws SQLException, ModelException {
 
         ResultSet data = statement.executeQuery();
         while(data.next()) {
@@ -81,7 +82,7 @@ public class OneObjectDB implements IOneObjectDAO{
 
     // [IMPLEMENT] Retrieve all objects from the database
     @Override
-    public ArrayList<OneObject> getAllObjects() throws DAOException {
+    public ArrayList<OneObject> getAllObjects() throws DAOException, ModelException {
 
         try {
             String sql = "SELECT * FROM oneobject";
@@ -96,7 +97,7 @@ public class OneObjectDB implements IOneObjectDAO{
 
     // [IMPLEMENT] Recovering all the objects of a collective
     @Override
-    public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOException {
+    public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOException, ModelException {
 
         try {
             String sql = "SELECT * FROM oneobject WHERE idCollectiveOwner = ?";
@@ -111,7 +112,7 @@ public class OneObjectDB implements IOneObjectDAO{
 
     // [IMPLEMENT] Retrieving an object via its id
     @Override
-    public OneObject getObjectByID(int idObject) throws DAOException {
+    public OneObject getObjectByID(int idObject) throws DAOException, ModelException {
         try {
             String sql = "SELECT * FROM oneobject WHERE idObject = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -124,7 +125,7 @@ public class OneObjectDB implements IOneObjectDAO{
     }
 
     // Convert sql to java object OneObject
-    private OneObject sqlToJavaObject(ResultSet data) throws SQLException {
+    private OneObject sqlToJavaObject(ResultSet data) throws SQLException, ModelException {
         GregorianCalendar calendar = new GregorianCalendar();
         OneObject oneObject = new OneObject();
 

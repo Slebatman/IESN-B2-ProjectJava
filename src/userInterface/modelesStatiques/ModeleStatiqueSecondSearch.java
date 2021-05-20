@@ -1,6 +1,9 @@
 package userInterface.modelesStatiques;
 
-import model.SecondResearch;
+import exception.BusinessException;
+import exception.ControllerException;
+import exception.ModelException;
+import model.research.SecondResearch;
 import controller.ResearchController;
 import exception.DAOException;
 
@@ -17,7 +20,7 @@ public class ModeleStatiqueSecondSearch extends AbstractTableModel {
     private SimpleDateFormat formatDate;
     GregorianCalendar date;
     String dateFormatted;
-    public ModeleStatiqueSecondSearch(int typeOfProblem) throws DAOException {
+    public ModeleStatiqueSecondSearch(int typeOfProblem) throws DAOException, ModelException, BusinessException, ControllerException {
         super();
         controler = new ResearchController();
         listSearch = controler.getProblemRentalBasedOnTypeOfProblem(typeOfProblem);

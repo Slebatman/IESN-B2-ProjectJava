@@ -1,4 +1,6 @@
-package model;
+package model.research;
+
+import exception.ModelException;
 
 import java.util.GregorianCalendar;
 
@@ -9,10 +11,8 @@ public class FirstResearch {
     private String collectiveName;
 
     // Constructors
-    public FirstResearch() {
-    }
 
-    public FirstResearch(GregorianCalendar startDate, String objectName, String collectiveName) {
+    public FirstResearch(GregorianCalendar startDate, String objectName, String collectiveName) throws ModelException {
         setStartDate(startDate);
         setObjectName(objectName);
         setCollectiveName(collectiveName);
@@ -23,11 +23,13 @@ public class FirstResearch {
         this.startDate = startDate;
     }
 
-    public void setObjectName(String objectName) {
+    public void setObjectName(String objectName) throws ModelException {
+        if (objectName.equals("")) throw new ModelException("Le nom ne peut pas être une chaine vide");
         this.objectName = objectName;
     }
 
-    public void setCollectiveName(String collectiveName)  {
+    public void setCollectiveName(String collectiveName) throws ModelException {
+        if (collectiveName.equals("")) throw new ModelException("Le nom ne peut pas être une chaine vide");
         this.collectiveName = collectiveName;
     }
 

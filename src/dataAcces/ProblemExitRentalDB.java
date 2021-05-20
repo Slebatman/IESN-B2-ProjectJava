@@ -2,6 +2,7 @@ package dataAcces;
 
 import dataAcces.dao.IProblemExitRental;
 import exception.DAOException;
+import exception.ModelException;
 import model.ProblemExitRental;
 
 import java.sql.Connection;
@@ -15,7 +16,7 @@ public class ProblemExitRentalDB implements IProblemExitRental {
     Connection connection = SingletonConnexion.getConnection();
 
     // Generic function who select a list of ProblemExitLocation
-    private ArrayList<ProblemExitRental> selectListOfProblemExitRental(PreparedStatement statement) throws SQLException {
+    private ArrayList<ProblemExitRental> selectListOfProblemExitRental(PreparedStatement statement) throws SQLException, ModelException {
         ArrayList<ProblemExitRental> listOfProblemExitRental = new ArrayList<>();
         ResultSet data = statement.executeQuery();
 
@@ -28,7 +29,7 @@ public class ProblemExitRentalDB implements IProblemExitRental {
 
     // [IMPLEMENT] (Research n°2) Select all ProblemExitRental based on a TypeOfExitRental
     @Override
-    public ArrayList<ProblemExitRental> getProblemExitRentalBasedTypeProblem(int idTypeOfProblemRental) throws DAOException {
+    public ArrayList<ProblemExitRental> getProblemExitRentalBasedTypeProblem(int idTypeOfProblemRental) throws DAOException, ModelException {
         try {
             String sql = "SELECT * FROM problemexitrental WHERE idTypeOfProblemRental = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -42,7 +43,7 @@ public class ProblemExitRentalDB implements IProblemExitRental {
     }
 
     // Convert sql data to Java ProblemExitRental Object
-    private ProblemExitRental sqlToJavaObject(ResultSet data) throws SQLException {
+    private ProblemExitRental sqlToJavaObject(ResultSet data) throws SQLException, ModelException {
         return new ProblemExitRental(
                 data.getInt("idproblemExitLocation"),
                 data.getInt("idRental"),

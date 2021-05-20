@@ -1,8 +1,9 @@
 package dataAcces;
 
-import model.FirstResearch;
-import model.SecondResearch;
-import model.ThirdResearch;
+import exception.ModelException;
+import model.research.FirstResearch;
+import model.research.SecondResearch;
+import model.research.ThirdResearch;
 import dataAcces.dao.IRentalDAO;
 import exception.DAOException;
 import model.Rental;
@@ -16,7 +17,7 @@ public class RentalDB implements IRentalDAO {
     private final Connection connection = SingletonConnexion.getConnection();
 
     // Generic function to select several objects
-    public ArrayList<Rental> selectListRental(PreparedStatement statement) throws SQLException {
+    public ArrayList<Rental> selectListRental(PreparedStatement statement) throws SQLException, ModelException {
         ArrayList<Rental> listRental = new ArrayList<>();
         ResultSet data = statement.executeQuery();
 
@@ -28,7 +29,7 @@ public class RentalDB implements IRentalDAO {
     }
 
     // Generic function to select one object
-    public Rental selectOneRental(PreparedStatement statement) throws SQLException {
+    public Rental selectOneRental(PreparedStatement statement) throws SQLException, ModelException {
         ResultSet data = statement.executeQuery();
 
         while (data.next()) {
@@ -39,7 +40,7 @@ public class RentalDB implements IRentalDAO {
 
     // [IMPLEMENT] (Research n°1) All rentals for a category of collectives
     @Override
-    public ArrayList<FirstResearch> getRentalsForOneCollectiveCategory(String category) throws DAOException {
+    public ArrayList<FirstResearch> getRentalsForOneCollectiveCategory(String category) throws DAOException, ModelException {
         try {
             ArrayList<FirstResearch> allRentalsForOneCollectiveCategory = new ArrayList<>();
 
@@ -67,7 +68,7 @@ public class RentalDB implements IRentalDAO {
 
     // [IMPLEMENT] (Research n°2) List all rentals that have had the same type of return problem
     @Override
-    public ArrayList<SecondResearch> getRentalsBasedOnSameTypeReturnProblem(int idTypeOfProblemExitProblemRental) throws DAOException {
+    public ArrayList<SecondResearch> getRentalsBasedOnSameTypeReturnProblem(int idTypeOfProblemExitProblemRental) throws DAOException, ModelException {
         try {
             ArrayList<SecondResearch> allRentalsBasedOnSameTypeReturnProblem = new ArrayList<>();
 
@@ -108,7 +109,7 @@ public class RentalDB implements IRentalDAO {
 
     // [IMPLEMENT] (Research n°3) All rentals between 2 dates
     @Override
-    public ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException {
+    public ArrayList<ThirdResearch> getRentalBetween2Dates(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException, ModelException {
         ArrayList<ThirdResearch> rentalBetween2Dates = new ArrayList<>();
 
         try {
@@ -163,7 +164,7 @@ public class RentalDB implements IRentalDAO {
 
     // [IMPLEMENT] Recovering a location based on its ID
     @Override
-    public Rental getOneRentalBasedID(int idRental) throws DAOException {
+    public Rental getOneRentalBasedID(int idRental) throws DAOException, ModelException {
         try {
             String sql = "SELECT * FROM rental WHERE idRental = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -176,7 +177,7 @@ public class RentalDB implements IRentalDAO {
     }
 
     // Convert sql to java object Rental
-    private Rental sqlToJavaObject(ResultSet data) throws SQLException {
+    private Rental sqlToJavaObject(ResultSet data) throws SQLException, ModelException {
         GregorianCalendar startDate = new GregorianCalendar(), endDate = new GregorianCalendar();
         Rental rental = new Rental();
 

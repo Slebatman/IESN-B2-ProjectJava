@@ -1,5 +1,6 @@
 package dataAcces.dao;
 
+import exception.ModelException;
 import model.*;
 import exception.DAOException;
 
@@ -17,12 +18,12 @@ public interface IOneObjectDAO {
     void delete(int idObject) throws DAOException;
 
     // Retrieve all objects
-    ArrayList<OneObject> getAllObjects() throws DAOException;
+    ArrayList<OneObject> getAllObjects() throws DAOException, ModelException;
 
     // Recovering all the objects of a collective
-    ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOException;
+    ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOException, ModelException;
 
     // Retrieving an object via its id
-    OneObject getObjectByID(int idObject) throws DAOException;
+    OneObject getObjectByID(int idObject) throws DAOException, ModelException;
 
 }

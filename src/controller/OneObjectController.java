@@ -1,4 +1,7 @@
 package controller;
+import exception.BusinessException;
+import exception.ControllerException;
+import exception.ModelException;
 import model.*;
 import business.OneObjectManager;
 import exception.DAOException;
@@ -30,17 +33,18 @@ public class OneObjectController {
    }
 
    // Delete an object
-   public void deleteAnObject(OneObject oneObject) throws DAOException {
+   public void deleteAnObject(OneObject oneObject) throws DAOException, BusinessException {
       manager.deleteAnObject(oneObject);
    }
 
    // Retrieve all objects
-   public ArrayList<OneObject> getAllObjects() throws DAOException {
+   public ArrayList<OneObject> getAllObjects() throws DAOException, ModelException {
       return manager.getAllObjects();
    }
 
    // Recovering all the objects of a collective
-   public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOException {
+   public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOException, ModelException, BusinessException, ControllerException {
+      if (idCollective < 1) throw new ControllerException("Erreur : l'identifiant doit être suppérieur à 0");
       return manager.getAllObjectsForOneCollective(idCollective);
    }
 

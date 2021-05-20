@@ -1,4 +1,6 @@
-package model;
+package model.research;
+
+import exception.ModelException;
 
 import java.util.GregorianCalendar;
 
@@ -13,7 +15,7 @@ public class SecondResearch {
     private String emailAddressCollectiveOwner;
 
     // Constructor
-    public SecondResearch(GregorianCalendar startDate, GregorianCalendar returnDate, String nameObject, int deposit, int maxRentalPeriod, String nameCollectiveOwner, String emailAddressCollectiveOwner) {
+    public SecondResearch(GregorianCalendar startDate, GregorianCalendar returnDate, String nameObject, int deposit, int maxRentalPeriod, String nameCollectiveOwner, String emailAddressCollectiveOwner) throws ModelException {
         setStartDate(startDate);
         setStartDate(returnDate);
         setNameObject(nameObject);
@@ -28,27 +30,33 @@ public class SecondResearch {
         this.startDate = startDate;
     }
 
-    public void setReturnDate(GregorianCalendar returnDate) {
+    public void setReturnDate(GregorianCalendar returnDate) throws ModelException {
+        if (returnDate.compareTo(startDate) != 1) throw new ModelException("La date de retour doit être plus recente ou égale à la date de départ");
         this.returnDate = returnDate;
     }
 
-    public void setNameObject(String nameObject) {
+    public void setNameObject(String nameObject) throws ModelException {
+        if (nameObject.equals("")) throw new ModelException("Le responsable location ne peut pas être une chaine vide");
         this.nameObject = nameObject;
     }
 
-    public void setDeposit(Integer deposit) {
+    public void setDeposit(Integer deposit) throws ModelException {
+        if (deposit < 0) throw new ModelException("La caution doit être suppérieure ou égale à 0");
         this.deposit = deposit;
     }
 
-    public void setMaxRentalPeriod(Integer maxRentalPeriod) {
+    public void setMaxRentalPeriod(Integer maxRentalPeriod) throws ModelException {
+        if (maxRentalPeriod < 0) throw new ModelException("La durée maximale de location doit être suppérieure ou égale à 0");
         this.maxRentalPeriod = maxRentalPeriod;
     }
 
-    public void setNameCollectiveOwner(String nameCollectiveOwner) {
+    public void setNameCollectiveOwner(String nameCollectiveOwner) throws ModelException {
+        if (nameCollectiveOwner.equals("")) throw new ModelException("Le nom ne peut pas être une chaine vide");
         this.nameCollectiveOwner = nameCollectiveOwner;
     }
 
-    public void setEmailAddressCollectiveOwner(String emailAddressCollectiveOwner) {
+    public void setEmailAddressCollectiveOwner(String emailAddressCollectiveOwner) throws ModelException {
+        if (emailAddressCollectiveOwner.equals("")) throw new ModelException("L'email' ne peut pas être une chaine vide");
         this.emailAddressCollectiveOwner = emailAddressCollectiveOwner;
     }
 

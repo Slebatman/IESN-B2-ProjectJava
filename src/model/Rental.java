@@ -1,5 +1,7 @@
 package model;
 
+import exception.ModelException;
+
 import java.util.GregorianCalendar;
 
 public class Rental {
@@ -14,7 +16,7 @@ public class Rental {
     // Constructors
     public Rental() {}
 
-    public Rental(GregorianCalendar startDate, int idObject, int idTenant, GregorianCalendar returnDate, String rentalManager) {
+    public Rental(GregorianCalendar startDate, int idObject, int idTenant, GregorianCalendar returnDate, String rentalManager) throws ModelException {
         setStartDate(startDate);
         setIdObject(idObject);
         setIdTenant(idTenant);
@@ -22,13 +24,14 @@ public class Rental {
         setRentalManager(rentalManager);
     }
 
-    public Rental(int idRental, GregorianCalendar startDate, int idObject, int idTenant, GregorianCalendar returnDate, String rentalManager) {
+    public Rental(int idRental, GregorianCalendar startDate, int idObject, int idTenant, GregorianCalendar returnDate, String rentalManager) throws ModelException {
         this(startDate, idObject, idTenant, returnDate, rentalManager);
         setIdRental(idRental);
     }
 
     // Setters
-    public void setIdRental(Integer idRental) {
+    public void setIdRental(Integer idRental) throws ModelException {
+        if (idRental < 1) throw new ModelException("L'identifiant doit être suppérieur à 0");
         this.idRental = idRental;
     }
 
@@ -36,19 +39,23 @@ public class Rental {
         this.startDate = startDate;
     }
 
-    public void setIdObject(Integer idObject) {
+    public void setIdObject(Integer idObject) throws ModelException {
+        if (idObject < 1) throw new ModelException("L'identifiant doit être suppérieur à 0");
         this.idObject = idObject;
     }
 
-    public void setIdTenant(Integer idTenant) {
+    public void setIdTenant(Integer idTenant) throws ModelException {
+        if (idTenant < 1) throw new ModelException("L'identifiant doit être suppérieur à 0");
         this.idTenant = idTenant;
     }
 
-    public void setReturnDate(GregorianCalendar returnDate) {
+    public void setReturnDate(GregorianCalendar returnDate) throws ModelException {
+        if (returnDate.compareTo(startDate) > 0) throw new ModelException("La date de retour doit être plus ancienne ou égale à la date de départ");
         this.returnDate = returnDate;
     }
 
-    public void setRentalManager(String rentalManager) {
+    public void setRentalManager(String rentalManager) throws ModelException {
+        if (rentalManager.equals("")) throw new ModelException("Le responsable location ne peut pas être une chaine vide");
         this.rentalManager = rentalManager;
     }
 

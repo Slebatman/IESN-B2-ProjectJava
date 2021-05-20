@@ -1,5 +1,6 @@
 package userInterface.modelesStatiques;
 
+import exception.ModelException;
 import model.OneObject;
 import controller.OneObjectController;
 import exception.DAOException;
@@ -16,7 +17,7 @@ public class ModeleStatiqueListingObjects extends AbstractTableModel {
     private ArrayList<OneObject> listObjects;
     private OneObjectController controler;
     private SimpleDateFormat formatDate;
-    public ModeleStatiqueListingObjects() throws DAOException {
+    public ModeleStatiqueListingObjects() throws DAOException, ModelException {
         super();
         controler = new OneObjectController();
         listObjects = controler.getAllObjects();

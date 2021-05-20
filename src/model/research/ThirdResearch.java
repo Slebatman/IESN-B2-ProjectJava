@@ -1,4 +1,6 @@
-package model;
+package model.research;
+
+import exception.ModelException;
 
 import java.util.GregorianCalendar;
 
@@ -14,7 +16,7 @@ public class ThirdResearch {
     // Constructors
     public ThirdResearch() {}
 
-    public ThirdResearch(String objectName, GregorianCalendar purchaseDate, Double purchasePrice, Double invoicedPrice, String note, String rentalManager) {
+    public ThirdResearch(String objectName, GregorianCalendar purchaseDate, Double purchasePrice, Double invoicedPrice, String note, String rentalManager) throws ModelException {
         setObjectName(objectName);
         setPurchaseDate(purchaseDate);
         setPurchasePrice(purchasePrice);
@@ -24,7 +26,8 @@ public class ThirdResearch {
     }
 
     // Setters
-    public void setObjectName(String objectName) {
+    public void setObjectName(String objectName) throws ModelException {
+        if (objectName.equals("")) throw new ModelException("Le nom ne peut pas être une chaine vide");
         this.objectName = objectName;
     }
 
@@ -32,19 +35,23 @@ public class ThirdResearch {
         this.purchaseDate = purchaseDate;
     }
 
-    public void setPurchasePrice(Double purchasePrice) {
+    public void setPurchasePrice(Double purchasePrice) throws ModelException {
+        if (purchasePrice < 0) throw new ModelException("Le prix d'achat doit être suppérieur ou égal à 0");
         this.purchasePrice = purchasePrice;
     }
 
-    public void setInvoicedPrice(Double invoicedPrice) {
+    public void setInvoicedPrice(Double invoicedPrice) throws ModelException {
+        if (invoicedPrice < 0) throw new ModelException("La facture doit être suppérieur ou égal à 0");
         this.invoicedPrice = invoicedPrice;
     }
 
-    public void setNote(String note) {
+    public void setNote(String note) throws ModelException {
+        if (objectName.equals("")) throw new ModelException("La note ne peut pas être une chaine vide");
         this.note = note;
     }
 
-    public void setRentalManager(String rentalManager) {
+    public void setRentalManager(String rentalManager) throws ModelException {
+        if (objectName.equals("")) throw new ModelException("Le responsable location ne peut pas être une chaine vide");
         this.rentalManager = rentalManager;
     }
 
