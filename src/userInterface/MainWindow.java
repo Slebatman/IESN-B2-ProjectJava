@@ -9,18 +9,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class MainWindow extends JFrame {
     private Container frameContainer;
     private MainWindowPanel panel;
     private JMenuBar menu;
-    private JMenu application, objects, research;
-    JMenuItem leave, createObject, updateObject, deleteObject, showObjects, firstSearch, secondSearch, thirdSearch;
+    private JMenu application, objects, research, delays;
+    private JLabel imageAnimation;
+    JMenuItem leave, createObject, updateObject, deleteObject, showObjects, firstSearch, secondSearch, thirdSearch, delaysManagement;
     public MainWindow(){
         super("Gestion d'inventaire");
-        setBounds(100, 100, 500, 500);
+        setBounds(100, 100, 600, 700);
 
         panel = new MainWindowPanel();
+
+
 
         frameContainer = this.getContentPane();
         frameContainer.setLayout(new BorderLayout());
@@ -31,10 +35,12 @@ public class MainWindow extends JFrame {
         application = new JMenu("Application");
         objects = new JMenu("Object");
         research = new JMenu("Research");
+        delays = new JMenu("Delays");
 
         menu.add(application);
         menu.add(objects);
         menu.add(research);
+        menu.add(delays);
 
         leave = new JMenuItem("Leave");
         leave.addActionListener(new ExitListener());
@@ -67,6 +73,10 @@ public class MainWindow extends JFrame {
         thirdSearch = new JMenuItem("Search rentals between 2 dates");
         thirdSearch.addActionListener(new ThirdSearch());
         research.add(thirdSearch);
+
+        delaysManagement = new JMenuItem("Show all the delays");
+        delaysManagement.addActionListener(new Delays());
+        delays.add(delaysManagement);
 
 
         setVisible(true);
@@ -145,8 +155,15 @@ public class MainWindow extends JFrame {
         @Override
         public void actionPerformed(ActionEvent evt){
             ThirdSearchForm thirdSearchForm = new ThirdSearchForm();
-            }
-
         }
 
+    }
+
+    private class Delays implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent evt){
+            ThirdSearchForm thirdSearchForm = new ThirdSearchForm();
+        }
+
+    }
 }

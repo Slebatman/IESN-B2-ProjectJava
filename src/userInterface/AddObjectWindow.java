@@ -20,8 +20,13 @@ public class AddObjectWindow extends JFrame {
     private JTextField textName, textPrice, textDeposit;
     private JRadioButton commendable, notCommendable;
     private ButtonGroup radioGroup;
+<<<<<<< HEAD
+    private JComboBox listCollective;
+    private JPanel panel, panelRadio, panelButton, panelWindow, panelDate, panelThread;
+=======
     private JComboBox comboboxAllCollectives;
     private JPanel panel, panelRadio, panelButton, panelWindow, panelDate;
+>>>>>>> f76d3b79d738982ce257958d3c78d40436f0935c
     private JButton buttonValid, buttonCancel, buttonDate;
     private OneObject object;
     private Boolean commendableValue;
@@ -32,11 +37,17 @@ public class AddObjectWindow extends JFrame {
     private ArrayList<String> listAllCollectives;
     private OneObjectController oneObjectController;
 
+<<<<<<< HEAD
+    public AddObjectWindow() throws DAOException {
+        super("Create an object");
+        setBounds(250, 200, 600, 700);
+=======
     // Constructor
     public AddObjectWindow() throws DAOException, ModelException {
         // Title frame
         super("Créer et ajouter un nouvel objet");
         setBounds(250, 200, 600, 450);
+>>>>>>> f76d3b79d738982ce257958d3c78d40436f0935c
         this.setLayout(new FlowLayout());
 
         // Controllers
@@ -139,7 +150,8 @@ public class AddObjectWindow extends JFrame {
         panelWindow.add(panel);
         panelWindow.add(panelButton);
         panelWindow.setVisible(true);
-        this.add(panelWindow);
+
+        this.getContentPane().add(panelWindow);
         setVisible(true);
     }
 

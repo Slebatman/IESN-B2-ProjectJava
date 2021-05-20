@@ -49,15 +49,18 @@ public class ThirdSearchForm extends JFrame {
             firstDate.setTime((Date)spinnerFirstDate.getModel().getValue());
             secondDate = new GregorianCalendar();
             secondDate.setTime((Date)spinnerSecondDate.getModel().getValue());
-            if(firstDate != secondDate && firstDate.compareTo(secondDate) < 0){
+            if(firstDate.compareTo(secondDate) < 0){
                 try {
                     ThirdSearchWindows thirdSearchWindows = new ThirdSearchWindows(firstDate, secondDate);
                 } catch (DAOException | ModelException | BusinessException | ControllerException e) {
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Get list of Rentals between 2 dates Exception", JOptionPane.ERROR_MESSAGE);
                 }
-                }
                 ThirdSearchForm.this.dispose();
+                }
+            else{
+                JOptionPane.showMessageDialog(null, "the start Date should be before the return date !", "Date Exception", JOptionPane.ERROR_MESSAGE);
             }
+        }
         }
 
 }
