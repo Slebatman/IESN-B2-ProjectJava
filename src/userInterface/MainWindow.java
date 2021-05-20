@@ -9,29 +9,37 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 public class MainWindow extends JFrame {
-    private Container frameContainer;
+    // Variables
+    private Container contentPane;
     private MainWindowPanel panel;
     private JMenuBar menu;
     private JMenu application, objects, research, delays;
     private JLabel imageAnimation;
     JMenuItem leave, createObject, updateObject, deleteObject, showObjects, firstSearch, secondSearch, thirdSearch, delaysManagement;
-    public MainWindow(){
-        super("Gestion d'inventaire");
+
+    // Constructor
+    public MainWindow() {
+        // Frame
+        super("Gestion de l'inventaire - Animation namuroise");
         setBounds(100, 100, 600, 700);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // Frame content panel
+        contentPane = this.getContentPane();
+        contentPane.setLayout(new BorderLayout());
         panel = new MainWindowPanel();
+        contentPane.add(panel, BorderLayout.CENTER);
 
-
-
-        frameContainer = this.getContentPane();
-        frameContainer.setLayout(new BorderLayout());
-        frameContainer.add(panel, BorderLayout.CENTER);
-
+        // Frame menu panel
         menu = new JMenuBar();
-        this.setJMenuBar(menu);
+        setJMenuBar(menu);
+
+        // Frame icon
+        this.setIconImage(new ImageIcon(getClass().getResource("ressources/age.gif")).getImage());
+
+
         application = new JMenu("Application");
         objects = new JMenu("Object");
         research = new JMenu("Research");

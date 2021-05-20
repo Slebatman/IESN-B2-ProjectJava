@@ -11,7 +11,7 @@ public class AnimationThread extends Thread{
     public AnimationThread(JPanel panel){
         this.panel = panel;
         animation = true;
-        Icon imageIcon = new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("animation.gif"));
+        Icon imageIcon = new ImageIcon(getClass().getResource("ressources/animation.gif"));
         imageAnimation = new JLabel(imageIcon);
         imageAnimation.setSize(200, 150);
     }
