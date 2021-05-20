@@ -4,16 +4,19 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainWindowPanel extends JPanel {
-    private JLabel label1;
+    private JLabel label;
 
-    public MainWindowPanel(){
-        this.setBorder(BorderFactory.createEmptyBorder(10,30,10,30));
-        this.setBorder(BorderFactory.createLineBorder(Color.red));
-        this.setLayout(new GridLayout(2,1));
+    public MainWindowPanel() {
+        // Layout
+        setBorder(BorderFactory.createEmptyBorder(15,30,10,30));
+        setLayout(new BorderLayout(0, 15));
 
+        // Label
+        label = new JLabel("Bienvenue dans la gestion de votre inventaire !");
+        label.setHorizontalAlignment(JLabel.CENTER);
+        this.add(label, BorderLayout.NORTH);
+
+        // Start thread
         new AnimationThread(this).start();
-        label1 = new JLabel("Bienvenue dans la gestion de votre inventaire !");
-        this.add(label1);
     }
-
 }
