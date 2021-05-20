@@ -34,7 +34,7 @@ public class OneObjectDB implements IOneObjectDAO{
     public void update(OneObject o) throws DAOException {
         try {
             String sql = "UPDATE oneobject SET name = ?, idCollectiveOwner = ?, isCommendable = ?, purchaseDate = ?, purchasePrice = ?, " +
-                    "deposit = ?, maxRentalPeriod = ? WHERE idObject = ?";
+                    "deposit = ?, maxRentalPeriod = ? WHERE idOneObject = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             editPreparedStatement(statement, o);
             statement.setInt(8, o.getIdObject());
@@ -49,7 +49,7 @@ public class OneObjectDB implements IOneObjectDAO{
     @Override
     public void delete(int idObject) throws DAOException {
         try {
-            String sql = "DELETE FROM oneobject WHERE idObject = ?";
+            String sql = "DELETE FROM oneobject WHERE idOneObject = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, idObject);
             statement.executeUpdate();
@@ -114,7 +114,7 @@ public class OneObjectDB implements IOneObjectDAO{
     @Override
     public OneObject getObjectByID(int idObject) throws DAOException, ModelException {
         try {
-            String sql = "SELECT * FROM oneobject WHERE idObject = ?";
+            String sql = "SELECT * FROM oneobject WHERE idOneObject = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, idObject);
             return selectOneObject(statement);
@@ -130,7 +130,7 @@ public class OneObjectDB implements IOneObjectDAO{
         OneObject oneObject = new OneObject();
 
         // ID
-        oneObject.setIdObject(data.getInt("idObject"));
+        oneObject.setIdObject(data.getInt("idOneObject"));
         // Name
         oneObject.setName( data.getString("name"));
         // Collective Owner
