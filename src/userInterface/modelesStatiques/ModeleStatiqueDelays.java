@@ -1,24 +1,35 @@
 package userInterface.modelesStatiques;
 
-public class ModeleStatiqueDelays {
-    /*
-    private final Delays[] delays;
-    private final String[] entetes = {"startDate", "objectName", "collectiveName"};
+import controller.DelayControler;
+import controller.ResearchController;
+import exception.DAOException;
+import exception.ModelException;
+import model.Delay;
 
-    private ArrayList<Delays> listSearch;
-    private ResearchController controler;
+import javax.swing.table.AbstractTableModel;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+
+public class ModeleStatiqueDelays extends AbstractTableModel {
+
+    private final Delay[] delays;
+    private final String[] entetes = {"Collective name", "Rental manager", "idOneObject", "OneObject name", "Start date", "MaxRentalPeriod", "Jours de retard", "deposit"};
+
+    private ArrayList<Delay> listDelay;
+    private DelayControler controler;
     private SimpleDateFormat formatDate;
 
-    public ModeleStatiqueDelays() throws DAOException {
+    public ModeleStatiqueDelays() throws DAOException, ModelException {
         super();
-        controler = new ResearchController();
-        listSearch = controler.getRentalsForOneCollectiveCategory(category);
-        search = listSearch.toArray(new FirstResearch[0]);
+        controler = new DelayControler();
+        listDelay = controler.getTacheMetier();
+        delays = listDelay.toArray(new Delay[0]);
         formatDate = new SimpleDateFormat("dd/MM/yyyy");
     }
 
     public int getRowCount(){
-        return search.length;
+        return delays.length;
     }
 
     public int getColumnCount(){
@@ -33,19 +44,29 @@ public class ModeleStatiqueDelays {
     public Object getValueAt(int rowIndex, int columnIndex){
         switch (columnIndex){
             case 0:
+                return delays[rowIndex].getNameCollectiveOwner();
+            case 1:
+                return delays[rowIndex].getRentalManager();
+            case 2 :
+                return delays[rowIndex].getIdOneObject();
+            case 3 :
+                return delays[rowIndex].getNameOneObject();
+            case 4 :
                 GregorianCalendar date = new GregorianCalendar();
-                date = search[rowIndex].getStartDate();
+                date = delays[rowIndex].getStartDate();
                 formatDate.setCalendar(date);
                 String dateFormatted = formatDate.format(date.getTime());
                 return dateFormatted;
-            case 1:
-                return search[rowIndex].getObjectName();
-            case 2 :
-                return search[rowIndex].getCollectiveName();
+            case 5 :
+                return delays[rowIndex].getMaxRentalPeriod();
+            case 6 :
+                return delays[rowIndex].getNbDaysDelay();
+            case 7 :
+                return delays[rowIndex].getDeposit();
             default:
                 return null;
         }
     }
 
-     */
+
 }

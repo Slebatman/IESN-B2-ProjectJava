@@ -1,6 +1,7 @@
 package dataAcces.dao;
 
 import exception.ModelException;
+import model.Delay;
 import model.research.FirstResearch;
 import model.Rental;
 import model.research.SecondResearch;
@@ -25,6 +26,6 @@ public interface IRentalDAO {
     Rental getOneRentalBasedID(int idRental) throws DAOException, ModelException;
 
     // Tahce metier
-    ArrayList<Rental> getTacheMetier();
+    ArrayList<Delay> getTacheMetier() throws DAOException, ModelException;
 
 }

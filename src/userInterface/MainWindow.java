@@ -162,7 +162,11 @@ public class MainWindow extends JFrame {
     private class Delays implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
-            ThirdSearchForm thirdSearchForm = new ThirdSearchForm();
+            try{
+                RentalDelaysWindow rentalDelaysWindow = new RentalDelaysWindow();
+            }catch(DAOException | ModelException e){
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Get list of Rentals's delays Exception", JOptionPane.ERROR_MESSAGE);
+            }
         }
 
     }
