@@ -2,6 +2,7 @@ package model;
 
 import exception.ModelException;
 
+import java.sql.Types;
 import java.util.GregorianCalendar;
 
 public class OneObject {
@@ -18,14 +19,18 @@ public class OneObject {
     // Constructors
     public OneObject() {}
 
-    public OneObject(String name, int idCollectiveOwner, boolean isCommendable, GregorianCalendar purchaseDate, double purchasePrice, int deposit, int maxRentalPeriod) throws ModelException {
+    public OneObject(String name, int idCollectiveOwner, boolean isCommendable, int maxRentalPeriod) throws ModelException {
         setName(name);
         setIdCollectiveOwner(idCollectiveOwner);
         setCommendable(isCommendable);
+        setMaxRentalPeriod(maxRentalPeriod);
+    }
+
+    public OneObject(String name, int idCollectiveOwner, boolean isCommendable, GregorianCalendar purchaseDate, double purchasePrice, int deposit, int maxRentalPeriod) throws ModelException {
+        this(name, idCollectiveOwner, isCommendable, maxRentalPeriod);
         setPurchaseDate(purchaseDate);
         setPurchasePrice(purchasePrice);
         setDeposit(deposit);
-        setMaxRentalPeriod(maxRentalPeriod);
     }
 
     public OneObject(int idObject, String name, int idCollectiveOwner, boolean isCommendable, GregorianCalendar purchaseDate, double purchasePrice, int deposit, int maxRentalPeriod) throws ModelException {
@@ -94,10 +99,12 @@ public class OneObject {
     }
 
     public double getPurchasePrice() {
+        if (purchasePrice == null) return Types.NULL;
         return purchasePrice;
     }
 
     public int getDeposit() {
+        if (deposit == null) return Types.NULL;
         return deposit;
     }
 

@@ -10,6 +10,7 @@ import exception.DAOException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -23,8 +24,7 @@ public class AddObjectWindow extends JFrame {
     private JComboBox comboboxAllCollectives;
     private JPanel panel, panelRadio, panelButton, panelWindow, panelDate;
     private JButton buttonValid, buttonCancel, buttonDate;
-    private OneObject object;
-    private Boolean commendableValue;
+    private Boolean commendableValue, dateEncoded;
     private GregorianCalendar dateObject;
     private JSpinner spinnerDate, spinnerPeriod;
     private ArrayList<Collective> arrayAllCollectives;
@@ -59,9 +59,9 @@ public class AddObjectWindow extends JFrame {
         textName = new JTextField();
 
         // IsCommendable
-        labelCommendable = new JLabel("Commandable : *");
-        commendable = new JRadioButton("Yes");
-        notCommendable = new JRadioButton("No");
+        labelCommendable = new JLabel("Disponible à la location : *");
+        commendable = new JRadioButton("Oui");
+        notCommendable = new JRadioButton("Non");
         radioGroup = new ButtonGroup();
         radioGroup.add(notCommendable);
         radioGroup.add(commendable);
@@ -73,7 +73,7 @@ public class AddObjectWindow extends JFrame {
         notCommendable.addItemListener(listener);
 
         // PurchaseDate
-        labelDate = new JLabel("Date de l'achat : ");
+        labelDate = new JLabel("Date d'achat : ");
         SpinnerDateModel model = new SpinnerDateModel();
         spinnerDate = new JSpinner(model);
         spinnerDate.setModel(model);
@@ -86,6 +86,7 @@ public class AddObjectWindow extends JFrame {
         buttonDate.addActionListener(new AddDate());
         panelDate.add(buttonDate);
         spinnerDate.setEnabled(false);
+        dateEncoded = false;
         dateObject = new GregorianCalendar();
         dateObject.setTime((Date)spinnerDate.getModel().getValue());
 
@@ -146,13 +147,6 @@ public class AddObjectWindow extends JFrame {
     }
 
     // Events
-    private class ExitButtonListener extends WindowAdapter{
-        @Override
-        public void windowClosing(WindowEvent evt){
-            AddObjectWindow.this.dispose();
-        }
-    }
-
     private class CancelButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
@@ -163,9 +157,11 @@ public class AddObjectWindow extends JFrame {
     private class CreateObject implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt) {
+            // All required field must be completed
             if(!textName.getText().equals("") && commendableValue != null) {
                 try {
                     Boolean canAdd = true;
+                // Not null value
                     // Collective
                         String collectiveName = comboboxAllCollectives.getSelectedItem().toString();
                         int idCollective = collectiveController.getACollectiveIDBasedName(collectiveName);
@@ -173,44 +169,40 @@ public class AddObjectWindow extends JFrame {
                         String objectName = textName.getText();
                     // isCommendable
                         Boolean isCommendable = commendableValue;
+                    // MaxPeriodRental
+                        Integer maxPeriodRental = (Integer)spinnerPeriod.getValue();
+                    // Create object
+                        OneObject oneObject = new OneObject(objectName, idCollective, isCommendable, maxPeriodRental);
+                // Null value
                     // PurchaseDate
-                        if(dateObject != null) {
+                        if(dateObject != null && dateEncoded) {
                             dateObject.setTime((Date)spinnerDate.getModel().getValue());
+                            oneObject.setPurchaseDate(dateObject);
                         }
                     // PurchasePrice
-                        Double purchasePrice = null;
                         if(!textPrice.getText().equals("")) {
-                            purchasePrice = Double.parseDouble(textPrice.getText());
+                            Double purchasePrice = Double.parseDouble(textPrice.getText());
                             if (purchasePrice < 0) {
-                                showErrorMessage("Le prix d'achat ne peut être négatif");
                                 canAdd = false;
+                                showErrorMessage("Le prix d'achat ne peut être négatif");
+                            } else {
+                                oneObject.setPurchasePrice(purchasePrice);
                             }
                         }
                     // Deposit
-                        Integer deposit = null;
                         if(!textDeposit.getText().equals("")){
-                            deposit = Integer.parseInt(textDeposit.getText());
+                            Integer deposit = Integer.parseInt(textDeposit.getText());
                             if (deposit < 0) {
-                                showErrorMessage("La caution ne peut pas être négative");
                                 canAdd = false;
+                                showErrorMessage("La caution ne peut pas être négative");
+                            } else {
+                                oneObject.setDeposit(deposit);
                             }
                         }
-                    // MaxPeriodRental
-                        Integer maxPeriodRental = (Integer)spinnerPeriod.getValue();
 
-                    // Add object
+                    // Add object & close windows
                         if (canAdd) {
-                            oneObjectController.addObject(
-                                    new OneObject(
-                                            objectName,
-                                            idCollective,
-                                            isCommendable,
-                                            dateObject,
-                                            purchasePrice,
-                                            deposit,
-                                            maxPeriodRental)
-                            );
-
+                            oneObjectController.addObject(oneObject);
                             AddObjectWindow.this.dispose();
                         }
 
@@ -239,9 +231,11 @@ public class AddObjectWindow extends JFrame {
         public void actionPerformed(ActionEvent evt){
             if(buttonDate.getText().equals("Ajouter")) {
                 spinnerDate.setEnabled(true);
+                dateEncoded = true;
                 buttonDate.setText("Retirer");
             } else {
                 spinnerDate.setEnabled(false);
+                dateEncoded = false;
                 buttonDate.setText("Ajouter");
             }
         }

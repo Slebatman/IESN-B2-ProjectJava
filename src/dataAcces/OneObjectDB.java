@@ -177,19 +177,19 @@ public class OneObjectDB implements IOneObjectDAO{
         if(o.getPurchaseDate() != null) {
             statement.setDate(4, new Date(o.getPurchaseDate().getTimeInMillis()));
         } else {
-            statement.setNull(4, Types.NULL);
+            statement.setNull(4, Types.TIMESTAMP);
         }
 
         if(o.getPurchasePrice() != Types.NULL) {
             statement.setDouble(5, o.getPurchasePrice());
         } else {
-            statement.setNull(5, Types.NULL);
+            statement.setNull(5, Types.DOUBLE);
         }
 
         if(o.getDeposit() != Types.NULL) {
             statement.setInt(6, o.getDeposit());
         } else {
-            statement.setNull(6, Types.NULL);
+            statement.setNull(6, Types.INTEGER);
         }
 
         // Not null values
