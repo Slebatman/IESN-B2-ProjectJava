@@ -37,44 +37,46 @@ public class UpdateObjectWindow extends JFrame{
     private JComboBox<String> listObjects;
     private GregorianCalendar dateObject;
     private JSpinner spinnerDate, spinnerPeriod;
-    private OneObject object;
-    private Boolean commandableValue;
+    private Boolean commandableValue, dateEncoded;
     private OneObject objectDefault;
     private SimpleDateFormat formatDate;
     int idCollective;
 
     UpdateObjectWindow() throws DAOException, ModelException, BusinessException, ControllerException {
-        super("Update an object");
+        // Setup windows
+        super("Mettre à jour un object");
         setBounds(250, 200, 800, 450);
         this.setLayout(new FlowLayout());
 
-        //Controlers et récupérations
-        //List des collective
+        // Controllers
         collectiveController = new CollectiveController();
         oneObjectController = new OneObjectController();
+
+        // List of collectives
         arrayCollectives = collectiveController.getAllCollectives();
         collectives = new ArrayList<String>();
-        for(Collective col : arrayCollectives){
-            if(oneObjectController.getAllObjectsForOneCollective(col.getIdCollective()).size() > 0){
+
+        for (Collective col : arrayCollectives) {
+            if (oneObjectController.getAllObjectsForOneCollective(col.getIdCollective()).size() > 0) {
                 collectives.add(col.getName());
             }
         }
         listCollective = new JComboBox(collectives.toArray());
         listCollective.addActionListener(new RefreshObjects());
 
-        //List des OneObject
-
+        //List of objects for one collective
         String value = listCollective.getItemAt(0).toString();
         idCollective = collectiveController.getACollectiveIDBasedName(value);
         arrayObjects = oneObjectController.getAllObjectsForOneCollective(idCollective);
         listObjects = new JComboBox<String>();
-        for(OneObject object : arrayObjects){
+
+        for(OneObject object : arrayObjects) {
             listObjects.addItem(object.getName());
         }
         listObjects.addActionListener(new RefreshValues());
         objectDefault = arrayObjects.get(0);
 
-        //Création des formats
+        // Formats creation
         formatDate = new SimpleDateFormat("dd/MM/yyyy");
         SpinnerDateModel model = new SpinnerDateModel();
         spinnerDate = new JSpinner(model);
@@ -84,10 +86,7 @@ public class UpdateObjectWindow extends JFrame{
         SpinnerNumberModel modelSpinnerPeriod = new SpinnerNumberModel(1, 1, 100, 1);
         spinnerPeriod = new JSpinner(modelSpinnerPeriod);
 
-
-
-
-        //Création visuel
+        // View creation
         labelCollective = new JLabel("Collectif : ");
         labelName = new JLabel("Nom de l'objet : ");
         labelCommandable = new JLabel("Commandable : ");
@@ -98,16 +97,16 @@ public class UpdateObjectWindow extends JFrame{
         textName = new JTextField();
         textDeposit = new JTextField();
         textPrice = new JTextField();
-        commandable = new JRadioButton("Yes");
-        notCommandable = new JRadioButton("No");
+        commandable = new JRadioButton("Oui");
+        notCommandable = new JRadioButton("Non");
         radioGroup = new ButtonGroup();
         radioGroup.add(notCommandable);
         radioGroup.add(commandable);
         panelRadio = new JPanel();
         panelRadio.add(commandable);
         panelRadio.add(notCommandable);
-        buttonUpdate = new JButton("Update");
-        buttonCancel= new JButton("Cancel");
+        buttonUpdate = new JButton("Mettre à jour");
+        buttonCancel= new JButton("Annuler");
         panel = new JPanel();
         panelButton = new JPanel();
         panelWindow = new JPanel();
@@ -118,24 +117,29 @@ public class UpdateObjectWindow extends JFrame{
         panelCollectives.add(labelCollective);
         panelCollectives.add(listCollective);
 
-        //Import des données
+        // Data import
         importDepositPriceCommendable();
         GregorianCalendar date = objectDefault.getPurchaseDate();
         formatDate.setCalendar(date);
         buttonDate = new JButton("Ajouter");
         buttonDate.addActionListener(new AddDate());
-        if(date != null){
+
+        if (date != null) {
             spinnerDate.setValue(date.getTime());
+            dateEncoded = true;
             spinnerDate.setEnabled(true);
             buttonDate.setText("Retirer");
-        }else{
+        } else {
+            dateEncoded = false;
             spinnerDate.setEnabled(false);
             buttonDate.setText("Ajouter");
         }
+
         spinnerPeriod.setValue(objectDefault.getMaxRentalPeriod());
         obligatoryLabel = new JLabel("(* : champs obligatoires)");
         obligatoryLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        //Panel
+
+        // Create panel
         panelDate = new JPanel();
         panelDate.setLayout(new GridLayout(1,2, 10, 5));
         panelDate.add(labelDate);
@@ -174,6 +178,7 @@ public class UpdateObjectWindow extends JFrame{
         panelWindow.add(panel);
         panelWindow.add(panelButton);
         panelWindow.setVisible(true);
+
         this.add(panelWindow);
         setVisible(true);
     }
@@ -185,43 +190,68 @@ public class UpdateObjectWindow extends JFrame{
         }
     }
 
-    private class UpdateObject implements ActionListener{
+    private class UpdateObject implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent evt){
-            if(textName.getText().equals("") && commandableValue != null){
-                dateObject.setTime((Date)spinnerDate.getModel().getValue());
-                String value = listCollective.getSelectedItem().toString();
-                int idCollective = -1;
+        public void actionPerformed(ActionEvent evt) {
+            // All required field must be completed
+            if(textName.getText().equals("") && commandableValue != null) {
                 try {
-                    idCollective = collectiveController.getACollectiveIDBasedName(value);
-                } catch (DAOException | ModelException | BusinessException | ControllerException e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage(), "Get idCollective by name Exception", JOptionPane.ERROR_MESSAGE);
+                Boolean canUpdate = true;
+            // Not null value
+                // IdCollective
+                int idCollective = collectiveController.getACollectiveIDBasedName(listCollective.getSelectedItem().toString());
+
+                // ObjectName
+                int indexObject = listObjects.getSelectedIndex();
+                int idObject = arrayObjects.get(indexObject).getIdObject();
+                String objectName = listObjects.getItemAt(indexObject);
+
+                // IsCommendable
+                Boolean isCommendable = commandableValue;
+
+                // MaxPeriodRental
+                Integer maxPeriodRental = (Integer)spinnerPeriod.getValue();
+
+                // Create object
+                OneObject oneObject = new OneObject(objectName, idCollective, isCommendable, maxPeriodRental);
+                oneObject.setIdObject(idObject);
+            // Null values
+                // PurchaseDate
+                if(dateObject != null && dateEncoded) {
+                    dateObject.setTime((Date)spinnerDate.getModel().getValue());
+                    oneObject.setPurchaseDate(dateObject);
                 }
-                if(idCollective > -1){
-                    int indexObject = listObjects.getSelectedIndex();
-                    OneObject objectDefault = arrayObjects.get(indexObject);
-                    int idObject = objectDefault.getIdObject();
 
-                    boolean price = false;
-                    boolean deposit = !textDeposit.getText().equals("");
-                    if(!textPrice.getText().equals("")){
-                        price = true;
+                // PurchasePrice
+                if(!textPrice.getText().equals("")) {
+                    Double purchasePrice = Double.parseDouble(textPrice.getText());
+                    if (purchasePrice < 0) {
+                        canUpdate = false;
+                        showErrorMessage("Le prix d'achat ne peut être négatif");
+                    } else {
+                        oneObject.setPurchasePrice(purchasePrice);
                     }
-                    if(buttonDate.getText().equals("Ajouter")){
-                        dateObject = null;
-                    }
-                    try {
-                        object = new OneObject(idObject, objectDefault.getName(), idCollective, commandableValue, dateObject, (price ? Double.parseDouble(textPrice.getText()) : Types.NULL), (deposit ? Integer.parseInt(textDeposit.getText()): Types.NULL), (Integer)spinnerPeriod.getValue());
-                    } catch (ModelException e) {
-                        JOptionPane.showMessageDialog(null, e.getMessage(), "UpdateObject Exception", JOptionPane.ERROR_MESSAGE);
-                    }
+                }
 
-                    try {
-                        oneObjectController.updateAnObject(object);
-                    } catch (DAOException e) {
-                        JOptionPane.showMessageDialog(null, e.getMessage(), "Update an object Exception", JOptionPane.ERROR_MESSAGE);
+                // Deposit
+                if(!textDeposit.getText().equals("")){
+                    Integer deposit = Integer.parseInt(textDeposit.getText());
+                    if (deposit < 0) {
+                        canUpdate = false;
+                        showErrorMessage("La caution ne peut pas être négative");
+                    } else {
+                        oneObject.setDeposit(deposit);
                     }
+                }
+
+                // Add object & close windows
+                if (canUpdate) {
+                    oneObjectController.updateAnObject(oneObject);
                     UpdateObjectWindow.this.dispose();
+                }
+
+                } catch (DAOException | ModelException | BusinessException | ControllerException e) {
+                    showErrorMessage(e.getMessage());
                 }
             }else{
                 labelCollective.setForeground(Color.red);
@@ -289,11 +319,13 @@ public class UpdateObjectWindow extends JFrame{
         }
     }
 
-    public void changeDateNullable(){
+    public void changeDateNullable() {
         if(buttonDate.getText().equals("Ajouter")){
+            dateEncoded = true;
             spinnerDate.setEnabled(true);
             buttonDate.setText("Retirer");
         }else{
+            dateEncoded = false;
             spinnerDate.setEnabled(false);
             buttonDate.setText("Ajouter");
         }
@@ -319,5 +351,10 @@ public class UpdateObjectWindow extends JFrame{
         }else{
             textDeposit.setText("");
         }
+    }
+
+    // Error message
+    private void showErrorMessage(String msg) {
+        JOptionPane.showMessageDialog(null, msg, "Erreur lors de la mise à jour de l'objet", JOptionPane.ERROR_MESSAGE);
     }
 }
