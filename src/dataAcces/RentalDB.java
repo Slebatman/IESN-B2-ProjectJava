@@ -91,7 +91,7 @@ public class RentalDB implements IRentalDAO {
 
                 data.getDate("r.returnDate");
                 if(!data.wasNull()) {
-                    endDate.setTime(data.getDate("o.purchaseDate"));
+                    endDate.setTime(data.getDate("r.returnDate"));
                 }
 
                 allRentalsBasedOnSameTypeReturnProblem.add(new SecondResearch(
@@ -108,7 +108,7 @@ public class RentalDB implements IRentalDAO {
             return allRentalsBasedOnSameTypeReturnProblem;
 
         } catch (SQLException e) {
-            throw new DAOException("Erreur SQL : impossible de récuperer la liste de toutes es locations ayant eu le même type de problème de retour");
+            throw new DAOException("Erreur SQL : impossible de récuperer la liste de toutes les locations ayant eu le même type de problème de retour");
         }
     }
 
