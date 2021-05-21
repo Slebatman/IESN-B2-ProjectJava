@@ -6,11 +6,7 @@ import exception.DAOException;
 import exception.ModelException;
 import model.Delay;
 
-import java.sql.Connection;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class DelayManager {

@@ -39,7 +39,7 @@ public class ModeleStatiqueListingObjects extends AbstractTableModel {
     }
 
     public Object getValueAt(int rowIndex, int columnIndex){
-        switch (columnIndex){
+        switch (columnIndex) {
             case 0:
                 return objects[rowIndex].getIdObject();
             case 1:
@@ -55,17 +55,17 @@ public class ModeleStatiqueListingObjects extends AbstractTableModel {
                     formatDate.setCalendar(date);
                     String dateFormatted = formatDate.format(date.getTime());
                     return dateFormatted;
-                }else{
+                } else {
                    return " - ";
                 }
             case 5:
-                if(objects[rowIndex].getPurchasePrice() == 0){
+                if(objects[rowIndex].getPurchasePrice() == 0) {
                     return " - ";
-                }else{
+                }else {
                     return objects[rowIndex].getPurchasePrice();
                 }
             case 6:
-                if(objects[rowIndex].getDeposit() == 0){
+                if(objects[rowIndex].getDeposit() == 0) {
                     return " - ";
                 }else{
                     return objects[rowIndex].getDeposit();
@@ -76,4 +76,6 @@ public class ModeleStatiqueListingObjects extends AbstractTableModel {
                 return null;
         }
     }
+
+    // ToDo : getColumnClass
 }
