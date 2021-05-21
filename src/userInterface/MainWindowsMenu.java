@@ -1,5 +1,6 @@
 package userInterface;
 
+import controller.OneObjectController;
 import exception.BusinessException;
 import exception.ControllerException;
 import exception.DAOException;
@@ -76,7 +77,8 @@ public class MainWindowsMenu extends JMenuBar {
     // Exit application
     private class ExitListener implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent evt){
+        public void actionPerformed(ActionEvent evt) {
+            new OneObjectController().closeConnection();
             System.exit(0);
         }
     }

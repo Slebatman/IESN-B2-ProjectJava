@@ -21,10 +21,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class UpdateObjectWindow extends JFrame{
-    private JLabel labelCollective, labelName, labelCommandable, labelDate, labelPrice, labelDeposit, labelPeriod, obligatoryLabel;
+public class UpdateObjectWindow extends JFrame {
+    private JLabel labelCollective, labelName, labelCommendable, labelDate, labelPrice, labelDeposit, labelPeriod, obligatoryLabel;
     private JTextField textName, textPrice, textDeposit;
-    private JRadioButton commandable, notCommandable;
+    private JRadioButton commendable, notCommendable;
     private ButtonGroup radioGroup;
     private JComboBox listCollective;
     private JPanel panel, panelRadio, panelButton, panelWindow, panelCollectives, panelDate;
@@ -37,7 +37,7 @@ public class UpdateObjectWindow extends JFrame{
     private JComboBox<String> listObjects;
     private GregorianCalendar dateObject;
     private JSpinner spinnerDate, spinnerPeriod;
-    private Boolean commandableValue, dateEncoded;
+    private Boolean commendableValue, dateEncoded;
     private OneObject objectDefault;
     private SimpleDateFormat formatDate;
     int idCollective;
@@ -89,7 +89,7 @@ public class UpdateObjectWindow extends JFrame{
         // View creation
         labelCollective = new JLabel("Collectif : ");
         labelName = new JLabel("Nom de l'objet : ");
-        labelCommandable = new JLabel("Commandable : ");
+        labelCommendable = new JLabel("Commandable : ");
         labelDate = new JLabel("Date de l'achat (dd/mm/yyyy) : ");
         labelPrice = new JLabel("Prix d'achat : ");
         labelDeposit = new JLabel("Montant de la caution : ");
@@ -97,14 +97,14 @@ public class UpdateObjectWindow extends JFrame{
         textName = new JTextField();
         textDeposit = new JTextField();
         textPrice = new JTextField();
-        commandable = new JRadioButton("Oui");
-        notCommandable = new JRadioButton("Non");
+        commendable = new JRadioButton("Oui");
+        notCommendable = new JRadioButton("Non");
         radioGroup = new ButtonGroup();
-        radioGroup.add(notCommandable);
-        radioGroup.add(commandable);
+        radioGroup.add(notCommendable);
+        radioGroup.add(commendable);
         panelRadio = new JPanel();
-        panelRadio.add(commandable);
-        panelRadio.add(notCommandable);
+        panelRadio.add(commendable);
+        panelRadio.add(notCommendable);
         buttonUpdate = new JButton("Mettre à jour");
         buttonCancel= new JButton("Annuler");
         panel = new JPanel();
@@ -149,7 +149,7 @@ public class UpdateObjectWindow extends JFrame{
         panel.add(listCollective);
         panel.add(labelName);
         panel.add(listObjects);
-        panel.add(labelCommandable);
+        panel.add(labelCommendable);
         panel.add(panelRadio);
         panel.add(panelDate);
         panel.add(spinnerDate);
@@ -171,8 +171,8 @@ public class UpdateObjectWindow extends JFrame{
         panelButton.add(buttonUpdate);
 
         RadioButtonListener listener = new RadioButtonListener();
-        commandable.addItemListener(listener);
-        notCommandable.addItemListener(listener);
+        commendable.addItemListener(listener);
+        notCommendable.addItemListener(listener);
 
         panelWindow.setLayout(new GridLayout(2,1, 10, 30));
         panelWindow.add(panel);
@@ -194,7 +194,7 @@ public class UpdateObjectWindow extends JFrame{
         @Override
         public void actionPerformed(ActionEvent evt) {
             // All required field must be completed
-            if(textName.getText().equals("") && commandableValue != null) {
+            if(textName.getText().equals("") && commendableValue != null) {
                 try {
                 Boolean canUpdate = true;
             // Not null value
@@ -207,7 +207,7 @@ public class UpdateObjectWindow extends JFrame{
                 String objectName = listObjects.getItemAt(indexObject);
 
                 // IsCommendable
-                Boolean isCommendable = commandableValue;
+                Boolean isCommendable = commendableValue;
 
                 // MaxPeriodRental
                 Integer maxPeriodRental = (Integer)spinnerPeriod.getValue();
@@ -269,7 +269,7 @@ public class UpdateObjectWindow extends JFrame{
                 }
             } else {
                 labelCollective.setForeground(Color.red);
-                labelCommandable.setForeground(Color.red);
+                labelCommendable.setForeground(Color.red);
                 labelName.setForeground(Color.red);
                 labelPeriod.setForeground(Color.red);
                 JOptionPane.showMessageDialog(null, "Veuillez remplir les champs obligatoires !", "Addobject Exception", JOptionPane.ERROR_MESSAGE);
@@ -321,8 +321,8 @@ public class UpdateObjectWindow extends JFrame{
 
     private class RadioButtonListener implements ItemListener {
         public void itemStateChanged(ItemEvent event){
-            if(event.getSource() == commandable && event.getStateChange() == ItemEvent.SELECTED) commandableValue = true;
-            else if(event.getSource() == notCommandable && event.getStateChange() == ItemEvent.SELECTED) commandableValue = false;
+            if(event.getSource() == commendable && event.getStateChange() == ItemEvent.SELECTED) commendableValue = true;
+            else if(event.getSource() == notCommendable && event.getStateChange() == ItemEvent.SELECTED) commendableValue = false;
         }
     }
 
@@ -347,13 +347,13 @@ public class UpdateObjectWindow extends JFrame{
 
     public void importDepositPriceCommendable(){
         if(objectDefault.isCommendable()){
-            commandable.setSelected(true);
-            notCommandable.setSelected(false);
-            commandableValue = true;
+            commendable.setSelected(true);
+            notCommendable.setSelected(false);
+            commendableValue = true;
         }else{
-            commandable.setSelected(false);
-            notCommandable.setSelected(true);
-            commandableValue = false;
+            commendable.setSelected(false);
+            notCommendable.setSelected(true);
+            commendableValue = false;
         }
         if(objectDefault.getPurchasePrice() != Types.NULL){
             textPrice.setText(objectDefault.getPurchasePrice() + "");

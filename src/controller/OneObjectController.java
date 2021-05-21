@@ -1,10 +1,8 @@
 package controller;
-import exception.BusinessException;
-import exception.ControllerException;
-import exception.ModelException;
+import dataAcces.SingletonConnexion;
+import exception.*;
 import model.*;
 import business.OneObjectManager;
-import exception.DAOException;
 
 import java.util.ArrayList;
 
@@ -46,6 +44,11 @@ public class OneObjectController {
    public ArrayList<OneObject> getAllObjectsForOneCollective(int idCollective) throws DAOException, ModelException, BusinessException, ControllerException {
       if (idCollective < 1) throw new ControllerException("Erreur : l'identifiant doit être suppérieur à 0");
       return manager.getAllObjectsForOneCollective(idCollective);
+   }
+
+   // Close connection
+   public void closeConnection() throws DAOExceptionConnection {
+      SingletonConnexion.closeConnection();
    }
 
 }

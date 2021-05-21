@@ -2,6 +2,7 @@ package dataAcces;
 
 import dataAcces.dao.IOneObjectDAO;
 import exception.DAOException;
+import exception.DAOExceptionConnection;
 import exception.ModelException;
 import model.OneObject;
 
@@ -194,5 +195,10 @@ public class OneObjectDB implements IOneObjectDAO{
 
         // Not null values
         statement.setInt(7, o.getMaxRentalPeriod());
+    }
+
+    // Close connection
+    public void closeConnection() throws DAOExceptionConnection {
+        SingletonConnexion.closeConnection();
     }
 }

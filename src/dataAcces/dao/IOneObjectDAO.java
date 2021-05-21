@@ -1,5 +1,7 @@
 package dataAcces.dao;
 
+import dataAcces.SingletonConnexion;
+import exception.DAOExceptionConnection;
 import exception.ModelException;
 import model.*;
 import exception.DAOException;
@@ -25,5 +27,8 @@ public interface IOneObjectDAO {
 
     // Retrieving an object via its id
     OneObject getObjectByID(int idObject) throws DAOException, ModelException;
+
+    // Close connection
+    public void closeConnection() throws DAOExceptionConnection;
 
 }

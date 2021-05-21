@@ -27,4 +27,12 @@ public class SingletonConnexion {
     public static Connection getConnection() {
         return connection;
     }
+
+    public static void closeConnection() throws DAOExceptionConnection {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new DAOExceptionConnection("Erreur lors de la fermeture de la base de données.");
+        }
+    }
 }
