@@ -222,27 +222,41 @@ public class UpdateObjectWindow extends JFrame{
                     oneObject.setPurchaseDate(dateObject);
                 }
 
-                // PurchasePrice
-                if(!textPrice.getText().equals("")) {
-                    Double purchasePrice = Double.parseDouble(textPrice.getText());
-                    if (purchasePrice < 0) {
-                        canUpdate = false;
-                        showErrorMessage("Le prix d'achat ne peut être négatif");
-                    } else {
-                        oneObject.setPurchasePrice(purchasePrice);
-                    }
-                }
+                    // PurchasePrice
+                    if(!textPrice.getText().equals("")) {
+                        // Verification if deposit is a number
+                        try {
+                            Double purchasePrice = Double.parseDouble(textPrice.getText());
 
-                // Deposit
-                if(!textDeposit.getText().equals("")){
-                    Integer deposit = Integer.parseInt(textDeposit.getText());
-                    if (deposit < 0) {
-                        canUpdate = false;
-                        showErrorMessage("La caution ne peut pas être négative");
-                    } else {
-                        oneObject.setDeposit(deposit);
+                            if (purchasePrice < 0) {
+                                canUpdate = false;
+                                showErrorMessage("Le prix d'achat ne peut être négatif");
+                            } else {
+                                oneObject.setPurchasePrice(purchasePrice);
+                            }
+
+                        } catch (NumberFormatException e) {
+                            canUpdate = false;
+                            showErrorMessage("Le prix d'achat doit être un nombre");
+                        }
+
                     }
-                }
+                    // Deposit
+                    if(!textDeposit.getText().equals("")) {
+                        // Test if deposit is a number
+                        try {
+                            Integer deposit = Integer.parseInt(textDeposit.getText());
+                            if (deposit < 0) {
+                                canUpdate = false;
+                                showErrorMessage("La caution ne peut pas être négative");
+                            } else {
+                                oneObject.setDeposit(deposit);
+                            }
+                        } catch (NumberFormatException e) {
+                            canUpdate = false;
+                            showErrorMessage("La caution doit être un nombre");
+                        }
+                    }
 
                 // Add object & close windows
                 if (canUpdate) {
@@ -253,7 +267,7 @@ public class UpdateObjectWindow extends JFrame{
                 } catch (DAOException | ModelException | BusinessException | ControllerException e) {
                     showErrorMessage(e.getMessage());
                 }
-            }else{
+            } else {
                 labelCollective.setForeground(Color.red);
                 labelCommandable.setForeground(Color.red);
                 labelName.setForeground(Color.red);
