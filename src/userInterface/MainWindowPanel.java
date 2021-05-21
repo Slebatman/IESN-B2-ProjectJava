@@ -12,7 +12,7 @@ public class MainWindowPanel extends JPanel {
         setLayout(new BorderLayout(0, 15));
 
         // Label
-        label = new JLabel("Bienvenue dans la gestion de votre inventaire !");
+        label = new JLabel("Bienvenue dans la gestion de l'inventaire de l'animation namuroise");
         label.setHorizontalAlignment(JLabel.CENTER);
         this.add(label, BorderLayout.NORTH);
 

@@ -12,7 +12,7 @@ public class AnimationThread extends Thread {
     public AnimationThread(JPanel panel) {
         this.panel = panel;
         ImageIcon imageIcon = new ImageIcon(getClass().getResource("ressources/animation.gif"));
-        ImageIcon imageIcon1 = new ImageIcon(imageIcon.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT));
+        ImageIcon imageIcon1 = new ImageIcon(imageIcon.getImage().getScaledInstance(250, 300, Image.SCALE_DEFAULT));
         imageAnimation = new JLabel();
         imageAnimation.setIcon(imageIcon1);
         imageAnimation.setHorizontalAlignment(JLabel.CENTER);
