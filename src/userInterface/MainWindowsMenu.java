@@ -7,16 +7,21 @@ import exception.DAOException;
 import exception.ModelException;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainWindowsMenu extends JMenuBar {
     // Variables
+    JFrame frame;
     private JMenu application, objects, research, delays;
     JMenuItem leave, createObject, updateObject, deleteObject, showObjects, firstSearch, secondSearch, thirdSearch, delaysManagement;
 
     // Constructor
-    public MainWindowsMenu() {
+    public MainWindowsMenu(JFrame frame) {
+        this.frame = frame;
+        this.frame.add(new JLabel("Test 1"), BorderLayout.WEST);
+
         // Main menu
         application = new JMenu("Application");
         objects = new JMenu("Objet");
@@ -101,7 +106,7 @@ public class MainWindowsMenu extends JMenuBar {
         @Override
         public void actionPerformed(ActionEvent evt) {
             try {
-                new DeleteObjectWindow();
+                new DeleteObjectWindow(frame);
 
             } catch (DAOException | ModelException | BusinessException | ControllerException e) {
                 showErrorMessage("Erreur lors de la suppression", e.getMessage());

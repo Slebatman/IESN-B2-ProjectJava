@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainWindow extends JFrame {
+    // Variables
+    private JPanel panel;
+
     // Constructor
     public MainWindow() {
         // Frame
@@ -17,7 +20,7 @@ public class MainWindow extends JFrame {
         getContentPane().add(new MainWindowPanel());
 
         // Frame menu
-        setJMenuBar(new MainWindowsMenu());
+        setJMenuBar(new MainWindowsMenu(this));
 
         // Frame icon
         setIconImage(new ImageIcon(getClass().getResource("ressources/age.gif")).getImage());

@@ -15,7 +15,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class DeleteObjectWindow extends JFrame{
+public class DeleteObjectWindow extends JLabel {
+    JFrame frame;
     private JComboBox listCollective;
     private JComboBox<String> listObjects;
     private JPanel panelCollectives, panelObjects, panelWindow, panelButton, mainPanel;
@@ -28,9 +29,9 @@ public class DeleteObjectWindow extends JFrame{
     private ArrayList<String> collectives;
     private ArrayList<String> objects;
 
-    DeleteObjectWindow() throws DAOException, ModelException, BusinessException, ControllerException {
-        super("Delete an object");
-        setBounds(150, 150, 400, 400);
+    DeleteObjectWindow(JFrame frame) throws DAOException, ModelException, BusinessException, ControllerException {
+        this.frame = frame;
+        frame.getContentPane().removeAll();
         this.setLayout(new FlowLayout());
 
         //Controlers et récupérations de listes
@@ -90,7 +91,11 @@ public class DeleteObjectWindow extends JFrame{
         mainPanel.add(panelWindow);
         mainPanel.add(panelButton);
 
-        this.add(mainPanel);
+        frame.add(mainPanel, BorderLayout.CENTER);
+
+        frame.revalidate();
+        frame.repaint();
+
         setVisible(true);
     }
 
@@ -114,8 +119,11 @@ public class DeleteObjectWindow extends JFrame{
 
     private class CancelButtonListener implements ActionListener{
         @Override
-        public void actionPerformed(ActionEvent evt){
-            DeleteObjectWindow.this.dispose();
+        public void actionPerformed(ActionEvent evt) {
+            frame.getContentPane().removeAll();
+            frame.add(new MainWindowPanel());
+            frame.revalidate();
+            frame.repaint();
         }
     }
 
