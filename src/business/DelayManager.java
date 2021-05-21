@@ -41,10 +41,10 @@ public class DelayManager {
             int days = (int)diff;
             if(diff > delay.getMaxRentalPeriod()){
                 delay.setNbDaysDelay(days);
+                delay.setNbRecalls(days/7 + 1);
                 delays.add(delay);
             }
         }
-
         return delays;
     }
 }

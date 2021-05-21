@@ -14,7 +14,7 @@ import java.util.GregorianCalendar;
 public class ModeleStatiqueDelays extends AbstractTableModel {
 
     private final Delay[] delays;
-    private final String[] entetes = {"Collective name", "Rental manager", "idOneObject", "OneObject name", "Start date", "MaxRentalPeriod", "Jours de retard", "deposit"};
+    private final String[] entetes = {"Nom du collectif", "Locataire", "idOneObject", "nom de l'objet", "date de départ", "Nombre maximum de jours de location", "Jours de retard", "Nombre de rappels", "Caution"};
 
     private ArrayList<Delay> listDelay;
     private DelayControler controler;
@@ -62,6 +62,8 @@ public class ModeleStatiqueDelays extends AbstractTableModel {
             case 6 :
                 return delays[rowIndex].getNbDaysDelay();
             case 7 :
+                return delays[rowIndex].getNbRecalls();
+            case 8 :
                 return delays[rowIndex].getDeposit();
             default:
                 return null;

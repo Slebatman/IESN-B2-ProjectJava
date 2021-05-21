@@ -12,6 +12,7 @@ public class Delay {
     private GregorianCalendar startDate;
     private int maxRentalPeriod;
     private int nbDaysDelay;
+    private int nbRecalls;
     private int deposit;
 
     public Delay(){}
@@ -66,6 +67,11 @@ public class Delay {
         this.nbDaysDelay = nbDaysDelay;
     }
 
+    public void setNbRecalls(int nbRecalls) throws ModelException{
+        if(nbRecalls < 0) throw new ModelException("Le nombre de rappels ne peut pas être négatif");
+        this.nbRecalls = nbRecalls;
+    }
+
     //Getters
     public GregorianCalendar getStartDate() {
         return startDate;
@@ -97,5 +103,9 @@ public class Delay {
 
     public int getNbDaysDelay() {
         return nbDaysDelay;
+    }
+
+    public int getNbRecalls() {
+        return nbRecalls;
     }
 }
