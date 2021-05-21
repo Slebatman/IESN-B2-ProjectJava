@@ -4,30 +4,21 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainWindow extends JFrame {
-    // Variables
-    private Container contentPane;
-    private MainWindowPanel panel;
-    private JMenuBar menu;
-
     // Constructor
     public MainWindow() {
         // Frame
         super("Gestion de l'inventaire - Animation namuroise");
-        setBounds(100, 100, 600, 700);
+        setBounds(100, 100, 600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Frame content panel
-        contentPane = this.getContentPane();
-        contentPane.setLayout(new BorderLayout());
-        panel = new MainWindowPanel();
-        contentPane.add(panel, BorderLayout.CENTER);
+        getContentPane().add(new MainWindowPanel());
 
         // Frame menu
-        menu = new MainWindowsMenu();
-        setJMenuBar(menu);
+        setJMenuBar(new MainWindowsMenu());
 
         // Frame icon
-        this.setIconImage(new ImageIcon(getClass().getResource("ressources/age.gif")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("ressources/age.gif")).getImage());
 
         setVisible(true);
     }

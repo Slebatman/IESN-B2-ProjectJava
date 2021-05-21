@@ -1,7 +1,15 @@
 package userInterface;
 
+import javax.swing.*;
+
 public class Principal {
     public static void main(String[] args){
-        MainWindow window = new MainWindow();
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        new MainWindow();
     }
 }

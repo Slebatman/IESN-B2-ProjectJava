@@ -1,28 +1,33 @@
 package userInterface;
 
 import javax.swing.*;
-import java.util.Objects;
+import java.awt.*;
 
-public class AnimationThread extends Thread{
+public class AnimationThread extends Thread {
+    // Variables
     private JPanel panel;
-    private boolean animation;
     private JLabel imageAnimation;
 
-    public AnimationThread(JPanel panel){
+    // Constructor
+    public AnimationThread(JPanel panel) {
         this.panel = panel;
-        animation = true;
-        Icon imageIcon = new ImageIcon(getClass().getResource("ressources/animation.gif"));
-        imageAnimation = new JLabel(imageIcon);
-        imageAnimation.setSize(200, 150);
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("ressources/animation.gif"));
+        ImageIcon imageIcon1 = new ImageIcon(imageIcon.getImage().getScaledInstance(250, 300, Image.SCALE_DEFAULT));
+        imageAnimation = new JLabel();
+        imageAnimation.setIcon(imageIcon1);
+        imageAnimation.setHorizontalAlignment(JLabel.CENTER);
+
     }
 
+    // Start method
     @Override
-    public void run(){
-        try{
-            panel.add(imageAnimation);
-            Thread.sleep(1000);
-            animation = false;
-        }catch(InterruptedException e){
+    public void run() {
+        try {
+            panel.add(imageAnimation, BorderLayout.CENTER);
+            sleep(1000);
+
+        } catch(InterruptedException e) {
+            // ToDo : throws exception
             e.printStackTrace();
         }
     }
