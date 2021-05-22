@@ -64,4 +64,8 @@ public class ModeleStatiqueFirstSearch extends AbstractTableModel {
         }
         return c;
     }
+
+    public boolean isEmpty() {
+        return listSearch.size() == 0;
+    }
 }
