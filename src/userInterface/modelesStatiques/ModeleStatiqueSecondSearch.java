@@ -45,23 +45,19 @@ public class ModeleStatiqueSecondSearch extends AbstractTableModel {
         switch (columnIndex){
             case 0:
                 if(search[rowIndex].getStartDate() != null){
-                    GregorianCalendar date = new GregorianCalendar();
-                    date = search[rowIndex].getStartDate();
+                    GregorianCalendar date = search[rowIndex].getStartDate();
                     formatDate.setCalendar(date);
-                    dateFormatted = formatDate.format(date.getTime());
-                    return dateFormatted;
+                    return formatDate.format(date.getTime());
                 }else{
-                    return " - ";
+                    return null;
                 }
             case 1:
                 if(search[rowIndex].getReturnDate() != null){
-                    GregorianCalendar date = new GregorianCalendar();
-                    date = search[rowIndex].getReturnDate();
+                    GregorianCalendar date = search[rowIndex].getReturnDate();
                     formatDate.setCalendar(date);
-                    dateFormatted = formatDate.format(date.getTime());
-                    return dateFormatted;
+                    return formatDate.format(date.getTime());
                 }else{
-                    return " - ";
+                    return null;
                 }
             case 2 :
                 return search[rowIndex].getNameObject();
@@ -76,5 +72,17 @@ public class ModeleStatiqueSecondSearch extends AbstractTableModel {
             default:
                 return null;
         }
+    }
+
+    public Class getColumnClass(int columnIndex){
+        Class c;
+        switch (columnIndex){
+            case 0, 1 : c = SimpleDateFormat.class;
+                break;
+            case 3, 4 : c = Integer.class;
+                break;
+            default: c = String.class;
+        }
+        return c;
     }
 }

@@ -9,6 +9,7 @@ import model.Delay;
 import javax.swing.table.AbstractTableModel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class ModeleStatiqueDelays extends AbstractTableModel {
@@ -52,11 +53,9 @@ public class ModeleStatiqueDelays extends AbstractTableModel {
             case 3 :
                 return delays[rowIndex].getNameOneObject();
             case 4 :
-                GregorianCalendar date = new GregorianCalendar();
-                date = delays[rowIndex].getStartDate();
+                GregorianCalendar date = delays[rowIndex].getStartDate();
                 formatDate.setCalendar(date);
-                String dateFormatted = formatDate.format(date.getTime());
-                return dateFormatted;
+                return formatDate.format(date.getTime());
             case 5 :
                 return delays[rowIndex].getMaxRentalPeriod();
             case 6 :
@@ -68,6 +67,18 @@ public class ModeleStatiqueDelays extends AbstractTableModel {
             default:
                 return null;
         }
+    }
+
+    public Class getColumnClass(int columnIndex){
+        Class c;
+        switch (columnIndex){
+            case 2, 5, 6, 7, 8 : c = Integer.class;
+                break;
+            case 4 : c = SimpleDateFormat.class;
+                break;
+            default: c = String.class;
+        }
+        return c;
     }
 
 

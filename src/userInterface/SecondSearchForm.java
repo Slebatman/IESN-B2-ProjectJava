@@ -20,14 +20,14 @@ public class SecondSearchForm extends JFrame {
     private ArrayList<String> problemList;
 
     public SecondSearchForm() throws DAOException {
-        super("Search rentals by type of problem");
+        super("Recherche des locations par type de problème");
         setBounds(200, 150, 400, 100);
         manager = new TypeOfProblemRentalManager();
         problemList = manager.getDistinctNameOfTypeOfProblemExitRental();
         this.setLayout(new FlowLayout());
-        labelProblem = new JLabel("Select a type of problem : ");
+        labelProblem = new JLabel("Choisissez un type de problème : ");
         listProblems = new JComboBox(problemList.toArray());
-        button = new JButton("Search");
+        button = new JButton("Recherche");
         button.addActionListener(new SecondSearchForm.SearchButton());
         this.add(labelProblem);
         this.add(listProblems);

@@ -47,13 +47,11 @@ public class ModeleStatiqueThirdSearch extends AbstractTableModel {
                 return search[rowIndex].getObjectName();
             case 1:
                 if(search[rowIndex].getPurchaseDate() != null){
-                    GregorianCalendar date = new GregorianCalendar();
-                    date = search[rowIndex].getPurchaseDate();
+                    GregorianCalendar date = search[rowIndex].getPurchaseDate();
                     formatDate.setCalendar(date);
-                    dateFormatted = formatDate.format(date.getTime());
-                    return dateFormatted;
+                    return formatDate.format(date.getTime());
                 }else{
-                    return " - ";
+                    return null;
                 }
             case 2 :
                 return search[rowIndex].getPurchasePrice();
@@ -66,5 +64,17 @@ public class ModeleStatiqueThirdSearch extends AbstractTableModel {
             default:
                 return null;
         }
+    }
+
+    public Class getColumnClass(int columnIndex){
+        Class c;
+        switch (columnIndex){
+            case 1 : c = SimpleDateFormat.class;
+                break;
+            case 2, 3 : c = Double.class;
+                break;
+            default: c = String.class;
+        }
+        return c;
     }
 }

@@ -20,7 +20,7 @@ public class FirstSearchForm extends JFrame {
     private ArrayList<String> categoryList;
 
     public FirstSearchForm() {
-        super("Search rentals by collective category");
+        super("Recherche des locations par catégorie du collectif");
         setBounds(200, 150, 400, 100);
         manager = new CollectiveManager();
 
@@ -32,9 +32,9 @@ public class FirstSearchForm extends JFrame {
 
 
         this.setLayout(new FlowLayout());
-        labelCategory = new JLabel("Select a category : ");
+        labelCategory = new JLabel("Choisissez une catégorie : ");
         listCategory = new JComboBox(categoryList.toArray());
-        button = new JButton("Search");
+        button = new JButton("Recherche");
         button.addActionListener(new SearchButton());
         this.add(labelCategory);
         this.add(listCategory);

@@ -19,11 +19,11 @@ public class ThirdSearchForm extends JFrame {
     private GregorianCalendar firstDate, secondDate;
 
     public ThirdSearchForm(){
-        super("Search rentals between 2 dates");
+        super("Cherchez les locations entre 2 dates");
         setBounds(200, 150, 500, 100);
         this.setLayout(new FlowLayout());
-        label = new JLabel("Select the dates : ");
-        button = new JButton("Search");
+        label = new JLabel("Choisissez les dates : ");
+        button = new JButton("Recherche");
         SpinnerDateModel firstModel = new SpinnerDateModel();
         SpinnerDateModel secondModel = new SpinnerDateModel();
         spinnerFirstDate = new JSpinner(firstModel);
@@ -58,7 +58,7 @@ public class ThirdSearchForm extends JFrame {
                 ThirdSearchForm.this.dispose();
                 }
             else{
-                JOptionPane.showMessageDialog(null, "the start Date should be before the return date !", "Date Exception", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "La date de départ doit être avant la date de retour !", "Date Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
         }

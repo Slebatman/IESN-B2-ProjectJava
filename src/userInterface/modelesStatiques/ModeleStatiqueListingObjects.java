@@ -6,6 +6,7 @@ import controller.OneObjectController;
 import exception.DAOException;
 
 import javax.swing.table.AbstractTableModel;
+import java.sql.Types;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -50,31 +51,37 @@ public class ModeleStatiqueListingObjects extends AbstractTableModel {
                 return objects[rowIndex].isCommendable();
             case 4:
                 if(objects[rowIndex].getPurchaseDate() != null){
-                    GregorianCalendar date = new GregorianCalendar();
-                    date = objects[rowIndex].getPurchaseDate();
+                    GregorianCalendar date = objects[rowIndex].getPurchaseDate();
                     formatDate.setCalendar(date);
-                    String dateFormatted = formatDate.format(date.getTime());
-                    return dateFormatted;
+                    return formatDate.format(date.getTime());
                 } else {
-                   return " - ";
+                   return null;
                 }
             case 5:
-                if(objects[rowIndex].getPurchasePrice() == 0) {
-                    return " - ";
-                }else {
-                    return objects[rowIndex].getPurchasePrice();
-                }
+                return objects[rowIndex].getPurchasePrice();
             case 6:
-                if(objects[rowIndex].getDeposit() == 0) {
-                    return " - ";
-                }else{
-                    return objects[rowIndex].getDeposit();
-                }
+                return objects[rowIndex].getDeposit();
             case 7 :
                 return objects[rowIndex].getMaxRentalPeriod();
             default:
                 return null;
         }
+    }
+
+    public Class getColumnClass(int columnIndex){
+        Class c;
+        switch (columnIndex){
+            case 0, 2, 6, 7 : c = Integer.class;
+                break;
+            case 3 : c = Boolean.class;
+                break;
+            case 4 : c = SimpleDateFormat.class;
+                break;
+            case 5 : c = Double.class;
+                break;
+            default: c = String.class;
+        }
+        return c;
     }
 
     // ToDo : getColumnClass

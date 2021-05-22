@@ -43,11 +43,9 @@ public class ModeleStatiqueFirstSearch extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex){
         switch (columnIndex){
             case 0:
-                GregorianCalendar date = new GregorianCalendar();
-                date = search[rowIndex].getStartDate();
+                GregorianCalendar date = search[rowIndex].getStartDate();
                 formatDate.setCalendar(date);
-                String dateFormatted = formatDate.format(date.getTime());
-                return dateFormatted;
+                return formatDate.format(date.getTime());
             case 1:
                 return search[rowIndex].getObjectName();
             case 2 :
@@ -55,5 +53,15 @@ public class ModeleStatiqueFirstSearch extends AbstractTableModel {
             default:
                 return null;
         }
+    }
+
+    public Class getColumnClass(int columnIndex){
+        Class c;
+        switch (columnIndex){
+            case 0 : c = SimpleDateFormat.class;
+                break;
+            default: c = String.class;
+        }
+        return c;
     }
 }
