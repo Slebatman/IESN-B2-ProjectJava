@@ -1,10 +1,7 @@
 package userInterface;
 
 import controller.OneObjectController;
-import exception.BusinessException;
-import exception.ControllerException;
-import exception.DAOException;
-import exception.ModelException;
+import exception.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -93,7 +90,7 @@ public class MainWindowsMenu extends JMenuBar {
             try {
                 new AddObjectWindow();
 
-            } catch (DAOException | ModelException e) {
+            } catch (DAOException | ModelException | DAOExceptionConnection e) {
                 showErrorMessage("Erreur lors de l'ajout", e.getMessage());
             }
         }
@@ -106,7 +103,7 @@ public class MainWindowsMenu extends JMenuBar {
             try {
                 new DeleteObjectWindow(frame);
 
-            } catch (DAOException | ModelException | BusinessException | ControllerException e) {
+            } catch (DAOException | ModelException | BusinessException | ControllerException | DAOExceptionConnection e) {
                 showErrorMessage("Erreur lors de la suppression", e.getMessage());
             }
         }
@@ -119,7 +116,7 @@ public class MainWindowsMenu extends JMenuBar {
             try {
                 new UpdateObjectWindow();
 
-            } catch (DAOException | ModelException | BusinessException | ControllerException e) {
+            } catch (DAOException | ModelException | BusinessException | ControllerException | DAOExceptionConnection e) {
                 showErrorMessage("Erreur lors de la mise à jour", e.getMessage());
             }
         }
@@ -132,7 +129,7 @@ public class MainWindowsMenu extends JMenuBar {
             try {
                 new ListingObjetWindow();
 
-            } catch (DAOException | ModelException e) {
+            } catch (DAOException | ModelException | DAOExceptionConnection e) {
                 showErrorMessage("Erreur lors de l'affichage de l'ensemble des objets", e.getMessage());
             }
         }
@@ -144,7 +141,7 @@ public class MainWindowsMenu extends JMenuBar {
         public void actionPerformed(ActionEvent evt) {
             try{
                 new FirstSearchForm();
-            }catch(DAOException e){
+            }catch(DAOException | DAOExceptionConnection e){
                 showErrorMessage("Erreur lors de la recherche sur base d'une catégorie", e.getMessage());
             }
 
@@ -158,7 +155,7 @@ public class MainWindowsMenu extends JMenuBar {
             try {
                 new SecondSearchForm();
 
-            } catch (DAOException e) {
+            } catch (DAOException | DAOExceptionConnection e) {
                 showErrorMessage("Erreur lors de la recherche n°2", e.getMessage());
             }
         }
@@ -178,7 +175,7 @@ public class MainWindowsMenu extends JMenuBar {
         public void actionPerformed(ActionEvent evt){
             try{
                 new RentalDelaysWindow();
-            }catch(DAOException | ModelException e){
+            }catch(DAOException | ModelException | DAOExceptionConnection e){
                 showErrorMessage("Erreur lors du listing des retards", e.getMessage());
             }
         }
