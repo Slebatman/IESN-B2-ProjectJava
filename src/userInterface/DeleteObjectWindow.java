@@ -48,7 +48,7 @@ public class DeleteObjectWindow extends JLabel {
             collectives.add(col.getName());
         }
 
-        int idCollective = arrayCollectives.get(1).getIdCollective();
+        int idCollective = arrayCollectives.get(0).getIdCollective();
         arrayObjects = oneObjectController.getAllObjectsForOneCollective(idCollective);
         listObjects = new JComboBox<String>();
         for (OneObject object : arrayObjects) {

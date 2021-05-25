@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -177,7 +178,12 @@ public class AddObjectWindow extends JFrame {
                     // PurchaseDate
                         if(dateObject != null && dateEncoded) {
                             dateObject.setTime((Date)spinnerDate.getModel().getValue());
-                            oneObject.setPurchaseDate(dateObject);
+                            try{
+                                oneObject.setPurchaseDate(dateObject);
+                            }catch(ModelException e){
+                                canAdd = false;
+                                showErrorMessage("La date d'achat doit être antérieure");
+                            }
                         }
                     // PurchasePrice
                         if(!textPrice.getText().equals("")) {
