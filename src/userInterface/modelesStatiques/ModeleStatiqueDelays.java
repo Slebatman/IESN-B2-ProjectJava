@@ -74,11 +74,8 @@ public class ModeleStatiqueDelays extends AbstractTableModel {
             default -> String.class;
         };
     }
-<<<<<<< HEAD
 
     public boolean isEmpty() {
         return listDelay.size() == 0;
     }
-=======
->>>>>>> 5bd0a247d01786fc02974147f90975b2441cd4b3
 }
