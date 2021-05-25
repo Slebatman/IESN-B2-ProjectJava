@@ -14,7 +14,7 @@ import java.util.GregorianCalendar;
 
 public class ModeleStatiqueFirstSearch extends AbstractTableModel {
     private final FirstResearch[] search;
-    private final String[] entetes = {"startDate", "objectName", "collectiveName"};
+    private final String[] entetes = {"Date de départ", "Nom de l'objet", "Nom du collectif"};
 
     private ArrayList<FirstResearch> listSearch;
     private ResearchController controler;
@@ -57,11 +57,15 @@ public class ModeleStatiqueFirstSearch extends AbstractTableModel {
 
     public Class getColumnClass(int columnIndex){
         Class c;
-        switch (columnIndex){
-            case 0 : c = SimpleDateFormat.class;
-                break;
-            default: c = String.class;
+        if(columnIndex == 0){
+            c = SimpleDateFormat.class;
+        }else{
+            c = String.class;
         }
         return c;
+    }
+
+    public boolean isEmpty() {
+        return listSearch.size() == 0;
     }
 }

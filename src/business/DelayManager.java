@@ -33,14 +33,22 @@ public class DelayManager {
 
         for(Delay delay : rentals){
             startDate = delay.getStartDate();
-            double diff =  ((double)(today.getTime().getTime() - startDate.getTime().getTime())) / (1000 * 60 * 60 *24);
-            int days = (int)diff;
-            if(diff > delay.getMaxRentalPeriod()){
+            int days = diffDays(today, startDate);
+            if(days > delay.getMaxRentalPeriod()){
                 delay.setNbDaysDelay(days);
-                delay.setNbRecalls(days/7 + 1);
+                int nbRecalls = nbRecalls(days);
+                delay.setNbRecalls(nbRecalls + 1); // A recall is also send at day 0
                 delays.add(delay);
             }
         }
         return delays;
+    }
+
+    public int diffDays(GregorianCalendar today, GregorianCalendar startDate){
+        return (int) ((double)(today.getTime().getTime() - startDate.getTime().getTime())) / (1000 * 60 * 60 *24);
+    }
+
+    public int nbRecalls(int days){
+        return days/7;
     }
 }

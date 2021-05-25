@@ -15,9 +15,8 @@ public class ThirdSearchWindows extends JFrame {
     public ThirdSearchWindows(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException, ModelException, BusinessException, ControllerException {
         super("Third search");
         setBounds(500, 200, 650, 500);
-        this.setLayout(new FlowLayout());
         JTable tableau = new JTable(new ModeleStatiqueThirdSearch(firstDate, secondDate));
-        this.add(new JScrollPane(tableau),BorderLayout.CENTER);
+        this.getContentPane().add(new JScrollPane(tableau),BorderLayout.CENTER);
         this.setVisible(true);
     }
 }

@@ -70,14 +70,11 @@ public class ModeleStatiqueDelays extends AbstractTableModel {
     }
 
     public Class getColumnClass(int columnIndex){
-        Class c;
-        switch (columnIndex){
-            case 2, 5, 6, 7, 8 : c = Integer.class;
-                break;
-            case 4 : c = SimpleDateFormat.class;
-                break;
-            default: c = String.class;
-        }
+        Class c = switch (columnIndex) {
+            case 2, 5, 6, 7, 8 -> Integer.class;
+            case 4 -> SimpleDateFormat.class;
+            default -> String.class;
+        };
         return c;
     }
 

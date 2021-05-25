@@ -33,4 +33,8 @@ public class CollectiveController {
         if (name.equals("")) throw new ControllerException("Erreur : le nom ne peut pas être une chaine vide");
         return manager.getACollectiveIDBasedName(name);
     }
+
+    public ArrayList<String> getDistinctCategoryCollective() throws DAOException {
+        return manager.getDistinctCategoryCollective();
+    }
 }

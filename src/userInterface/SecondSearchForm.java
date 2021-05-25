@@ -1,6 +1,7 @@
 package userInterface;
 
 import business.TypeOfProblemRentalManager;
+import controller.TypeOfProblemRentalControler;
 import exception.BusinessException;
 import exception.ControllerException;
 import exception.DAOException;
@@ -16,19 +17,25 @@ public class SecondSearchForm extends JFrame {
     private JLabel labelProblem;
     private JComboBox listProblems;
     private JButton button;
-    private TypeOfProblemRentalManager manager;
+    private TypeOfProblemRentalControler controler;
     private ArrayList<String> problemList;
 
     public SecondSearchForm() throws DAOException {
         super("Recherche des locations par type de problème");
         setBounds(200, 150, 400, 100);
-        manager = new TypeOfProblemRentalManager();
-        problemList = manager.getDistinctNameOfTypeOfProblemExitRental();
         this.setLayout(new FlowLayout());
-        labelProblem = new JLabel("Choisissez un type de problème : ");
+
+        //List of type of problem
+        controler = new TypeOfProblemRentalControler();
+        problemList = controler.getDistinctNameOfTypeOfProblemExitRental();
         listProblems = new JComboBox(problemList.toArray());
+
+        //Affectations
+        labelProblem = new JLabel("Choisissez un type de problème : ");
         button = new JButton("Recherche");
         button.addActionListener(new SecondSearchForm.SearchButton());
+
+        //Add to the frame
         this.add(labelProblem);
         this.add(listProblems);
         this.add(button);

@@ -13,7 +13,7 @@ import java.util.GregorianCalendar;
 
 public class ModeleStatiqueListingObjects extends AbstractTableModel {
     private final OneObject[] objects;
-    private final String[] entetes = {"IdObject","Name","idCollectiveOwner","isCommandable","purchaseDate","purchasePrice","deposit","MaxRentalPeriod"};
+    private final String[] entetes = {"Id","Nom","Id du collectif","Est commandable","Date d'achat","Prix d'achat","Caution","Nombre maximum de jours de location"};
 
     private ArrayList<OneObject> listObjects;
     private OneObjectController controler;
@@ -69,18 +69,13 @@ public class ModeleStatiqueListingObjects extends AbstractTableModel {
     }
 
     public Class getColumnClass(int columnIndex){
-        Class c;
-        switch (columnIndex){
-            case 0, 2, 6, 7 : c = Integer.class;
-                break;
-            case 3 : c = Boolean.class;
-                break;
-            case 4 : c = SimpleDateFormat.class;
-                break;
-            case 5 : c = Double.class;
-                break;
-            default: c = String.class;
-        }
+        Class c = switch (columnIndex) {
+            case 0, 2, 6, 7 -> Integer.class;
+            case 3 -> Boolean.class;
+            case 4 -> SimpleDateFormat.class;
+            case 5 -> Double.class;
+            default -> String.class;
+        };
         return c;
     }
 

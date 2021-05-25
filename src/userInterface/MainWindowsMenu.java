@@ -143,7 +143,12 @@ public class MainWindowsMenu extends JMenuBar {
     private class FirstSearch implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent evt) {
-            new FirstSearchForm();
+            try{
+                new FirstSearchForm();
+            }catch(DAOException e){
+                showErrorMessage("Erreur lors de la recherche sur base d'une catégorie", e.getMessage());
+            }
+
         }
     }
 
