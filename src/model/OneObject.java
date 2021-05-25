@@ -3,7 +3,6 @@ package model;
 import exception.ModelException;
 
 import java.sql.Types;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class OneObject {

@@ -1,6 +1,5 @@
 package dataAcces.dao;
 
-import dataAcces.SingletonConnexion;
 import exception.DAOExceptionConnection;
 import exception.ModelException;
 import model.*;

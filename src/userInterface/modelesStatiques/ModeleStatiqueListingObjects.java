@@ -6,7 +6,6 @@ import controller.OneObjectController;
 import exception.DAOException;
 
 import javax.swing.table.AbstractTableModel;
-import java.sql.Types;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;

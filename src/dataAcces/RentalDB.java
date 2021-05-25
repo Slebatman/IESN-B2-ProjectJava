@@ -188,10 +188,10 @@ public class RentalDB implements IRentalDAO {
 
         try{
             String sql = """
-                    SELECT c.name, r.rentalManager, r.idOneObject, o.name, r.startDate, o.maxRentalPeriod, o.deposit  
-                    FROM rental r 
-                    JOIN oneobject o on r.idOneObject = o.idOneObject 
-                    JOIN collective c on c.idCollective = r.idTenant 
+                    SELECT c.name, r.rentalManager, r.idOneObject, o.name, r.startDate, o.maxRentalPeriod, o.deposit
+                    FROM rental r
+                    JOIN oneobject o on r.idOneObject = o.idOneObject
+                    JOIN collective c on c.idCollective = r.idTenant
                     WHERE r.returnDate IS null;
                     """;
             PreparedStatement statement = connection.prepareStatement(sql);
