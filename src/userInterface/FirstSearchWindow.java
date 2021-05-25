@@ -10,15 +10,21 @@ import javax.swing.*;
 import java.awt.*;
 
 public class FirstSearchWindow extends JFrame {
+    // Constructor
     FirstSearchWindow(String category) throws DAOException, ModelException, BusinessException, ControllerException {
+        // Frame initialization
         super("First search");
         setBounds(500, 200, 650, 500);
-        ModeleStatiqueFirstSearch modele = new ModeleStatiqueFirstSearch(category);
-        JTable tableau = new JTable(modele);
-        if(!modele.isEmpty()){
+
+        // Display search results
+        ModeleStatiqueFirstSearch modeleStatiqueFirstSearch = new ModeleStatiqueFirstSearch(category);
+        JTable tableau = new JTable(modeleStatiqueFirstSearch);
+
+        if (!modeleStatiqueFirstSearch.isEmpty()) {
             this.getContentPane().add(new JScrollPane(tableau),BorderLayout.CENTER);
             this.setVisible(true);
-        }else{
+
+        } else {
             JOptionPane.showMessageDialog(null, "La liste des locations pour cette catégorie est vide", "Liste vide", JOptionPane.INFORMATION_MESSAGE);
         }
     }

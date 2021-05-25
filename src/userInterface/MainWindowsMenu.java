@@ -69,11 +69,6 @@ public class MainWindowsMenu extends JMenuBar {
 
     }
 
-    // Show message error
-    private void showErrorMessage(String title, String msg) {
-        JOptionPane.showMessageDialog(null, msg, title, JOptionPane.ERROR_MESSAGE);
-    }
-
     // Exit application
     private class ExitListener implements ActionListener {
         @Override
@@ -139,12 +134,12 @@ public class MainWindowsMenu extends JMenuBar {
     private class FirstSearch implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent evt) {
-            try{
+            try {
                 new FirstSearchForm();
-            }catch(DAOException | DAOExceptionConnection e){
+
+            } catch(DAOException | DAOExceptionConnection e) {
                 showErrorMessage("Erreur lors de la recherche sur base d'une catégorie", e.getMessage());
             }
-
         }
     }
 
@@ -169,16 +164,22 @@ public class MainWindowsMenu extends JMenuBar {
         }
     }
 
-    // (Job task)
-    private class Delays implements ActionListener{
+    // (Job task) Management of rental arrears
+    private class Delays implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent evt){
-            try{
+        public void actionPerformed(ActionEvent evt) {
+            try {
                 new RentalDelaysWindow();
-            }catch(DAOException | ModelException | DAOExceptionConnection e){
+
+            } catch(DAOException | ModelException | DAOExceptionConnection e) {
                 showErrorMessage("Erreur lors du listing des retards", e.getMessage());
             }
         }
+    }
+
+    // Show message error
+    private void showErrorMessage(String title, String msg) {
+        JOptionPane.showMessageDialog(null, msg, title, JOptionPane.ERROR_MESSAGE);
     }
 }
 

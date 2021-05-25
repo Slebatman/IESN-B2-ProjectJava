@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class UpdateObjectWindow extends JFrame {
+    // Variables
     private JLabel labelCollective, labelName, labelCommendable, labelDate, labelPrice, labelDeposit, labelPeriod, obligatoryLabel;
     private JTextField textName, textPrice, textDeposit;
     private JRadioButton commendable, notCommendable;
@@ -42,6 +43,7 @@ public class UpdateObjectWindow extends JFrame {
     private SimpleDateFormat formatDate;
     int idCollective;
 
+    // Constructor
     UpdateObjectWindow() throws DAOException, ModelException, BusinessException, ControllerException {
         // Setup windows
         super("Mettre à jour un object");
@@ -180,9 +182,11 @@ public class UpdateObjectWindow extends JFrame {
         panelWindow.setVisible(true);
 
         this.add(panelWindow);
+
         setVisible(true);
     }
 
+    // Cancelling the update of an object
     private class CancelButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent evt){
@@ -190,6 +194,7 @@ public class UpdateObjectWindow extends JFrame {
         }
     }
 
+    // Updating an object
     private class UpdateObject implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent evt) {
@@ -217,12 +222,11 @@ public class UpdateObjectWindow extends JFrame {
                 oneObject.setIdObject(idObject);
             // Null values
                 // PurchaseDate
-                if(dateObject != null && dateEncoded) {
-                    dateObject.setTime((Date)spinnerDate.getModel().getValue());
-                    oneObject.setPurchaseDate(dateObject);
-                }
-
-                    // PurchasePrice
+                    if(dateObject != null && dateEncoded) {
+                        dateObject.setTime((Date)spinnerDate.getModel().getValue());
+                        oneObject.setPurchaseDate(dateObject);
+                    }
+                // PurchasePrice
                     if(!textPrice.getText().equals("")) {
                         // Verification if deposit is a number
                         try {
@@ -234,29 +238,27 @@ public class UpdateObjectWindow extends JFrame {
                             } else {
                                 oneObject.setPurchasePrice(purchasePrice);
                             }
-
                         } catch (NumberFormatException e) {
                             canUpdate = false;
                             showErrorMessage("Le prix d'achat doit être un nombre");
                         }
-
                     }
                     // Deposit
-                    if(!textDeposit.getText().equals("")) {
-                        // Test if deposit is a number
-                        try {
-                            Integer deposit = Integer.parseInt(textDeposit.getText());
-                            if (deposit < 0) {
+                        if(!textDeposit.getText().equals("")) {
+                            // Test if deposit is a number
+                            try {
+                                Integer deposit = Integer.parseInt(textDeposit.getText());
+                                if (deposit < 0) {
+                                    canUpdate = false;
+                                    showErrorMessage("La caution ne peut pas être négative");
+                                } else {
+                                    oneObject.setDeposit(deposit);
+                                }
+                            } catch (NumberFormatException e) {
                                 canUpdate = false;
-                                showErrorMessage("La caution ne peut pas être négative");
-                            } else {
-                                oneObject.setDeposit(deposit);
+                                showErrorMessage("La caution doit être un nombre");
                             }
-                        } catch (NumberFormatException e) {
-                            canUpdate = false;
-                            showErrorMessage("La caution doit être un nombre");
                         }
-                    }
 
                 // Add object & close windows
                 if (canUpdate) {
@@ -276,39 +278,44 @@ public class UpdateObjectWindow extends JFrame {
             }
         }
     }
+
+    // Refreshing the object list
     private class RefreshObjects implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent evt){
+        public void actionPerformed(ActionEvent evt) {
             String value = listCollective.getSelectedItem().toString();
-            int idCollective = 0;
 
             try {
-                idCollective = collectiveController.getACollectiveIDBasedName(value);
+                int idCollective = collectiveController.getACollectiveIDBasedName(value);
                 arrayObjects = oneObjectController.getAllObjectsForOneCollective(idCollective);
+
+                listObjects.removeAllItems();
+                for (OneObject object : arrayObjects) {
+                    listObjects.addItem(object.getName());
+                }
+
             } catch (DAOException | ModelException | BusinessException | ControllerException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Get idCollective or list of objects from a collective Exception", JOptionPane.ERROR_MESSAGE);
-            }
-            listObjects.removeAllItems();
-            for(OneObject object : arrayObjects){
-                listObjects.addItem(object.getName());
             }
         }
     }
 
+    // Refresh values for an object
     private class RefreshValues implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent evt){
+        public void actionPerformed(ActionEvent evt) {
+            // Setup idObjet
             int indexObject = listObjects.getSelectedIndex();
-            if(indexObject < 0){
-                indexObject =0;
-            }
+            if(indexObject < 0) indexObject =0;
+
             objectDefault = arrayObjects.get(indexObject);
             GregorianCalendar date = objectDefault.getPurchaseDate();
-            if(date != null){
+
+            if(date != null) {
                 spinnerDate.setValue(date.getTime());
                 spinnerDate.setEnabled(true);
                 buttonDate.setText("Retirer");
-            }else{
+            } else {
                 spinnerDate.setEnabled(false);
                 buttonDate.setText("Ajouter");
             }
@@ -319,13 +326,15 @@ public class UpdateObjectWindow extends JFrame {
         }
     }
 
+    // Radio button management
     private class RadioButtonListener implements ItemListener {
-        public void itemStateChanged(ItemEvent event){
+        public void itemStateChanged(ItemEvent event) {
             if(event.getSource() == commendable && event.getStateChange() == ItemEvent.SELECTED) commendableValue = true;
             else if(event.getSource() == notCommendable && event.getStateChange() == ItemEvent.SELECTED) commendableValue = false;
         }
     }
 
+    // Method managing the date field of the form
     private class AddDate implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
@@ -333,36 +342,40 @@ public class UpdateObjectWindow extends JFrame {
         }
     }
 
-    public void changeDateNullable() {
-        if(buttonDate.getText().equals("Ajouter")){
+    // Method managing the date nullable
+    private void changeDateNullable() {
+        if (buttonDate.getText().equals("Ajouter")) {
             dateEncoded = true;
             spinnerDate.setEnabled(true);
             buttonDate.setText("Retirer");
-        }else{
+        } else {
             dateEncoded = false;
             spinnerDate.setEnabled(false);
             buttonDate.setText("Ajouter");
         }
     }
 
+    // Method managing commendable, purchasePrice & deposit value
     public void importDepositPriceCommendable(){
-        if(objectDefault.isCommendable()){
+        if (objectDefault.isCommendable()) {
             commendable.setSelected(true);
             notCommendable.setSelected(false);
             commendableValue = true;
-        }else{
+        } else {
             commendable.setSelected(false);
             notCommendable.setSelected(true);
             commendableValue = false;
         }
-        if(objectDefault.getPurchasePrice() != Types.NULL){
+
+        if(objectDefault.getPurchasePrice() != Types.NULL) {
             textPrice.setText(objectDefault.getPurchasePrice() + "");
-        }else{
+        } else {
             textPrice.setText("");
         }
-        if(objectDefault.getDeposit() != Types.NULL){
+
+        if (objectDefault.getDeposit() != Types.NULL){
             textDeposit.setText(objectDefault.getDeposit() +"");
-        }else{
+        } else {
             textDeposit.setText("");
         }
     }
