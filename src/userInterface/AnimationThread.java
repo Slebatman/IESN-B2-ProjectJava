@@ -26,8 +26,7 @@ public class AnimationThread extends Thread {
             sleep(1000);
 
         } catch(InterruptedException e) {
-            // ToDo : throws exception
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Le tread a rencontré une erreur inatendue", "Erreur tread", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
