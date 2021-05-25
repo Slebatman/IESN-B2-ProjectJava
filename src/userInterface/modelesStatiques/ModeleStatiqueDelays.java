@@ -1,6 +1,6 @@
 package userInterface.modelesStatiques;
 
-import controller.DelayControler;
+import controller.DelayController;
 import exception.DAOException;
 import exception.ModelException;
 import model.Delay;
@@ -15,14 +15,14 @@ public class ModeleStatiqueDelays extends AbstractTableModel {
     private final Delay[] delays;
     private final String[] entetes = {"Nom du collectif", "Locataire", "idOneObject", "nom de l'objet", "date de départ", "Nombre maximum de jours de location", "Jours de retard", "Nombre de rappels", "Caution"};
     private ArrayList<Delay> listDelay;
-    private DelayControler controler;
+    private DelayController controler;
     private SimpleDateFormat formatDate;
 
     // Constructor
     public ModeleStatiqueDelays() throws DAOException, ModelException {
         super();
-        controler = new DelayControler();
-        listDelay = controler.getTacheMetier();
+        controler = new DelayController();
+        listDelay = controler.getJobTask();
         delays = listDelay.toArray(new Delay[0]);
         formatDate = new SimpleDateFormat("dd/MM/yyyy");
     }

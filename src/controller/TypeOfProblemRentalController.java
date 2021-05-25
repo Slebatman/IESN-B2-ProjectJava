@@ -5,13 +5,16 @@ import exception.DAOException;
 
 import java.util.ArrayList;
 
-public class TypeOfProblemRentalControler {
+public class TypeOfProblemRentalController {
+    // Variable
     private TypeOfProblemRentalManager manager;
 
-    public TypeOfProblemRentalControler(){
+    // Constructor
+    public TypeOfProblemRentalController() {
         manager = new TypeOfProblemRentalManager();
     }
 
+    // Get distinct name of typeOfProblemExitRental
     public ArrayList<String> getDistinctNameOfTypeOfProblemExitRental() throws DAOException {
         return manager.getDistinctNameOfTypeOfProblemExitRental();
     }

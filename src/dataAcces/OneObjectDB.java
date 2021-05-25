@@ -197,7 +197,7 @@ public class OneObjectDB implements IOneObjectDAO{
         statement.setInt(7, o.getMaxRentalPeriod());
     }
 
-    // Close connection
+    // [IMPLEMENT] Close connection
     public void closeConnection() throws DAOExceptionConnection {
         SingletonConnexion.closeConnection();
     }

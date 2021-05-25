@@ -181,9 +181,9 @@ public class RentalDB implements IRentalDAO {
         }
     }
 
-    // [IMPLEMENT] Tache metier
+    // [IMPLEMENT] (Job task) Late rentals and number of days in delay.
     @Override
-    public ArrayList<Delay> getTacheMetier() throws DAOException, ModelException{
+    public ArrayList<Delay> getJobTask() throws DAOException, ModelException{
         ArrayList<Delay> rentalsWithDelays = new ArrayList<>();
 
         try{
@@ -216,10 +216,11 @@ public class RentalDB implements IRentalDAO {
                 rentalsWithDelays.add(delay);
             }
 
-        }catch (SQLException e) {
+            return rentalsWithDelays;
+
+        } catch (SQLException e) {
             throw new DAOException("Erreur SQL : recherche des retards dans les locations n'est pas possible");
         }
-        return rentalsWithDelays;
     }
 
 

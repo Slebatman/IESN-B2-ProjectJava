@@ -11,7 +11,6 @@ public class FirstResearch {
     private String collectiveName;
 
     // Constructors
-
     public FirstResearch(GregorianCalendar startDate, String objectName, String collectiveName) throws ModelException {
         setStartDate(startDate);
         setObjectName(objectName);

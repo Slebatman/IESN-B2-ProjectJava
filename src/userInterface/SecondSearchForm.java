@@ -1,6 +1,6 @@
 package userInterface;
 
-import controller.TypeOfProblemRentalControler;
+import controller.TypeOfProblemRentalController;
 import exception.BusinessException;
 import exception.ControllerException;
 import exception.DAOException;
@@ -17,7 +17,7 @@ public class SecondSearchForm extends JFrame {
     private JLabel labelProblem;
     private JComboBox listProblems;
     private JButton button;
-    private TypeOfProblemRentalControler controller;
+    private TypeOfProblemRentalController controller;
     private ArrayList<String> problemList;
 
     // Constructor
@@ -28,7 +28,7 @@ public class SecondSearchForm extends JFrame {
         this.setLayout(new FlowLayout());
 
         // Controller
-        controller = new TypeOfProblemRentalControler();
+        controller = new TypeOfProblemRentalController();
 
         // Type of problem listing
         problemList = controller.getDistinctNameOfTypeOfProblemExitRental();

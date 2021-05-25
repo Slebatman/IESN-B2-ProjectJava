@@ -7,18 +7,22 @@ import model.Delay;
 
 import java.util.ArrayList;
 
-public class DelayControler {
+public class DelayController {
+    // Variable
     private DelayManager manager;
 
-    public DelayControler(){
+    // Constructor
+    public DelayController(){
         setManager(new DelayManager());
     }
 
+    // Setter
     private void setManager(DelayManager manager) {
         this.manager = manager;
     }
 
-    public ArrayList<Delay> getTacheMetier() throws DAOException, ModelException{
-        return manager.getTacheMetier();
+    // (Job task) Late rentals and number of days in delay.
+    public ArrayList<Delay> getJobTask() throws DAOException, ModelException{
+        return manager.getJobTask();
     }
 }

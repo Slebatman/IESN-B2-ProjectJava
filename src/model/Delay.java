@@ -1,10 +1,10 @@
 package model;
 
 import exception.ModelException;
-
 import java.util.GregorianCalendar;
 
 public class Delay {
+    // Variables
     private String nameCollectiveOwner;
     private String rentalManager;
     private int idOneObject;
@@ -15,9 +15,9 @@ public class Delay {
     private int nbRecalls;
     private int deposit;
 
+    //Constructors
     public Delay(){}
 
-    //Constructor
     public Delay(String nameCollectiveOwner, String rentalManager, int idOneObject, String nameOneObject, GregorianCalendar startDate, int maxRentalPeriod, int deposit) throws ModelException {
         setNameCollectiveOwner(nameCollectiveOwner);
         setRentalManager(rentalManager);

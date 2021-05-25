@@ -29,6 +29,6 @@ public interface IOneObjectDAO {
     OneObject getObjectByID(int idObject) throws DAOException, ModelException;
 
     // Close connection
-    public void closeConnection() throws DAOExceptionConnection;
+    void closeConnection() throws DAOExceptionConnection;
 
 }

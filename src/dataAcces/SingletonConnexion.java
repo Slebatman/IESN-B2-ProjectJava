@@ -19,7 +19,6 @@ public class SingletonConnexion {
                     DriverManager.getConnection(url, user, password);
         }
         catch(ClassNotFoundException | SQLException e) {
-            // Todo : implement catch exception
             throw new DAOExceptionConnection("Erreur lors de la connection à la base de données.");
         }
     }
@@ -31,6 +30,7 @@ public class SingletonConnexion {
     public static void closeConnection() throws DAOExceptionConnection {
         try {
             connection.close();
+
         } catch (SQLException e) {
             throw new DAOExceptionConnection("Erreur lors de la fermeture de la base de données.");
         }
