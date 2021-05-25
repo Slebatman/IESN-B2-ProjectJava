@@ -20,7 +20,6 @@ public class MainWindowsMenu extends JMenuBar {
     // Constructor
     public MainWindowsMenu(JFrame frame) {
         this.frame = frame;
-        this.frame.add(new JLabel("Test 1"), BorderLayout.WEST);
 
         // Main menu
         application = new JMenu("Application");

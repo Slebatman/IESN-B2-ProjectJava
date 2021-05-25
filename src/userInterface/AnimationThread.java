@@ -16,7 +16,6 @@ public class AnimationThread extends Thread {
         imageAnimation = new JLabel();
         imageAnimation.setIcon(imageIcon1);
         imageAnimation.setHorizontalAlignment(JLabel.CENTER);
-
     }
 
     // Start method
