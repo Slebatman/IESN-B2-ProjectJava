@@ -2,7 +2,6 @@ package userInterface;
 import exception.DAOException;
 import exception.ModelException;
 import userInterface.modelesStatiques.ModeleStatiqueListingObjects;
-import userInterface.modelesStatiques.ModeleStatiqueThirdSearch;
 
 import javax.swing.*;
 import java.awt.*;

@@ -4,10 +4,6 @@ import exception.DAOException;
 import exception.ModelException;
 import userInterface.modelesStatiques.ModeleStatiqueDelays;
 
-import userInterface.modelesStatiques.ModeleStatiqueFirstSearch;
-import userInterface.modelesStatiques.ModeleStatiqueThirdSearch;
-
-
 import javax.swing.*;
 import java.awt.*;
 
