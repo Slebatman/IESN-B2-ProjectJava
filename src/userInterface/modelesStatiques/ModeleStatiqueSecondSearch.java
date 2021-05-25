@@ -14,12 +14,11 @@ import java.util.GregorianCalendar;
 
 public class ModeleStatiqueSecondSearch extends AbstractTableModel {
     private final SecondResearch[] search;
-    private final String[] entetes = {"startDate", "returnDate", "nameObject", "deposit", "maxRentalPeriod", "nameCollectiveOwner", "emailAddressCollectiveOwner"};
+    private final String[] entetes = {"Date de départ", "Date de retour", "Nom de l'objet", "Caution", "Nombre maximum de jours de location", "Nom du collectif propriétaire", "adresse mail du collectif"};
     private ArrayList<SecondResearch> listSearch;
     private ResearchController controler;
     private SimpleDateFormat formatDate;
-    GregorianCalendar date;
-    String dateFormatted;
+
     public ModeleStatiqueSecondSearch(int typeOfProblem) throws DAOException, ModelException, BusinessException, ControllerException {
         super();
         controler = new ResearchController();
@@ -75,14 +74,11 @@ public class ModeleStatiqueSecondSearch extends AbstractTableModel {
     }
 
     public Class getColumnClass(int columnIndex){
-        Class c;
-        switch (columnIndex){
-            case 0, 1 : c = SimpleDateFormat.class;
-                break;
-            case 3, 4 : c = Integer.class;
-                break;
-            default: c = String.class;
-        }
+        Class c = switch (columnIndex) {
+            case 0, 1 -> SimpleDateFormat.class;
+            case 3, 4 -> Integer.class;
+            default -> String.class;
+        };
         return c;
     }
 }

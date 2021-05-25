@@ -22,10 +22,17 @@ public class ThirdSearchForm extends JFrame {
         super("Cherchez les locations entre 2 dates");
         setBounds(200, 150, 500, 100);
         this.setLayout(new FlowLayout());
+
+        //Label and button
         label = new JLabel("Choisissez les dates : ");
         button = new JButton("Recherche");
+        button.addActionListener(new ThirdSearchForm.SearchButton());
+
+        //Models
         SpinnerDateModel firstModel = new SpinnerDateModel();
         SpinnerDateModel secondModel = new SpinnerDateModel();
+
+        //Date spinners
         spinnerFirstDate = new JSpinner(firstModel);
         spinnerFirstDate.setModel(firstModel);
         JSpinner.DateEditor editor = new JSpinner.DateEditor(spinnerFirstDate, "dd/MM/yyyy");
@@ -34,7 +41,8 @@ public class ThirdSearchForm extends JFrame {
         spinnerSecondDate.setModel(secondModel);
         JSpinner.DateEditor editorTwo = new JSpinner.DateEditor(spinnerSecondDate, "dd/MM/yyyy");
         spinnerSecondDate.setEditor(editorTwo);
-        button.addActionListener(new ThirdSearchForm.SearchButton());
+
+      //Add to the frame
         this.add(label);
         this.add(spinnerFirstDate);
         this.add(spinnerSecondDate);

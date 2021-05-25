@@ -1,6 +1,7 @@
 package userInterface;
 
 import business.CollectiveManager;
+import controller.CollectiveController;
 import exception.BusinessException;
 import exception.ControllerException;
 import exception.DAOException;
@@ -16,26 +17,25 @@ public class FirstSearchForm extends JFrame {
     private JLabel labelCategory;
     private JComboBox listCategory;
     private JButton button;
-    private CollectiveManager manager;
+    private CollectiveController controler;
     private ArrayList<String> categoryList;
 
-    public FirstSearchForm() {
+    public FirstSearchForm() throws DAOException{
         super("Recherche des locations par catégorie du collectif");
         setBounds(200, 150, 400, 100);
-        manager = new CollectiveManager();
-
-        try{
-            categoryList = manager.getDistinctCategoryCollective();
-        }catch(DAOException e){
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Get list of category", JOptionPane.ERROR_MESSAGE);
-        }
-
-
         this.setLayout(new FlowLayout());
-        labelCategory = new JLabel("Choisissez une catégorie : ");
+
+        //List of Collectives
+        controler = new CollectiveController();
+        categoryList = controler.getDistinctCategoryCollective();
         listCategory = new JComboBox(categoryList.toArray());
+
+        //Label and button
+        labelCategory = new JLabel("Choisissez une catégorie : ");
         button = new JButton("Recherche");
         button.addActionListener(new SearchButton());
+
+        //Add to the frame
         this.add(labelCategory);
         this.add(listCategory);
         this.add(button);
