@@ -13,12 +13,14 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class ModeleStatiqueFirstSearch extends AbstractTableModel {
+    // Variables
     private final FirstResearch[] search;
     private final String[] entetes = {"Date de départ", "Nom de l'objet", "Nom du collectif"};
-
     private ArrayList<FirstResearch> listSearch;
     private ResearchController controler;
     private SimpleDateFormat formatDate;
+
+    // Constructor
     public ModeleStatiqueFirstSearch(String category) throws DAOException, ModelException, BusinessException, ControllerException {
         super();
         controler = new ResearchController();
@@ -55,14 +57,12 @@ public class ModeleStatiqueFirstSearch extends AbstractTableModel {
         }
     }
 
-    public Class getColumnClass(int columnIndex){
-        Class c;
-        if(columnIndex == 0){
-            c = SimpleDateFormat.class;
-        }else{
-            c = String.class;
+    public Class getColumnClass(int columnIndex) {
+        if (columnIndex == 0) {
+            return SimpleDateFormat.class;
+        } else {
+            return String.class;
         }
-        return c;
     }
 
     public boolean isEmpty() {

@@ -13,12 +13,14 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class ModeleStatiqueSecondSearch extends AbstractTableModel {
+    // Variables
     private final SecondResearch[] search;
     private final String[] entetes = {"Date de départ", "Date de retour", "Nom de l'objet", "Caution", "Nombre maximum de jours de location", "Nom du collectif propriétaire", "adresse mail du collectif"};
     private ArrayList<SecondResearch> listSearch;
     private ResearchController controler;
     private SimpleDateFormat formatDate;
 
+    // Constructor
     public ModeleStatiqueSecondSearch(int typeOfProblem) throws DAOException, ModelException, BusinessException, ControllerException {
         super();
         controler = new ResearchController();
@@ -43,19 +45,19 @@ public class ModeleStatiqueSecondSearch extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex){
         switch (columnIndex){
             case 0:
-                if(search[rowIndex].getStartDate() != null){
+                if (search[rowIndex].getStartDate() != null) {
                     GregorianCalendar date = search[rowIndex].getStartDate();
                     formatDate.setCalendar(date);
                     return formatDate.format(date.getTime());
-                }else{
+                } else {
                     return null;
                 }
             case 1:
-                if(search[rowIndex].getReturnDate() != null){
+                if (search[rowIndex].getReturnDate() != null) {
                     GregorianCalendar date = search[rowIndex].getReturnDate();
                     formatDate.setCalendar(date);
                     return formatDate.format(date.getTime());
-                }else{
+                } else {
                     return null;
                 }
             case 2 :
@@ -74,11 +76,10 @@ public class ModeleStatiqueSecondSearch extends AbstractTableModel {
     }
 
     public Class getColumnClass(int columnIndex){
-        Class c = switch (columnIndex) {
+        return switch (columnIndex) {
             case 0, 1 -> SimpleDateFormat.class;
             case 3, 4 -> Integer.class;
             default -> String.class;
         };
-        return c;
     }
 }
