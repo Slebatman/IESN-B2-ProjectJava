@@ -79,5 +79,7 @@ public class ModeleStatiqueListingObjects extends AbstractTableModel {
         return c;
     }
 
-    // ToDo : getColumnClass
+    public boolean isEmpty() {
+        return listObjects.size() == 0;
+    }
 }

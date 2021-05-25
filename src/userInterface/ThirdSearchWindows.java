@@ -12,11 +12,19 @@ import java.util.GregorianCalendar;
 
 public class ThirdSearchWindows extends JFrame {
     private JTable table;
+    private ModeleStatiqueThirdSearch modele;
     public ThirdSearchWindows(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException, ModelException, BusinessException, ControllerException {
         super("Third search");
         setBounds(500, 200, 650, 500);
-        JTable tableau = new JTable(new ModeleStatiqueThirdSearch(firstDate, secondDate));
-        this.getContentPane().add(new JScrollPane(tableau),BorderLayout.CENTER);
-        this.setVisible(true);
+        modele = new ModeleStatiqueThirdSearch(firstDate, secondDate);
+        JTable tableau = new JTable(modele);
+        if(!modele.isEmpty()){
+            this.getContentPane().add(new JScrollPane(tableau),BorderLayout.CENTER);
+            this.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "La liste des locations entre ces 2 dates est vide", "Liste vide", JOptionPane.INFORMATION_MESSAGE);
+            ThirdSearchWindows.this.dispose();
+        }
+
     }
 }

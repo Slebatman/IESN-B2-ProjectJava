@@ -72,4 +72,8 @@ public class ModeleStatiqueThirdSearch extends AbstractTableModel {
         };
         return c;
     }
+
+    public boolean isEmpty() {
+        return listSearch.size() == 0;
+    }
 }

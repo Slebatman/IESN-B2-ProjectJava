@@ -6,6 +6,8 @@ import exception.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class MainWindowsMenu extends JMenuBar {
     // Variables
@@ -16,6 +18,7 @@ public class MainWindowsMenu extends JMenuBar {
     // Constructor
     public MainWindowsMenu(JFrame frame) {
         this.frame = frame;
+        this.frame.addWindowListener(new ExitButtonListener());
 
         // Main menu
         application = new JMenu("Application");
@@ -78,6 +81,15 @@ public class MainWindowsMenu extends JMenuBar {
     private class ExitListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent evt) {
+            new OneObjectController().closeConnection();
+            System.exit(0);
+        }
+    }
+
+    //Exit application
+    private class ExitButtonListener extends WindowAdapter {
+        @Override
+        public void windowClosing(WindowEvent evt){
             new OneObjectController().closeConnection();
             System.exit(0);
         }
