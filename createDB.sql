@@ -1,3 +1,10 @@
+CREATE SCHEMA inventory DEFAULT CHARACTER SET utf8;
+USE inventory;
+
+CREATE USER 'BaeAnt'@'localhost' IDENTIFIED BY 'projectJava';
+GRANT ALL PRIVILEGES ON *.* TO 'BaeAnt'@'localhost';
+FLUSH PRIVILEGES;
+
 -- collective: table
 CREATE TABLE `collective`
 (
@@ -27,31 +34,12 @@ CREATE TABLE `oneobject`
     `deposit`           int    DEFAULT '0',
     `maxRentalPeriod`   int         NOT NULL,
     PRIMARY KEY (`idOneObject`, `name`, `idCollectiveOwner`),
-    UNIQUE KEY `name` (`name`),
     KEY `idCollectiveOwner_idx` (`idCollectiveOwner`),
     CONSTRAINT `idCollectiveOwner` FOREIGN KEY (`idCollectiveOwner`) REFERENCES `collective` (`idCollective`) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT `oneobject_chk_1` CHECK ((`purchasePrice` > 0)),
     CONSTRAINT `oneobject_chk_2` CHECK ((`deposit` >= 0)),
     CONSTRAINT `oneobject_chk_3` CHECK ((`maxRentalPeriod` > 0)),
     CONSTRAINT `oneobject_chk_4` CHECK ((not ((`name` like _utf8mb3''))))
-);
-
--- problemexitrental: table
-CREATE TABLE `problemexitrental`
-(
-    `idproblemExitLocation` int    NOT NULL AUTO_INCREMENT,
-    `idRental`              int    NOT NULL,
-    `idTypeOfProblemRental` int    NOT NULL,
-    `invocedPrice`          double NOT NULL,
-    `note`                  longtext,
-    PRIMARY KEY (`idproblemExitLocation`, `idRental`),
-    UNIQUE KEY `idRental` (`idRental`),
-    KEY `idRental_idx` (`idRental`),
-    KEY `idTypeOfProblemRental_idx` (`idTypeOfProblemRental`),
-    CONSTRAINT `idRental` FOREIGN KEY (`idRental`) REFERENCES `rental` (`idRental`) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT `idTypeOfProblemRental` FOREIGN KEY (`idTypeOfProblemRental`) REFERENCES `typeofproblemrental` (`idtypeofproblemrental`) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT `problemexitrental_chk_1` CHECK ((`invocedPrice` >= 0)),
-    CONSTRAINT `problemexitrental_chk_2` CHECK ((not ((`note` like _utf8mb3''))))
 );
 
 -- rental: table
@@ -83,5 +71,23 @@ CREATE TABLE `typeofproblemrental`
     UNIQUE KEY `name` (`name`),
     CONSTRAINT `typeofproblemrental_chk_1` CHECK ((not ((`name` like _utf8mb3'')))),
     CONSTRAINT `typeofproblemrental_chk_2` CHECK ((not ((`description` like _utf8mb3''))))
+);
+
+-- problemexitrental: table
+CREATE TABLE `problemexitrental`
+(
+    `idproblemExitLocation` int    NOT NULL AUTO_INCREMENT,
+    `idRental`              int    NOT NULL,
+    `idTypeOfProblemRental` int    NOT NULL,
+    `invocedPrice`          double NOT NULL,
+    `note`                  longtext,
+    PRIMARY KEY (`idproblemExitLocation`, `idRental`),
+    UNIQUE KEY `idRental` (`idRental`),
+    KEY `idRental_idx` (`idRental`),
+    KEY `idTypeOfProblemRental_idx` (`idTypeOfProblemRental`),
+    CONSTRAINT `idRental` FOREIGN KEY (`idRental`) REFERENCES `rental` (`idRental`) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `idTypeOfProblemRental` FOREIGN KEY (`idTypeOfProblemRental`) REFERENCES `typeofproblemrental` (`idtypeofproblemrental`) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `problemexitrental_chk_1` CHECK ((`invocedPrice` >= 0)),
+    CONSTRAINT `problemexitrental_chk_2` CHECK ((not ((`note` like _utf8mb3''))))
 );
 
