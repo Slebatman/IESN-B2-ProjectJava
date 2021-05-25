@@ -17,7 +17,7 @@ public class SecondResearch {
     // Constructor
     public SecondResearch(GregorianCalendar startDate, GregorianCalendar returnDate, String nameObject, int deposit, int maxRentalPeriod, String nameCollectiveOwner, String emailAddressCollectiveOwner) throws ModelException {
         setStartDate(startDate);
-        setStartDate(returnDate);
+        setReturnDate(returnDate);
         setNameObject(nameObject);
         setDeposit(deposit);
         setMaxRentalPeriod(maxRentalPeriod);

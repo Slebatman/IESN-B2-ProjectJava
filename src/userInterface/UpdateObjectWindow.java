@@ -224,7 +224,12 @@ public class UpdateObjectWindow extends JFrame {
                 // PurchaseDate
                     if(dateObject != null && dateEncoded) {
                         dateObject.setTime((Date)spinnerDate.getModel().getValue());
-                        oneObject.setPurchaseDate(dateObject);
+                        try{
+                            oneObject.setPurchaseDate(dateObject);
+                        }catch(ModelException e){
+                            canUpdate = false;
+                            showErrorMessage("La date d'achat doit être antérieure");
+                        }
                     }
                 // PurchasePrice
                     if(!textPrice.getText().equals("")) {

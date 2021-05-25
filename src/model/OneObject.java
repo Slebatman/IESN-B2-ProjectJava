@@ -3,6 +3,7 @@ package model;
 import exception.ModelException;
 
 import java.sql.Types;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class OneObject {
@@ -58,7 +59,9 @@ public class OneObject {
         isCommendable = commendable;
     }
 
-    public void setPurchaseDate(GregorianCalendar purchaseDate) {
+    public void setPurchaseDate(GregorianCalendar purchaseDate) throws ModelException{
+        GregorianCalendar dateToday = new GregorianCalendar();
+        if(purchaseDate != null && purchaseDate.compareTo(dateToday) > 0) throw new ModelException("La date d'achat doit être antérieure à la date du jour");
         this.purchaseDate = purchaseDate;
     }
 
