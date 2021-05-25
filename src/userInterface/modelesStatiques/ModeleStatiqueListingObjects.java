@@ -12,12 +12,14 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class ModeleStatiqueListingObjects extends AbstractTableModel {
+    // Variables
     private final OneObject[] objects;
     private final String[] entetes = {"Id","Nom","Id du collectif","Est commandable","Date d'achat","Prix d'achat","Caution","Nombre maximum de jours de location"};
-
     private ArrayList<OneObject> listObjects;
     private OneObjectController controler;
     private SimpleDateFormat formatDate;
+
+    // Constructor
     public ModeleStatiqueListingObjects() throws DAOException, ModelException {
         super();
         controler = new OneObjectController();
@@ -69,17 +71,19 @@ public class ModeleStatiqueListingObjects extends AbstractTableModel {
     }
 
     public Class getColumnClass(int columnIndex){
-        Class c = switch (columnIndex) {
+        return switch (columnIndex) {
             case 0, 2, 6, 7 -> Integer.class;
             case 3 -> Boolean.class;
             case 4 -> SimpleDateFormat.class;
             case 5 -> Double.class;
             default -> String.class;
         };
-        return c;
     }
+<<<<<<< HEAD
 
     public boolean isEmpty() {
         return listObjects.size() == 0;
     }
+=======
+>>>>>>> 5bd0a247d01786fc02974147f90975b2441cd4b3
 }

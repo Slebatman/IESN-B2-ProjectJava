@@ -13,12 +13,14 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class ModeleStatiqueThirdSearch extends AbstractTableModel {
+    // Variables
     private final ThirdResearch[] search;
     private final String[] entetes = {"Nom de l'objet", "Date d'achat", "Prix d'achat", "Prix facturé", "note", "Responsable location"};
     private ArrayList<ThirdResearch> listSearch;
     private ResearchController controler;
     private SimpleDateFormat formatDate;
 
+    // Constructor
     public ModeleStatiqueThirdSearch(GregorianCalendar firstDate, GregorianCalendar secondDate) throws DAOException, ModelException, BusinessException, ControllerException {
         super();
         controler = new ResearchController();
@@ -26,6 +28,7 @@ public class ModeleStatiqueThirdSearch extends AbstractTableModel {
         search = listSearch.toArray(new ThirdResearch[0]);
         formatDate = new SimpleDateFormat("dd/MM/yyyy");
     }
+
     public int getRowCount(){
         return search.length;
     }
@@ -44,11 +47,11 @@ public class ModeleStatiqueThirdSearch extends AbstractTableModel {
             case 0:
                 return search[rowIndex].getObjectName();
             case 1:
-                if(search[rowIndex].getPurchaseDate() != null){
+                if (search[rowIndex].getPurchaseDate() != null) {
                     GregorianCalendar date = search[rowIndex].getPurchaseDate();
                     formatDate.setCalendar(date);
                     return formatDate.format(date.getTime());
-                }else{
+                } else {
                     return null;
                 }
             case 2 :
@@ -64,13 +67,12 @@ public class ModeleStatiqueThirdSearch extends AbstractTableModel {
         }
     }
 
-    public Class getColumnClass(int columnIndex){
-        Class c = switch (columnIndex) {
+    public Class getColumnClass(int columnIndex) {
+        return switch (columnIndex) {
             case 1 -> SimpleDateFormat.class;
             case 2, 3 -> Double.class;
             default -> String.class;
         };
-        return c;
     }
 
     public boolean isEmpty() {

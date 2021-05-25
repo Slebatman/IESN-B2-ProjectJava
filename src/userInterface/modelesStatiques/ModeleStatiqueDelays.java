@@ -1,7 +1,6 @@
 package userInterface.modelesStatiques;
 
 import controller.DelayControler;
-import controller.ResearchController;
 import exception.DAOException;
 import exception.ModelException;
 import model.Delay;
@@ -9,18 +8,17 @@ import model.Delay;
 import javax.swing.table.AbstractTableModel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class ModeleStatiqueDelays extends AbstractTableModel {
-
+    // Variables
     private final Delay[] delays;
     private final String[] entetes = {"Nom du collectif", "Locataire", "idOneObject", "nom de l'objet", "date de départ", "Nombre maximum de jours de location", "Jours de retard", "Nombre de rappels", "Caution"};
-
     private ArrayList<Delay> listDelay;
     private DelayControler controler;
     private SimpleDateFormat formatDate;
 
+    // Constructor
     public ModeleStatiqueDelays() throws DAOException, ModelException {
         super();
         controler = new DelayControler();
@@ -70,15 +68,17 @@ public class ModeleStatiqueDelays extends AbstractTableModel {
     }
 
     public Class getColumnClass(int columnIndex){
-        Class c = switch (columnIndex) {
+        return switch (columnIndex) {
             case 2, 5, 6, 7, 8 -> Integer.class;
             case 4 -> SimpleDateFormat.class;
             default -> String.class;
         };
-        return c;
     }
+<<<<<<< HEAD
 
     public boolean isEmpty() {
         return listDelay.size() == 0;
     }
+=======
+>>>>>>> 5bd0a247d01786fc02974147f90975b2441cd4b3
 }

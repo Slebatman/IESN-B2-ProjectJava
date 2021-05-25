@@ -10,7 +10,6 @@ import exception.DAOException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -146,7 +145,7 @@ public class AddObjectWindow extends JFrame {
         setVisible(true);
     }
 
-    // Events
+    // Annulation of the insertion
     private class CancelButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
@@ -154,6 +153,7 @@ public class AddObjectWindow extends JFrame {
         }
     }
 
+    // Creating and adding an object
     private class CreateObject implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt) {
@@ -234,6 +234,7 @@ public class AddObjectWindow extends JFrame {
         }
     }
 
+    // Method for managing the form's radio buttons
     private class RadioButtonListener implements ItemListener{
         public void itemStateChanged(ItemEvent event){
             if(event.getSource() == commendable && event.getStateChange() == ItemEvent.SELECTED) commendableValue = true;
@@ -241,6 +242,7 @@ public class AddObjectWindow extends JFrame {
         }
     }
 
+    // Method managing the date field of the form
     private class AddDate implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt){
